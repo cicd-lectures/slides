@@ -1,0 +1,58 @@
+
+
+= CI/CD Lectures
+include::./attributes.adoc[]
+
+[.small]
+Présentation disponible à l’adresse: {presentationUrl}[{presentationUrl}]
+
+image::qrcode.png["QRCode to this presentation",height=150]
+
+[.small]
+Présentation disponible en PDF: {presentationUrl}/slides.pdf[{presentationUrl}/slides.pdf]
+
+[{invert}]
+== Damien DUPORTAL
+
+* Freelancer
+* Consultant @ link:https://www.ovh.com/fr/[OVHCloud]
+
+* Me contacter :
+** +++<span class="fa fa-envelope"></span>+++ damien.duportal+pro <chez> gmail.com
+** link:https://www.linkedin.com/in/damien-duportal-ab70b524/[+++<span class="fab fa-linkedin"></span>+++ Damien Duportal,window=_blank]
+** link:https://twitter.com/DamienDuportal[+++<span class="fab fa-twitter"></span>+++ @DamienDuportal,window=_blank]
+
+[{invert}]
+== Julien LEVESY
+
+* Señor Software Engineer @ link:https://www.upfluence.com/fr/[Upfluence]
+
+* Me contacter :
+** +++<span class="fa fa-envelope"></span>+++ jlevesy <chez> gmail.com
+** link:https://twitter.com/jlevesy[+++<span class="fab fa-twitter"></span>+++ @jlevesy,window=_blank]
+
+== Au Menu
+
+1. AAA
+2. BBB
+3. CCC
+
+== Sources
+
+- link:http//www.wikipedia.fr[Wikipedia]
+
+[{invert}]
+== Merci !
+
+* +++<span class="fa fa-envelope"></span>+++ damien.duportal+pro <chez> gmail.com
+* link:https://twitter.com/DamienDuportal[+++<span class="fab fa-twitter"></span>+++ @DamienDuportal,window=_blank]
+* +++<span class="fa fa-envelope"></span>+++ jlevesy <chez> gmail.com
+* link:https://twitter.com/jlevesy[+++<span class="fab fa-twitter"></span>+++ @jlevesy,window=_blank]
+
+[.small]
+link:{presentationUrl}[Slides: {presentationUrl}]
+
+image::qrcode.png["QRCode to this presentation",height=150]
+
+[.small]
+link:{repositoryUrl}[Source on +++<span class="fab fa-github"></span>+++: {repositoryUrl}]
