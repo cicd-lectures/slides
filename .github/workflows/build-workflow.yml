@@ -29,6 +29,8 @@ jobs:
       uses: actions/download-artifact@v2
       with:
         name: dist
+    - name: 'DEBUG'
+      run: find . -type d
     - name: 'Deploy'
       uses: netlify/actions/cli@6c34c3f
       with:
