@@ -54,9 +54,6 @@ pdf: $(DIST_DIR)/index.html
 		/slides/slides.pdf \
 		--size='2048x1536'
 
-deploy: pdf
-	@bash $(CURDIR)/scripts/deploy.sh
-
 clean:
 	@docker-compose down -v --remove-orphans
 	@rm -rf $(DIST_DIR)
@@ -64,4 +61,4 @@ clean:
 qrcode:
 	@docker-compose up --build --force-recreate qrcode
 
-.PHONY: all build verify serve deploy qrcode pdf
+.PHONY: all build verify serve qrcode pdf

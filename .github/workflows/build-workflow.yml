@@ -14,6 +14,8 @@ jobs:
         run: make build
       - name: 'Verify'
         run: make verify
+      - name: 'PDF'
+        run: make pdf
       - name: 'Upload dist/ as artefact'
         uses: actions/upload-artifact@v2
         with:
@@ -29,7 +31,7 @@ jobs:
         name: dist
         path: ./dist
     - name: 'Deploy'
-      uses: netlify/actions/cli@6c34c3f
+      uses: netlify/actions/cli@master
       with:
         args: deploy --dir=./dist ${{ github.ref == 'refs/heads/master' && '--prod' || '' }}
       env:
