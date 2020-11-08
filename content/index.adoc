@@ -43,7 +43,9 @@ image::qrcode.png["QRCode to this presentation",height=150]
 
 * Me contacter :
 ** +++<span class="fa fa-envelope"></span>+++ jlevesy <chez> gmail.com
+** link:https://www.linkedin.com/in/julien-levesy-5b80ab149/[+++<span class="fab fa-linkedin"></span>+++ Julien Levesy,window=_blank]
 ** link:https://twitter.com/jlevesy[+++<span class="fab fa-twitter"></span>+++ @jlevesy,window=_blank]
+** link:https://github.com/jlevesy[+++<span class="fab fa-github"></span>+++ @jlevesy,window=_blank]
 
 === Et vous ?
 [.left.text-center]
