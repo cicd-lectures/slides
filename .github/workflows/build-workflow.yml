@@ -22,6 +22,7 @@ jobs:
       - name: 'Build'
         run: make build
       - name: 'Caching for later builds'
+        if: github.ref == 'refs/heads/main'
         run: docker push "${IMAGE_CACHE_NAME}"
       - name: 'Verify'
         run: make verify
