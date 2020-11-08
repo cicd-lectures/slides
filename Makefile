@@ -1,24 +1,10 @@
 CURRENT_UID = $(shell id -u):$(shell id -g)
 DIST_DIR ?= $(CURDIR)/dist
-REPOSITORY_NAME ?= slides
-REPOSITORY_OWNER ?= cicd-lectures
-REPOSITORY_BASE_URL ?= https://github.com/$(REPOSITORY_OWNER)/$(REPOSITORY_NAME)
 
-REPOSITORY_URL = $(REPOSITORY_BASE_URL)
-PRESENTATION_URL = https://$(REPOSITORY_OWNER).github.io/$(REPOSITORY_NAME)
+REPOSITORY_URL = https://github.com/slides/cicd-lectures
+PRESENTATION_URL = https://gifted-albattani-3bc8a1.netlify.app/
 
-ifdef GIT_TAG
-REPOSITORY_URL = $(REPOSITORY_BASE_URL)/tree/$(GIT_TAG)
-PRESENTATION_URL = https://$(REPOSITORY_OWNER).github.io/$(REPOSITORY_NAME)/$(GIT_TAG)
-else
-ifdef GIT_BRANCH
-ifneq ($(GIT_BRANCH), main)
-REPOSITORY_URL = $(REPOSITORY_BASE_URL)/tree/$(GIT_BRANCH)
-PRESENTATION_URL = https://$(REPOSITORY_OWNER).github.io/$(REPOSITORY_NAME)/$(GIT_BRANCH)
-endif
-endif
-endif
-export PRESENTATION_URL CURRENT_UID REPOSITORY_URL REPOSITORY_BASE_URL
+export PRESENTATION_URL CURRENT_UID REPOSITORY_URL
 
 ## Docker Buildkit is enabled for faster build and caching of images
 DOCKER_BUILDKIT ?= 1
