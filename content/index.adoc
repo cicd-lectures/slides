@@ -53,9 +53,55 @@ image::commitstrip.png[width="400"]
 
 == Au Menu
 
-1. AAA
-2. BBB
-3. CCC
+1. De la feuille blanche au produit minimal viable.
+2. Projet n°1: Site web de restaurant
+3. Du produit minimal viable au prochain Netflix.
+4. Projet n°2: API de menus as a service.
+
+== De la feuille blanche au produit minimal viable
+
+- Que veut dire créer un logiciel?
+- Choisirs les bons outils
+  - Pour les dévelopeurs
+  - Pour votre production
+  - En fonction de vos moyens et de vos usages ?
+    -> Soyez pragmatiques!
+- Périmètre de votre projet
+  -> baby steps
+    - Déterminez le périmètre fonctionel le plus faible pour ensuite l'étendre petit a petit
+  -> L'important, c'est d'avoir une production et des utilisateurs, au plus tot.
+  -> Shipped is better than perfect.
+    - (on peut parler cycle en V et toussa lol, mais est-ce bien nécessaire?)
+- Délivrer un logiciel
+  - Gérer les changements
+    - CVS et parlons git & github.
+    - Parlons version en général (tag, semantic versioning?).
+  - C'est quoi aller jusqu'a la prod ?
+    -> Présentation du pipeline de production logicielle.
+  - Comment aller jusqu'a la prod
+    -> Manuellement, tatata badaboum c'est pas bien cacaprout.
+    -> Automatiquement, yay lalla c'est bien bien. Parlons CI CD, #satombebienonestlapourça.
+  - Les outils a votre disposition
+  - Focus sur github et githubactions.
+
+== Projet n°1
+
+- Votre projet c'est de délivrer un site web d'un menu pour la Cantina de Tatoine, en ces temps de covid.
+- Introduction a github et au github actions ?
+- Votre production: netlify, creezvousuncomptetoussa.
+- yaml yaml yaml
+- Votre mission si vous l'acceptez: écrire un workflow github qui met en production un siteoueb a chaque fois qu'un changement est mergé sur main.
+
+== Du produit minimal viable au prochain Netflix
+
+TODO
+- Travailler en équipe, kesako?
+- S'assurer que le logiciel ne régresse pas.
+
+== Projet n°2
+
+- Same idea, except that we have an API to manage now.
+- Your job should run tests, build a reproductible artifact, and publish to production as soon as you hit a tag.
 
 == Sources
 
