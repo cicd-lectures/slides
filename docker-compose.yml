@@ -1,9 +1,14 @@
-version: '2.2'
+version: '2.4'
 
 # Reusable options
 x-slides-base: &slides-base
-  build: ./
-  image: slides-builder
+  build:
+    context: ./
+    cache_from:
+      - ${IMAGE_CACHE_NAME:-slides-builder}
+    args:
+      BUILDKIT_INLINE_CACHE: 1
+  image: ${IMAGE_CACHE_NAME:-slides-builder}
   environment:
     - PRESENTATION_URL=${PRESENTATION_URL}
     - REPOSITORY_URL=${REPOSITORY_URL}

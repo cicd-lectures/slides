@@ -20,6 +20,11 @@ endif
 endif
 export PRESENTATION_URL CURRENT_UID REPOSITORY_URL REPOSITORY_BASE_URL
 
+## Docker Buildkit is enabled for faster build and caching of images
+DOCKER_BUILDKIT ?= 1
+COMPOSE_DOCKER_CLI_BUILD ?= 1
+export DOCKER_BUILDKIT COMPOSE_DOCKER_CLI_BUILD
+
 all: clean build verify
 
 # Generate documents inside a container, all *.adoc in parallel
