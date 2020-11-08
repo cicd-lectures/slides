@@ -3,6 +3,10 @@ name: Slides Workflow
 on:
   push:
 
+env:
+  ## Override default value for Docker cached image
+  IMAGE_CACHE_NAME: "dduportal/slides:cicd-lectures"
+
 jobs:
   build:
     name: 'Build Slides'
@@ -10,8 +14,15 @@ jobs:
     steps:
       - name: 'Checkout'
         uses: actions/checkout@master
+      - name: 'Login to DockerHub'
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: 'Build'
         run: make build
+      - name: 'Caching for later builds'
+        run: docker push "${IMAGE_CACHE_NAME}"
       - name: 'Verify'
         run: make verify
       - name: 'PDF'
