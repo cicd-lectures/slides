@@ -45,8 +45,7 @@ serve: clean $(DIST_DIR)
 	@docker-compose up --build --force-recreate serve
 
 shell: $(DIST_DIR)
-	@docker-compose up --build --force-recreate -d wait
-	@docker-compose exec --user root wait sh
+	@CURRENT_UID=0 docker-compose run --entrypoint=sh --rm serve
 
 $(DIST_DIR)/index.html: build
 
@@ -64,6 +63,6 @@ clean:
 	@rm -rf $(DIST_DIR)
 
 qrcode:
-	@docker-compose up --build --force-recreate qrcode
+	@docker-compose run --entrypoint=/app/node_modules/.bin/qrcode --rm serve -t png -o /app/content/images/qrcode.png $(PRESENTATION_URL)
 
 .PHONY: all build verify serve qrcode pdf
