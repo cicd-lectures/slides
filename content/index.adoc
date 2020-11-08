@@ -59,30 +59,38 @@ image::commitstrip.png[width="400"]
 4. Projet n°2: API de menus as a service.
 
 == De la feuille blanche au produit minimal viable
+Que veut dire créer un logiciel?
 
-- Que veut dire créer un logiciel?
-- Choisirs les bons outils
-  - Pour les dévelopeurs
-  - Pour votre production
-  - En fonction de vos moyens et de vos usages ?
-    -> Soyez pragmatiques!
-- Périmètre de votre projet
+- Définir périmètre de votre projet
   -> baby steps
     - Déterminez le périmètre fonctionel le plus faible pour ensuite l'étendre petit a petit
   -> L'important, c'est d'avoir une production et des utilisateurs, au plus tot.
-  -> Shipped is better than perfect.
-    - (on peut parler cycle en V et toussa lol, mais est-ce bien nécessaire?)
-- Délivrer un logiciel
-  - Gérer les changements
-    - CVS et parlons git & github.
+  -> Livré c'est mieux que parfait
+  - On peut parler cycle en V vs Methode à gilles de la tourelle.
+  -> Le problème c'est de gérer le changement.
+  -> Et de le gérer de façon efficace
+  -> Il faut qu'une version soit un non évènement.
+- Gérer le changement:
+  - Au niveau du code
+    - VCS et parlons git & github.
+    - S'assurer que le logiciel fonctionne toujours.
+      - tests
+      - lint
+        -> CI
     - Parlons version en général (tag, semantic versioning?).
   - C'est quoi aller jusqu'a la prod ?
     -> Présentation du pipeline de production logicielle.
+    -> Dénominateur commun c'est la génération d'atefacts.
   - Comment aller jusqu'a la prod
     -> Manuellement, tatata badaboum c'est pas bien cacaprout.
     -> Automatiquement, yay lalla c'est bien bien. Parlons CI CD, #satombebienonestlapourça.
   - Les outils a votre disposition
   - Focus sur github et githubactions.
+- Choisir les bons outils
+  - Pour les dévelopeurs
+  - Pour votre production
+  - En fonction de vos moyens et de vos usages ?
+    -> Soyez pragmatiques!
 
 == Projet n°1
 
