@@ -7,10 +7,10 @@ include::./attributes.adoc[]
 ENSG - Décembre 2020
 
 [.small]
-- Présentation disponible à l’adresse: {presentationUrl}[{presentationUrl}]
-- Version PDF de la présentation : link:slides.pdf[+++<span class="far fa-file-pdf"></span>+++ Cliquez ici]
-- This work is licensed under a Creative Commons Attribution 4.0 International License
-- Code source de la présentation: link:{repositoryUrl}[+++<span class="fab fa-github"></span>+++ {repositoryUrl}]
+* Présentation disponible à l’adresse: {presentationUrl}[{presentationUrl}]
+* Version PDF de la présentation : link:slides.pdf[+++<span class="far fa-file-pdf"></span>+++ Cliquez ici]
+* This work is licensed under a Creative Commons Attribution 4.0 International License
+* Code source de la présentation: link:{repositoryUrl}[+++<span class="fab fa-github"></span>+++ {repositoryUrl}]
 
 image::qrcode.png["QRCode to this presentation",height=150]
 
@@ -59,61 +59,102 @@ image::commitstrip.png[width="400"]
 4. Projet n°2: API de menus as a service.
 
 == De la feuille blanche au produit minimal viable
+
 Que veut dire créer un logiciel?
 
-- Définir périmètre de votre projet
-  -> baby steps
-    - Déterminez le périmètre fonctionel le plus faible pour ensuite l'étendre petit a petit
-  -> L'important, c'est d'avoir une production et des utilisateurs, au plus tot.
-  -> Livré c'est mieux que parfait
-  - On peut parler cycle en V vs Methode à gilles de la tourelle.
-  -> Le problème c'est de gérer le changement.
-  -> Et de le gérer de façon efficace
-  -> Il faut qu'une version soit un non évènement.
-- Gérer le changement:
-  - Au niveau du code
-    - VCS et parlons git & github.
-    - S'assurer que le logiciel fonctionne toujours.
-      - tests
-      - lint
-        -> CI
-    - Parlons version en général (tag, semantic versioning?).
-  - C'est quoi aller jusqu'a la prod ?
-    -> Présentation du pipeline de production logicielle.
-    -> Dénominateur commun c'est la génération d'atefacts.
-  - Comment aller jusqu'a la prod
-    -> Manuellement, tatata badaboum c'est pas bien cacaprout.
-    -> Automatiquement, yay lalla c'est bien bien. Parlons CI CD, #satombebienonestlapourça.
-  - Les outils a votre disposition
-  - Focus sur github et githubactions.
-- Choisir les bons outils
-  - Pour les dévelopeurs
-  - Pour votre production
-  - En fonction de vos moyens et de vos usages ?
-    -> Soyez pragmatiques!
+== Définir périmètre de votre projet
+
+* Baby steps
+** Déterminez le périmètre fonctionel le plus faible pour ensuite l'étendre petit a petit
+* L'important, c'est d'avoir une production et des utilisateurs, au plus tot.
+* Livré c'est mieux que parfait
+
+=== Approches Itératives
+
+Du cycle en V (industrie historique)... aux Methode à Gilles
+
+* Le problème c'est de gérer le changement.
+* Et de le gérer de façon efficace
+* Il faut qu'une version soit un non évènement.
+
+== Gérer le changement
+
+* Au niveau du code
+* Au niveau des utilisateurs
+
+== Gérer le changement: Au niveau du code
+
+=== VCS
+
+* VCS et parlons git (version)
+
+=== Tests
+
+* But: S'assurer que le logiciel fonctionne toujours.
+* intro tests
+
+=== CI
+
+* Intégration Continue
+
+=== Versions
+
+* Parlons version en général (tag, semantic versioning?).
+
+== Gérer le changement: Au niveau des utilisateurs
+
+=== C'est où la prod ?
+
+* tél de Mme. Michu, Serveur, etc.
+** Là où le logiciel s’exécute
+
+=== C'est quoi aller jusqu’à la prod ?
+
+* Présentation du pipeline de production logicielle.
+* Dénominateur commun c'est la génération d’artefacts reproductibles
+
+=== Comment aller jusqu'a la prod ?
+
+* CD vs. CD
+* Manuellement, tatata badaboum c'est pas bien cacaprout.
+* Automatiquement, yay lalla c'est bien bien. Parlons CI CD, #satombebienonestlapourça.
+
+== Les outils a votre disposition
+
+=== VCS
+
+Focus sur github
+
+=== CI Engines
+
+Focus sur GH Actions
+
+=== Hébergements
+
+Netlify, server web mutu, etc.
 
 == Projet n°1
 
-- Votre projet c'est de délivrer un site web d'un menu pour la Cantina de Tatoine, en ces temps de covid.
-- Introduction a github et au github actions ?
-- Votre production: netlify, creezvousuncomptetoussa.
-- yaml yaml yaml
-- Votre mission si vous l'acceptez: écrire un workflow github qui met en production un siteoueb a chaque fois qu'un changement est mergé sur main.
+* Votre projet c'est de délivrer un site web d'un menu pour la Cantina de Tatoine, en ces temps de covid.
+* Introduction a github et au github actions ?
+* Votre production: netlify, creezvousuncomptetoussa.
+* yaml yaml yaml
+* Votre mission si vous l'acceptez: écrire un workflow github qui met en production un siteoueb a chaque fois qu'un changement est mergé sur main.
 
 == Du produit minimal viable au prochain Netflix
 
 TODO
-- Travailler en équipe, kesako?
-- S'assurer que le logiciel ne régresse pas.
+* Travailler en équipe, kesako?
+* S'assurer que le logiciel ne régresse pas.
 
 == Projet n°2
 
-- Same idea, except that we have an API to manage now.
-- Your job should run tests, build a reproductible artifact, and publish to production as soon as you hit a tag.
+* Same idea, except that we have an API to manage now.
+* Your job should run tests, build a reproductible artifact, and publish to production as soon as you hit a tag.
 
 == Sources
 
-- link:http//www.wikipedia.fr[Wikipedia]
+* link:http//www.wikipedia.fr[Wikipedia]
 
 [{invert}]
 == Merci !
