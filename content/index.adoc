@@ -53,73 +53,130 @@ image::commitstrip.png[width="400"]
 
 == Au Menu
 
-1. De la feuille blanche au produit minimal viable.
+1. De la feuille blanche au premier utilisateur.
 2. Projet n°1: Site web de restaurant
-3. Du produit minimal viable au prochain Netflix.
-4. Projet n°2: API de menus as a service.
+3. Du premier utilisateur au prochain Netflix.
+4. Projet n°2: Menus "as a service".
 
-== De la feuille blanche au produit minimal viable
+== Partie I: De la feuille blanche au premier utilisateur
 
-Que veut dire créer un logiciel?
+Concrètement, ça veut dire quoi créer un logiciel ?
 
-== Définir périmètre de votre projet
+== Savoir ce que l'on veut faire!
 
-* Baby steps
-** Déterminez le périmètre fonctionel le plus faible pour ensuite l'étendre petit a petit
-* L'important, c'est d'avoir une production et des utilisateurs, au plus tot.
-* Livré c'est mieux que parfait
+[.notes]
+--
+* Créer un logiciel c'est écrire du code qui implémente une logique.
+* Cette logique à pour but de répondre à un besoin.
+* Il faut donc clarifier ce besoin.
+--
 
-=== Approches Itératives
+=== Avant : le cycle en V
 
-Du cycle en V (industrie historique)... aux Methode à Gilles
+image::cycleenv.png[width="800"]
 
-* Le problème c'est de gérer le changement.
-* Et de le gérer de façon efficace
-* Il faut qu'une version soit un non évènement.
+=== What went wrong here?
 
-== Gérer le changement
+* On specifie et l'on engage un volume conséquent de travail sur des hypothèses
+** ... et si les hypothèses sont fausses?
+** ... et si les besoins changent?
+* Cycle trèèèèès long
+** Aucune validation à court terme
+** Coût de l'erreur décuplé
 
-* Au niveau du code
-* Au niveau des utilisateurs
+[.notes]
+--
+* L'informatique manipule peu de concepts tangibles, il est très difficile de mener un travail de conception purement théorique à terme.
+--
 
-== Gérer le changement: Au niveau du code
+=== Comment éviter ça?
 
-=== VCS
+* Valider les hypothèses au plus tôt, et étendre petit à petit le périmètre fonctionel.
+** Reduire le périmètre fonctionel au minimum.
+** Confronter le logiciel au plus tôt aux utilisateurs.
+** Refaire des hypothèses basées sur ce que l'on à appris, et recommencer!
+* Accepter le changement.
+** Votre première idée n'est probablement pas la bonne.
+** Il est difficile, voire impossible, de prévoir comment votre logiciel va être utilisé.
 
-* VCS et parlons git (version)
+[.notes]
+--
+* J'itère donc je suis.
+* EMBRACE CHANGE
+--
 
-=== Tests
+=== La clé : gérer le changement!
 
-* But: S'assurer que le logiciel fonctionne toujours.
-* intro tests
+* Le changement ne doit pas être un évenement, ça doit être la norme.
+* Notre objectif : minimiser le coût du changement.
+* Faire en sorte que:
+** Changer quelque chose soit facile
+** Changer quelque chose soit rapide
+** Changer quelque chose ne casse pas tout
 
-=== CI
+=== Heureusement, vous avez des outils à disposition!
 
-* Intégration Continue
+Et c'est ce que l'on va voir ensemble aujourd'hui!
 
-=== Versions
+[{invert}]
+== Disclaimer: les outils c'est une chose, l'important c'est le problème derrière!
+Soyez pragmatiques :)
+
+[.notes]
+--
+* On va vous parler de beaucoup d'outils dans ce cours, ce sont des implémentations.
+* Ce qui compte, c'est les problèmes qu'ils résolvent ;-)
+--
+
+== Changer du code
+
+=== VCS: Tracer le changement
+
+=== TODO: Slides sur git 101
+
+=== TODO: Version
 
 * Parlons version en général (tag, semantic versioning?).
 
-== Gérer le changement: Au niveau des utilisateurs
+=== Tests automatisés
 
-=== C'est où la prod ?
+Faire en sorte qu'on ne pète pas tout
 
+=== TODO: Intro au testing automatisé.
+
+== Rendre son changement visible
+
+=== Où votre code est visible?
+
+* Où est executé le code?
 * tél de Mme. Michu, Serveur, etc.
 ** Là où le logiciel s’exécute
 
-=== C'est quoi aller jusqu’à la prod ?
+=== C'est quoi rendre un changement visible?
 
 * Présentation du pipeline de production logicielle.
 * Dénominateur commun c'est la génération d’artefacts reproductibles
 
-=== Comment aller jusqu'a la prod ?
+=== Comment rendre un changement visible?
 
-* CD vs. CD
+* CI vs. CD
 * Manuellement, tatata badaboum c'est pas bien cacaprout.
 * Automatiquement, yay lalla c'est bien bien. Parlons CI CD, #satombebienonestlapourça.
 
-== Les outils a votre disposition
+[.notes]
+--
+* C'est couteux et compliqué de tout refaire a chaque fois => Automatisons alors.
+--
+
+== Projet n°1: Menus de la cantina de Tatooine
+
+* Votre projet c'est de délivrer un site web d'un menu pour la Cantina de Tatoine, en ces temps de covid.
+* Introduction a github et au github actions ?
+* Votre production: netlify, creezvousuncomptetoussa.
+* yaml yaml yaml
+* Votre mission si vous l'acceptez: écrire un workflow github qui met en production un siteoueb a chaque fois qu'un changement est mergé sur main.
+
+=== Les outils a votre disposition
 
 === VCS
 
@@ -133,19 +190,11 @@ Focus sur GH Actions
 
 Netlify, server web mutu, etc.
 
-== Projet n°1
-
-* Votre projet c'est de délivrer un site web d'un menu pour la Cantina de Tatoine, en ces temps de covid.
-* Introduction a github et au github actions ?
-* Votre production: netlify, creezvousuncomptetoussa.
-* yaml yaml yaml
-* Votre mission si vous l'acceptez: écrire un workflow github qui met en production un siteoueb a chaque fois qu'un changement est mergé sur main.
-
-== Du produit minimal viable au prochain Netflix
+== Partie II: Du premier utilisateur au prochain Netflix
 
 TODO
+
 * Travailler en équipe, kesako?
-* S'assurer que le logiciel ne régresse pas.
 
 == Projet n°2
 
