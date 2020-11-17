@@ -138,11 +138,78 @@ Soyez pragmatiques :)
 
 * Parlons version en général (tag, semantic versioning?).
 
-=== Tests automatisés
+=== Tests Automatisés
 
-Faire en sorte qu'on ne pète pas tout
+Faire en sorte qu'on ne péte pas tout!
 
-=== TODO: Intro au testing automatisé.
+=== Qu'est ce qu'un Test ?
+
+* Çe sont des outils, soyez pragmatiques!
+** Ça n'élimine pas les bugs, ça évite d'en introduire!
+** Ça sert a prouver que le logiciel se comporte comme attendu a tout moment.
+** Ça permet de détecter au plus tôt les problèmes.
+* Il existe différent types de tests pour différents cas d'usages.
+
+=== Test Unitaire
+
+* Test validant le bon comportement une unité de code (fonction, méthode...)
+* Prouve que l'unité de code interagit correctement avec ses collaborateurs
+* Par exemple:
+** Retourne les bonnes valeur en fonction des bons paramètres
+** Appelle le bon type collaborateur avec les bons paramètres
+
+=== Test Unitaire: Demonstration
+
+=== Test Unitaire: Pro / Cons
+
+* (+) Super rapides (<1s) et légers a executer
+* (+) Pousse à avoir un bon design de code
+* (+) Faible risque de "flackeyness"
+* (+) Efficaces pour tester des cas limites
+* (-) Potentiellement couteux à maintenir
+* (-) Peu ancrés dans le réel
+
+=== Test d'Integration
+
+* Test validant qu'un assemblage d'unités se comportent comme prévu.
+* Prouve le bon comportement d'une partie de l'application.
+* Par exemple:
+** Prouve que `GET /users` retourne la liste des utilisateurs en base
+** Prouve que `POST /users`  avec un nom manquant provoque une réponse HTTP 400
+
+=== Test d'Integration: Demonstration
+
+=== Test d'Integration: Pro / Cons
+
+* (+) Rapides (~1s) a executer
+* (+) Assez proches d'un cas réel
+* (-) Risque de "flackeyness"
+* (-) Potentiellement complexes
+* (-) Moins flexibles
+
+=== Test de Bout en Bout
+
+* Test validant qu'un cas d'utilisation est correctement implémenté par le logiciel
+* Tests idéaliement décrits de façon non technique
+* Par exemple:
+** En tant qu'un utilisateur authentifié
+** Quand je remplis le formulare correctement et appuie sur le bouton "OK"
+** Alors un utilisateur est créé en base
+
+=== Demonstration
+
+=== Test de Bout en Bout: Pro / Cons
+
+* (+) Au plus proche d'un cas réel
+* (+) Teste tous les composants du logiciel
+* (-) Lents (~1m) et complexes
+* (-) Haut risque de flackeyness :sob:
+* (-) Peu flexibles
+
+=== Quel type de test utiliser où ?
+
+* ¯\_(ツ)_/¯
+* Soyez pragmatiques :)
 
 == Rendre son changement visible
 
