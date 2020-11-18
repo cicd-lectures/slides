@@ -144,9 +144,9 @@ Faire en sorte qu'on ne casse pas tout...
 
 === Qu'est ce qu'un Test ?
 
-* Çe sont des outils, soyez pragmatiques!
-** Ça n'élimine pas les bugs, ça évite d'en introduire !
+* C'est du code qui vérifie que du code fait ce qu'il est supposé faire.
 ** Ça sert a prouver que le logiciel se comporte comme attendu a tout moment.
+** Ça n'élimine pas les bugs, ça évite d'en introduire !
 ** Ça permet de détecter au plus tôt les problèmes.
 * Il existe différent types de tests pour différents cas d'usages.
 
