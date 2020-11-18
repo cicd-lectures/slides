@@ -140,12 +140,12 @@ Soyez pragmatiques :)
 
 === Tests Automatisés
 
-Faire en sorte qu'on ne péte pas tout!
+Faire en sorte qu'on ne casse pas tout...
 
 === Qu'est ce qu'un Test ?
 
 * Çe sont des outils, soyez pragmatiques!
-** Ça n'élimine pas les bugs, ça évite d'en introduire!
+** Ça n'élimine pas les bugs, ça évite d'en introduire !
 ** Ça sert a prouver que le logiciel se comporte comme attendu a tout moment.
 ** Ça permet de détecter au plus tôt les problèmes.
 * Il existe différent types de tests pour différents cas d'usages.
@@ -190,7 +190,7 @@ Faire en sorte qu'on ne péte pas tout!
 === Test de Bout en Bout
 
 * Test validant qu'un cas d'utilisation est correctement implémenté par le logiciel
-* Tests idéaliement décrits de façon non technique
+* Tests idéalement décrits de façon non technique
 * Par exemple:
 ** En tant qu'un utilisateur authentifié
 ** Quand je remplis le formulare correctement et appuie sur le bouton "OK"
