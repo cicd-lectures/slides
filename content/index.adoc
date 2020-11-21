@@ -128,17 +128,13 @@ Soyez pragmatiques :)
 * Ce qui compte, c'est les problèmes qu'ils résolvent ;-)
 --
 
-== Changer du code
+include::./chapitres/vcs.adoc[leveloffset=1]
 
-=== VCS: Tracer le changement
-
-=== TODO: Slides sur git 101
-
-=== TODO: Version
+== TODO: Version
 
 * Parlons version en général (tag, semantic versioning?).
 
-=== Tests Automatisés
+== Tests automatisés
 
 Faire en sorte qu'on ne casse pas tout...
 

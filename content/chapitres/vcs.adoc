@@ -1,0 +1,220 @@
+
+= Changer du code
+
+== Tracer le changement dans le code
+
+avec un *VCS* : 🇬🇧 Version Control System
+
+[.small]
+également connu sous le nom de SCM (🇬🇧 Source Code Management)
+
+== Pourquoi un VCS ?
+
+* Pour conserver une trace de *tous* les changements dans un historique
+
+* Pour *collaborer* efficacement sur un même référentiel de code source
+
+[.notes]
+--
+* Historique : On parle de source unique de vérité (_Single Source of Truth_)
+** Historique complet des modifications
+** Possibilité de retour arrière à tout moment
+
+* Collaboration:
+** Aide à la résolution de conflits
+** Partage de contenu facile
+--
+
+== Concepts des VCS
+
+image::scm-local.png[caption="Local SCM",float="left",width=200]
+image::scm-centralized.png[caption="Centralized SCM",float="middle",width=200]
+image::scm-distributed.png[caption="Centralized SCM",float="right",width=200]
+
+[.notes]
+--
+* Une base de donnée locale contenant l'historique de tous les changements
+* Un espace de travail qui contient des fichiers
+** C'est une "photographie" d'une des versions
+--
+
+== Quel VCS utiliser ?
+
+image::cloudwords-vcs.png[]
+
+Nous allons utiliser *Git*
+
+== Git
+
+[quote]
+____
+Git is a free and open source distributed version control system designed to handle everything from small to very large projects with speed and efficiency.
+____
+
+link:https://git-scm.com/[]
+
+image::git-logo.png[]
+
+== Exercice avec Git - 1
+
+* Créer un nouveau dépôt Git vide localement:
+** Créer un dossier vide nommé `projet-vcs-1`
+** Initialiser le dépôt git (Indice : `git init --help` et `git status --help`)
+** Créer un fichier `README.md` dedans avec un titre et vos nom et prénoms
+** Créer un commit qui ajoute le fichier `README.md` avec un message
+(Indice : `git add --help` et `git commit --help`)
+
+== Solution de l'exercice avec Git - 1
+
+[source,bash]
+--
+$ mkdir -p ./projet-vcs-1/
+$ cd ./projet-vcs-1/
+$ git init ./
+$ git status
+$ echo "# Read Me\n\nObi Wan" > ./README.md
+$ git status
+$ git add ./README.md
+$ git status
+$ git commit -m "Ajoute un README au projet"
+$ git status
+--
+
+== Terminologie de Git : Basiques
+
+*diff:* un ensemble de lignes "changées" sur un fichier donné
+
+image::diff.png[width=500]
+
+*changeset:* un ensemble de "diff" (donc peut couvrir plusieurs fichiers)
+
+image::changeset.png[height=200]
+
+== Terminologie des SCM : Représentation
+
+*commit:* un changeset avec un message,
+sauvegardé dans la base de données des versions
+
+image::commit.png[height=150]
+
+_"HEAD"_: C'est le dernier commit dans l'historique
+
+image::scm-basics-legend.png[]
+
+image::scm-basics-history.png[]
+
+== Exercice avec Git - 2
+
+* Afficher la liste des commits
+
+* Afficher le changeset associé à un commit
+
+* Modifier du contenu dans `README.md` et afficher le diff
+
+
+== Solution de l'exercice avec Git - 1
+
+[source,bash]
+--
+$ git log
+$ git show 4c3c55109bdf34e23fc954f3b5217c4bb2c4a8d6
+$ echo "# Read Me\n\nObi Wan Kenobi" > ./README.md
+$ git diff
+--
+
+== Terminologie des SCM : Branches
+
+* Abstraction d'une version "isolée" du code
+* Concrètement, une *branche* est un alias pointant vers un "commit"
+
+image::scm-branches.png[caption="SCM branches"]
+
+== Exercice avec Git - 3
+
+* Créer une branche nommée `feature/html`
+
+* Ajouter un nouveau commit contenant un nouveau fichier `index.html` sur cette branche
+
+* Afficher le graphe correspondant à cette branche avec `git log --graph`
+
+== Solution de l'exercice avec Git - 3
+
+[source,bash]
+--
+$ git branch feature/html && git checkout feature/html
+# Ou git checkout -b feature/html
+$ echo '<h1>Hello</h1>' > ./index.html
+$ git add ./index.html && git commit -m "Ajout d'une page HTML par défaut"
+$ git log --graph
+# git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+--
+
+== Terminologie des SCM : Merge
+
+* On intègre une branche dans une autre en effectuant un *merge*
+** Un nouveau commit est créé, fruit de la combinaison de 2 autres commits
+
+image::scm-merge.png[caption="SCM Merge"]
+
+== Exercice avec Git - 4
+
+* Merger la branche `feature/html` dans la branche principale
+
+* Afficher le graphe correspondant à cette branche avec `git log --graph`
+
+== Solution de l'exercice avec Git - 4
+
+[source,bash]
+--
+$ git checkout master # or git checkout main
+$ git merge `feature/html`
+$ git log --graph
+# git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+--
+
+== Collaboration Flow
+
+image::scm-centralized-flow-how-to.jpg[caption="Centralized SCM Workflow",width=800]
+
+[NOTE.speaker]
+====
+* Defined by collaborators working from a single code base
+** Abstraction of this process is the basis for Trunk based development
+* This pattern is the natural usage of a CVCS like SVN or CVS
+* It is easy to understand and use, and sufficient enough for a lot of cases
+* Collaboration is blocked when centralized server is down or history is broken
+====
+
+== Feature Branch Flow
+
+* *Une seule* branche *par* fonctionnalité
+
+image::scm-feature-branch-workflow.png[caption="Feature Branch SCM Workflow",link=https://twitter.com/jay_gee/status/702638177471873024]
+
+[NOTE.speaker]
+====
+** Encapsulation allows working without disturbing the main codebase
+** Allows easier collaboration
+** Merge conflicts map the conceptual conflicts: easier to track
+** Useful when inclusion of a feature in the main code base is open to debate
+====
+
+== Exemple d'usages de VCS
+
+* "Infrastructure as Code" :
+** Besoins de traçabilité, de définition explicite et de gestion de conflits
+** Collaboration requise pour chaque changement (revue, responsabilités)
+* Code Civil:
+** https://github.com/steeve/france.code-civil
+** https://github.com/steeve/france.code-civil/pull/40
+
+== Pour aller plus loin avec Git et les VCS...
+
+Un peu de lecture :
+
+* https://git-scm.com/book/en/v2/Getting-Started-About-Version-Control
+* http://martinfowler.com/bliki/VersionControlTools.html
+* http://martinfowler.com/bliki/FeatureBranch.html
+* https://about.gitlab.com/2014/09/29/gitlab-flow/
+* https://www.atlassian.com/git/tutorials/comparing-workflows
+* http://nvie.com/posts/a-successful-git-branching-model/
