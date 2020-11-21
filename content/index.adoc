@@ -136,7 +136,7 @@ include::./chapitres/vcs.adoc[leveloffset=1]
 
 == Tests automatisés
 
-Faire en sorte qu'on ne casse pas tout...
+Faire en sorte qu'on ne casse pas tout quand on change quelque chose...
 
 === Qu'est ce qu'un Test ?
 
@@ -151,7 +151,7 @@ Faire en sorte qu'on ne casse pas tout...
 * Test validant le bon comportement une unité de code (fonction, méthode...)
 * Prouve que l'unité de code interagit correctement avec ses collaborateurs
 * Par exemple:
-** Retourne les bonnes valeur en fonction des bons paramètres
+** Retourne les bonnes valeur en fonction des paramètres donnés
 ** Appelle le bon type collaborateur avec les bons paramètres
 
 === Test Unitaire: Demonstration
@@ -189,7 +189,7 @@ Faire en sorte qu'on ne casse pas tout...
 * Tests idéalement décrits de façon non technique
 * Par exemple:
 ** En tant qu'un utilisateur authentifié
-** Quand je remplis le formulare correctement et appuie sur le bouton "OK"
+** Quand je remplis le formulaire correctement et appuie sur le bouton "OK"
 ** Alors un utilisateur est créé en base
 
 === Demonstration
