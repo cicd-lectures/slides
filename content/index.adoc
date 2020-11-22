@@ -182,7 +182,7 @@ cd demoapp
 git checkout ut-exercise-1
 
 # Run the tests
-./mwnw test
+mvnw test
 ```
 
 === Test Unitaire: Exercice 1
