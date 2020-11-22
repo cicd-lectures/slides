@@ -120,7 +120,6 @@ Et c'est ce que l'on va voir ensemble aujourd'hui!
 
 [{invert}]
 == Disclaimer: les outils c'est une chose, l'important c'est le problème derrière!
-Soyez pragmatiques :)
 
 [.notes]
 --
@@ -138,48 +137,83 @@ include::./chapitres/vcs.adoc[leveloffset=1]
 
 Faire en sorte qu'on ne casse pas tout quand on change quelque chose...
 
-=== Qu'est ce qu'un Test ?
+=== Qu'est ce qu'un test ?
 
-* C'est du code qui vérifie que du code fait ce qu'il est supposé faire.
-** Ça sert a prouver que le logiciel se comporte comme attendu a tout moment.
-** Ça n'élimine pas les bugs, ça évite d'en introduire !
-** Ça permet de détecter au plus tôt les problèmes.
-* Il existe différent types de tests pour différents cas d'usages.
+* C'est du code qui vérifie qu'un système fait ce qu'il est supposé faire.
+* Ecrire des tests est un acte préventif et non curratif.
 
-=== Test Unitaire
+=== Pourquoi faire des tests ?
+
+* Ça sert a prouver que le logiciel se comporte comme attendu a tout moment.
+* Ça permet de détecter au plus tôt les problèmes.
+
+[.notes]
+--
+* Cela ne permet pas de corriger des bugs, cela limite le risque d'en introduire.
+--
+
+=== Qu'est ce que l'on teste ?
+
+* Une fonction
+* Une combinaison de classes
+* Un serveur applicatif et une base de données
+
+On parle de SUT, System Under Test.
+
+=== Différents systemes, différents types de tests
+
+* Test unitaire
+* Test d'integration
+* Test de bout en bout
+
+=== Test unitaire
 
 * Test validant le bon comportement une unité de code (fonction, méthode...)
-* Prouve que l'unité de code interagit correctement avec ses collaborateurs
+* Prouve que l'unité de code interagit correctement avec les autres unités.
 * Par exemple:
 ** Retourne les bonnes valeur en fonction des paramètres donnés
-** Appelle le bon type collaborateur avec les bons paramètres
+** Appelle la bonne methode du bon attribut avec les bons paramètres
 
-=== Test Unitaire: Demonstration
+=== Test Unitaire: Exercice 1
+
+Fonction pure
+
+=== Test Unitaire: Exercice 2
+
+Service de gestion d'utilisateur
 
 === Test Unitaire: Pro / Cons
 
 * (+) Super rapides (<1s) et légers a executer
 * (+) Pousse à avoir un bon design de code
-* (+) Faible risque de "flackeyness"
 * (+) Efficaces pour tester des cas limites
-* (-) Potentiellement couteux à maintenir
-* (-) Peu ancrés dans le réel
+* (-) Peu réaliste
+
+[%notitle]
+=== fail
+
+image::ut-fail-1.gif[width="600"]
+
+[%notitle]
+=== fail2
+
+image::ut-fail-2.gif[width="600"]
 
 === Test d'Integration
 
 * Test validant qu'un assemblage d'unités se comportent comme prévu.
-* Prouve le bon comportement d'une partie de l'application.
 * Par exemple:
 ** Prouve que `GET /users` retourne la liste des utilisateurs en base
 ** Prouve que `POST /users`  avec un nom manquant provoque une réponse HTTP 400
+
+Prouve le bon comportement d'une partie de l'application.
 
 === Test d'Integration: Demonstration
 
 === Test d'Integration: Pro / Cons
 
 * (+) Rapides (~1s) a executer
-* (+) Assez proches d'un cas réel
-* (-) Risque de "flackeyness"
+* (+) Relativement réalistes
 * (-) Potentiellement complexes
 * (-) Moins flexibles
 
@@ -198,14 +232,9 @@ Faire en sorte qu'on ne casse pas tout quand on change quelque chose...
 
 * (+) Au plus proche d'un cas réel
 * (+) Teste tous les composants du logiciel
-* (-) Lents (~1m) et complexes
-* (-) Haut risque de flackeyness :sob:
+* (-) Lents (~1m)
+* (-) Complexes
 * (-) Peu flexibles
-
-=== Quel type de test utiliser où ?
-
-* ¯\_(ツ)_/¯
-* Soyez pragmatiques :)
 
 == Rendre son changement visible
 
@@ -241,7 +270,7 @@ TODO: Je sais pas vraiment comment faire la transition ici.
 
 === Différentes étapes
 
-* Recours à des environements de tests  pour valider les changements 
+* Recours à des environements de tests  pour valider les changements
 ** Pré-versions (beta)
 ** Environement de pré-production, QA, staging...
 
