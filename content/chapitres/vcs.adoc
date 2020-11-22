@@ -31,7 +31,8 @@ image::scm-local.png[caption="Local SCM",width=300]
 
 image::scm-distributed.png[caption="Centralized SCM",width=300]
 
-// https://git-scm.com/book/en/v2/Getting-Started-About-Version-Control
+[.small]
+Source : https://git-scm.com/book/en/v2/Getting-Started-About-Version-Control
 
 [.notes]
 --
@@ -57,47 +58,79 @@ link:https://git-scm.com/[]
 
 image::git-logo.png[]
 
-== Exercice avec Git - 1
+== Les 3 états avec Git
 
-Créer un nouveau dépôt Git vide localement:
+* L'historique ("Version Database") : dossier `.git`
+* Dossier de votre projet ("Working Directory") - Commande
+* La zone d'index ("Staging Area")
+
+image::git-3-etats.png[width=300]
+
+[.small]
+Source : https://git-scm.com/book/fr/v2/D%C3%A9marrage-rapide-Rudiments-de-Git#_les_trois_%C3%A9tats
+
+== Exercice avec Git - 1.1
+
+Dossier de travail -> Historique
 
 * Créer un dossier vide nommé `projet-vcs-1`
-* Initialiser le dépôt git
+** Est-ce qu'il y a un dossier `git.` ?
+** Essayez la commande `git status` ?
 
-(Indice : `git init --help` et `git status --help`)
+* Initialiser le dépôt git avec `git init`
+** Est-ce qu'il y a un dossier `git.` ?
+** Essayez la commande `git status` ?
 
-* Créer un fichier `README.md` dedans avec un titre et vos nom et prénoms
-* Créer un commit qui ajoute le fichier `README.md` avec un message
-
-(Indice : `git add --help` et `git commit --help`)
-
-== Solution de l'exercice avec Git - 1
+== Solution de l'exercice avec Git - 1.1
 
 [source,bash]
 --
 $ mkdir -p ./projet-vcs-1/
 $ cd ./projet-vcs-1/
+$ ls -la # Pas de dossier .git
+$ git status # Erreur "fatal: not a git repository"
 $ git init ./
-$ git status
-$ echo "# Read Me\n\nObi Wan" > ./README.md
-$ git status
-$ git add ./README.md
-$ git status
-$ git commit -m "Ajoute un README au projet"
-$ git status
+$ ls -la # On a un dossier .git
+$ git status # Succès avec un message "On branch master No commits yet"
 --
 
-== Terminologie de Git : Basiques
+== Exercice avec Git - 1.2
+
+Dossier de travail -> Zone d'indexation -> Historique
+
+* Créer un fichier `README.md` dedans avec un titre et vos nom et prénoms
+** Essayez la commande `git status` ?
+
+* Ajouter le fichier à la zone d'indexation à l'aide de la commande `git add (...)`
+** Essayez la commande `git status` ?
+
+* Créer un commit qui ajoute le fichier `README.md` avec un message,
+à l'aide de la commande `git commit -m <message>`
+** Essayez la commande `git status` ?
+
+== Solution de l'exercice avec Git - 1.2
+
+[source,bash]
+--
+$ echo "# Read Me\n\nObi Wan" > ./README.md
+$ git status # Message "Untracked file"
+$ git add ./README.md
+$ git status # Message "Changes to be committed"
+$ git commit -m "Ajout du README au projet"
+$ git status  # Message "nothing to commit, working tree clean"
+--
+
+== Terminologie de Git - Diff et changeset
 
 *diff:* un ensemble de lignes "changées" sur un fichier donné
 
-image::diff.png[width=500]
+image::diff.png[width=800]
 
 *changeset:* un ensemble de "diff" (donc peut couvrir plusieurs fichiers)
 
-image::changeset.png[height=200]
+image::changeset.png[height=300]
 
-== Terminologie des SCM : Représentation
+== Terminologie de Git - Commit
 
 *commit:* un changeset qui possède un (commit) parent, associé à un message
 
@@ -128,7 +161,7 @@ $ echo "# Read Me\n\nObi Wan Kenobi" > ./README.md
 $ git diff
 --
 
-== Terminologie des SCM : Branches
+== Terminologie de Git - Branche
 
 * Abstraction d'une version "isolée" du code
 * Concrètement, une *branche* est un alias pointant vers un "commit"
@@ -155,7 +188,7 @@ $ git log --graph
 # git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
 --
 
-== Terminologie des SCM : Merge
+== Terminologie de Git - Merge
 
 * On intègre une branche dans une autre en effectuant un *merge*
 ** Un nouveau commit est créé, fruit de la combinaison de 2 autres commits
