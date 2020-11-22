@@ -223,12 +223,12 @@ Service de gestion d'utilisateur
 [%notitle]
 === fail
 
-image::ut-fail-1.gif[width="600"]
+video::ut-fail-1.mp4[width="600",options="autoplay,loop,nocontrols"]
 
 [%notitle]
 === fail2
 
-image::ut-fail-2.gif[width="600"]
+video::ut-fail-2.mp4[width="600",options="autoplay,loop,nocontrols"]
 
 === Test d'Integration
 
