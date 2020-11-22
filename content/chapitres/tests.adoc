@@ -61,7 +61,8 @@ Implementez la methode `greet` de la classe `GreeterService`
 
 == La classe `GreeterService`
 
-```java
+[source,java]
+--
 // src/main/java/com/cicdlectures/demoapp/user/GreeterService.java
 
 public class GreeterService {
@@ -71,11 +72,12 @@ public class GreeterService {
   }
 
 }
-```
+--
 
 == La classe `User`
 
-```java
+[source,java]
+--
 // src/main/java/com/cicdlectures/demoapp/user/User.java
 
 public class User {
@@ -91,11 +93,12 @@ public class User {
     return this.age;
   }
 }
-```
+--
 
 == La classe `GreeterServiceTests`
 
-```java
+[source,java]
+--
 // src/test/java/com/cicdlectures/demoapp/user/GreeterServiceTests.java
 
 class GreeterServiceTests {
@@ -112,12 +115,13 @@ class GreeterServiceTests {
     // ...
   }
 }
-```
+--
 
 
 == Un exemple de test
 
-```java
+[source,java]
+--
 // src/test/java/com/cicdlectures/demoapp/user/GreeterServiceTests.java
 
   @Test
@@ -133,11 +137,12 @@ class GreeterServiceTests {
     assertEquals("Hi", got);
   }
 
-```
+--
 
 == Implémentation du premier cas
 
-```java
+[source,java]
+--
 // src/main/java/com/cicdlectures/demoapp/user/GreeterService.java
 
   public String greet(User user) {
@@ -147,12 +152,13 @@ class GreeterServiceTests {
 
     //...
   }
-```
+--
 
 
 == A vous de jouer pour les deux autres cas :)
 
-```java
+[source,java]
+--
   @Test
   @DisplayName("greets user with age between 10 and 20 with Hey")
   void greetsUserWithAgeBetween10And20WithHey() {
@@ -164,7 +170,7 @@ class GreeterServiceTests {
   void greetsUserWithAgeBelow10WithHello() {
     fail("Not implemented");
   }
-```
+--
 
 == Test Unitaire: Solution Exercice 1
 
