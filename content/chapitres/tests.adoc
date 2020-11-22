@@ -40,7 +40,7 @@ On parle de SUT, System Under Test.
 ** Retourne les bonnes valeur en fonction des paramètres donnés
 ** Appelle la bonne methode du bon attribut avec les bons paramètres
 
-== Test Unitaire: Exercices
+== Test Unitaire: Mise en place
 
 ```bash
 git clone https://github.com/cicd-lectures/demoapp.git
@@ -53,20 +53,117 @@ mvnw test
 
 == Test Unitaire: Exercice 1
 
-Implementez et testez le comportement suivant:
+Implementez la methode `greet` de la classe `GreeterService`
 
-```bash
-# Si l'age de l'utilisateur est inferieur a 10, alors retourner "Hi"
-# Si l'age de l'utilisateur est entre 10 et 20, alors retourner "Hey"
-# Si l'age de l'utilisateur est supérieur a 20, alors retourner "Hello"
+* Si l'age de l'utilisateur est inferieur a 10, alors retourner "Hi"
+* Si l'age de l'utilisateur est entre 10 et 20, alors retourner "Hey"
+* Si l'age de l'utilisateur est supérieur a 20, alors retourner "Hello"
+
+== La classe `GreeterService`
+
+```java
+// src/main/java/com/cicdlectures/demoapp/user/GreeterService.java
+
+public class GreeterService {
+
+  public String greet(User user) {
+    // TODO
+  }
+
+}
 ```
 
-Chemins utiles:
+== La classe `User`
 
-```bash
-# Modèle "src/main/java/com/cicdlectures/demoapp/user/User.java"
-# Classe "src/main/java/com/cicdlectures/demoapp/user/GreeterService.java"
-# Tests "src/test/java/com/cicdlectures/demoapp/user/GreeterServiceTests.java"
+```java
+// src/main/java/com/cicdlectures/demoapp/user/User.java
+
+public class User {
+
+  private int age;
+
+  public User(String name, int age) {
+    //...
+    this.age = age;
+  }
+
+  public int getAge() {
+    return this.age;
+  }
+}
+```
+
+== La classe `GreeterServiceTests`
+
+```java
+// src/test/java/com/cicdlectures/demoapp/user/GreeterServiceTests.java
+
+class GreeterServiceTests {
+
+  private GreeterService subject;
+
+  @BeforeEach
+  public void init() {
+    this.subject = new GreeterService();
+  }
+
+  @Test
+  void greetsUserWithAgeBelow10WithHi() {
+    // ...
+  }
+}
+```
+
+
+== Un exemple de test
+
+```java
+// src/test/java/com/cicdlectures/demoapp/user/GreeterServiceTests.java
+
+  @Test
+  @DisplayName("greets user with age below 10 with Hi")
+  void greetsUserWithAgeBelow10WithHi() {
+    // Instancier un nouvel utilisateur.
+    User user = new User("John", 5);
+
+    // Appeler la methode a tester.
+    String result = this.subject.greet(user);
+
+    // Verifier le résutat.
+    assertEquals("Hi", got);
+  }
+
+```
+
+== Implémentation du premier cas
+
+```java
+// src/main/java/com/cicdlectures/demoapp/user/GreeterService.java
+
+  public String greet(User user) {
+    if (user.getAge() < 10) {
+      return "Hi";
+    }
+
+    //...
+  }
+```
+
+
+== A vous de jouer pour les deux autres cas :)
+
+```java
+  @Test
+  @DisplayName("greets user with age between 10 and 20 with Hey")
+  void greetsUserWithAgeBetween10And20WithHey() {
+    fail("Not implemented");
+  }
+
+  @Test
+  @DisplayName("greets user above 20 with Hello")
+  void greetsUserWithAgeBelow10WithHello() {
+    fail("Not implemented");
+  }
 ```
 
 == Test Unitaire: Solution Exercice 1
