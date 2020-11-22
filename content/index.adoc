@@ -127,145 +127,15 @@ Et c'est ce que l'on va voir ensemble aujourd'hui!
 * Ce qui compte, c'est les problèmes qu'ils résolvent ;-)
 --
 
+// Chapitre VCS - Git
 include::./chapitres/vcs.adoc[leveloffset=1]
 
 == TODO: Version
 
 * Parlons version en général (tag, semantic versioning?).
 
-== Tests automatisés
-
-Faire en sorte qu'on ne casse pas tout quand on change quelque chose...
-
-=== Qu'est ce qu'un test ?
-
-* C'est du code qui vérifie qu'un système fait ce qu'il est supposé faire.
-* Ecrire des tests est un acte préventif et non curratif.
-
-=== Pourquoi faire des tests ?
-
-* Ça sert a prouver que le logiciel se comporte comme attendu a tout moment.
-* Ça permet de détecter au plus tôt les problèmes.
-
-[.notes]
---
-* Cela ne permet pas de corriger des bugs, cela limite le risque d'en introduire.
---
-
-=== Qu'est ce que l'on teste ?
-
-* Une fonction
-* Une combinaison de classes
-* Un serveur applicatif et une base de données
-
-On parle de SUT, System Under Test.
-
-=== Différents systemes, différents types de tests
-
-* Test unitaire
-* Test d'integration
-* Test de bout en bout
-
-=== Test unitaire
-
-* Test validant le bon comportement une unité de code (fonction, méthode...)
-* Prouve que l'unité de code interagit correctement avec les autres unités.
-* Par exemple:
-** Retourne les bonnes valeur en fonction des paramètres donnés
-** Appelle la bonne methode du bon attribut avec les bons paramètres
-
-=== Test Unitaire: Exercices
-
-```bash
-git clone https://github.com/cicd-lectures/demoapp.git
-cd demoapp
-git checkout ut-exercise-1
-
-# Run the tests
-mvnw test
-```
-
-=== Test Unitaire: Exercice 1
-
-Implementez et testez le comportement suivant:
-
-```bash
-# Si l'age de l'utilisateur est inferieur a 10, alors retourner "Hi"
-# Si l'age de l'utilisateur est entre 10 et 20, alors retourner "Hey"
-# Si l'age de l'utilisateur est supérieur a 20, alors retourner "Hello"
-```
-
-Chemins utiles:
-
-```bash
-# Modèle "src/main/java/com/cicdlectures/demoapp/user/User.java"
-# Classe "src/main/java/com/cicdlectures/demoapp/user/GreeterService.java"
-# Tests "src/test/java/com/cicdlectures/demoapp/user/GreeterServiceTests.java"
-```
-
-=== Test Unitaire: Solution Exercice 1
-
-```bash
-git checkout ut-exercise-1-solution
-```
-
-=== Test Unitaire: Exercice 2
-
-Service de gestion d'utilisateur
-
-=== Test Unitaire: Pro / Cons
-
-* (+) Super rapides (<1s) et légers a executer
-* (+) Pousse à avoir un bon design de code
-* (+) Efficaces pour tester des cas limites
-* (-) Peu réaliste
-
-[%notitle]
-=== fail
-
-video::ut-fail-1.mp4[width="600",options="autoplay,loop,nocontrols"]
-
-[%notitle]
-=== fail2
-
-video::ut-fail-2.mp4[width="600",options="autoplay,loop,nocontrols"]
-
-=== Test d'Integration
-
-* Test validant qu'un assemblage d'unités se comportent comme prévu.
-* Par exemple:
-** Prouve que `GET /users` retourne la liste des utilisateurs en base
-** Prouve que `POST /users`  avec un nom manquant provoque une réponse HTTP 400
-
-Prouve le bon comportement d'une partie de l'application.
-
-=== Test d'Integration: Demonstration
-
-=== Test d'Integration: Pro / Cons
-
-* (+) Rapides (~1s) a executer
-* (+) Relativement réalistes
-* (-) Potentiellement complexes
-* (-) Moins flexibles
-
-=== Test de Bout en Bout
-
-* Test validant qu'un cas d'utilisation est correctement implémenté par le logiciel
-* Tests idéalement décrits de façon non technique
-* Par exemple:
-** En tant qu'un utilisateur authentifié
-** Quand je remplis le formulaire correctement et appuie sur le bouton "OK"
-** Alors un utilisateur est créé en base
-
-=== Demonstration
-
-=== Test de Bout en Bout: Pro / Cons
-
-* (+) Au plus proche d'un cas réel
-* (+) Teste tous les composants du logiciel
-* (-) Lents (~1m)
-* (-) Complexes
-* (-) Peu flexibles
+// Chapitre Tests
+include::./chapitres/tests.adoc[leveloffset=1]
 
 == Rendre son changement visible
 
