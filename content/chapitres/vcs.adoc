@@ -27,9 +27,11 @@ avec un *VCS* : 🇬🇧 Version Control System
 
 == Concepts des VCS
 
-image::scm-local.png[caption="Local SCM",float="left",width=200]
-image::scm-centralized.png[caption="Centralized SCM",float="middle",width=200]
-image::scm-distributed.png[caption="Centralized SCM",float="right",width=200]
+image::scm-local.png[caption="Local SCM",width=300]
+
+image::scm-distributed.png[caption="Centralized SCM",width=300]
+
+// https://git-scm.com/book/en/v2/Getting-Started-About-Version-Control
 
 [.notes]
 --
@@ -40,7 +42,7 @@ image::scm-distributed.png[caption="Centralized SCM",float="right",width=200]
 
 == Quel VCS utiliser ?
 
-image::cloudwords-vcs.png[]
+image::cloudwords-vcs.png[width=500]
 
 Nous allons utiliser *Git*
 
@@ -57,11 +59,16 @@ image::git-logo.png[]
 
 == Exercice avec Git - 1
 
-* Créer un nouveau dépôt Git vide localement:
-** Créer un dossier vide nommé `projet-vcs-1`
-** Initialiser le dépôt git (Indice : `git init --help` et `git status --help`)
-** Créer un fichier `README.md` dedans avec un titre et vos nom et prénoms
-** Créer un commit qui ajoute le fichier `README.md` avec un message
+Créer un nouveau dépôt Git vide localement:
+
+* Créer un dossier vide nommé `projet-vcs-1`
+* Initialiser le dépôt git
+
+(Indice : `git init --help` et `git status --help`)
+
+* Créer un fichier `README.md` dedans avec un titre et vos nom et prénoms
+* Créer un commit qui ajoute le fichier `README.md` avec un message
+
 (Indice : `git add --help` et `git commit --help`)
 
 == Solution de l'exercice avec Git - 1
@@ -92,8 +99,7 @@ image::changeset.png[height=200]
 
 == Terminologie des SCM : Représentation
 
-*commit:* un changeset avec un message,
-sauvegardé dans la base de données des versions
+*commit:* un changeset qui possède un (commit) parent, associé à un message
 
 image::commit.png[height=150]
 
@@ -112,12 +118,12 @@ image::scm-basics-history.png[]
 * Modifier du contenu dans `README.md` et afficher le diff
 
 
-== Solution de l'exercice avec Git - 1
+== Solution de l'exercice avec Git - 2
 
 [source,bash]
 --
 $ git log
-$ git show 4c3c55109bdf34e23fc954f3b5217c4bb2c4a8d6
+$ git show # Show the "HEAD" commit
 $ echo "# Read Me\n\nObi Wan Kenobi" > ./README.md
 $ git diff
 --
