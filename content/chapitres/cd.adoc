@@ -1,0 +1,57 @@
+
+[{invert}]
+= "Continuous Everything"
+
+== Livraison Continue
+
+Continous Delivery (CD)
+
+== Pourquoi la Livraison Continue ?
+
+* Diminuer les risque liés au déploiement
+* Permettre de récolter des retours utilisateurs plus souvent
+* Rendre l'avancement visible par *tous*
+
+[quote, Mary and Tom Poppendieck]
+____
+How long would it take to your organization to deploy a change that
+involves just one single line of code?
+____
+
+== Qu'est ce que la Livraison Continue ?
+
+* Suite logique de l'intégration continue:
+** Chaque changement est *potentiellement* déployable en production
+** Le déploiement peut donc être effectué à *tout* moment
+
+[quote, Martin Fowler]
+____
+Your team prioritizes keeping the software *deployable* over working on new features
+____
+
+== Déploiement Continu
+
+Continuous Deployment
+
+== Qu'est ce que le Déploiement Continu ?
+
+* Version "avancée" de la livraison continue:
+** Chaque changement *est* déployé en production, de manière *automatique*
+* Question importante: En avez-vous besoin ?
+** Avez-vous les mêmes besoin que Amazon Google ou Netflix ?
+
+== Continuous Delivery versus Deployment
+
+image::continuous-depl-vs-delivery.jpg[caption=Continuous Delivery vs Deployment,width=700]
+
+[.small]
+Source : http://blog.crisp.se/2013/02/05/yassalsundman/continuous-delivery-vs-continuous-deployment
+
+== Pour aller plus loin...
+
+* http://martinfowler.com/articles/continuousIntegration.html
+* http://martinfowler.com/bliki/ContinuousDelivery.html
+* https://jaxenter.com/implementing-continuous-delivery-117916.html
+* https://technologyconversations.com/2014/04/29/continuous-delivery-introduction-to-concepts-and-tools/
+* http://blog.arungupta.me/continuous-integration-delivery-deployment-maturity-model
+* http://blog.crisp.se/2013/02/05/yassalsundman/continuous-delivery-vs-continuous-deployment
