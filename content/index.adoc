@@ -136,6 +136,9 @@ include::./chapitres/version.adoc[leveloffset=1]
 // Chapitre Tests
 include::./chapitres/tests.adoc[leveloffset=1]
 
+// Chapitre "Cycle de vie technique"
+include::./chapitres/tech-lifecycle.adoc[leveloffset=1]
+
 // Chapitre "Rendre son changement visible"
 include::./chapitres/changement-visible.adoc[leveloffset=1]
 
