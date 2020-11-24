@@ -49,6 +49,6 @@ clean:
 	@rm -rf $(DIST_DIR)
 
 qrcode:
-	@docker-compose run --entrypoint=/app/node_modules/.bin/qrcode --rm serve -t png -o /app/content/images/qrcode.png $(PRESENTATION_URL)
+	@docker-compose run --entrypoint=/app/node_modules/.bin/qrcode --rm serve -t png -o /app/content/media/qrcode.png $(PRESENTATION_URL)
 
 .PHONY: all build verify serve qrcode pdf

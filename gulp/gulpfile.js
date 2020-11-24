@@ -20,7 +20,7 @@ var tasks_dir_path = './tasks',
     },
     current_config = {
         docinfosPath: '/app/content/docinfos',
-        imgSrcPath: '/app/content/images',
+        imgSrcPath: '/app/content/media',
         videosSrcPath: '/app/content/videos',
         scriptsSrcPath: '/app/assets/scripts',
         stylesSrcPath: '/app/assets/styles',
