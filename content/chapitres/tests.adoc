@@ -187,7 +187,8 @@ Implementez la methode `createUser` de la classe `UserService`
 
 == Base de donnée ?
 
-```java
+[source,java]
+--
 public interface UserRepository {
 
     // Enregistre l'utilisateur en base de donnée.
@@ -197,7 +198,7 @@ public interface UserRepository {
     // Retourne `null` si aucun utilisateur portant le nom existe.
     public User findByName(String user);
 }
-```
+--
 
 == La classe `UserService`
 
