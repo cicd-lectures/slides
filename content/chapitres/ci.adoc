@@ -1,6 +1,6 @@
 
 [{invert}]
-== Intégration Continue (CI)
+= Intégration Continue (CI)
 
 [quote, Martin Fowler]
 ____

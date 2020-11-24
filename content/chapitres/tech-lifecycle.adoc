@@ -1,0 +1,426 @@
+
+[{invert}]
+= Cycle de vie technique
+
+== Quel est le problème ?
+
+On a du code (qu'on sait changer et tester).
+
+* Qu'est ce qu'on "fabrique" à partir du code ?
+* Comment faire pour "fabriquer" de la même manière pour tout•e•s (💻 | 🖥 ) ?
+
+== Que "fabrique" t'on à partir du code ?
+
+Un **livrable** :
+
+* C'est ce qu'on utilise dans la "vraie vie"
+* C'est versionné
+* C'est __reproductible__
+
+== Reproduire la fabrication
+
+Comment fabriquer et tester de manière reproductible ?
+
+* Linux / Windows / Mac
+* Puissance disponible
+* Habitudes différentes
+
+=> 🛠 Il faut des outils pour gérer le cycle de vie technique (Build -> Test -> etc.)
+
+[{invert}]
+== Exemple avec Make
+
+Fabriquons (joyeusement) des pages en HTML
+
+== Exemple Make : Livrable
+
+Définissons le livrable :
+
+* Une archive tarball compressée nommé `exemple-make.tar.gz`
+* qui contient un dossier nommé `exemple-make`...
+* ...avec un fichier `index.html` dedans
+
+[source,bash]
+----
+$ tar tzf ./exemple-make.tar.gz # tzf: Test Ze (zipped) File
+./exemple-make
+./exemple-make/index.html
+----
+
+== Exemple Make : Code source
+
+* On utilise le format link:https://asciidoctor.org/[Asciidoctor] pour écrire le **contenu**
+** Format de fichier `.adoc`
+** Exemple de syntaxe Asciidoctor :
+
+[source,asciidoctor]
+----
+include::../code-samples/tech-lifecycle/index.adoc[]
+----
+
+== Exemple Make : Asciidoctor -> HTML
+
+* Pour générer un fichier HTML a partir de fichiers au format Asciidoctor :
++
+[source,bash]
+----
+asciidoctor index.adoc --out-file=./index.html
+----
+
+* Essayez par vous-même:
+** Ouvrez link:https://gitpod.io#https://github.com/cicd-lectures/demoapp[l'environnement dans GitPod,window=_blank]
+** Créez un fichier `index.adoc` et remplissez-le avec le contenu donné en exemple dans la slide précédente
+** Essayez la commande de conversion dans le terminal de GitPod
+** Ouvrez le fichier HTML généré dans GitPod, et affichez l'aperçu avec l'icône en haut à droite
+
+== Exemple Make : Récapépète
+
+image::make-flow-1.svg[width=800]
+
+== Exemple Make : Introduction à Makefile
+
+* link:https://www.gnu.org/software/make/[GNU Make] est une ligne de commande,
+* qui lit un fichier `Makefile` pour exécuter des tâches.
+* Chaque tâche (ou "règle") est décrite par une "cible":
+* Format d'une "cible" make :
++
+[source,makefile]
+----
+cible: dependance
+	commandes
+----
+* On appelle la commande `make` avec une ou plusieurs cibles en argument :
++
+[source,bash]
+----
+make clean build
+----
+
+== Exemple Make : Exemple de Makefile
+
+[source,makefile]
+----
+# Fabrique le fichier "hello" (binaire) à partir des fichier "hello.o" et "main.o"
+hello: hello.o main.o
+	gcc -o hello hello.o main.o
+
+# Fabrique le fichier "hello.o" à partir du code source "hello.c"
+hello.o: hello.c
+	gcc -o hello.o -c hello.c
+
+# Fabrique le fichier "main.o" à partir du code source "main.c"
+main.o: main.c
+	gcc -o main.o -c main.c
+----
+
+[source,bash]
+----
+make hello # Appelle implicitement "make hello.o" et "make main.o"
+## équivalent à "make hello.o main.o hello"
+----
+
+== Exemple Make : Makefile - Build
+
+* *But :* on veut générer le HTML en appelant la commande `make index.html`
+* Toujours dans link:https://gitpod.io#https://github.com/cicd-lectures/demoapp[l'environnement GitPod,window=_blank],
+supprimez le fichier `index.html` si vous l'avez déjà
+* Créez un fichier `Makefile` qui contient une cible `index.html` et qui appelle la commande `asciidoctor`:
++
+[source,Makefile]
+----
+include::../code-samples/tech-lifecycle/Makefile[tags="build"]
+----
+
+* Essayez avec la commande `make index.html`
+
+[.notes]
+--
+=> Le fichier index.adoc doit être présent...
+--
+
+== Exercice Make : Makefile - Package
+
+* *But :* on veut générer le livrable en appelant la commande `make example-make.tar.gz`
+* On utilisera la commande `tar czf ./example-make.tar.gz ./index.html`
+* ⚠️ Il y a une **dépendance** sur la cible `index.html` (il faut que `index.html` soit présent)
+
+=> C'est à vous !
+
+== Solution : Makefile - Package
+
+[source,Makefile]
+----
+include::../code-samples/tech-lifecycle/Makefile[tags="build,package"]
+----
+
+[source,bash]
+----
+rm -f index.html example-make.tar.gz
+ls -l # Aucun fichier "index.html" ou "example-make.tar.gz"
+make example-make.tar.gz
+ls -l # 2 nouveaux fichiers "index.html ou "example-make.tar.gz"
+----
+
+== Exemple Make : Makefile Avancé
+
+* Par défaut une cible/règle correspond à un fichier
+** Si le fichier existe, `make` ne ré-exécutera pas les commandes
+
+* Pour désactiver ce comportement pour une cible donnée,
+ajoutez ladite cible comme dépendance à la cible spéciale `.PHONY`
+
+* Si vous appellez `make` sans argument,
+alors la cible par défaut sera la première executée
+
+== Exercice Make : Makefile - Clean
+
+* *But :* on veut supprimer les fichiers qu'on a généré lorsqu'on appelle la commande `make clean`
+* Cette commande doit **toujours** s'exécuter, même si un fichier `clean` existe
+
+=> C'est à vous !
+
+== Solution : Makefile - Clean
+
+[source,Makefile]
+----
+include::../code-samples/tech-lifecycle/Makefile[tags="build,package,clean"]
+----
+
+[source,bash]
+----
+touch clean # Créer un fichier "clean" bidon
+make example-make.tar.gz
+ls -l # 2 nouveaux fichiers "index.html ou "example-make.tar.gz"
+make clean
+ls -l # Aucun fichier "index.html" ou "example-make.tar.gz"
+----
+
+== Exercice Make : Makefile - All
+
+* *But :* on veut que Make créé/re-créé le livrable **de zéro** par défaut lorsqu'on appelle `make` sans argument
+* Cette cible doit s'appeller `all` et va appellez `clean` (au moins)
+
+=> C'est à vous !
+
+== Solution : Makefile - All
+
+[source,Makefile]
+----
+include::../code-samples/tech-lifecycle/Makefile[tags="all"]
+----
+
+[source,bash]
+----
+make clean
+ls -l # Aucun fichier "index.html" ou "example-make.tar.gz"
+make
+ls -l # 2 nouveaux fichiers "index.html ou "example-make.tar.gz"
+make clean
+ls -l # Aucun fichier "index.html" ou "example-make.tar.gz"
+----
+
+// == Exemple Make : Tests ?
+
+// Diagramme :
+
+// `index.adoc` -(build)-> `index.html` -(TEST?)-> -(package)-> `example-make.tar.gz`
+
+// [%step]
+// * Lien HTTP en 404 dans le HTML ?
+// * Valide W3C ?
+
+// == Exercice : Tester du HTML
+
+// * Commande pour tester le HTML:
+// // W3C ou lien mort ou les deux ?
+// * But : ajouter une cible Makefile pour tester avant de packager
+// * Vérification:
+// ** Ecrivez un lien HTTP invalide dans `index.adoc`
+// ** Vous ne pouvez pas "packager" (commande doite être en erreur) avec `make all`
+
+// == Solution : Tester du HTML
+
+[{invert}]
+== Exemple avec Maven
+
+JAVA bien ?
+
+== Exemple Maven : Livrable
+
+* Fichier "JAR" (Java ARchive)
+** C'est une archive "ZIP" pour distribuer des applications en java
+** Pour exécuter le programme depuis le livrable :
++
+[source,bash]
+----
+java -jar <fichier.jar>
+----
+
+== Exemple Maven : Code source
+
+* Code Source attendu dans `src/*/<language>/**`
+** Code Java de l'application dans `src/main/java/**`
+** Code (Java) des tests dans `src/test/java/**`
+
+== Exemple Make : Java -> JAR
+
+* La commande `javac` permet de "compiler" du java en bytecode java:
++
+[source,bash]
+----
+$ javac ./src/main/java/com/cicdlectures/demoapp/Application.java --directory=./Application.class
+./src/main/java/com/cicdlectures/demoapp/Application.java:4: error: package org.springframework.boot.autoconfigure does not exist
+----
+
+* Comment gérer les dependances ?
+* Comment assembler les `.class` pour faire un `.jar`?
+* Et les tests ?
+
+=> C'est vite **complexe** alors qu'on veut écrire un programme
+
+== Exemple Maven : Introduction à Maven
+
+Say Hello to "Maven":
+
+* Idée de Maven : *Cycle de vie* standardisé composé de "phases"
+* Configuration Maven : `pom.xml` (Project Object Model)
+* Ligne de commande `mvn` qui exécute les *phases*
+** Enchainement de *phases* séquentiellement
+
+⚠️ D'autres alternatives existent : Gradle, Bazel, etc.
+
+== Exemple Maven : Commande `mvn`
+
+Ligne de commande `mvn` :
+
+* Lit le fichier `./pom.xml` pour comprendre le projet
+* Exécute les phases ("étapes") passées en argument,
+ainsi que leurs dépendances :
++
+[source,bash]
+----
+mvn clean # Appelle la phase "clean"
+mvn compile # Appelle les phases "validate" puis "compile"
+mvn clean compile -X # On peut appeller plusieurs phases et passer des options
+----
+* Le résultat est dans `./target`
+
+== Exemple Maven : Les phases de Maven
+
+* `clean` - Nettoie le contenu du dossier `./target`
+* `validate` - Validation du projet (syntaxe du `pom.xml` et du Java, etc.)
+* `compile` - Fabrication des fichiers `.class` depuis le code java
+* `test` - Exécuter les tests unitaires
+* `package` - Préparer le livrable finale (`.jar` par exemple)
+* `verify` - Exécuter les tests d'intégration
+* `install` - Mettre à disposition le livrable localement pour d'autres projets Maven
+* `deploy` - Copier le livrable dans un système de stockage de dépendance distant
+
+== Exemple Maven : C'est à vous !
+
+=> C'est à vous :
+
+* Ouvrez link:https://gitpod.io#https://github.com/cicd-lectures/demoapp[l'environnement de démo dans GitPod,window=_blank]
+* On va nettoyer ce qu'on a déjà produit:
++
+[source,bash]
+----
+mvn clean # Supprime le contenu du dossier `./target
+ls -l ./target
+----
+* ⚠️ La phase `clean` est spéciale et n'est jamais appellée par les autres phases
+
+== Exemple Maven : Compiler
+
+* But: Compilez le code source et visualisez le contenu du dossier `target` :
++
+[source,bash]
+----
+ls -l ./target # Avant
+mvn compile
+ls -l ./target # Après
+----
+
+[.notes]
+--
+* Résolution des dépendances
+* Pré-traitement du code source
+* Compilation des classes
+--
+
+== Exemple Maven : Tests Unitaires
+
+* But: Compilez le code source et visualisez le contenu du dossier `target` :
++
+[source,bash]
+----
+ls -l ./target # Avant
+mvn test
+ls -l ./target # Après
+ls -l ./target/surefire-reports
+----
+
+[.notes]
+--
+* Exécute le goal `compile`
+* Compilation des tests unitaires
+* Exécution des tests unitaires
+* Rapports de tests dans *`./target/surefire-reports`*
+--
+
+== Exemple Maven : Fabriquer le livrable
+
+* But: Générez le livrable au format `.jar` :
++
+[source,bash]
+----
+ls -l ./target # Avant
+mvn package
+ls -l ./target # Après
+----
+
+[.notes]
+--
+* Exécute les goals `compile` et `test`
+* Paquetage de l'application
+--
+
+== Exercice Maven : Tests d'intégration
+
+* But: Exécuter les tests d'intégrations et afficher les rapport de tests
+** ⚠️ Piège : regardez bien le contenu du dossier `./target`
+
+== Solution : Tests d'intégration
+
+[source,bash]
+----
+ls -l ./target # Avant
+mvn verify
+ls -l ./target/failsafe-reports
+----
+
+[.notes]
+--
+* Exécute `compile`, `test` et `package`
+* Compile et exécute les tests d'intégration
+sur l'application empaquetée
+* Rapport de tests dans *`./target/failsafe-reports`*
+--
+
+// == Exemple Maven : Exécution du livrable
+
+// * Spring Boot demo exécutée comme un *"Über-Jar"*
+// * Exécution avec la commande java:
+// +
+// [source,subs="attributes",bash]
+// ----
+// java -jar ./target/demoapp.jar
+// # Utiliser CTRL-C pour arrêter
+// ----
+// * Ouvrir une autre instance de *DevBox* (link:{devbox-url}[Click Me, window=_blank]) et vérifier
+// link:http//localhost:8080[] avec `curl`
+// +
+// [source,subs="attributes",bash]
+// ----
+// curl -v http://localhost:8080/
+// ----
