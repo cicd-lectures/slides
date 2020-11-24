@@ -1,0 +1,39 @@
+
+[{invert}]
+== Intégration Continue (CI)
+
+[quote, Martin Fowler]
+____
+Continuous Integration doesn’t get rid of bugs, but it does make them
+dramatically easier to find and remove.
+____
+
+== Pourquoi la CI ?
+
+*But :* Détecter les fautes au plus tôt pour en limiter le coût
+
+image::big-bugs.jpg[caption="Big Bugs",width=800]
+
+[.small]
+Source : http://cartoontester.blogspot.be/2010/01/big-bugs.html
+
+== Qu'est ce que l'Intégration Continue ?
+
+**Objectif :** que l'intégration de code soit un _non-évenement_
+
+* Construire et intégrer le code *en continu*
+* Le code est intégré *souvent* (au moins quotidiennement)
+* Chaque intégration est validée par une exécution *automatisée*
+
+== Et concrètement ?
+
+image::fail-fast-continuous-integration.png[height=250]
+
+* Un•e dévelopeu•se•r ajoute du code dans git : un évènement est transmis au "CI"
+* Le CI compile et teste le code
+* On ferme la boucle : Le résultat est rendu au dévelopeu•se•r•s
+
+== Quelques moteurs de CI connus
+
+- Self hosted: Jenkins, Drone CI
+- SaAS: Travis CI, Semaphore CI, Circle CI, Github Actions

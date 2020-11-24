@@ -1,4 +1,5 @@
 
+[{invert}]
 = Tests automatisés
 
 Faire en sorte qu'on ne casse pas tout quand on change quelque chose...

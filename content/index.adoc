@@ -137,114 +137,14 @@ include::./chapitres/vcs.adoc[leveloffset=1]
 // Chapitre Tests
 include::./chapitres/tests.adoc[leveloffset=1]
 
-== Rendre son changement visible
+// Chapitre "Rendre son changement visible"
+include::./chapitres/changement-visible.adoc[leveloffset=1]
 
-=== Où votre changement est-il visible?
+// // Chapitre CI
+include::./chapitres/ci.adoc[leveloffset=1]
 
-** Un téléphone
-** Les serveurs de votre client
-** Vos propres serveur
-** Un microcontrolleur dans un satelite
-
-=== Différents environements, différentes contraintes
-
-* Comment effectuer la mise à jour?
-** Est-ce que vous opérez le logiciel ?
-** Est-ce qu'une mise à jour est facile ?
-** Est-ce qu'une interuption de service est acceptable ?
-
-* Plus la mise à jour sera facile, moins le risque sera élevé.
-
-[.notes]
---
-TODO: Je sais pas vraiment comment faire la transition ici.
---
-
-=== Gérer le risque ?
-
-* Chaque changement comporte un risque
-* Il est souvent nécessaire de valider un changement avant de l'exposer au reste du monde
-* Validation technique:
-** Est-ce que ça marche ? Est-ce que c'est assez rapide ?
-* Validation fonctionnelle:
-** Est-ce que ce qui a été réalisé correspond aux attentes?
-
-=== Différentes étapes
-
-* Recours à des environements de tests  pour valider les changements
-** Pré-versions (beta)
-** Environement de pré-production, QA, staging...
-
-* "Au plus proche" des conditions réelles...
-* ...Ou la stabilité est "moins importante"
-
-=== Processus de création logiciel
-
-Developement -> Staging -> Production
-
-=== Developement -> Staging
-
-* Etapes (simplifiées)
-** Tester le code: `make unit-test` && `make integration-test`
-** Merger le code: `git merge` et `git push`
-** Générer les artefacts: `make jar`
-** Déployer les artefacts `scp ./jar.jar monutilisateur@mamachinedestaging.com:/app/binks/jar.jar`
-** Redémarer mon serveur `ssh monutilisateur@mamachinedestaging.com -C "systemctl restart binks"`
-
-=== Staging -> Production
-
-* Etapes (simplifiées)
-** Tester le code: `make unit-test` && `make integration-test`
-** Merger le code: `git merge` et `git push`
-** Générer les artefacts: `make jar`
-** Déployer les artefacts `scp ./jar-prod.jar monutilisateur@mamachinedeprod.com:/app/rbinks/jar.jar`
-** Redémarer mon serveur `ssh monutilisateur@mamachinedeprod.com -C "systemctl restart binks"`
-
-=== What could go wrong ?
-
-* Oublier / Inverser une étape
-* Les tests ont pas été lancés depuis 3 semaines...
-** ...ils sont pétés, bah c'est pas grave.
-* Et si j'ai pas les droits ?
-* Et si "celuiquifaitçad'habitude" est pas la aujourd'hui ?
-* Et si j'ai pas un serveur mais en fait 10 ou 100 \o/
-
-=== Une seule solution: l'automatisation !
-
-* Rendre systématiques le plus d'opérations
-** Avant chaque "git merge", on build et on joue les tests
-*** Comme ça on voit tôt les problèmes!
-* Automatiser les tâches redondantes
-** Minimiser le risque d'erreur
-** Simplifier des étapes complexes
-*** Rendre le changement plus facile!
-
-[.notes]
---
-* Comme l'hygiène corporelle
-** On se lave les dents, on se brosse les cheveux...
-** Ce qui est important la dedans c'est de le faire régulièrement.
---
-
-=== Comment automatiser ?
-
-* A chaque évenement sur git effectuer une tâche
-* Votre serveur git informe un autre logiciel
-* Le logiciel execute un job en fonction de l'évenement notifié.
-
-Say hello to CI/CD engines!
-
-=== Et concrètement ?
-
-* Quand on "push" un nouveau "commit" sur la branche "staging" alors:
-** On joue les tests
-** On construit un artefact
-** On déploie le nouvel artefact sur le(s) serveurs de staging
-
-=== Quelques moteurs de CI connus
-
-- Self hosted: Jenkins, Drone CI
-- SaAS: Travis CI, Semaphore CI, Circle CI, Github Actions
+// // Chapitre CD
+include::./chapitres/cd.adoc[leveloffset=1]
 
 == Projet n°1: Menus de la cantina de Tatooine
 
