@@ -4,9 +4,9 @@
 == Pourquoi faire des versions ?
 
 * Un changement visible d'un logiciel peut nécessiter une adaptation de ses utilisateurs
-* ... or dans certains cas l'adaptation n'est pas automatique!
+* ... or dans certains cas l'adaptation n'est pas automatique !
 
-Controller le problème de la compatibilité entre deux logiciels.
+Contrôler le problème de la compatibilité entre deux logiciels.
 
 == Une petite histoire
 
@@ -37,7 +37,7 @@ public class Item {
 [%notitle]
 == Une petite histoire
 
-Le site décide tout d'un coup de changer le format de l'identifiant de son objet en chaine de caractère.
+Le site décide tout d'un coup de changer le format de l'identifiant de son objet en chaine de caractères.
 
 [source,json]
 --
@@ -59,9 +59,9 @@ Que se passe t'il du coté de votre application ?
 
 image::explosion.gif[width="800"]
 
-== Qu'est ce qui s'est passé ?
+== Qu'est s'est il passé ?
 
-* Votre application ne s'attendait pas à un identifiant sous forme de chaine de caractère!
+* Votre application ne s'attendait pas à un identifiant sous forme de chaine de caractères !
 * Le fournisseur de l'API à "changé le contrat" de son API d'une façon non rétrocompatible avec votre l'existant.
 ** Cela s'appele un 🇬🇧 *Breaking Change*
 
@@ -76,7 +76,7 @@ Pour effectuer cela, il est nécessaire de rendre manipulable facilement la noti
 
 == Bonjour versions !
 
-* Une version crystalise un contrat respecté par votre application.
+* Une version cristallise un contrat respecté par votre application.
 * C'est un jalon dans l'historique de cette dernière.
 
 [.notes]
