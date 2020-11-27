@@ -130,9 +130,8 @@ Et c'est ce que l'on va voir ensemble aujourd'hui!
 // Chapitre VCS - Git
 include::./chapitres/vcs.adoc[leveloffset=1]
 
-== TODO: Version
-
-* Parlons version en général (tag, semantic versioning?).
+// Chapitre Version
+include::./chapitres/version.adoc[leveloffset=1]
 
 // Chapitre Tests
 include::./chapitres/tests.adoc[leveloffset=1]

@@ -1,0 +1,167 @@
+[{invert}]
+= Versions
+
+== Pourquoi faire des versions ?
+
+* Un changement visible d'un logiciel peut nécessiter une adaptation de ses utilisateurs
+* ... or dans certains cas l'adaptation n'est pas automatique !
+
+Contrôler le problème de la compatibilité entre deux logiciels.
+
+== Une petite histoire
+
+Le logiciel que vous développez utilise des données d'une API d'un site de vente.
+
+[source,json]
+--
+// Corps de la réponse d'une requête GET https://supersite.com/api/item
+[
+  {
+    "identifier": 1343,
+    // ...
+  }
+]
+--
+
+Voici comment est représenté un item vendu dans votre code.
+
+[source,java]
+--
+public class Item {
+  // Identifiant de l'item représenté sous forme d'entier.
+  private int identifier;
+  // ...
+}
+--
+
+[%notitle]
+== Une petite histoire
+
+Le site décide tout d'un coup de changer le format de l'identifiant de son objet en chaine de caractères.
+
+[source,json]
+--
+// Corps de la réponse d'une requête GET https://supersite.com/api/item
+[
+  {
+    "identifier": "lolilol3843",
+    // ...
+  }
+]
+--
+
+Que se passe t'il du coté de votre application ?
+
+[%notitle]
+== !
+
+`com.fasterxml.jackson.databind.JsonMappingException`
+
+image::explosion.gif[width="800"]
+
+== Qu'est s'est il passé ?
+
+* Votre application ne s'attendait pas à un identifiant sous forme de chaine de caractères !
+* Le fournisseur de l'API à "changé le contrat" de son API d'une façon non rétrocompatible avec votre l'existant.
+** Cela s'appele un 🇬🇧 *Breaking Change*
+
+== Comment éviter cela ?
+
+* Laisser aux utilisateurs une marge de manoeuvre pour "accepter" votre changement.
+** Donner une garantie de maintien des contrats existants.
+** Informer vos utilisateurs d'un changement non rétrocompatible.
+** Anticiper les changements non rétrocompatibles à l'aide de stratégies (dépréciation...).
+
+Pour effectuer cela, il est nécessaire de rendre manipulable facilement la notion de version!
+
+== Bonjour versions !
+
+* Une version cristallise un contrat respecté par votre application.
+* C'est un jalon dans l'historique de cette dernière.
+
+[.notes]
+--
+Valide d'un point de vue fonctionel et aussi technique
+--
+
+== Quoi versionner ?
+
+Le problème de la compatibilité existe des qu'une dépendance entre deux bouts de code existe.
+
+* Une API
+* Une librarie
+* Un langage de programation
+* Le noyau linux
+
+== Version sémantique
+
+La norme est l'utilisation du format vX.Y.Z (Majeur.Mineur.Patch)
+
+image:semver.png[width="600"]
+
+(source link:https://medium.com/better-programming/why-versioning-is-important-and-how-to-do-it-686ce13b854f[betterprograming])
+
+[%notitle]
+== !
+
+Un changement **ne changeant pas le périmètre fonctionel** incrémente le numéro de version **patch**.
+
+
+[.notes]
+--
+Example:
+
+Un bugfix
+--
+
+[%notitle]
+== !
+
+Un changement changeant le périmètre fonctionel de façon **rétrocompatible** incrémente le numéro de version **mineure**.
+
+[.notes]
+--
+Example:
+
+Ajout d'une fonctionalité supplémentaire (nouvelle route dans une API).
+--
+
+[%notitle]
+== !
+
+Un changement changeant le périmètre fonctionel de façon **non rétrocompatible** incrémente le numéro de version **majeure**.
+
+[.notes]
+--
+Example:
+
+Retrait d'une fonctionalité (retrait d'une route dans une API).
+--
+
+== En résumé
+
+* Changer de version mineure ne devrait avoir aucun d'impact sur votre code.
+* Changer de version majeure peut nécessiter des adaptations.
+
+==  Concrètement avec une API
+
+* Offrir a l'utilisateur un moyen d'indiquer la version de l'API a laquelle il souhaite parler
+** Via un préfixe dans le chemin de la requête:
+*** `https://monsupersite.com/api/v2.3/item`
+** Via un en-tête HTTP:
+*** `Accept-version: v2.3`
+
+== Version VS Git
+
+* Un identifiant de commit est de granularité trop faible pour un l'utilisateur externe.
+* Utilisation de *tags* git pour définir des versions
+* Un *tag* git est une référence sur un commit.
+
+[source,bash]
+```bash
+# Créer un tag.
+git tag -a v1.4.3 -m "Release version v1.4.3"
+
+# Publier un tag sur le remote origin.
+git push origin v1.4.3
+```
