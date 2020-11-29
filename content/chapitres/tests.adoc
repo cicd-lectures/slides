@@ -179,6 +179,12 @@ class GreeterServiceTests {
 git checkout ut-exercise-1-solution
 ```
 
+== Test Unitaire: Exercice 2 : Mise en place
+
+```bash
+git checkout ut-exercise-2
+```
+
 == Test Unitaire: Exercice 2
 
 Implementez la methode `createUser` de la classe `UserService`
@@ -313,6 +319,12 @@ et on valide les interactions avec cette instance!
   verify(this.repository, never()).saveUser(user);
 --
 
+== Test Unitaire: Solution Exercice 2
+
+```bash
+git checkout ut-exercise-2-solution
+```
+
 == Test Unitaire: Pro / Cons
 
 * (+) Super rapides (<1s) et légers a executer
@@ -332,21 +344,208 @@ video::ut-fail-2.mp4[width="600",options="autoplay,loop,nocontrols"]
 
 == Test d'Integration
 
-* Test validant qu'un assemblage d'unités se comportent comme prévu.
+* Test validant qu'un assemblage d'unités se comportent comme souhaité.
 * Par exemple:
 ** Prouve que `GET /users` retourne la liste des utilisateurs en base
-** Prouve que `POST /users`  avec un nom manquant provoque une réponse HTTP 400
 
-Prouve le bon comportement d'une partie de l'application.
+== Définition du Système a tester
 
-== Test d'Integration: Demonstration
+image:applayers.svg[width="800"]
+
+(omission volontaire de classe de service a des fins de simplification)
+
+[.notes]
+--
+* On teste la chaine user <=> controller <=> repository
+--
+
+== HTTP Client
+
+Emet une requiête HTTP et inteprète la réponse.
+
+Par exemple: curl, Firefox, Chrome, une autre app.
+
+== UserController
+
+Mappe une requête HTTP sur une methode java.
+
+* Parse les paramètres de la requête HTTP (headers, query parameters)
+* Appelle la couche service
+* Réponds la donnée récupérée de la couche service dans un format négocié.
+** HTML, JSON, XML ...
+
+== UserRepository
+
+* Transforme un appel java en une requête à la base de données
+** SQL, PSQL, CQL, JSON (MongoDB, Elastisearch...)
+* Transforme la réponse de la base de donnée en objets java
+
+== Base de données
+
+* Reçoit des requêtes
+* Réponds des données
+
+Nous allons utiliser link:https://www.h2database.com[h2], une base de donnée SQL implémentée en java et s'executant en mémoire.
+
+== En résumé
+
+image:applayers.svg[width="800"]
+
+== De quel point de vue testons nous ?
+
+Du point de vue du client HTTP.
+
+== Exercice
+
+Implémentez la méthode `getUsers` de la classe `UserController` pour qu'elle respect le contrat suivant
+
+* Si le paramètre de requête "name" est vide alors on retourne tous les utilisateurs connus
+* Si le paramètre de requête "name" non-vide alors on retourne la liste des utilisateurs ayant ce nom.
+
+== Accès a la donnée
+
+[source, java]
+--
+// src/main/java/com/cicdlectures/demoapp/user/UserRepository.java
+import org.springframework.data.repository.CrudRepository;
+
+public interface UserRepository extends CrudRepository<User,Long> {
+    // CrudRepository fournit des metodes de bases pour accéder à la donnée
+    //
+    // Par exemple:
+    //
+    // public Iterable<User> findAll();
+
+    public List<User> findByName(String name);
+
+}
+--
+
+== Interpréter et répondre à une requête HTTP
+
+[source, java]
+--
+@RestController
+public class UserController {
+
+  @Autowired
+  private UserRepository users;
+
+  @GetMapping(path="/users", produces = "application/json")
+  public Iterable<User> getUsers(@RequestParam(value = "name",defaultValue = "") String name) {
+    // Appelle le user repository pour récupérer les données.
+  }
+
+}
+--
+
+== Notre client: le test!
+
+[source, java]
+--
+// src/test/java/com/cicdlectures/demoapp/user/UserControllerIT.java
+
+// Crée et initialise le serveur et le lance sur un port aléatoire.
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+public class UserControllerTests {
+  // [...]
+
+  // Mets à jour l'attribut `url` avec le port du serveur (décidé aléatoirement).
+  @BeforeEach
+  public void setUp() throws Exception {
+    this.url = new URL("http://localhost:" + port + "/users");
+  }
+
+  // Après chaque test, on vide la base de donnée.
+  @AfterEach
+  public void tearDown() throws Exception {
+    this.userRepository.deleteAll();
+  }
+--
+
+== !
+
+[source, java]
+--
+  @Test
+  @DisplayName("lists all users")
+  public void testUsersList() throws Exception {
+    // Définition du jeu de données.
+    User[] wantUsers = {
+      new User("John", 43),
+      new User("Philip", 93),
+      new User("Mitchell", 31)
+    };
+
+    // Enregistrement du jeu de données en base.
+    for (User user : wantUsers) {
+      this.userRepository.save(user);
+    }
+
+    // Appel HTTP GET /users sur l'URL du serveur lancé pour le test.
+    ResponseEntity<User[]> response = this.template
+      .getForEntity(url.toString(), User[].class);
+
+    // Interprétation du corps de la réponse HTTP.
+    User[] gotUsers = response.getBody();
+
+    // Verifions que le corps de la réponse correspond bien à notre jeu de données.
+    assertArrayEquals(wantUsers, gotUsers);
+  }
+--
+
+== Implémentation du premier cas de test
+
+[source, java]
+--
+public class UserController {
+
+  @GetMapping(path="/users", produces = "application/json")
+  public Iterable<User> getUsers(@RequestParam(value = "name",defaultValue = "") String name) {
+    return this.users.findAll();
+  }
+
+}
+--
+
+== A vous de jouer pour le second cas !
+
+[source,java]
+--
+  @Test
+  @DisplayName("filters users by name")
+  public void testUsersListFiltersByName() throws Exception {
+    // Valide que lorsque le paramètre de requête name est non vide
+    // Alors l'application réponds les utilisateurs portant ce nom.
+  }
+--
+
+[source, java]
+--
+  // Un peu d'aide :)
+
+  // Vérifier qu'une chaine de caractère est non vide
+  if (!name.isBlank()) {
+    // ...
+  }
+
+  // Requête avec le paramètre de requête name à la valeur "Philip"
+  ResponseEntity<User[]> response = this.template
+      .getForEntity(url.toString()+ "?name=Philip", User[].class);
+--
+
+== Test d'Integration: Solution
+
+```bash
+git checkout it-exercise-1-solution
+```
 
 == Test d'Integration: Pro / Cons
 
-* (+) Rapides (~1s) a executer
 * (+) Relativement réalistes
 * (-) Potentiellement complexes
 * (-) Moins flexibles
+* (-) Plus lents
 
 == Test de Bout en Bout
 
