@@ -179,7 +179,7 @@ class GreeterServiceTests {
 git checkout ut-exercise-1-solution
 ```
 
-== Test Unitaire: Exercice 2 : Mise en place
+== Test Unitaire: Exercice 2, mise en place
 
 ```bash
 git checkout ut-exercise-2
@@ -187,15 +187,17 @@ git checkout ut-exercise-2
 
 == Test Unitaire: Exercice 2
 
-Implementez la methode `createUser` de la classe `UserService`
+Implementez la methode `createUser` de la classe `UserService` et sa suite de tests.
 
-* Si un utilisateur porte le même nom, alors on ne le sauvegarde pas
-* Si il n'existe pas, alors on le crée
+* Si un utilisateur avec le même nom existe déjà dans la base de données, alors on ne fait rien.
+* Sinon on enregistre ce nouvel utilisateur dans la base de donées.
 
-== Base de donnée ?
+== Base de données ?
 
 [source,java]
 --
+// src/main/java/com/cicdlectures/demoapp/user/UserRepository.java
+
 public interface UserRepository {
 
     // Enregistre l'utilisateur en base de donnée.
@@ -211,6 +213,8 @@ public interface UserRepository {
 
 [source,java]
 --
+// src/main/java/com/cicdlectures/demoapp/user/UserService.java
+
 public class UserService {
 
   private UserRepository repo;
@@ -236,10 +240,12 @@ public class UserService {
 
 == Remplacer le UserRepository (1/3)
 
-Solution: On fournit une "fausse implémentation"
+Solution: On fournit une "fausse implémentation" au service.
 
 [source,java]
 --
+// src/test/java/com/cicdlectures/demoapp/user/UserServiceTests.java
+
   private UserRepository repository;
 
   private UserService subject;
@@ -348,11 +354,11 @@ video::ut-fail-2.mp4[width="600",options="autoplay,loop,nocontrols"]
 * Par exemple:
 ** Prouve que `GET /users` retourne la liste des utilisateurs en base
 
-== Définition du Système a tester
+== Définition du Système à tester
 
 image:applayers.svg[width="800"]
 
-(omission volontaire de classe de service a des fins de simplification)
+(omission volontaire d'une couche de service a des fins de simplification)
 
 [.notes]
 --
@@ -367,11 +373,13 @@ Par exemple: curl, Firefox, Chrome, une autre app.
 
 == UserController
 
-Mappe une requête HTTP sur une methode java.
+Implémentation d'une requête HTTP par une methode java.
+[.small]
+(en passant par un peu de magie spring)
 
 * Parse les paramètres de la requête HTTP (headers, query parameters)
-* Appelle la couche service
-* Réponds la donnée récupérée de la couche service dans un format négocié.
+* Appelle la couche de données
+* Réponds la donnée récupérée de la couche de données dans un format négocié.
 ** HTML, JSON, XML ...
 
 == UserRepository
@@ -397,12 +405,12 @@ Du point de vue du client HTTP.
 
 == Exercice
 
-Implémentez la méthode `getUsers` de la classe `UserController` pour qu'elle respect le contrat suivant
+Implémentez la méthode `getUsers` de la classe `UserController` et sa suite de tests pour qu'elle respecte le contrat suivant:
 
 * Si le paramètre de requête "name" est vide alors on retourne tous les utilisateurs connus
 * Si le paramètre de requête "name" non-vide alors on retourne la liste des utilisateurs ayant ce nom.
 
-== Accès a la donnée
+== Base de données 2, le retour !
 
 [source, java]
 --
