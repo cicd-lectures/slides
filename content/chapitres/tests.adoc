@@ -37,23 +37,17 @@ On parle de SUT, System Under Test.
 
 * Test validant le bon comportement une unité de code (fonction, méthode...)
 * Prouve que l'unité de code interagit correctement avec les autres unités.
-* Par exemple:
+* Par exemple :
 ** Retourne les bonnes valeur en fonction des paramètres donnés
 ** Appelle la bonne methode du bon attribut avec les bons paramètres
 
-== Test Unitaire: Mise en place
+== Test Unitaire : Mise en place
 
-[source,bash]
---
-git clone https://github.com/cicd-lectures/demoapp.git
-cd demoapp
-git checkout ut-exercise-1
+* Accédez à link:https://gitpod.io#https://github.com/cicd-lectures/demoapp[l'environnement de travail]
+* Passez sur la branche `ut-exercise-1` (`git checkout ut-exercise-1`) et rafraichissez l'explorateur de fichier
+* Exécutez les tests unitaires avec la commande `mvn test` dans le terminal en bas
 
-# Run the tests
-mvnw test
---
-
-== Test Unitaire: Exercice 1
+== Test Unitaire : Exercice 1
 
 Implementez la methode `greet` de la classe `GreeterService`
 
@@ -174,7 +168,7 @@ class GreeterServiceTests {
   }
 --
 
-== Test Unitaire: Solution Exercice 1
+== Test Unitaire : Solution Exercice 1
 
 [source,bash]
 --
@@ -188,7 +182,7 @@ git checkout ut-exercise-1-solution
 git checkout ut-exercise-2
 --
 
-== Test Unitaire: Exercice 2
+== Test Unitaire : Exercice 2
 
 Implementez la methode `createUser` de la classe `UserService` et sa suite de tests.
 
@@ -237,13 +231,13 @@ public class UserService {
 == Comment tester uniquement la classe `UserService` ?
 
 * Le `UserService` à besoin d'un `UserRepository` pour fonctionner.
-* Cependant:
+* Cependant :
 ** On ne veut pas valider le comportement du `UserRepository`.
 ** Pire, on ne veut pas se connecter à une base de donnée pendant un test unitaire.
 
 == Remplacer le UserRepository (1/3)
 
-Solution: On fournit une "fausse implémentation" au service.
+Solution : On fournit une "fausse implémentation" au service.
 
 [source,java]
 --
@@ -330,16 +324,17 @@ et on valide les interactions avec cette instance!
 
 == Test Unitaire: Solution Exercice 2
 
-```bash
+[source, bash]
+---
 git checkout ut-exercise-2-solution
-```
+---
 
-== Test Unitaire: Pro / Cons
+== Test Unitaire : Pro / Cons
 
-* (+) Super rapides (<1s) et légers a executer
-* (+) Pousse à avoir un bon design de code
-* (+) Efficaces pour tester des cas limites
-* (-) Peu réaliste
+* ✅ Super rapides (<1s) et légers a executer
+* ✅ Pousse à avoir un bon design de code
+* ✅ Efficaces pour tester des cas limites
+* ❌ Peu réalistes
 
 [%notitle]
 == fail
@@ -353,8 +348,8 @@ video::ut-fail-2.mp4[width="600",options="autoplay,loop,nocontrols"]
 
 == Test d'Integration
 
-* Test validant qu'un assemblage d'unités se comportent comme souhaité.
-* Par exemple:
+* Test validant qu'un assemblage d'unités se comportent comme prévu.
+* Par exemple :
 ** Prouve que `GET /users` retourne la liste des utilisateurs en base
 
 == Définition du Système à tester
@@ -545,35 +540,35 @@ public class UserController {
       .getForEntity(url.toString()+ "?name=Philip", User[].class);
 --
 
-== Test d'Integration: Solution
+== Test d'Integration : Solution
 
 [source,bash]
 --
 git checkout it-exercise-1-solution
 --
 
-== Test d'Integration: Pro / Cons
+== Test d'Integration : Pro / Cons
 
-* (+) Relativement réalistes
-* (-) Potentiellement complexes
-* (-) Moins flexibles
-* (-) Plus lents
+* ✅ Relativement réalistes
+* ✅ Potentiellement complexes
+* ✅ Feeback "rapide" 1s < t < 1m
+* ❌ Moins flexibles
 
 == Test de Bout en Bout
 
 * Test validant qu'un cas d'utilisation est correctement implémenté par le logiciel
 * Tests idéalement décrits de façon non technique
-* Par exemple:
+* Par exemple :
 ** En tant qu'un utilisateur authentifié
 ** Quand je remplis le formulaire correctement et appuie sur le bouton "OK"
 ** Alors un utilisateur est créé en base
 
 == Demonstration
 
-== Test de Bout en Bout: Pro / Cons
+== Test de Bout en Bout : Pro / Cons
 
-* (+) Au plus proche d'un cas réel
-* (+) Teste tous les composants du logiciel
-* (-) Lents (~1m)
-* (-) Complexes
-* (-) Peu flexibles
+* ✅ Au plus proche d'un cas réel
+* ✅ Teste tous les composants du logiciel
+* ❌ Lents (~1m)
+* ❌ Complexes
+* ❌ Peu flexibles
