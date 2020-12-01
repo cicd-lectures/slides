@@ -43,14 +43,15 @@ On parle de SUT, System Under Test.
 
 == Test Unitaire: Mise en place
 
-```bash
+[source,bash]
+--
 git clone https://github.com/cicd-lectures/demoapp.git
 cd demoapp
 git checkout ut-exercise-1
 
 # Run the tests
 mvnw test
-```
+--
 
 == Test Unitaire: Exercice 1
 
@@ -175,15 +176,17 @@ class GreeterServiceTests {
 
 == Test Unitaire: Solution Exercice 1
 
-```bash
+[source,bash]
+--
 git checkout ut-exercise-1-solution
-```
+--
 
 == Test Unitaire: Exercice 2, mise en place
 
-```bash
+[source,bash]
+--
 git checkout ut-exercise-2
-```
+--
 
 == Test Unitaire: Exercice 2
 
@@ -544,9 +547,10 @@ public class UserController {
 
 == Test d'Integration: Solution
 
-```bash
+[source,bash]
+--
 git checkout it-exercise-1-solution
-```
+--
 
 == Test d'Integration: Pro / Cons
 
