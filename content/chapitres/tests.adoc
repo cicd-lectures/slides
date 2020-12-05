@@ -127,7 +127,7 @@ class GreeterServiceTests {
     User user = new User("John", 5);
 
     // Appeler la methode a tester.
-    String result = this.subject.greet(user);
+    String got = this.subject.greet(user);
 
     // Verifier le résutat.
     assertEquals("Hi", got);
@@ -163,7 +163,7 @@ class GreeterServiceTests {
 
   @Test
   @DisplayName("greets user above 20 with Hello")
-  void greetsUserWithAgeBelow10WithHello() {
+  void greetsUserWithAgeAbove20WithHello() {
     fail("Not implemented");
   }
 --
@@ -187,7 +187,7 @@ git checkout ut-exercise-2
 Implementez la methode `createUser` de la classe `UserService` et sa suite de tests.
 
 * Si un utilisateur avec le même nom existe déjà dans la base de données, alors on ne fait rien.
-* Sinon on enregistre ce nouvel utilisateur dans la base de donées.
+* Sinon on enregistre ce nouvel utilisateur dans la base de données.
 
 == Base de données ?
 
@@ -325,9 +325,9 @@ et on valide les interactions avec cette instance!
 == Test Unitaire: Solution Exercice 2
 
 [source, bash]
----
+----
 git checkout ut-exercise-2-solution
----
+----
 
 == Test Unitaire : Pro / Cons
 
@@ -539,6 +539,12 @@ public class UserController {
   ResponseEntity<User[]> response = this.template
       .getForEntity(url.toString()+ "?name=Philip", User[].class);
 --
+
+[source, bash]
+----
+# Lancer les tests d'intégration
+mvn verify
+----
 
 == Test d'Integration : Solution
 
