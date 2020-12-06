@@ -154,14 +154,14 @@ Retrait d'une fonctionalité (retrait d'une route dans une API).
 == Version VS Git
 
 * Un identifiant de commit est de granularité trop faible pour un l'utilisateur externe.
-* Utilisation de *tags* git pour définir des versions
+* Utilisation de *tags* git pour définir des versions.
 * Un *tag* git est une référence sur un commit.
 
 [source,bash]
-```bash
+----
 # Créer un tag.
 git tag -a v1.4.3 -m "Release version v1.4.3"
 
 # Publier un tag sur le remote origin.
 git push origin v1.4.3
-```
+----

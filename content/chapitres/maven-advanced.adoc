@@ -1,0 +1,23 @@
+= Maven Avancé
+
+== POM
+
+* XML
+* Identité appli
+* Dépendances
+* Plugins et Configurations
+
+== XML
+
+* Exemple 101
+
+== Dépendances
+
+* Rappel des "versions"
+* Exemple 102
+* Expliquer le `~/.m2`
+
+== Plugins et Configurations
+
+* Exemple simple sur jar
+* Exercice sur ajouter jacoco

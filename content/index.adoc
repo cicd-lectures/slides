@@ -142,44 +142,26 @@ include::./chapitres/tech-lifecycle.adoc[leveloffset=1]
 // Chapitre "Rendre son changement visible"
 include::./chapitres/changement-visible.adoc[leveloffset=1]
 
-// // Chapitre CI
+// Chapitre CI
 include::./chapitres/ci.adoc[leveloffset=1]
 
-// // Chapitre CD
+// Chapitre CD
 include::./chapitres/cd.adoc[leveloffset=1]
 
-== Projet n°1: Menus de la cantina de Tatooine
+// Projet 1.0
+include::./chapitres/projet-1.0.adoc[leveloffset=1]
 
-* Votre projet c'est de délivrer un site web d'un menu pour la Cantina de Tatoine, en ces temps de covid.
-* Introduction a github et au github actions ?
-* Votre production: netlify, creezvousuncomptetoussa.
-* yaml yaml yaml
-* Votre mission si vous l'acceptez: écrire un workflow github qui met en production un siteoueb a chaque fois qu'un changement est mergé sur main.
+// Travailler en tant qu'équipe
+include::./chapitres/work-as-a-team.adoc[leveloffset=1]
 
-=== Les outils a votre disposition
+// Projet 1.1
+include::./chapitres/projet-1.1.adoc[leveloffset=1]
 
-=== VCS
+// Maven Avancé
+include::./chapitres/maven-advanced.adoc[leveloffset=1]
 
-Focus sur github
-
-=== CI Engines
-
-Focus sur GH Actions
-
-=== Hébergements
-
-Netlify, server web mutu, etc.
-
-== Partie II: Du premier utilisateur au prochain Netflix
-
-TODO
-
-* Travailler en équipe, kesako?
-
-== Projet n°2
-
-* Same idea, except that we have an API to manage now.
-* Your job should run tests, build a reproductible artifact, and publish to production as soon as you hit a tag.
+// Projet 2.0
+include::./chapitres/projet-2.0.adoc[leveloffset=1]
 
 == Sources
 

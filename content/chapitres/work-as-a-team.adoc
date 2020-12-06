@@ -1,0 +1,49 @@
+[{invert}]
+= Work as a team
+
+* Travailler en équipe, kesako?
+* Ce que tu voulais décrires (lint, revue, etc.)
+
+== Pull Request
+
+* Demande de merge
+* Discussion
+* Revue de code
+* Checks (Conflits, approval, et aussi ... CI!)
+
+== Exercice Pull Request
+
+* Fork / PR / remotes (again) etc.
+
+== Environnement de "staging"
+
+* On a parlé de code qui change, et de production.
+* Problème : une PR ne va pas en production tant qu'elle n'est pas mergée
+Comment qu'on fait pour tester jusqu'au bout ?
+
+=> Environement de staging
+
+* éphèmères
+* disposables et automatisables
+* retour dans une PR pour permettre de "voir" plus loin que le code
+
+== Exercice avec Netlify
+
+* Y fé une branche
+* Y pousse la branche
+* Hop Magica ! (environnemnt/check avec lien de l'environnement copié)
+
+== Limites des envs de stagings
+
+* Couteux
+* Complexes
+* Pas toujours en phase avec la prod (données client ? Volumétrie, etc.)
+* Ref. Tests end to end
+
+== CI avec PRs
+
+* On a causé des embouts du tuyau, causons du tuyau !
+* Events de PR
+* Instruction conditionnelles (si on est sur master)
+
+// Suite : projet 1.1
