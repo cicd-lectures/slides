@@ -12,11 +12,11 @@
 
 Nya nya <source> -> hugo -> HTML+CSS+JS
 
-Quel est le livrable ? Définision la production pour le savoir
+Quel est le livrable ? Définition la production pour le savoir
 
 == Projet 1.0 : Production
 
-Comment héberger un site web de type statique (HTML+Cssetc.)
+Comment héberger un site web de type statique (HTML+CSS etc.)
 
 == Say Hello to Netlify
 
@@ -24,7 +24,8 @@ Intro à Netlify
 
 == Exercice Netlify
 
-* Créer un dépôt vide avec un hugo de base
+* Depuis le dépôt de l'exercice précédent
+* On ajoute un hugo de base
 * Créer un projet Netlify + config hugo
 * Pousser sur master => Hop magie
 

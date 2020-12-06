@@ -1,0 +1,266 @@
+
+[{invert}]
+= Aller plus loin avec git
+
+== Une autre petite histoire
+
+Votre dépôt est actuellement sur votre ordinateur.
+
+* Que se passe t'il si :
+** Votre disque dur tombe en panne ?
+** On vous vole votre ordinateur ?
+** Vous échapez votre tasse de thé / café sur votre ordinateur ?
+** Une météorite tombe sur votre bureau et fracasse votre ordinateur ?
+
+[%notitle]
+== !
+
+image:crying.gif[width="500"]
+
+[.small]
+Testé, pas approuvé.
+
+== Comment éviter ça ?
+
+* Répliquer votre dépôt sur une autre machine !
+* Git, comme tout autre CVS, peut gérer ce type de problème
+
+== Centralisé vs Decentralisé
+
+Git n'est pas un CVS, mais un DCVS
+
+* Chaque utilisateur maintient une version du dépôt _local_ qu'il peut changer à souhait
+* L'opération de propager une version sur un dépôt **distant** est décorrelée du commit
+* Un dépôt _local_ peut avoir plusieurs dépôts **distants**.
+
+[%notitle]
+== !
+
+image:cvsdcvs.png[width="800"]
+
+[.small]
+Source link:https://www.geeksforgeeks.org/centralized-vs-distributed-version-control-which-one-should-we-choose/[Geek for Geeks]
+
+Cela rends la manipulation un peu plus complexe, allons-y pas à pas :-)
+
+== Mise en place de l'exercice (1/2)
+
+* Rendez vous sur link:https://gitpod.io/access-control[la page des droits GitPod]
+** Cochez dans la colonne github "write public repos" et "update workflows" puis validez
+* Rendez vous sur link:https://github.com[Github]
+** Créez un nouveau dépôt distant en cliquant sur "New" en haut à gauche
+** Une fois créé, mémorisez l'URL (++https://github.com/...++) de votre dépôt :-)
+
+== Mise en place de l'exercice (2/2)
+
+Accédez à link:https://gitpod.io#https://github.com/cicd-lectures/demoapp[l'environnement de travail], puis depuis le terminal jouez les commandes suivantes:
+
+[source,bash]
+--
+cd /workspace/
+
+mkdir -p <Nom de votre dépôt>
+
+cd ./<Nom de votre dépôt>/
+
+# Initialize un nouveau dépôt git dans le répertoire
+git init
+
+# Crée un premier commit vide dans votre dépôt
+git commit --allow-empty -m "Initial commit"
+
+# Renomme la branche courante "master" en "main"
+git branch -m main
+--
+
+== Consulter l'historique de commits
+
+[source,bash]
+--
+# Liste tous les commits présent sur la branche main.
+git log
+
+# Ici il n'y en a qu'un seul!
+--
+
+== Associer un dépôt distant (1/2)
+
+Git permet de manipuler des "remotes"
+
+* Image "distante" (sur un autre ordinateur) de votre dépôt local.
+* Permet de publier et de rapatrier des branches.
+* C'est une arborescence de commits, tout comme votre dépôt local.
+* Un dépôt peut posséder N remotes.
+
+== Associer un dépôt distant (2/2)
+
+[source,bash]
+--
+# Liste les remotes associés a votre dépôt
+git remote -v
+
+# Ajoute votre dépôt comme remote appelé `origin`
+git remote add origin https://<URL de votre dépôt>
+
+# Vérifiez que votre nouveau remote `origin` est bien listé a la bonne adresse
+git remote -v
+--
+
+== Publier une branche dans sur dépôt distant
+
+Maintenant qu'on a un dépôt, il faut publier notre code dessus !
+
+[source, bash]
+--
+# git push <remote> <votre_branche_courante>
+git push origin main
+--
+
+== Que s'est il passé ?
+
+image:remote1.svg[]
+
+== !
+
+* git à créé une branche distante `origin/main`
+* ... et l'a envoyé sur le remote origin
+* ... qui à accepté le changement !
+
+== Refaisons un commit !
+
+[source, bash]
+--
+git commit --allow-empty -m "Yet another commit"
+--
+
+== !
+
+image:remote2.svg[]
+
+== Branche distante
+
+Dans votre dépôt local, une branche "distante" est maintenue par git
+
+C'est une une image du dernier état connu de la branche sur le remote.
+
+Pour la mettre a jour depuis le remote il faut utiliser :
+
+`git fetch <nom_du_remote>`
+
+== !
+
+[source, bash]
+--
+# Lister toutes les branches y compris les branches distances
+git branch -a
+
+# Notez que est listé remotes/origin/main
+
+# Mets a jour les branches distantes du remote origin
+git fetch origin
+
+# Rien ne se passe, votre dépôt est tout neuf, changeons ça!
+--
+
+== Créez un commit depuis GitHub directement
+
+* Rendez vous sur la page de votre dépôt
+* Cliquez sur "Add a README"
+* Rajoutez du contenu a votre README
+* Dans la section "Commit a new file"
+** Ajoutez un titre de commit et une description
+** Cochez "Commit directly to the main branch"
+** Validez
+
+Github crée directement un commit sur la branche main sur le dépôt distant
+
+== Rapatrier les changements distants
+
+[source, bash]
+--
+# Mets à jour les branches distantes du dépot origin
+git fetch origin
+
+# La branche distante main a avancé sur le remote origin
+# => La branche remotes/origin/main est donc mise a jour
+
+
+# Listez les fichiers présents dans le dépôt
+ls
+
+# Mystère, le fichier README n'est pas la ?
+# Listez l'historique de commit
+git log
+
+# Votre nouveau commit n'est pas présent, DAMN IT !
+--
+
+== !
+
+image:remote3.svg[]
+
+== Branche Distante VS Branche Locale
+
+Le changement à été rapatrié, cependant il n'est pas encore présent sur votre branche main locale
+
+[source, bash]
+--
+# Merge la branch distante dans la branche locale.
+git merge origin/main
+--
+
+== !
+
+Vu que votre branche main n'a pas divergé (== partage le même historique) de la branche distante, `git merge` se passe bien et effectue un "fast forward".
+
+[source, bash]
+--
+Updating 1919673..b712a8e
+Fast-forward
+ README.md | 1 +
+ 1 file changed, 1 insertion(+)
+--
+
+Cela signifie qu'il fait "avancer" la branche `main` sur le même commit que la branche `origin/main`
+
+== !
+
+image:remote4.svg[]
+
+== !
+
+[source, bash]
+--
+# Liste l'historique de commit
+git log
+
+# Votre nouveau commit est présent sur la branche main !
+# Juste au dessus de votre commit initial !
+--
+
+== Git(Hub|Lab|tea|...)
+
+Un dépôt distant peut être hébergé par n'importe quel serveur sans besoin autre qu'un accès SSH ou HTTPS.
+
+Une multitudes de services facilitent et enrichissent encore git: (Github, Gitlab, Gitea, Bitbucket...)
+
+=> Dans le cadre du cours, nous allons utiliser +++<span class="fab fa-github"></span>+++ *Github*.
+
+== git + Git(Hub|Lab|tea|...) = superpowers !
+
+* GUI de navigation dans le code
+* Plateforme de gestion et suivi d'issues
+* Plateforme de revue de code
+* Integration aux moteurs de CI/CD
+* And so much more...
+
+== Integration aux moteurs de CI/CD ?
+
+* Pour chaque evenement important du dépôt
+** (merge, nouvelle branche poussée sur dépôt, nouvelle Pull Request)
+** Le service peut envoyer une requête HTTP pour notifier un service tiers de l'evennement.
+*** Par exemple: à un moteur de CI/CD !
+
+== Anatomie du déclenchement d'un job CI
+
+image:ghci.svg[with="800"]

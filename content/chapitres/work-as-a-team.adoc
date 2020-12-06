@@ -15,6 +15,13 @@
 
 * Fork / PR / remotes (again) etc.
 
+== Un gros raccourci
+
+`git pull` = `git fetch` + `git merge`
+
+[.small]
+Mais attention avec ;-)
+
 == Environnement de "staging"
 
 * On a parlé de code qui change, et de production.
