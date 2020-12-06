@@ -1,0 +1,16 @@
+
+= Projet 1.1 : Contribuer au menu de la cantina
+
+* On reprend le projet 1.0 et on veut pouvoir contribuer au contenu
+avec validation du "chef cuisinier"
+
+== Projet 1.1 : Consigne
+
+* Si PR ou branche, alors buid + test uniquement
+* Si branch main, alors build + test + deploy
+
+GO GO GO
+
+// == Projet 1.1 : Plus loin
+// * Verrouiler branche main ?
+// * Netlify de staging sur builds de PRs avec un lien dans la PR par un bot?

@@ -1,0 +1,15 @@
+
+[{invert}]
+= Projet 2.0 : Du premier utilisateur au prochain Netflix
+
+* Cantina : site web dynamique (pas que le menu : commande à distance)
+* Projet Java/Spring/Maven
+
+== Projet 2.0 : Production
+
+* Exercice guidé pour faire une image Docker java et la déployer sur autosrv
+
+== Projet 2.0 : Consigne
+
+* Same idea, except that we have an API to manage now.
+* Your job should run tests, build a reproductible artifact, and publish to production as soon as you hit a tag.

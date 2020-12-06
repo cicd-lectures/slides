@@ -1,0 +1,47 @@
+
+[{invert}]
+= Projet 1.0 : Menus de la cantina de Tatooine
+
+* Votre projet c'est de délivrer un site web d'un menu pour la Cantina de Tatoine, en ces temps de covid.
+* Introduction a github et au github actions ?
+* Votre production: netlify, creezvousuncomptetoussa.
+* yaml yaml yaml
+* Votre mission si vous l'acceptez: écrire un workflow github qui met en production un siteoueb a chaque fois qu'un changement est mergé sur main.
+
+== Projet 1.0 : Code source
+
+Nya nya <source> -> hugo -> HTML+CSS+JS
+
+Quel est le livrable ? Définision la production pour le savoir
+
+== Projet 1.0 : Production
+
+Comment héberger un site web de type statique (HTML+Cssetc.)
+
+== Say Hello to Netlify
+
+Intro à Netlify
+
+== Exercice Netlify
+
+* Créer un dépôt vide avec un hugo de base
+* Créer un projet Netlify + config hugo
+* Pousser sur master => Hop magie
+
+== Github Actions vs. Netlify
+
+* Netlify est une forme de CI spécialisé
+* Github action peut aussi pousser dans Netlify (CLI, etc.)
+* Problème : lequel choisir ?
+** La question elle est vite répondue jeune étudiant-entrepreneur : que faire si le test échoue ?
+** Donc Github Actions
+
+== Challenge : tester du HTML
+
+<Insert La commande magique pour tester index.html>
+
+== Projet 1.0 : Consigne
+
+Voilà yapuka faire un "Build -> Test -> Deploy" qui se déclenche quand on pousse sur master
+
+GO GO GO
