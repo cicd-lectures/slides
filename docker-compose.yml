@@ -19,7 +19,7 @@ services:
       - ./assets:/app/assets
       - ./gulp/gulpfile.js:/app/gulpfile.js
       - ./gulp/tasks:/app/tasks
-      - ./package.json:/app/package.json
+      - ./npm-packages:/app/npm-packages
     ports:
       - "8000:8000"
 

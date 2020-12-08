@@ -21,7 +21,6 @@
         "gulp-rename": "2.0.0",
         "gulp-sass": "^4.1.0",
         "merge-stream": "2.0.0",
-        "npm-check-updates": "7.0.2",
         "qrcode": "1.4.4"
     }
 }
