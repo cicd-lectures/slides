@@ -67,6 +67,24 @@ Otherwise, you can run the `all` command ,as the CI process is doing:
 make all
 ----
 
+=== Dependencies management
+
+As NPM is used for expressing the dependencies, you can execute the following chores:
+
+* Lock the dependencies (e.g. generating the file `package-lock.json` from the file `package.json` and the content of `nodes_modules`):
+
+[source,bash]
+----
+make dependencies-lock-update
+----
+
+* Upgrade all dependencies (e.g. update the file `package.json`)
+
+[source,bash]
+----
+make dependencies-update
+----
+
 === Maintenance tasks inside the container
 
 If you want to get a shell inside the "build and serve" container,
@@ -77,11 +95,13 @@ run the following `make` command:
 make shell
 ----
 
-==== Example: updating the package.json (and lock) depencies
+==== Example: Updating the package.json (and package-lock.json) Dependencies
 
 [source,bash]
 ----
-make shell
-/app # ncu -u
-...
+$ make shell
+# Update the `package.json` file to latest versions
+/app > ncu -u
+# Update the `package-lock.json` file from `package.json`
+/app > npm install
 ----
