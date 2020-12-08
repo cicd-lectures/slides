@@ -40,7 +40,7 @@ dependencies-lock-update: $(DIST_DIR) prepare
 	@CURRENT_UID=0 docker-compose run --entrypoint=npm --rm serve install --package-lock
 
 dependencies-update: $(DIST_DIR) prepare
-	@CURRENT_UID=0 docker-compose run --entrypoint=ncu --rm serve -u
+	@CURRENT_UID=0 docker-compose run --entrypoint=ncu --workdir=/app/npm-packages --rm serve -u
 	@make -C $(CURDIR) dependencies-lock-update
 
 $(DIST_DIR)/index.html: build
