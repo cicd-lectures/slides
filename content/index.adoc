@@ -148,6 +148,9 @@ include::./chapitres/ci.adoc[leveloffset=1]
 // Chapitre CD
 include::./chapitres/cd.adoc[leveloffset=1]
 
+// Chapitre Github
+include::./chapitres/github.adoc[leveloffset=1]
+
 // Chapitre GithHub Actions
 include::./chapitres/gh-actions.adoc[leveloffset=1]
 
