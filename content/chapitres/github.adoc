@@ -1,6 +1,6 @@
 
 [{invert}]
-= Aller plus loin avec git
+= GitHub : Aller plus loin avec git
 
 == Une autre petite histoire
 
