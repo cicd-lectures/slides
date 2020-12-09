@@ -1,0 +1,194 @@
+
+[{invert}]
+= Github Actions
+
+== Github Actions
+
+Github Actions est un moteur de CI/CD intégré à Github
+
+* ✅ : Très facile à mettre en place, gratuit et intégré complètement
+* ❌ : Utilisable uniquement avec Github, et DANS la plateforme Github
+
+== Concepts de Github Actions
+
+image::gh-actions-concepts.svg[width=800]
+
+== Concepts de Github Actions - Step
+
+Une *Step* (étape) est une tâche individuelle à faire effectuer par le CI :
+
+* Par défaut c'est une commande à exécuter - mot clef `run`
+* Ou une "action" (quel est le nom du produit déjà ?) - mot clef `uses`
+** Réutilisables et https://docs.github.com/en/free-pro-team@latest/actions/learn-github-actions/finding-and-customizing-actions[partageables]
+
+== Concepts de Github Actions - Job
+
+Un *Job* est un groupe logique de tâches :
+
+* Enchainement _séquentiel_ de tâches
+* Regroupement logique : "qui a un sens" (exemple : )
+
+== Concepts de Github Actions - Runner
+
+Un *Runner* est un serveur distant sur lequel s'exécute un job.
+
+* Mot clef `runs-on` dans la définition d'un job
+* Défaut : machine virtuelle Ubuntu dans le cloud utilisé par Github
+* https://docs.github.com/en/free-pro-team@latest/actions/reference/specifications-for-github-hosted-runners[D'autres types sont disponibles]
+(macOS, Windows, etc.)
+* Possibilité de fournir https://docs.github.com/en/free-pro-team@latest/actions/reference/specifications-for-github-hosted-runners[son propre serveur]
+
+== Concepts de Github Actions - Workflow
+
+Un *Workflow* est une procédure automatisée composée de plusieurs jobs,
+décrite par un fichier YAML.
+
+* On parle de "Workflow/Pipeline as Code"
+* Chemin : `.github/workflows/<nom du workflow>.yml`
+* On peut avoir _plusieurs_ fichiers donc _plusieurs_ workflows
+
+== Concepts de Github Actions - Evènement
+
+Un *évènement* du projet Github (push, merge, nouvelle issue, etc. ) déclenche l'exécution du workflow
+
+* Plein de type d'évènements : push, issue, alarme régulière, favori, fork, etc.
+* Le workflow est exécuté pour un commit donné (Rappel : "Workflow as Code")
+
+== Concepts de Github Actions : Exemple
+
+.Workflow File :
+[source,yaml]
+----
+name: Node.js CI
+on: [push]
+jobs:
+  test-linux:
+    runs-on: ubuntu-20.04
+    steps:
+    - uses: actions/checkout@v2
+    - run: npm install
+    - run: npm test
+
+  test-mac:
+    runs-on: mac-10.15
+    steps:
+    - uses: actions/checkout@v2
+    - run: npm install
+    - run: npm test
+----
+
+== Concepts de Github Actions - Récapépète
+
+image::gh-actions-concepts.svg[width=800]
+
+== Essayons Github Actions
+
+* *But* : nous allons créer notre premier workflow dans Github Actions
+
+* N'hésitez pas à utiliser la documentation de GitHub Actions:
+** https://docs.github.com/en/free-pro-team@latest/actions[Accueil]
+** https://docs.github.com/en/free-pro-team@latest/actions/quickstart[Quickstart]
+** https://docs.github.com/en/free-pro-team@latest/actions/reference[Référence]
+
+* Retournez dans le dépôt créé précédemment dans votre environnement gitpod
+
+== Exemple simple avec Github Actions
+
+* Créez le fichier `.github/workflows/bonjour.yml` avec le contenu suivant :
+
+[source,yaml]
+----
+name: Bonjour
+on: [push]
+jobs:
+  dire_bonjour:
+    runs-on: ubuntu-20.04
+    steps:
+    - run: echo "Bonjour 👋 "
+----
+
+* Revenez sur la page GitHub de votre projet et naviguez dans l'onglet "Actions" :
+** Voyez-vous un workflow ? Et un Job ? Et le message affiché par la commande `echo` ?
+
+== Exemple simple avec Github Actions : Récapépète
+
+image::gh-actions-simple-example.svg[width=800]
+
+== Exemple Github Actions : Checkout
+
+* Supposons que l'on souhaite utiliser le code du dépôt...
+** Essayez: modifiez le fichier `bonjour.yml` pour afficher le contenu de `README.md` :
++
+[source,yaml]
+----
+name: Bonjour
+on: [push]
+jobs:
+  dire_bonjour:
+    runs-on: ubuntu-20.04
+    steps:
+    - run: ls -l # Liste les fichier du répertoire courant
+    - run: cat README.md # Affiche le contenu du fichier `README.md` à la base du dépôt
+----
+
+* Est-ce que l'étape `cat README.md` se passe bien ? (SPOILER: non ❌ )
+
+== Exercice Github Actions : Checkout
+
+* *But* : On souhaite récupérer ("checkout") le code du dépôt dans le job
+
+* C'est à vous d'essayer de _réparer_ le job :
+** L'étape `cat README.md` doit être conservée et doit fonctionner
+** Utilisez l'action "checkout" (https://github.com/marketplace/actions/checkout[Documentation]) du marketplace GitHub Action
+** Vous pouvez vous inspirer du https://docs.github.com/en/free-pro-team@latest/actions/quickstart[Quickstart] de GitHub Actions
+
+== Solution Github Actions : Checkout
+
+[source,yaml]
+----
+name: Bonjour
+on: [push]
+jobs:
+  dire_bonjour:
+    runs-on: ubuntu-20.04
+    steps:
+    - uses: actions/checkout@v2 # Récupère le contenu du dépôt correspondant au commit du workflow en cours
+    - run: cat README.md # Affiche le contenu du fichier `README.md` à la base du dépôt
+----
+
+== Exemple : Environnement d'exécution
+
+* Notre pipeline de build dit que "la vache" doit afficher le contenu du fichier `README.md`
+** WAT (Non, nous ne sommes pas fous) ?
+
+[%steps]
+* Essayez la commande `cat README.md | cowsay` dans GitPod
+** Essayez de mettre à jour le workflow pour faire la même chose dans GitHub Actions
+** SPOILER: ❌ (la commande `cowsay` n'est pas disponible dans le runner GitHub Actions)
+
+== Exercice : Environnement d'exécution
+
+* *But* : On souhaite utiliser une commande spécifique durant notre job
+
+* Deux types de solutions existent, chacune avec ses inconvénients :
+** Installer les outils manquants en préambule de chaque job (❌ lent ✅ facile )
+** Utiliser Docker pour fabriquer une action Github (❌ complexe ✅ portable)
+
+* C'est à vous :
+** Cherchez comment installer `cowsay` dans Ubuntu 20.04
+** Appliquer cette solution dans votre job afin de le "réparer" et de voir la vache dans GitHub Actions.
+
+== Solution : Environnement d'exécution
+
+[source,yaml]
+----
+name: Bonjour
+on: [push]
+jobs:
+  dire_bonjour:
+    runs-on: ubuntu-20.04
+    steps:
+    - run: sudo apt-get update && sudo apt-get install -y cowsay
+    - uses: actions/checkout@v2
+    - run: cat README.md | cowsay
+----
