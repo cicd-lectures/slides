@@ -1,10 +1,98 @@
 [{invert}]
-= Work as a team
+= Travailler en équipe ?
 
-* Travailler en équipe, kesako?
-* Ce que tu voulais décrires (lint, revue, etc.)
+== Limites de bosser seul
 
-== Pull Request
+* Capacité finie de travail
+* Victime de propres biais
+* On ne sait pas tout, tout le temps ?
+
+== !
+
+image:solo.gif[width="500"]
+
+== Travailler en équipe ? Une si bonne idée ?
+
+* ... Mais il faut communiquer ?
+* ... Mais tout le monde ne sait pas tout ?
+* ... Mais tout le monde y code pas pareil ?
+
+== !
+
+Collaborer c'est pas évident, mais on à des outils et des methodes pour vous aider.
+
+[.small]
+Cela reste des outils, ça ne résoud pas tout non plus.
+
+== Git multijoueur
+
+* Git permet de collaborer assez aisément
+* Chaque développeur crée et publie des commits...
+* ... et rapatrie de de ses camarades !
+
+Tout se passe relativement bien... à condition de réspecter quelques règles !
+
+[{invert}]
+== Disclaimer
+
+Attachez vous aux idées générales... les détails varient d'un projet à l'autre!
+
+== Gestion des branches (1/2)
+
+* Les "versions" du logiciel sont maintenues sur des branches principales
+(main, staging)
+* Ces branches reflêtent l'état du logiciel
+** **main**: version actuelle en production
+** **staging**: prochaine version
+
+== Gestion des branches (2/2)
+
+* Chaque groupe de travail (développeur, binôme...)
+** Crée une branche de travail à partir de la branche staging
+** Une branche de travail correspond à *une chose à la fois*
+** Pousse des commits dessus qui effectuent le changement
+* Quand le travail est fini:
+** La branche de travail est mergée dans staging
+
+== !
+
+image::scm-feature-branch-workflow.png[caption="Feature Branch SCM Workflow",link=https://twitter.com/jay_gee/status/702638177471873024]
+
+== Gestion des remotes
+
+La grande question: où vivent ces branches ?
+
+== Plusieurs modèles possibles
+
+* Un remote pour les gouverner tous !
+* Chacun son propre remote (et les commits seront bien gardés)
+* ... whatever floats your boat!
+
+== Un remote pour les gouverner tous
+
+Tous les développeurs envoient leur commits et branches sur le même dépot remote
+
+* (+) Simple a gérer
+* (-) Nécessite que tous les contributeurs aient accès au dépot
+** Adapté a l'entreprise, peu adapté au monde de l'open source
+
+== Chacun son propre remote
+
+* C'est le modèle poussé par GitHub, qui se veut promouvoir l'Open Source.
+* La motivation est le contrôle d'accès
+** Tout le monde peut manipuler du code public et publier des changements sur son propre remote
+** Mais toute modification arrivant sur le remote principal passe par une validation des propriétaires
+
+== Forks ! Forks everywhere !
+
+Dans la terminologie GitHub:
+
+* Un fork est un remote copié d'un dépot principal
+** C'est la où les contributeurs poussent leur branche de travail.
+* Les branches de version (main, staging...) vivent sur le dépot principal
+* La procédure de de ramener un changement d'un fork vers un dépot principal s'appelle une **Pull Request (PR)**.
+
+== Pull request et revue de code
 
 * Demande de merge
 * Discussion
@@ -13,44 +101,22 @@
 
 == Exercice Pull Request
 
-* Fork / PR / remotes (again) etc.
+* Mettez vous par deux
+* Forkez le dépot de l'autre
+* Rajoutez le dépot de l'autre comme remote de votre dépot local
 
-== Un gros raccourci
-
-`git pull` = `git fetch` + `git merge`
-
-[.small]
-Mais attention avec ;-)
-
-== Environnement de "staging"
-
-* On a parlé de code qui change, et de production.
-* Problème : une PR ne va pas en production tant qu'elle n'est pas mergée
-Comment qu'on fait pour tester jusqu'au bout ?
-
-=> Environement de staging
-
-* éphèmères
-* disposables et automatisables
-* retour dans une PR pour permettre de "voir" plus loin que le code
-
-== Exercice avec Netlify
-
-* Y fé une branche
-* Y pousse la branche
-* Hop Magica ! (environnemnt/check avec lien de l'environnement copié)
-
-== Limites des envs de stagings
-
-* Couteux
-* Complexes
-* Pas toujours en phase avec la prod (données client ? Volumétrie, etc.)
-* Ref. Tests end to end
+[source,bash]
+--
+git remote add fork https://github.com/blallala/blublu
+git checkout -b feature-branch
+git commit -m "lololo"
+git push fork feature-branch
+# OPEN DA PR.
+--
 
 == CI avec PRs
 
 * On a causé des embouts du tuyau, causons du tuyau !
 * Events de PR
-* Instruction conditionnelles (si on est sur master)
 
 // Suite : projet 1.1
