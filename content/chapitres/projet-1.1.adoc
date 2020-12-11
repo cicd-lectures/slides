@@ -1,8 +1,15 @@
 
-= Projet 1.1 : Contribuer au menu de la cantina
+= Projet 1.1 : Contribuer au Menu
 
 * On reprend le projet 1.0 et on veut pouvoir contribuer au contenu
 avec validation du "chef cuisinier"
+
+
+== Challenge : Tester du HTML
+
+* Ouverture du menu à la contribution externe : comment tester le HTML ?
+// <Insert La commande magique pour tester index.html>
+
 
 == Projet 1.1 : Consigne
 
