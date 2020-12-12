@@ -4,12 +4,18 @@
 * On reprend le projet 1.0 et on veut pouvoir contribuer au contenu
 avec validation du "chef cuisinier"
 
-
 == Challenge : Tester du HTML
 
 * Ouverture du menu à la contribution externe : comment tester le HTML ?
-// <Insert La commande magique pour tester index.html>
+** 🔎 Il faut valider/tester les modifications
+** 🌍 Nous allons tester si les liens HTTP sont valides et pointent vers des pages existentes
 
+* Essayez avec la commande `linkchecker` :
++
+[source,bash]
+make main.html && linkchecker --check-extern ./main.html
+
+* Modifiez le contenu pour tester le cas d'un mauvais lien HTTP et ré-essayez
 
 == Projet 1.1 : Consigne
 
