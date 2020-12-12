@@ -122,9 +122,9 @@ image:remote1.svg[]
 
 == !
 
-* git à créé une branche distante `origin/main`
-* ... et l'a envoyé sur le remote origin
-* ... qui à accepté le changement !
+* git à envoyé la branche main sur le remote origin
+* ... qui à accepté le changement et mis à jour sa propre branche main.
+* git à créé localement une branche distante `origin/main` qui suis l'état de `main`sur le remote.
 
 == Refaisons un commit !
 

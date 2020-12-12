@@ -19,7 +19,7 @@ image:solo.gif[width="500"]
 
 == !
 
-Collaborer c'est pas évident, mais on à des outils et des methodes pour vous aider.
+Collaborer c'est pas évident, mais il existe des outils et des methodes pour vous aider.
 
 [.small]
 Cela reste des outils, ça ne résoud pas tout non plus.
@@ -28,16 +28,21 @@ Cela reste des outils, ça ne résoud pas tout non plus.
 
 * Git permet de collaborer assez aisément
 * Chaque développeur crée et publie des commits...
-* ... et rapatrie de de ses camarades !
+* ... et rapatrie ceux de de ses camarades !
+* C'est un outil très flexible... chacun peut faire ce qu'il lui semble bon !
 
-Tout se passe relativement bien... à condition de réspecter quelques règles !
+== ... et (souvent) ça finit comme ça !
+
+image:bloing.jpeg[]
+
+== Quelques règles pour éviter ça !
 
 [{invert}]
 == Disclaimer
 
 Attachez vous aux idées générales... les détails varient d'un projet à l'autre!
 
-== Gestion des branches (1/2)
+== Gestion des branches
 
 * Les "versions" du logiciel sont maintenues sur des branches principales
 (main, staging)
@@ -45,18 +50,30 @@ Attachez vous aux idées générales... les détails varient d'un projet à l'au
 ** **main**: version actuelle en production
 ** **staging**: prochaine version
 
-== Gestion des branches (2/2)
+== !
+
+image:gitmulti1.svg[]
+
+== Gestion des branches
 
 * Chaque groupe de travail (développeur, binôme...)
 ** Crée une branche de travail à partir de la branche staging
 ** Une branche de travail correspond à *une chose à la fois*
-** Pousse des commits dessus qui effectuent le changement
-* Quand le travail est fini:
-** La branche de travail est mergée dans staging
+** Pousse des commits dessus qui implémentent le changement
 
 == !
 
-image::scm-feature-branch-workflow.png[caption="Feature Branch SCM Workflow",link=https://twitter.com/jay_gee/status/702638177471873024]
+image:gitmulti2.svg[]
+
+== !
+
+image:gitmulti3.svg[]
+
+Quand le travail est fini, la branche de travail est mergée dans staging
+
+== !
+
+image:gitmulti4.svg[]
 
 == Gestion des remotes
 
@@ -76,12 +93,22 @@ Tous les développeurs envoient leur commits et branches sur le même dépot rem
 * (-) Nécessite que tous les contributeurs aient accès au dépot
 ** Adapté a l'entreprise, peu adapté au monde de l'open source
 
+== !
+
+image:remotemulti1.svg[]
+
 == Chacun son propre remote
 
-* C'est le modèle poussé par GitHub, qui se veut promouvoir l'Open Source.
+* Chaque contributeur possède son propre remote
 * La motivation est le contrôle d'accès
-** Tout le monde peut manipuler du code public et publier des changements sur son propre remote
-** Mais toute modification arrivant sur le remote principal passe par une validation des propriétaires
+** Tout le monde peut lire le dépot principal. Personne ne peut écrire desuss.
+** Tout le monde peut dupliquer le dépot public et écrire sur sa copie.
+** Toute modification du dépot principal passe par une procédure de revue.
+* C'est le modèle poussé par GitHub !
+
+== !
+
+image:remotemulti2.svg[]
 
 == Forks ! Forks everywhere !
 
