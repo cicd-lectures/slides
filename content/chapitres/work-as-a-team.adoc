@@ -87,10 +87,10 @@ La grande question: où vivent ces branches ?
 
 == Un remote pour les gouverner tous
 
-Tous les développeurs envoient leur commits et branches sur le même dépot remote
+Tous les développeurs envoient leur commits et branches sur le même remote
 
-* (+) Simple a gérer
-* (-) Nécessite que tous les contributeurs aient accès au dépot
+* Simple a gérer ...
+* ... mais nécessite que tous les contributeurs aient accès au dépot
 ** Adapté a l'entreprise, peu adapté au monde de l'open source
 
 == !
@@ -104,6 +104,7 @@ image:remotemulti1.svg[]
 ** Tout le monde peut lire le dépot principal. Personne ne peut écrire desuss.
 ** Tout le monde peut dupliquer le dépot public et écrire sur sa copie.
 ** Toute modification du dépot principal passe par une procédure de revue.
+** Si la revue est validée, alors la branche est "mergée" dans la branche cible
 * C'est le modèle poussé par GitHub !
 
 == !
@@ -119,31 +120,111 @@ Dans la terminologie GitHub:
 * Les branches de version (main, staging...) vivent sur le dépot principal
 * La procédure de de ramener un changement d'un fork vers un dépot principal s'appelle une **Pull Request (PR)**.
 
-== Pull request et revue de code
+== La procédure de pull request
 
-* Demande de merge
-* Discussion
+* Objectif:
+** Valider les changements d'un contributeur
+*** technique: est-ce que ça marche ? est-ce maintenable ?
+*** fonctionelle: est-ce que le code fait ce que l'on veux ?
+** Propager la connaissance par la revue de code.
+** Tracer les changements.
+
+== Anatomie d'une Pull Request sur GitHub
+
+* **Branche source**: La branche portant le changement
+* **Branche cible**: La branche dans lequel le changement va être mergé.
+* **Titre**: décrit de façon concise le changement apporté
+* **Description**: décrit de façon détaillée le changement. Doit donner toutes les "clés de lecture" de la PR à un relecteur
+* **Labels**: meta informations permettant de suivre le type de la PR (bugfix, feature?)
+* **Historique de commit**: Lors d'une pull request, une attention particulière doit être portée aux commits (bien nommés, atomiques), c'est un outil aidant à la relecture!
+
+== Outils à disposition
+
 * Revue de code
-* Checks (Conflits, approval, et aussi ... CI!)
+* Validation automatisée
 
-== Exercice Pull Request
+== Revue de code ? Kézako ?
 
-* Mettez vous par deux
-* Forkez le dépot de l'autre
-* Rajoutez le dépot de l'autre comme remote de votre dépot local
+* Validation par un ou plusieurs pair (techniques et non technique) des changements que l'on veut ramener
+* Relecture des changements depuis github (ou depuis l'environement de poste du developpeur)
+* Chaque relecteur emet des commentaires ou des suggestions de changement.
+* Quand un relecteur satisfait d'un le changement, il l'approuve.
+
+== !
+
+* La revue de code est un **exercice difficile** et **potentiellement frustrant** pour les deux parties.
+** Comme sur Twitter, on est bien à l'abri derrirère son écran ;=)
+* En tant que contributeur, **soyez respecteux** de vos relecteurs, défois votre changement va être refusé et c'est quelquechose de normal.
+* En tant que relecteur, **soyez respectueux** du travail effecuté, même si celui ci comporte des erreurs ou ne correspond pas à ce que vous attendez.
+** Astuce: link:https://github.com/franckverrot/clamav-client/pull/12#discussion_r526222319[Proposez des solutions] plutôt que simplement pointer les problèmes.
+
+== Validation automatisée
+
+**Objectif**: Valider que le changement n'introduit pas de régressions dans le projet
+
+* A chaque fois qu'un nouveau commit est créé dans une PR, une succession de checks sont déclenchés par GitHub
+* Effectue des vérifications automatisées sur un commit de merge entre votre branche cible et la branche de PR
+
+== Quelques exemples
+
+* Analyse syntaxique du code (lint), pour détecter les erreurs potentielles ou les violations du guide de style
+* Compilation du projet
+* Execution des tests automatisés du projet (unit, integration)
+* Déploiement du projet dans un environnement de test (coucou netlify !)
+
+Ces "checks" peuvent êtres executés par votre moteur de CI ou des outils externes.
+
+== !
+
+*Règle d'or*: Si le CI est rouge, on ne merge pas la pull request !
+
+[.small]
+Même si le linter ilécon, même si on a la flemme et sépanou qui avons cassé le CI.
+
+== Exercice Pull request
+
+Effectuez une contribution sur un dépot d'un de vos camarades.
+
+Nous allons réutiliser les dépots crées dans le chapitre GitHub.
+
+== Exercice Pull Request: Mise en place
+
+* Trouvez vous un binôme dans le groupe.
+* Rendez vous link:https://docs.google.com/spreadsheets/d/1iWwCiS-jApvfSMETMG22N-wDhxVNvIrR4IoM-v2YYas/edit?usp=sharing[ici] pour enregistrer votre binôme, et indiquez les liens de vos dépots respectifs.
+* Depuis la page du dépot de votre binôme, cliquez en haut à gauche sur le bouton **Fork**.
+
+== Exercice Pull Request: Faites votre changement
+
+Accédez à link:https://gitpod.io#https://github.com/cicd-lectures/demoapp[l'environnement de travail], puis depuis le terminal jouez les commandes suivantes:
 
 [source,bash]
 --
-git remote add fork https://github.com/blallala/blublu
-git checkout -b feature-branch
-git commit -m "lololo"
-git push fork feature-branch
-# OPEN DA PR.
+cd /workspace/
+
+# Clonez votre fork
+git clone <url_de_votre_fork>
+
+# Créez votre feature branch
+git checkout -b <nom-de-votre-feature-branch>
+
+# Changez le readme ou ajoutez un nouveau fichier.
+# (bonus si c'est rigolo :p)
+# Et comittez le ;)
+
+# Publiez votre changement
+git push origin <nom-de-votre-feature-branch>
 --
 
-== CI avec PRs
+== Exercice Pull Request: Ouvrez la PR
 
-* On a causé des embouts du tuyau, causons du tuyau !
-* Events de PR
+* Rendez vous sur la page de votre projet
+* Sélectionnez votre branch dans le menu déroulant "branches  en haut a gauche.
+* Cliquez ensuite sur le bouton ouvrir une pull request
+* Remplissez le contenu de votre PR (titre, description, labels) et validez.
 
-// Suite : projet 1.1
+== Exercice Pull Request: Relisez votre PR reçu
+
+* Vous devriez avoir reçu une PR de votre binôme
+* Relisez le changement de la PR
+* Effectuez quelques commentaires (bonus: utilisez la suggestion de changements)
+* Si elle vous convient, mergez la pull request dans votre dépôt.
