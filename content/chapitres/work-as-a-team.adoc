@@ -177,14 +177,12 @@ git push origin <nom-de-votre-feature-branch>
 
 image:pr.png[]
 
-== Validations d'une PR
-
 == Revue de code ?
 
 * Validation par un ou plusieur pairs (technique et non technique) des changements
-* Relecture depuis github (ou depuis l'environement de poste du developpeur)
+* Relecture depuis github (ou depuis le poste du developpeur)
 * Chaque relecteur emet des commentaires // suggestions de changement
-* Quand un relecteur est satisfait d'un le changement, il l'approuve
+* Quand un relecteur est satisfait d'un changement, il l'approuve
 
 == !
 
@@ -194,6 +192,13 @@ image:pr.png[]
 * En tant que relecteur, **soyez respectueux** du travail effectué, même si celui ci comporte des erreurs ou ne correspond pas à vos attentes.
 
 💡 Astuce: link:https://github.com/franckverrot/clamav-client/pull/12#discussion_r526222319[Proposez des solutions] plutôt que simplement pointer les problèmes.
+
+== Exercice: Relisez votre PR reçue !
+
+* Vous devriez avoir reçu une PR de votre binôme :-)
+* Relisez le changement de la PR
+* Effectuez quelques commentaires (bonus: utilisez la suggestion de changements)
+* Si elle vous convient, mergez la pull request dans votre dépôt.
 
 == Validation automatisée
 
@@ -217,10 +222,3 @@ Ces "checks" peuvent êtres executés par votre moteur de CI ou des outils exter
 
 [.small]
 Même si le linter ilécon, même si on a la flemme et sépanou qui avons cassé le CI.
-
-== Exercice: Relisez votre PR reçue !
-
-* Vous devriez avoir reçu une PR de votre binôme :-)
-* Relisez le changement de la PR
-* Effectuez quelques commentaires (bonus: utilisez la suggestion de changements)
-* Si elle vous convient, mergez la pull request dans votre dépôt.
