@@ -25,7 +25,7 @@ image::qrcode.png["QRCode to this presentation",height=150]
 // Chapitre Welcome.adoc
 include::./chapitres/welcome.adoc[leveloffset=1]
 
-== Ca veut dire quoi créer un logiciel ?
+== Ça veut dire quoi créer un logiciel ?
 
 == Savoir ce que l'on veut faire !
 
