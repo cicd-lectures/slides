@@ -14,7 +14,7 @@ image:solo.gif[width="500"]
 == Travailler en équipe ? Une si bonne idée ?
 
 * ... Mais il faut communiquer ?
-* ... Mais tout le monde ne sait pas tout ?
+* ... Mais tout le monde n'a pas les mêmes compétences ?
 * ... Mais tout le monde y code pas pareil ?
 
 == !
@@ -99,7 +99,6 @@ image:remotemulti1.svg[]
 
 == Chacun son propre remote
 
-* Chaque contributeur possède son propre remote
 * La motivation est le contrôle d'accès
 ** Tout le monde peut lire le dépot principal. Personne ne peut écrire desuss.
 ** Tout le monde peut dupliquer le dépot public et écrire sur sa copie.
@@ -118,16 +117,15 @@ Dans la terminologie GitHub:
 * Un fork est un remote copié d'un dépot principal
 ** C'est la où les contributeurs poussent leur branche de travail.
 * Les branches de version (main, staging...) vivent sur le dépot principal
-* La procédure de de ramener un changement d'un fork vers un dépot principal s'appelle une **Pull Request (PR)**.
+* La procédure de ramener un changement d'un fork vers un dépot principal s'appelle une **Pull Request (PR)**.
 
-== La procédure de pull request
+== La procédure de Pull Request
 
-* Objectif:
-** Valider les changements d'un contributeur
-*** technique: est-ce que ça marche ? est-ce maintenable ?
-*** fonctionelle: est-ce que le code fait ce que l'on veux ?
-** Propager la connaissance par la revue de code.
-** Tracer les changements.
+*Objectif* : Valider les changements d'un contributeur
+* Technique : est-ce que ça marche ? est-ce maintenable ?
+* Fonctionnel : est-ce que le code fait ce que l'on veux ?
+* Humain : Propager la connaissance par la revue de code.
+* Méthode : Tracer les changements.
 
 == Anatomie d'une Pull Request sur GitHub
 
@@ -148,21 +146,22 @@ Dans la terminologie GitHub:
 * Validation par un ou plusieurs pair (techniques et non technique) des changements que l'on veut ramener
 * Relecture des changements depuis github (ou depuis l'environement de poste du developpeur)
 * Chaque relecteur emet des commentaires ou des suggestions de changement.
-* Quand un relecteur satisfait d'un le changement, il l'approuve.
+* Quand un relecteur est satisfait d'un le changement, il l'approuve.
 
 == !
 
 * La revue de code est un **exercice difficile** et **potentiellement frustrant** pour les deux parties.
 ** Comme sur Twitter, on est bien à l'abri derrirère son écran ;=)
-* En tant que contributeur, **soyez respecteux** de vos relecteurs, défois votre changement va être refusé et c'est quelquechose de normal.
-* En tant que relecteur, **soyez respectueux** du travail effecuté, même si celui ci comporte des erreurs ou ne correspond pas à ce que vous attendez.
-** Astuce: link:https://github.com/franckverrot/clamav-client/pull/12#discussion_r526222319[Proposez des solutions] plutôt que simplement pointer les problèmes.
+* En tant que contributeur, **soyez respectueux** de vos relecteurs : votre changement peut être refusé et c'est quelque chose de normal.
+* En tant que relecteur, **soyez respectueux** du travail effectué, même si celui ci comporte des erreurs ou ne correspond pas à vos attentes.
+
+💡 Astuce: link:https://github.com/franckverrot/clamav-client/pull/12#discussion_r526222319[Proposez des solutions] plutôt que simplement pointer les problèmes.
 
 == Validation automatisée
 
 **Objectif**: Valider que le changement n'introduit pas de régressions dans le projet
 
-* A chaque fois qu'un nouveau commit est créé dans une PR, une succession de checks sont déclenchés par GitHub
+* A chaque fois qu'un nouveau commit est créé dans une PR, une succession de validations ("checks") sont déclenchés par GitHub
 * Effectue des vérifications automatisées sur un commit de merge entre votre branche cible et la branche de PR
 
 == Quelques exemples
@@ -170,7 +169,7 @@ Dans la terminologie GitHub:
 * Analyse syntaxique du code (lint), pour détecter les erreurs potentielles ou les violations du guide de style
 * Compilation du projet
 * Execution des tests automatisés du projet (unit, integration)
-* Déploiement du projet dans un environnement de test (coucou netlify !)
+* Déploiement du projet dans un environnement de test (coucou Netlify !)
 
 Ces "checks" peuvent êtres executés par votre moteur de CI ou des outils externes.
 
@@ -190,12 +189,12 @@ Nous allons réutiliser les dépots crées dans le chapitre GitHub.
 == Exercice Pull Request: Mise en place
 
 * Trouvez vous un binôme dans le groupe.
-* Rendez vous link:https://docs.google.com/spreadsheets/d/1iWwCiS-jApvfSMETMG22N-wDhxVNvIrR4IoM-v2YYas/edit?usp=sharing[ici] pour enregistrer votre binôme, et indiquez les liens de vos dépots respectifs.
-* Depuis la page du dépot de votre binôme, cliquez en haut à gauche sur le bouton **Fork**.
+* Rendez vous link:https://docs.google.com/spreadsheets/d/1iWwCiS-jApvfSMETMG22N-wDhxVNvIrR4IoM-v2YYas/edit?usp=sharing[sur cette page,window="_blank"] pour enregistrer votre binôme, et indiquez les liens de vos dépôts respectifs.
+* Depuis la page du dépot de votre binôme, cliquez en haut à droite sur le bouton **Fork**.
 
 == Exercice Pull Request: Faites votre changement
 
-Accédez à link:https://gitpod.io#https://github.com/cicd-lectures/demoapp[l'environnement de travail], puis depuis le terminal jouez les commandes suivantes:
+Accédez à link:https://gitpod.io#https://github.com/cicd-lectures/demoapp[l'environnement GitPod,window="_blank"], puis depuis le terminal jouez les commandes suivantes:
 
 [source,bash]
 --
@@ -211,14 +210,14 @@ git checkout -b <nom-de-votre-feature-branch>
 # (bonus si c'est rigolo :p)
 # Et comittez le ;)
 
-# Publiez votre changement
+# Publiez votre changement sur votre remote "forké"
 git push origin <nom-de-votre-feature-branch>
 --
 
 == Exercice Pull Request: Ouvrez la PR
 
 * Rendez vous sur la page de votre projet
-* Sélectionnez votre branch dans le menu déroulant "branches  en haut a gauche.
+* Sélectionnez votre branche dans le menu déroulant "branches"  en haut a gauche.
 * Cliquez ensuite sur le bouton ouvrir une pull request
 * Remplissez le contenu de votre PR (titre, description, labels) et validez.
 
