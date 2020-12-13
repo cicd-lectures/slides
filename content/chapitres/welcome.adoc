@@ -40,4 +40,4 @@ image::youreup.gif[width="800"]
 * Un navigateur récent (et décent)
 * Un compte link:https://github.com[GitHub,window="_blank"]
 * Un compte link:https://gitpod.io[GitPod.io,window="_blank"], notre environement de développement
-* On va vous demander de travailler en binôme, commencez à réfléchir avec qui vous souaitez travailler !
+* On va vous demander de travailler en binôme, commencez à réfléchir avec qui vous souhaitez travailler !
