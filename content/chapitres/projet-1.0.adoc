@@ -56,7 +56,7 @@ https://www.netlify.com/[]
 * Dans link:https://gitpod.io#https://github.com/cicd-lectures/demoapp[l'environnement GitPod,window=_blank],
 retournez dans `/workspace/exercice-makefile`
 
-* Initialisez l'environnement pour tuiliser la CLI Netlify :
+* Initialisez l'environnement pour utiliser la CLI Netlify :
 ** `netlify login` (https://docs.netlify.com/cli/get-started/#obtain-a-token-via-the-command-line[Documentation,window=_blank])
 *** Si besoin, choissez "Ouvrir dans une nouvelle fenêtre"
 ** `netlify status` (https://cli.netlify.com/commands/status[Documentation,window=_blank])
@@ -91,7 +91,7 @@ retournez dans `/workspace/exercice-makefile`
 
 * Nous sommes en 2020 et vous tenez la Cantina de Tatooine: COVID, commandes par téléphone, etc. 🤒 🛵
 [.small]
-** Ou le Chaudron Baveur du Chemin de Traverse, le Poney Fringuant à Bree, ou même Paul Bocuse si vous ne vous sentez pas l'âme imaginaire
+** Ou le Chaudron Baveur du Chemin de Traverse, le Poney Fringuant à Bree, ou même Paul Bocuse si vous ne vous sentez pas l'âme imaginaire !
 
 * Votre projet c'est de délivrer site web contenant le menu de la Cantina
 
