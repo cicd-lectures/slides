@@ -37,7 +37,7 @@ Faire en sorte que le CI execute un job différent en fonction du type d'événe
 
 == Projet 1.1.1 : Continuous delivery vs Continous deployement
 
-* Défois il n'est pas forcément bon de déployer automatiquement la branche main
+* Il n'est pas toujours adapté de déployer automatiquement la branche `main`
 * Vous décidez donc de changer votre job pour qu'il ne déploie que sur un *tag*
 
 // == Projet 1.1 : Plus loin
