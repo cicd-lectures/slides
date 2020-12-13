@@ -1,8 +1,16 @@
 
 = Projet 1.1 : Contribuer au Menu
 
-* On reprend le projet 1.0 et on veut pouvoir contribuer au contenu
-avec validation du "chef cuisinier"
+Open sourcer le projet 1.0 !
+
+== Règles du jeu
+
+* Chaque contributeur externe pourra proposer des changements au menu
+* Le dépot du menu doit être en lecture publique.
+* Seul le mainteneur du menu (vous!) peut écrire dessus.
+* L'objectif:
+** Faire en sorte que pour chaque PR ouverte sur le dépot le contenu du menu soit validé par un job de CI
+** Ce workflow va valider que le HTML généré suite au changement est "correct"
 
 == Challenge : Tester du HTML
 
@@ -19,10 +27,18 @@ make main.html && linkchecker --check-extern ./main.html
 
 == Projet 1.1 : Consigne
 
-* Si PR ou branche, alors buid + test uniquement
-* Si branch main, alors build + test + deploy
+Faire en sorte que le CI execute un job différent en fonction du type d'événement:
 
-GO GO GO
+* Si c'est un commit d'une PR: build + test uniquement
+* Si un nouveau commit est poussé sur main: build + test + deploy
+* Plusieurs options:
+** Un seul workflow avec un link:https://docs.github.com/en/free-pro-team@latest/actions/reference/workflow-syntax-for-github-actions#jobsjob_idstepsif[step conditionel]
+** Un link:https://docs.github.com/en/free-pro-team@latest/actions/reference/workflow-syntax-for-github-actions#about-yaml-syntax-for-workflows[workflow specifique]
+
+== Projet 1.1.1 : Continuous delivery vs Continous deployement
+
+* Il n'est pas toujours adapté de déployer automatiquement la branche `main`
+* Vous décidez donc de changer votre job pour qu'il ne déploie que sur un *tag*
 
 // == Projet 1.1 : Plus loin
 // * Verrouiler branche main ?

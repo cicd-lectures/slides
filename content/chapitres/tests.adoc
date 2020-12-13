@@ -383,7 +383,7 @@ Implémentation d'une requête HTTP par une methode java.
 == UserRepository
 
 * Transforme un appel java en une requête à la base de données
-** SQL, PSQL, CQL, JSON (MongoDB, Elastisearch...)
+** SQL, PL/SQL, CQL, JSON (MongoDB, Elastisearch...)
 * Transforme la réponse de la base de donnée en objets java
 
 == Base de données
