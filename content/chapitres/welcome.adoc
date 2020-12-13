@@ -1,0 +1,43 @@
+[{invert}]
+= Bonjour !
+
+[{invert}]
+== Damien DUPORTAL
+
+* Freelancer
+* Consultant @ link:https://www.ovh.com/fr/[OVHCloud]
+
+* Me contacter :
+** +++<span class="fa fa-envelope"></span>+++ damien.duportal+pro <chez> gmail.com
+** link:https://www.linkedin.com/in/damien-duportal-ab70b524/[+++<span class="fab fa-linkedin"></span>+++ Damien Duportal,window=_blank]
+** link:https://twitter.com/DamienDuportal[+++<span class="fab fa-twitter"></span>+++ @DamienDuportal,window=_blank]
+
+[{invert}]
+== Julien LEVESY
+
+* Senior Software Engineer @ link:https://www.upfluence.com/fr/[Upfluence]
+
+* Me contacter :
+** +++<span class="fa fa-envelope"></span>+++ jlevesy <chez> gmail.com
+** link:https://www.linkedin.com/in/julien-levesy-5b80ab149/[+++<span class="fab fa-linkedin"></span>+++ Julien Levesy,window=_blank]
+** link:https://twitter.com/jlevesy[+++<span class="fab fa-twitter"></span>+++ @jlevesy,window=_blank]
+** link:https://github.com/jlevesy[+++<span class="fab fa-github"></span>+++ @jlevesy,window=_blank]
+
+== Et vous ?
+
+image::youreup.gif[width="400"]
+
+== A propos du cours
+
+* On s'est adaptés à la situation et à voulu faire quelque chose d'interactif
+* Il y aura donc une alternance de théorie et de pratique
+* C'est la première fois qu'on le donne, il risque d'y avoir des soucis, be kind :-)
+[.small]
+** N'hésitez pas à ouvrir des PRs si vous en voyez (wink wink)
+
+== Outils necessaires
+
+* Un navigateur récent
+* Un compte link:https://github.com[GitHub]
+* Un compte link:https://gitpod.io[GitPod.io], notre environement de développement
+* On va vous demander de travailler en binôme, commencez à réfléchir avec qui vous souaitez travailler !

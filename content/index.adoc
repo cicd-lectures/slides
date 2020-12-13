@@ -22,47 +22,12 @@ image::qrcode.png["QRCode to this presentation",height=150]
 * Pour avoir une vue globale : utiliser la touche "o" (pour "*Overview*")
 * Pour voir les notes de l'auteur : utilisez la touche "s" (pour "*Speaker* notes")
 
-[{invert}]
-== Bonjour !
+// Chapitre Welcome.adoc
+include::./chapitres/welcome.adoc[leveloffset=1]
 
-[{invert}]
-=== Damien DUPORTAL
+== Ca veut dire quoi créer un logiciel ?
 
-* Freelancer
-* Consultant @ link:https://www.ovh.com/fr/[OVHCloud]
-
-* Me contacter :
-** +++<span class="fa fa-envelope"></span>+++ damien.duportal+pro <chez> gmail.com
-** link:https://www.linkedin.com/in/damien-duportal-ab70b524/[+++<span class="fab fa-linkedin"></span>+++ Damien Duportal,window=_blank]
-** link:https://twitter.com/DamienDuportal[+++<span class="fab fa-twitter"></span>+++ @DamienDuportal,window=_blank]
-
-[{invert}]
-=== Julien LEVESY
-
-* Señor Software Engineer @ link:https://www.upfluence.com/fr/[Upfluence]
-
-* Me contacter :
-** +++<span class="fa fa-envelope"></span>+++ jlevesy <chez> gmail.com
-** link:https://www.linkedin.com/in/julien-levesy-5b80ab149/[+++<span class="fab fa-linkedin"></span>+++ Julien Levesy,window=_blank]
-** link:https://twitter.com/jlevesy[+++<span class="fab fa-twitter"></span>+++ @jlevesy,window=_blank]
-** link:https://github.com/jlevesy[+++<span class="fab fa-github"></span>+++ @jlevesy,window=_blank]
-
-=== Et vous ?
-[.left.text-center]
-image::commitstrip.png[width="400"]
-
-== Au Menu
-
-1. De la feuille blanche au premier utilisateur.
-2. Projet n°1: Site web de restaurant
-3. Du premier utilisateur au prochain Netflix.
-4. Projet n°2: Menus "as a service".
-
-== Partie I: De la feuille blanche au premier utilisateur
-
-Concrètement, ça veut dire quoi créer un logiciel ?
-
-== Savoir ce que l'on veut faire!
+== Savoir ce que l'on veut faire !
 
 [.notes]
 --
