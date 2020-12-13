@@ -126,6 +126,8 @@ Dans la terminologie GitHub:
 * Rendez vous link:https://docs.google.com/spreadsheets/d/1iWwCiS-jApvfSMETMG22N-wDhxVNvIrR4IoM-v2YYas/edit?usp=sharing[sur cette page,window="_blank"] pour enregistrer votre binôme, et indiquez les liens de vos dépôts respectifs.
 * Depuis la page du dépot de votre binôme, cliquez en haut à droite sur le bouton **Fork**.
 
+image:fork.png[]
+
 == La procédure de Pull Request
 
 *Objectif* : Valider les changements d'un contributeur
@@ -173,17 +175,16 @@ git push origin <nom-de-votre-feature-branch>
 * Cliquez ensuite sur le bouton ouvrir une pull request
 * Remplissez le contenu de votre PR (titre, description, labels) et validez.
 
-== Validations d'une PR
+image:pr.png[]
 
-* Revue de code
-* Validation automatisée
+== Validations d'une PR
 
 == Revue de code ?
 
-* Validation par un ou plusieurs pair (techniques et non technique) des changements que l'on veut ramener
-* Relecture des changements depuis github (ou depuis l'environement de poste du developpeur)
-* Chaque relecteur emet des commentaires ou des suggestions de changement.
-* Quand un relecteur est satisfait d'un le changement, il l'approuve.
+* Validation par un ou plusieur pairs (technique et non technique) des changements
+* Relecture depuis github (ou depuis l'environement de poste du developpeur)
+* Chaque relecteur emet des commentaires // suggestions de changement
+* Quand un relecteur est satisfait d'un le changement, il l'approuve
 
 == !
 
@@ -206,7 +207,7 @@ git push origin <nom-de-votre-feature-branch>
 * Analyse syntaxique du code (lint), pour détecter les erreurs potentielles ou les violations du guide de style
 * Compilation du projet
 * Execution des tests automatisés du projet (unit, integration)
-* Déploiement du projet dans un environnement de test (coucou Netlify !)
+* Déploiement du projet dans un environnement de test (coucou Gitpod.io ou Netlify !)
 
 Ces "checks" peuvent êtres executés par votre moteur de CI ou des outils externes.
 
@@ -217,7 +218,7 @@ Ces "checks" peuvent êtres executés par votre moteur de CI ou des outils exter
 [.small]
 Même si le linter ilécon, même si on a la flemme et sépanou qui avons cassé le CI.
 
-== Exercice Pull Request: Relisez votre PR reçue
+== Exercice: Relisez votre PR reçue !
 
 * Vous devriez avoir reçu une PR de votre binôme :-)
 * Relisez le changement de la PR
