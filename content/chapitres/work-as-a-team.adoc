@@ -119,9 +119,17 @@ Dans la terminologie GitHub:
 * Les branches de version (main, staging...) vivent sur le dépot principal
 * La procédure de ramener un changement d'un fork vers un dépot principal s'appelle une **Pull Request (PR)**.
 
+== Exercice: Créez un fork
+
+* Nous allons vous  faire forker les dépots créés dans le chapitre GitHub.
+* Trouvez vous un binôme dans le groupe.
+* Rendez vous link:https://docs.google.com/spreadsheets/d/1iWwCiS-jApvfSMETMG22N-wDhxVNvIrR4IoM-v2YYas/edit?usp=sharing[sur cette page,window="_blank"] pour enregistrer votre binôme, et indiquez les liens de vos dépôts respectifs.
+* Depuis la page du dépot de votre binôme, cliquez en haut à droite sur le bouton **Fork**.
+
 == La procédure de Pull Request
 
 *Objectif* : Valider les changements d'un contributeur
+
 * Technique : est-ce que ça marche ? est-ce maintenable ?
 * Fonctionnel : est-ce que le code fait ce que l'on veux ?
 * Humain : Propager la connaissance par la revue de code.
@@ -136,12 +144,41 @@ Dans la terminologie GitHub:
 * **Labels**: meta informations permettant de suivre le type de la PR (bugfix, feature?)
 * **Historique de commit**: Lors d'une pull request, une attention particulière doit être portée aux commits (bien nommés, atomiques), c'est un outil aidant à la relecture!
 
-== Outils à disposition
+== Exercice: faites votre changement sur votre fork
+
+Accédez à link:https://gitpod.io#https://github.com/cicd-lectures/demoapp[l'environnement GitPod,window="_blank"], puis depuis le terminal jouez les commandes suivantes:
+
+[source,bash]
+--
+cd /workspace/
+
+# Clonez votre fork
+git clone <url_de_votre_fork>
+
+# Créez votre feature branch
+git checkout -b <nom-de-votre-feature-branch>
+
+# Changez le readme ou ajoutez un nouveau fichier.
+# (bonus si c'est rigolo :p)
+# Et comittez le ;)
+
+# Publiez votre changement sur votre remote "forké"
+git push origin <nom-de-votre-feature-branch>
+--
+
+== Exercice: Ouvrez votre PR
+
+* Rendez vous sur la page de votre projet
+* Sélectionnez votre branche dans le menu déroulant "branches"  en haut a gauche.
+* Cliquez ensuite sur le bouton ouvrir une pull request
+* Remplissez le contenu de votre PR (titre, description, labels) et validez.
+
+== Validations d'une PR
 
 * Revue de code
 * Validation automatisée
 
-== Revue de code ? Kézako ?
+== Revue de code ?
 
 * Validation par un ou plusieurs pair (techniques et non technique) des changements que l'on veut ramener
 * Relecture des changements depuis github (ou depuis l'environement de poste du developpeur)
@@ -180,50 +217,9 @@ Ces "checks" peuvent êtres executés par votre moteur de CI ou des outils exter
 [.small]
 Même si le linter ilécon, même si on a la flemme et sépanou qui avons cassé le CI.
 
-== Exercice Pull request
+== Exercice Pull Request: Relisez votre PR reçue
 
-Effectuez une contribution sur un dépot d'un de vos camarades.
-
-Nous allons réutiliser les dépots crées dans le chapitre GitHub.
-
-== Exercice Pull Request: Mise en place
-
-* Trouvez vous un binôme dans le groupe.
-* Rendez vous link:https://docs.google.com/spreadsheets/d/1iWwCiS-jApvfSMETMG22N-wDhxVNvIrR4IoM-v2YYas/edit?usp=sharing[sur cette page,window="_blank"] pour enregistrer votre binôme, et indiquez les liens de vos dépôts respectifs.
-* Depuis la page du dépot de votre binôme, cliquez en haut à droite sur le bouton **Fork**.
-
-== Exercice Pull Request: Faites votre changement
-
-Accédez à link:https://gitpod.io#https://github.com/cicd-lectures/demoapp[l'environnement GitPod,window="_blank"], puis depuis le terminal jouez les commandes suivantes:
-
-[source,bash]
---
-cd /workspace/
-
-# Clonez votre fork
-git clone <url_de_votre_fork>
-
-# Créez votre feature branch
-git checkout -b <nom-de-votre-feature-branch>
-
-# Changez le readme ou ajoutez un nouveau fichier.
-# (bonus si c'est rigolo :p)
-# Et comittez le ;)
-
-# Publiez votre changement sur votre remote "forké"
-git push origin <nom-de-votre-feature-branch>
---
-
-== Exercice Pull Request: Ouvrez la PR
-
-* Rendez vous sur la page de votre projet
-* Sélectionnez votre branche dans le menu déroulant "branches"  en haut a gauche.
-* Cliquez ensuite sur le bouton ouvrir une pull request
-* Remplissez le contenu de votre PR (titre, description, labels) et validez.
-
-== Exercice Pull Request: Relisez votre PR reçu
-
-* Vous devriez avoir reçu une PR de votre binôme
+* Vous devriez avoir reçu une PR de votre binôme :-)
 * Relisez le changement de la PR
 * Effectuez quelques commentaires (bonus: utilisez la suggestion de changements)
 * Si elle vous convient, mergez la pull request dans votre dépôt.
