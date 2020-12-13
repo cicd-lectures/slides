@@ -1,48 +1,108 @@
 
 [{invert}]
-= Projet 1.0 : Menus de la cantina de Tatooine
+= Projet 1.0
 
-* Votre projet c'est de délivrer un site web d'un menu pour la Cantina de Tatoine, en ces temps de covid.
-* Introduction a github et au github actions ?
-* Votre production: netlify, creezvousuncomptetoussa.
-* yaml yaml yaml
-* Votre mission si vous l'acceptez: écrire un workflow github qui met en production un siteoueb a chaque fois qu'un changement est mergé sur main.
+Menu de la Cantina de Tatooine
 
-== Projet 1.0 : Code source
+image::cantina.jpg[width=800]
 
-Nya nya <source> -> hugo -> HTML+CSS+JS
+[{invert}]
+== Netlify
 
-Quel est le livrable ? Définition la production pour le savoir
+Fichier `index.html` cherche environment de production pour relation longue durée
 
-== Projet 1.0 : Production
+== Rappel
 
-Comment héberger un site web de type statique (HTML+CSS etc.)
+* On a vu comment générér du HTML depuis un format Asciidoctor ✅
+* Question: Quel est le livrable final ? Une archive tarball, un fichier `index.html`, un dossier ?
+
+=> Dépends de l'environment de production utilisé
+
+== Production pour du HTML ?
+
+* *But* : héberger un site web de type statique (HTML+CSS etc.)
+
+* Il faut un service qui permet :
+** (MUST) De servir des fichier statiques via HTTP
+** (NICE) Active le HTTPS avec des certificats et des noms de domaines
 
 == Say Hello to Netlify
 
-Intro à Netlify
+image::Netlify_logo.svg[width=400]
 
-== Exercice Netlify
+https://www.netlify.com/[]
 
-* Depuis le dépôt de l'exercice précédent
-* On ajoute un hugo de base
-* Créer un projet Netlify + config hugo
-* Pousser sur master => Hop magie
+== Netlify : Kézako ?
+
+* Platforme hébergée dans le cloud
+* Offres de services gratuites et payantes en fonction des besoins
+** L'offre gratuite est suffisante pour notre besoin
+* Concept de `git push` -> `netlify build` -> `netlify deploy`
+** Déjà vu ?
 
 == Github Actions vs. Netlify
 
-* Netlify est une forme de CI spécialisé
-* Github action peut aussi pousser dans Netlify (CLI, etc.)
-* Problème : lequel choisir ?
-** La question elle est vite répondue jeune étudiant-entrepreneur : que faire si le test échoue ?
-** Donc Github Actions
+* Netlify est une forme de CI/CD spécialisé
+* Github Actions peut aussi pousser dans Netlify (CLI, etc.)
+* Lequel choisir ?
+** La question elle est vite répondue jeune étudiant-entrepreneur : Github Actions
+** Pourquoi ? Pour rester homogènes et bénéficier des outils de GitHub
 
-== Challenge : tester du HTML
+== Préparation : CLI Netlify
 
-<Insert La commande magique pour tester index.html>
+* Authentifiez-vous sur https://www.netlify.com/[Netlify] (bouton "Log In" puis "GitHub")
+** ⚠️ La 1ère fois vous devrez autoriser Nelify à accéder à votre compte GitHub
 
-== Projet 1.0 : Consigne
+* Dans link:https://gitpod.io#https://github.com/cicd-lectures/demoapp[l'environnement GitPod,window=_blank],
+retournez dans `/workspace/exercice-makefile`
 
-Voilà yapuka faire un "Build -> Test -> Deploy" qui se déclenche quand on pousse sur master
+* Initialisez l'environnement pour utiliser la CLI Netlify :
+** `netlify login` (https://docs.netlify.com/cli/get-started/#obtain-a-token-via-the-command-line[Documentation,window=_blank])
+*** Si besoin, choissez "Ouvrir dans une nouvelle fenêtre"
+** `netlify status` (https://cli.netlify.com/commands/status[Documentation,window=_blank])
+** `netlify sites:list` (https://cli.netlify.com/commands/sites[Documentation,window=_blank])
 
-GO GO GO
+== Créer un site avec la CLI Netlify
+
+* Créez un nouveau "site" en suivant les étapes suivantes avec la commande `netlify site:<xxx>` :
+** `netlify sites:list` (https://cli.netlify.com/commands/sites[Documentation,window=_blank])
+** `netlify sites:create` (https://cli.netlify.com/commands/sites[Documentation,window=_blank])
+*** Laissez l'option "Site Name" à vide pour obtenir un nom aléatoire
+
+* Configurez les variables d'environnements pour Netlify:
+** `export NETLIFY_AUTH_TOKEN=XXX` (récupérez `XXX` dans le fichier `~/.netlify/config.json`)
+** `export NETLIFY_SITE_ID=YYY` (récupérez `YYY` à l'aide de la commande `netlify sites:list`)
+
+== Déployez un site avec la CLI Netlify
+
+* Déployez le dossier courant (`./`) contenant au moins un fichier `index.html` dans ce nouveau site
+** `netlify deploy --dir=./dist/` (https://cli.netlify.com/commands/deploy[Documentation,window=_blank])
+** Prévisualisez le site "brouillon" (🇬🇧 "Draft")
+** `netlify deploy --prod --dir=./dist/` (https://cli.netlify.com/commands/deploy[Documentation,window=_blank])
+
+* Testez le processus complet:
+** Modifiez le contenu de `index.adoc`
+** Regénérez le HTML avec la commande `make all`
+** Re-déployez le site sur Netlify et vérifiez que votre changement est présent
+
+== Projet 1.0 : Consignes
+
+=> ⌚️ Il est temps pour vous de tout assembler
+
+* Nous sommes en 2020 et vous tenez la Cantina de Tatooine: COVID, commandes par téléphone, etc. 🤒 🛵
+[.small]
+** Ou le Chaudron Baveur du Chemin de Traverse, le Poney Fringuant à Bree, ou même Paul Bocuse si vous ne vous sentez pas l'âme imaginaire !
+
+* Votre projet c'est de délivrer site web contenant le menu de la Cantina
+
+* Le code source sera hébergé au format Asciidoctor sur un dépôt +++<span class="fab fa-github"></span>+++ GitHub
+
+* Le site web de votre Cantina sera hébergé sur... 🥁 ... image:Netlify_logo.svg[height=30,opts=inline] Netlify (surprise!)
+
+* Votre mission si vous l'acceptez : écrire un workflow github qui met en production
+à chaque fois qu'un changement est poussé sur main. 🚀
+
+[.notes]
+--
+* Si vous êtes joueur•se vous pouvez essayer https://gohugo.io/getting-started/quick-start/[Markdown + `hugo`]
+--

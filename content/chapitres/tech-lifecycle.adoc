@@ -36,15 +36,13 @@ Fabriquons (joyeusement) des pages en HTML
 
 Définissons le livrable :
 
-* Une archive tarball compressée nommé `exemple-make.tar.gz`
-* qui contient un dossier nommé `exemple-make`...
+* Un dossier nommé `dist`...
 * ...avec un fichier `index.html` dedans
 
 [source,bash]
 ----
-$ tar tzf ./exemple-make.tar.gz # tzf: Test Ze (zipped) File
-./exemple-make
-./exemple-make/index.html
+$ ls ./dist/
+index.html
 ----
 
 == Exemple Make : Code source
@@ -55,23 +53,34 @@ $ tar tzf ./exemple-make.tar.gz # tzf: Test Ze (zipped) File
 
 [source,asciidoctor]
 ----
-include::../code-samples/tech-lifecycle/index.adoc[]
+include::../code-samples/tech-lifecycle/main.adoc[]
 ----
 
 == Exemple Make : Asciidoctor -> HTML
 
-* Pour générer un fichier HTML a partir de fichiers au format Asciidoctor :
+=> C'est à vous (dans link:https://gitpod.io#https://github.com/cicd-lectures/demoapp[l'environnement GitPod,window=_blank])
+
+* Créez un nouveau projet nommé `exercice-makefile`
++
+[source,bash]
+mkdir -p /workspace/exercice-makefile && cd /workspace/exercice-makefile
+
+* Ajoutez un nouveau fichier `main.adoc` comme celui de la slide précédente
+
+* Générez un fichier HTML avec la commande `asciidoctor` :
 +
 [source,bash]
 ----
-asciidoctor index.adoc --out-file=./index.html
+$ asciidoctor main.adoc
+$ ls -ltr
+# ...
+main.html
+# ...
 ----
 
-* Essayez par vous-même:
-** Ouvrez link:https://gitpod.io#https://github.com/cicd-lectures/demoapp[l'environnement dans GitPod,window=_blank]
-** Créez un fichier `index.adoc` et remplissez-le avec le contenu donné en exemple dans la slide précédente
-** Essayez la commande de conversion dans le terminal de GitPod
-** Ouvrez le fichier HTML généré dans GitPod, et affichez l'aperçu avec l'icône en haut à droite
+* Affichez le fichier HTML en aperçu
+
+image::gitpod-open-side-preview.png[width=200]
 
 == Exemple Make : Récapépète
 
@@ -96,7 +105,7 @@ cible: dependance
 make clean build
 ----
 
-== Exemple Make : Exemple de Makefile
+== Exemple de Makefile
 
 [source,makefile]
 ----
@@ -121,45 +130,17 @@ make hello # Appelle implicitement "make hello.o" et "make main.o"
 
 == Exemple Make : Makefile - Build
 
-* *But :* on veut générer le HTML en appelant la commande `make index.html`
+* *But :* on veut générer le HTML en appelant la commande `make main.html`
 * Toujours dans link:https://gitpod.io#https://github.com/cicd-lectures/demoapp[l'environnement GitPod,window=_blank],
-supprimez le fichier `index.html` si vous l'avez déjà
-* Créez un fichier `Makefile` qui contient une cible `index.html` et qui appelle la commande `asciidoctor`:
+supprimez le fichier `main.html` si vous l'avez déjà
+* Créez un fichier `Makefile` qui contient une cible `main.html` et qui appelle la commande `asciidoctor`:
 +
 [source,Makefile]
 ----
 include::../code-samples/tech-lifecycle/Makefile[tags="build"]
 ----
 
-* Essayez avec la commande `make index.html`
-
-[.notes]
---
-=> Le fichier index.adoc doit être présent...
---
-
-== Exercice Make : Makefile - Package
-
-* *But :* on veut générer le livrable en appelant la commande `make example-make.tar.gz`
-* On utilisera la commande `tar czf ./example-make.tar.gz ./index.html`
-* ⚠️ Il y a une **dépendance** sur la cible `index.html` (il faut que `index.html` soit présent)
-
-=> C'est à vous !
-
-== Solution : Makefile - Package
-
-[source,Makefile]
-----
-include::../code-samples/tech-lifecycle/Makefile[tags="build,package"]
-----
-
-[source,bash]
-----
-rm -f index.html example-make.tar.gz
-ls -l # Aucun fichier "index.html" ou "example-make.tar.gz"
-make example-make.tar.gz
-ls -l # 2 nouveaux fichiers "index.html ou "example-make.tar.gz"
-----
+* Essayez avec la commande `make main.html`
 
 == Exemple Make : Makefile Avancé
 
@@ -168,9 +149,10 @@ ls -l # 2 nouveaux fichiers "index.html ou "example-make.tar.gz"
 
 * Pour désactiver ce comportement pour une cible donnée,
 ajoutez ladite cible comme dépendance à la cible spéciale `.PHONY`
+** On peut répéter `.PHONY` plusieurs fois
 
 * Si vous appellez `make` sans argument,
-alors la cible par défaut sera la première executée
+alors la cible par défaut sera la première cible définie
 
 == Exercice Make : Makefile - Clean
 
@@ -183,16 +165,41 @@ alors la cible par défaut sera la première executée
 
 [source,Makefile]
 ----
-include::../code-samples/tech-lifecycle/Makefile[tags="build,package,clean"]
+include::../code-samples/tech-lifecycle/Makefile[tags="build,clean-v1"]
 ----
 
 [source,bash]
 ----
-touch clean # Créer un fichier "clean" bidon
-make example-make.tar.gz
-ls -l # 2 nouveaux fichiers "index.html ou "example-make.tar.gz"
+touch clean # Créez un fichier "clean" bidon
+make main.html
+ls -l # 1 fichier "main.html"
 make clean
-ls -l # Aucun fichier "index.html" ou "example-make.tar.gz"
+ls -l # Aucun fichier "main.html"
+rm -f clean # Nettoyage
+----
+
+== Exercice Make : Makefile - Livrable
+
+* *But :* on veut générer le livrable en appelant la commande `make dist`
+* On utilisera les commandes `mkdir` et `cp` pour cette cible
+* ⚠️ Il y a une **dépendance** sur la cible `main.html`
+* ⚠️ Il faudra sans doute adapter `clean` et `.PHONY`
+
+=> C'est à vous !
+
+== Solution : Makefile - Livrable
+
+[source,Makefile]
+----
+include::../code-samples/tech-lifecycle/Makefile[tags="build,dist,clean-v2"]
+----
+
+[source,bash]
+----
+make clean
+ls -l # Aucun fichier "main.html" ni "dist/index.html"
+make dist
+ls -l # 2 fichiers "main.html et "dist/index.html"
 ----
 
 == Exercice Make : Makefile - All
@@ -206,7 +213,7 @@ ls -l # Aucun fichier "index.html" ou "example-make.tar.gz"
 
 [source,Makefile]
 ----
-include::../code-samples/tech-lifecycle/Makefile[tags="all"]
+include::../code-samples/tech-lifecycle/Makefile[tags="all,!clean-v1"]
 ----
 
 [source,bash]
@@ -223,7 +230,7 @@ ls -l # Aucun fichier "index.html" ou "example-make.tar.gz"
 
 // Diagramme :
 
-// `index.adoc` -(build)-> `index.html` -(TEST?)-> -(package)-> `example-make.tar.gz`
+// `main.adoc` -(build)-> `index.html` -(TEST?)-> -(package)-> `example-make.tar.gz`
 
 // [%step]
 // * Lien HTTP en 404 dans le HTML ?
@@ -235,7 +242,7 @@ ls -l # Aucun fichier "index.html" ou "example-make.tar.gz"
 // // W3C ou lien mort ou les deux ?
 // * But : ajouter une cible Makefile pour tester avant de packager
 // * Vérification:
-// ** Ecrivez un lien HTTP invalide dans `index.adoc`
+// ** Ecrivez un lien HTTP invalide dans `main.adoc`
 // ** Vous ne pouvez pas "packager" (commande doite être en erreur) avec `make all`
 
 // == Solution : Tester du HTML
@@ -318,9 +325,14 @@ mvn clean compile -X # On peut appeller plusieurs phases et passer des options
 
 == Exemple Maven : C'est à vous !
 
-=> C'est à vous :
 
-* Ouvrez link:https://gitpod.io#https://github.com/cicd-lectures/demoapp[l'environnement de démo dans GitPod,window=_blank]
+=> C'est à vous (dans link:https://gitpod.io#https://github.com/cicd-lectures/demoapp[l'environnement GitPod,window=_blank])
+
+* Créez un nouveau projet nommé `exercice-maven`
++
+[source,bash]
+mkdir -p /workspace/exercice-maven && cd /workspace/exercice-maven
+
 * On va nettoyer ce qu'on a déjà produit:
 +
 [source,bash]

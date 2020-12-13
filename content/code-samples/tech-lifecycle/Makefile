@@ -1,23 +1,29 @@
 # tag::all[]
 .PHONY: all
-all: clean example-make.tar.gz
+all: clean dist
 
 # tag::build[]
-index.html:
-  asciidoctor index.adoc --out-file=$(CURDIR)/index.html
-  # $(CURDIR) est une variable Make désignant le chemin vers le dossier contenant le Makefile
+main.html:
+	asciidoctor main.adoc
 
 # end::build[]
-# tag::package[]
-example-make.tar.gz: index.html
-  # czf: Create Ze (gZipped) File
-  tar czf $(CURDIR)/example-make.tar.gz $(CURDIR)/index.html
+# tag::dist[]
+.PHONY: dist
+dist: main.html
+	mkdir -p ./dist
+	cp ./main.html ./dist/index.html
 
-# end::package[]
-# tag::clean[]
+# end::dist[]
+# tag::clean-v1[]
 .PHONY: clean
 clean:
-  rm -f $(CURDIR)/example-make.tar.gz $(CURDIR)/index.html
+	rm -f ./main.html
 
-# end::clean[]
+# end::clean-v1[]
+# tag::clean-v2[]
+.PHONY: clean
+clean:
+	rm -rf ./dist/ ./main.html
+
+# end::clean-v2[]
 # end::all[]
