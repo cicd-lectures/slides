@@ -72,7 +72,8 @@ Source : https://git-scm.com/book/fr/v2/D%C3%A9marrage-rapide-Rudiments-de-Git#_
 
 == Exercice avec Git - 1.1
 
-Dossier de travail -> Historique
+* Accédez à link:https://gitpod.io#https://github.com/cicd-lectures/demoapp[l'environnement de travail]
+* Rendez vous dans le répertoire `/workspace` (`cd /workspace`)
 
 * Créer un dossier vide nommé `projet-vcs-1`
 ** Est-ce qu'il y a un dossier `git.` ?
@@ -96,8 +97,6 @@ $ git status # Succès avec un message "On branch master No commits yet"
 --
 
 == Exercice avec Git - 1.2
-
-Dossier de travail -> Zone d'indexation -> Historique
 
 * Créer un fichier `README.md` dedans avec un titre et vos nom et prénoms
 ** Essayez la commande `git status` ?

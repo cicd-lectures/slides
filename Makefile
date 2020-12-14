@@ -1,7 +1,7 @@
 CURRENT_UID = $(shell id -u):$(shell id -g)
 DIST_DIR ?= $(CURDIR)/dist
 
-REPOSITORY_URL = https://github.com/slides/cicd-lectures
+REPOSITORY_URL = https://github.com/cicd-lectures/slides
 PRESENTATION_URL = https://gifted-albattani-3bc8a1.netlify.app/
 
 export PRESENTATION_URL CURRENT_UID REPOSITORY_URL
