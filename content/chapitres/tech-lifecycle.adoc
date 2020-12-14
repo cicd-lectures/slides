@@ -326,20 +326,21 @@ mvn clean compile -X # On peut appeller plusieurs phases et passer des options
 == Exemple Maven : C'est à vous !
 
 
-=> C'est à vous (dans link:https://gitpod.io#https://github.com/cicd-lectures/demoapp[l'environnement GitPod,window=_blank])
+=> C'est à vous (dans link:https://gitpod.io#https://github.com/cicd-lectures/demoapp[l'environnement GitPod,window="_blank"])
 
-* Créez un nouveau projet nommé `exercice-maven`
+* Positionnez-vous dans le projet `demoapp`, sur la branche
 +
 [source,bash]
-mkdir -p /workspace/exercice-maven && cd /workspace/exercice-maven
+cd /workspace/demoapp
 
-* On va nettoyer ce qu'on a déjà produit:
+* On va "nettoyer" ce qu'on a déjà produit:
 +
 [source,bash]
 ----
 mvn clean # Supprime le contenu du dossier `./target
-ls -l ./target
+ls -l ./target # No such file or directory
 ----
+
 * ⚠️ La phase `clean` est spéciale et n'est jamais appellée par les autres phases
 
 == Exemple Maven : Compiler
@@ -353,13 +354,6 @@ mvn compile
 ls -l ./target # Après
 ----
 
-[.notes]
---
-* Résolution des dépendances
-* Pré-traitement du code source
-* Compilation des classes
---
-
 == Exemple Maven : Tests Unitaires
 
 * But: Compilez le code source et visualisez le contenu du dossier `target` :
@@ -372,14 +366,6 @@ ls -l ./target # Après
 ls -l ./target/surefire-reports
 ----
 
-[.notes]
---
-* Exécute le goal `compile`
-* Compilation des tests unitaires
-* Exécution des tests unitaires
-* Rapports de tests dans *`./target/surefire-reports`*
---
-
 == Exemple Maven : Fabriquer le livrable
 
 * But: Générez le livrable au format `.jar` :
@@ -390,12 +376,6 @@ ls -l ./target # Avant
 mvn package
 ls -l ./target # Après
 ----
-
-[.notes]
---
-* Exécute les goals `compile` et `test`
-* Paquetage de l'application
---
 
 == Exercice Maven : Tests d'intégration
 
@@ -410,29 +390,3 @@ ls -l ./target # Avant
 mvn verify
 ls -l ./target/failsafe-reports
 ----
-
-[.notes]
---
-* Exécute `compile`, `test` et `package`
-* Compile et exécute les tests d'intégration
-sur l'application empaquetée
-* Rapport de tests dans *`./target/failsafe-reports`*
---
-
-// == Exemple Maven : Exécution du livrable
-
-// * Spring Boot demo exécutée comme un *"Über-Jar"*
-// * Exécution avec la commande java:
-// +
-// [source,subs="attributes",bash]
-// ----
-// java -jar ./target/demoapp.jar
-// # Utiliser CTRL-C pour arrêter
-// ----
-// * Ouvrir une autre instance de *DevBox* (link:{devbox-url}[Click Me, window=_blank]) et vérifier
-// link:http//localhost:8080[] avec `curl`
-// +
-// [source,subs="attributes",bash]
-// ----
-// curl -v http://localhost:8080/
-// ----
