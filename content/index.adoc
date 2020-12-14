@@ -134,10 +134,6 @@ include::./chapitres/maven-advanced.adoc[leveloffset=1]
 // Projet 2.0
 include::./chapitres/projet-2.0.adoc[leveloffset=1]
 
-== Sources
-
-* link:http//www.wikipedia.fr[Wikipedia]
-
 [{invert}]
 == Merci !
 
