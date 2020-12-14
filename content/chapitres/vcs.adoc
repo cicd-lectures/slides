@@ -72,39 +72,40 @@ Source : https://git-scm.com/book/fr/v2/D%C3%A9marrage-rapide-Rudiments-de-Git#_
 
 == Exercice avec Git - 1.1
 
-* Accédez à link:https://gitpod.io#https://github.com/cicd-lectures/demoapp[l'environnement de travail]
+* Accédez à link:https://gitpod.io#https://github.com/cicd-lectures/demoapp[l'environnement de travail,window="_blank"]
 * Rendez vous dans le répertoire `/workspace` (`cd /workspace`)
 
-* Créer un dossier vide nommé `projet-vcs-1`
-** Est-ce qu'il y a un dossier `git.` ?
+* Créez un dossier vide nommé `projet-vcs-1` (`mkdir -p ./projet-vcs-1/`)
+** Est-ce qu'il y a un dossier `.git/` ?
 ** Essayez la commande `git status` ?
 
-* Initialiser le dépôt git avec `git init`
-** Est-ce qu'il y a un dossier `git.` ?
+* Initialisez le dépôt git avec `git init`
+** Est-ce qu'il y a un dossier `.git/` ?
 ** Essayez la commande `git status` ?
 
 == Solution de l'exercice avec Git - 1.1
 
 [source,bash]
 --
-$ mkdir -p ./projet-vcs-1/
-$ cd ./projet-vcs-1/
-$ ls -la # Pas de dossier .git
-$ git status # Erreur "fatal: not a git repository"
-$ git init ./
-$ ls -la # On a un dossier .git
-$ git status # Succès avec un message "On branch master No commits yet"
+cd /workspace
+mkdir -p ./projet-vcs-1/
+cd ./projet-vcs-1/
+ls -la # Pas de dossier .git
+git status # Erreur "fatal: not a git repository"
+git init ./
+ls -la # On a un dossier .git
+git status # Succès avec un message "On branch master No commits yet"
 --
 
 == Exercice avec Git - 1.2
 
-* Créer un fichier `README.md` dedans avec un titre et vos nom et prénoms
+* Créez un fichier `README.md` dedans avec un titre et vos nom et prénoms
 ** Essayez la commande `git status` ?
 
-* Ajouter le fichier à la zone d'indexation à l'aide de la commande `git add (...)`
+* Ajoutez le fichier à la zone d'indexation à l'aide de la commande `git add (...)`
 ** Essayez la commande `git status` ?
 
-* Créer un commit qui ajoute le fichier `README.md` avec un message,
+* Créez un commit qui ajoute le fichier `README.md` avec un message,
 à l'aide de la commande `git commit -m <message>`
 ** Essayez la commande `git status` ?
 
@@ -112,23 +113,23 @@ $ git status # Succès avec un message "On branch master No commits yet"
 
 [source,bash]
 --
-$ echo "# Read Me\n\nObi Wan" > ./README.md
-$ git status # Message "Untracked file"
-$ git add ./README.md
-$ git status # Message "Changes to be committed"
-$ git commit -m "Ajout du README au projet"
-$ git status  # Message "nothing to commit, working tree clean"
+echo "# Read Me\n\nObi Wan" > ./README.md
+git status # Message "Untracked file"
+git add ./README.md
+git status # Message "Changes to be committed"
+git commit -m "Ajout du README au projet"
+git status  # Message "nothing to commit, working tree clean"
 --
 
 == Terminologie de Git - Diff et changeset
 
 *diff:* un ensemble de lignes "changées" sur un fichier donné
 
-image::diff.png[width=800]
+image::diff.png[width=600]
 
 *changeset:* un ensemble de "diff" (donc peut couvrir plusieurs fichiers)
 
-image::changeset.png[height=300]
+image::changeset.png[height=200]
 
 == Terminologie de Git - Commit
 
@@ -150,15 +151,19 @@ image::scm-basics-history.png[]
 
 * Modifier du contenu dans `README.md` et afficher le diff
 
+* Annulez ce changement sur `README.md`
 
 == Solution de l'exercice avec Git - 2
 
 [source,bash]
 --
-$ git log
-$ git show # Show the "HEAD" commit
-$ echo "# Read Me\n\nObi Wan Kenobi" > ./README.md
-$ git diff
+git log
+git show # Show the "HEAD" commit
+echo "# Read Me\n\nObi Wan Kenobi" > ./README.md
+git diff
+git status
+git checkout -- README.md
+git status
 --
 
 == Terminologie de Git - Branche
@@ -180,11 +185,11 @@ image::scm-branches.png[caption="SCM branches"]
 
 [source,bash]
 --
-$ git branch feature/html && git checkout feature/html
+git branch feature/html && git checkout feature/html
 # Ou git checkout -b feature/html
-$ echo '<h1>Hello</h1>' > ./index.html
-$ git add ./index.html && git commit -m "Ajout d'une page HTML par défaut"
-$ git log --graph
+echo '<h1>Hello</h1>' > ./index.html
+git add ./index.html && git commit -m "Ajout d'une page HTML par défaut"
+git log --graph
 # git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
 --
 
@@ -205,24 +210,11 @@ image::scm-merge.png[caption="SCM Merge"]
 
 [source,bash]
 --
-$ git checkout master # or git checkout main
-$ git merge `feature/html`
-$ git log --graph
+git checkout master
+git merge feature/html
+git log --graph
 # git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
 --
-
-== Collaboration Flow
-
-image::scm-centralized-flow-how-to.jpg[caption="Centralized SCM Workflow",width=800]
-
-[NOTE.speaker]
-====
-* Defined by collaborators working from a single code base
-** Abstraction of this process is the basis for Trunk based development
-* This pattern is the natural usage of a CVCS like SVN or CVS
-* It is easy to understand and use, and sufficient enough for a lot of cases
-* Collaboration is blocked when centralized server is down or history is broken
-====
 
 == Feature Branch Flow
 
