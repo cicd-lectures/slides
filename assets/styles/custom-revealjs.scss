@@ -238,14 +238,14 @@
   * LINKS
   *********************************************/
  .reveal a {
-   color: #51483D;
+   color: #8b7c69;
    text-decoration: none;
    -webkit-transition: color .15s ease;
    -moz-transition: color .15s ease;
    transition: color .15s ease; }
 
  .reveal a:hover {
-   color: #8b7c69;
+   color: rgb(248, 228, 130);
    text-shadow: none;
    border: none; }
 
@@ -259,8 +259,7 @@
  .reveal section img {
    margin: 15px 0px;
    background: rgba(255, 255, 255, 0.12);
-   border: 0;
-   box-shadow: 0 0 10px rgba(0, 0, 0, 0.15); }
+   border: 0; }
 
  .reveal section img.plain {
    border: 0;

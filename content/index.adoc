@@ -60,9 +60,8 @@ image::cycleenv.png[width="800"]
 ** Reduire le périmètre fonctionel au minimum.
 ** Confronter le logiciel au plus tôt aux utilisateurs.
 ** Refaire des hypothèses basées sur ce que l'on à appris, et recommencer!
-* Accepter le changement.
-** Votre première idée n'est probablement pas la bonne.
-** Il est difficile, voire impossible, de prévoir comment votre logiciel va être utilisé.
+* "Embrasser" le changement
+** Votre logiciel va changer en **continu**
 
 [.notes]
 --
