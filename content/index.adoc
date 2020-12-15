@@ -94,9 +94,6 @@ Et c'est ce que l'on va voir ensemble aujourd'hui!
 // Chapitre VCS - Git
 include::./chapitres/vcs.adoc[leveloffset=1]
 
-// Chapitre Version
-include::./chapitres/version.adoc[leveloffset=1]
-
 // Chapitre Tests
 include::./chapitres/tests.adoc[leveloffset=1]
 
@@ -126,6 +123,9 @@ include::./chapitres/work-as-a-team.adoc[leveloffset=1]
 
 // Projet 1.1
 include::./chapitres/projet-1.1.adoc[leveloffset=1]
+
+// Chapitre Version
+include::./chapitres/version.adoc[leveloffset=1]
 
 // Maven Avancé
 include::./chapitres/maven-advanced.adoc[leveloffset=1]
