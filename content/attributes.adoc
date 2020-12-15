@@ -20,3 +20,5 @@
 :invert: state=invert,background-color="rgb(248, 228, 130)"
 :stylesdir: styles
 :notitle: true
+:revealjs_plugins: ./assets/plugins/revealjs-plugins.js
+:revealjs_plugins_configuration: ./assets/plugins/revealjs-plugins-config.js

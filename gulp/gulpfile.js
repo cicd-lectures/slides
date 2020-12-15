@@ -4,7 +4,6 @@ var tasks_dir_path = './tasks',
     fs = require('fs'),
     path = require('path'),
     gulp = require('gulp'),
-    file = '',
     plugins = {
         asciidoctor: require('@asciidoctor/core')(),
         asciidoctorRevealjs: require('@asciidoctor/reveal.js'),
@@ -33,7 +32,6 @@ var tasks_dir_path = './tasks',
         listen_port: process.env.LISTEN_PORT || 8000,
         livereload_port: process.env.LIVERELOAD_PORT || 35729,
         revealjsPlugins: ["reveal.js-menu","reveal.js-toolbar"],
-        revealJSPluginListFile: '/tmp/revealjs-plugins-list.js',
     };
 plugins.asciidoctorRevealjs.register();
 
