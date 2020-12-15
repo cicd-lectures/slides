@@ -12,3 +12,12 @@ toolbar: {
     help: true,
     pause: true,
 },
+copycode: {
+    copy: "Copy",
+    copied: "Copied!",
+    timeout: 1000,
+    copybg: "orange",
+    copiedbg: "green",
+    copycolor: "black",
+    copiedcolor: "white"
+},

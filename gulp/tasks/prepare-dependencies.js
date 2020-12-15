@@ -76,7 +76,10 @@ module.exports = function (gulp, plugins, current_config) {
         var revealPluginToolbar = gulp.src(current_config.nodeModulesDir + '/reveal.js-toolbar/**/*')
             .pipe(gulp.dest(current_config.distDir + '/reveal.js/plugin/reveal.js-toolbar/'));
 
-        return plugins.mergeStreams(revealPluginMenu, revealPluginToolbar);
+        var revealPluginCopyCode = gulp.src(current_config.scriptsSrcPath + '/*.js')
+            .pipe(gulp.dest(current_config.distDir + '/reveal.js/plugin/reveal.js-copycode/'));
+
+        return plugins.mergeStreams(revealPluginMenu, revealPluginToolbar, revealPluginCopyCode);
 
     });
 };
