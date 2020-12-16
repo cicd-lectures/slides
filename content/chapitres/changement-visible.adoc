@@ -2,14 +2,14 @@
 [{invert}]
 = Rendre son changement visible
 
-Changer le code c'est bien. Mais à qui cela bénéficie t'il ?
+Changer le code c'est bien. Mais à qui cela bénéficie-t-il ?
 
 == Où votre changement est-il visible ?
 
 * Un téléphone
 * Les serveurs de votre client
-* Vos propres serveur
-* Un microcontrolleur dans un satelite
+* Vos propres serveurs
+* Un microcontrôleur dans un satelite
 
 == La Production
 
@@ -55,7 +55,7 @@ C'est facile ! Soyez Attentifs !
 * Déployer les artefacts : `scp ./jar-prod.jar monutilisateur@mamachinedeprod.com:/app/rbinks/jar.jar`
 * Redémarrer mon serveur : `ssh monutilisateur@mamachinedeprod.com -C "systemctl restart binks"`
 
-== Qu'est ce qui peut mal se passer ?
+== Qu'est-ce qui peut mal se passer ?
 
 [%step]
 * Oublier / Inverser une étape
@@ -81,7 +81,7 @@ __
 --
 * Comme l'hygiène corporelle
 ** On se lave les dents, on se brosse les cheveux...
-** Ce qui est important la dedans c'est de le faire régulièrement.
+** Ce qui est important là-dedans c'est de le faire régulièrement.
 --
 
 == Comment automatiser ?
