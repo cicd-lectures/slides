@@ -332,6 +332,8 @@ mvn clean compile -X # On peut appeller plusieurs phases et passer des options
 +
 [source,bash]
 cd /workspace/demoapp
+git fetch
+git checkout full-maven
 
 * On va "nettoyer" ce qu'on a déjà produit:
 +
