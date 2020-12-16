@@ -75,7 +75,11 @@ Source : https://git-scm.com/book/fr/v2/D%C3%A9marrage-rapide-Rudiments-de-Git#_
 * Accédez à link:https://gitpod.io#https://github.com/cicd-lectures/demoapp[l'environnement de travail,window="_blank"]
 * Rendez vous dans le répertoire `/workspace` (`cd /workspace`)
 
-* Créez un dossier vide nommé `projet-vcs-1` (`mkdir -p ./projet-vcs-1/`)
+* Créez un dossier vide nommé `projet-vcs-1` puis positionnez-vous dans ce dossier
++
+[source,bash]
+mkdir -p ./projet-vcs-1/ && cd ./projet-vcs-1/
+
 ** Est-ce qu'il y a un dossier `.git/` ?
 ** Essayez la commande `git status` ?
 
@@ -203,6 +207,7 @@ image::scm-merge.png[caption="SCM Merge"]
 == Exercice avec Git - 4
 
 * Merger la branche `feature/html` dans la branche principale
+** ⚠️ Pensez à utiliser l'option `--no-ff`
 
 * Afficher le graphe correspondant à cette branche avec `git log --graph`
 
@@ -211,7 +216,7 @@ image::scm-merge.png[caption="SCM Merge"]
 [source,bash]
 --
 git checkout master
-git merge feature/html
+git merge --no-ff feature/html
 git log --graph
 # git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
 --
@@ -238,6 +243,7 @@ image::scm-feature-branch-workflow.png[caption="Feature Branch SCM Workflow",lin
 * Code Civil:
 ** https://github.com/steeve/france.code-civil
 ** https://github.com/steeve/france.code-civil/pull/40
+** https://github.com/steeve/france.code-civil/commit/b805ecf05a86162d149d3d182e04074ecf72c066
 
 == Pour aller plus loin avec Git et les VCS...
 

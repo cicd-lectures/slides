@@ -131,6 +131,7 @@ image:remote1.svg[]
 [source, bash]
 --
 git commit --allow-empty -m "Yet another commit"
+git push origin main
 --
 
 == !

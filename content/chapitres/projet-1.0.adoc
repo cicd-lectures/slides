@@ -40,14 +40,6 @@ https://www.netlify.com/[]
 * Concept de `git push` -> `netlify build` -> `netlify deploy`
 ** Déjà vu ?
 
-== Github Actions vs. Netlify
-
-* Netlify est une forme de CI/CD spécialisé
-* Github Actions peut aussi pousser dans Netlify (CLI, etc.)
-* Lequel choisir ?
-** La question elle est vite répondue jeune étudiant-entrepreneur : Github Actions
-** Pourquoi ? Pour rester homogènes et bénéficier des outils de GitHub
-
 == Préparation : CLI Netlify
 
 * Authentifiez-vous sur https://www.netlify.com/[Netlify] (bouton "Log In" puis "GitHub")
@@ -84,6 +76,17 @@ retournez dans `/workspace/exercice-makefile`
 ** Modifiez le contenu de `index.adoc`
 ** Regénérez le HTML avec la commande `make all`
 ** Re-déployez le site sur Netlify et vérifiez que votre changement est présent
+
+== Github Actions vs. Netlify
+
+* Netlify est une forme de CI/CD spécialisé, et Github Actions peut aussi pousser dans Netlify (CLI, etc.)
+* Lequel choisir ?
+** La question elle est vite répondue jeune étudiant-entrepreneur : Github Actions
+** Pourquoi ? Pour rester homogènes et bénéficier des outils de GitHub
+
+* Github Actions Marketplace : https://github.com/marketplace[]
+** Actions Netlify officielle ? 💡 https://github.com/netlify/actions/tree/master/cli[]
+** Alternative (non officielle) https://github.com/marketplace/actions/netlify-actions[]
 
 == Projet 1.0 : Consignes
 

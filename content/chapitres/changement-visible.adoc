@@ -42,6 +42,9 @@ Suite à un changement de code, il faut mettre à jour votre production.
 
 * **Validation fonctionnelle :** Est-ce que ce qui a été réalisé correspond aux attentes?
 
+[{invert}]
+== Comment aller jusqu'à la production ?
+
 == Procédure jusqu'à la production
 
 C'est facile ! Soyez Attentifs !
