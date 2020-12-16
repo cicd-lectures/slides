@@ -1,15 +1,53 @@
 
 [{invert}]
-= Projet 2.0 : Du premier utilisateur au prochain Netflix
+= Projet 2.0
 
-* Cantina : site web dynamique (pas que le menu : commande à distance)
-* Projet Java/Spring/Maven
+== Enoncé
 
-== Projet 2.0 : Production
+* Nous allons fournir le code source d'une application java spring boot
+* Votre mission: Faire en sorte d'industrialiser cette application avec les standards
+  qui vous ont été transmis durant ce cours.
 
-* Exercice guidé pour faire une image Docker java et la déployer sur autosrv
+== Un peu plus de détails: VCS
 
-== Projet 2.0 : Consigne
+* Versioner et héberger le projet dans un dépot public Github ou Gitlab
+* Possède un historique de commit et une organisation de branches illustrant le cycle de vie de l'application.
+** Deux branches: `main` et `development`
+** `main` ne devrait avoir que des **commits de merge** issus de development.
+** Chaque commit de main est `taggé` et correpond à une release du logiciel avec une version sémantique.
+** `development` ne devrait avoir que des **commits** de merges issus de PRs.
 
-* Same idea, except that we have an API to manage now.
-* Your job should run tests, build a reproductible artifact, and publish to production as soon as you hit a tag.
+== Un peu plus de détails: PRs
+
+* On vous conseille de travailler sur le projet uniquement par PR qui fera office de documentation de votre travail.
+* Par exemple:
+** 1- Mise en place du CI
+** 2- Mise en place de Maven
+** 3- Ajout des tests unitaires et activation dans le CI
+** 4- Ajout des tests d'intégration et activation dans le CI
+** 5- Ajout des tests d'intégration et activation dans le CI
+
+== Un peu plus de détails: Tests
+
+* S'assurer que la couverture de test est "satisfaisante" pour la base de code.
+** En implémentant des tests unitaires et d'intégration.
+
+== Un peu plus de détails: Cycle de vie et Maven
+
+* Utilise maven pour compiler, jouer les tests et réaliser le cycle de vie de l'app.
+
+== Un peu plus de détails: CI et CD
+
+Que ce projet est associé à un moteur d'intégration continue qui effectue les taches suivantes:
+
+* Sur une PR:
+** Compile l'application
+** Joue les tests unitaires et intégration
+*** Bonus si récupère les rapports de tests comme artifacts
+* Sur un push dans main
+** Compile l'application
+** Joue les tests unitaires et intégration
+* Sur un tag push de tag sur main
+** Compile l'application
+** Joue les tests unitaires et intégration
+** Fait une release github avec un jar attaché et une version associée au tag.
