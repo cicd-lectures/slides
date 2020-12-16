@@ -1,23 +1,354 @@
-= Maven Avancé
+[{invert}]
+= Maven : Niveau 2
 
-== POM
+== Maven ?
 
-* XML
-* Identité appli
-* Dépendances
-* Plugins et Configurations
+Pourquoi est-ce qu'on s'embête avec des outils comme Maven ?
 
-== XML
+[.small]
+Make c'est bien suffisant non ?
 
-* Exemple 101
+== Do It Ourselves or Reinvent the Wheel ?
 
-== Dépendances
+*Problème* : Doit-on recoder tous ses outils ou réutiliser des choses existantes ?
 
-* Rappel des "versions"
-* Exemple 102
-* Expliquer le `~/.m2`
+image::reinvent-wheel.jpg[]
 
-== Plugins et Configurations
+*Réponse* : ça dépends donc ce sera à vous de juger et de ré-évaluer
 
-* Exemple simple sur jar
-* Exercice sur ajouter jacoco
+== Dépendances Externes
+
+*Hypothèse* : on a besoin de code et d'outils externes (e.g. écrits par quelqu'un d'autre)
+
+* Comment faire si le code externe est mis à jour ?
+* Que se passe t'il si le code externe est supprimé de l'internet ?
+[.small]
+** https://github.blog/2020-11-16-standing-up-for-developers-youtube-dl-is-back/[window="_blank"]
+* Acceptez-vous d'exécuter le code de quelqu'un d'autre sur votre machine ?
+* Et si quelqu'un injecte du code malicieux dans le code externe ?
+[.small]
+** https://www.zdnet.com/article/malicious-npm-packages-caught-installing-remote-access-trojans/[window="_blank"]
+
+== TOUS les languages...
+
+// The triple plus (`+++`) are used to escape the first dot (and avoid a numbered bullet list)
++++...+++ sont concernés
+
+== Pourquoi Maven ?
+
+* On fait du Java...
+** Alternatives en Java : Gradle, Bazel, Ant
+* Bon exemple d'application car complet (cycle de vie, configuration, dépendances)
+* Plutôt mature (1ère release : 2004)
+
+== Maven : `pom.xml`
+
+* Maven a besoin d'un fichier `pom.xml` à la racine de votre projet
+* XML : language de type "markup", avec un **schéma**, donc strict
+* "POM" signifie "Project Object Model"
+* Concept de "Convention au lieu de configuration" pour limiter la complexité
+
+[source,xml]
+----
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <!-- Contenu du fichier pom.xml -->
+
+</project>
+----
+
+== Maven : Identité d'un projet
+
+Maven identifie un projet par l•'•es artefact•s généré•s ,
+en utilisant les 3 éléments *obligatoires* suivants :
+
+* **groupId** : Identifiant unique de votre projet suivant les règles Java de nommage de paquets
+* **artifactId** : Nom de l'artefact généré par votre projet
+* **version** : Version de l'artefact, qui **devrait** respected le semantic versionning.
+[.small]
+** Peut être suffixé par `-SNAPSHOT` pour indiquer une version non releasée.
+
+[source,xml]
+----
+<groupId>com.mycompany.app</groupId>
+<artifactId>my-app</artifactId>
+<version>1.0-SNAPSHOT</version>
+----
+
+== Exercice : Maven From Scratch
+
+=> C'est à vous dans link:https://gitpod.io/workspaces/[l'environnement GitPod,window="_blank"]
+
+* Créez un projet vide pour Maven :
+[source,bash]
+mkdir -p /workspace/mvn-level2/src/main/java && cd /workspace/mvn-level2
+
+* A partir des 2 slides précédentes, créez un fichier `pom.xml` avec la balise `project` qui définit les schémas,
+contenant 4 autres balises : `modelVersion`, `groupId`, `artifactId` et `version`
+
+* Créez 1 fichier "Hello.java" dans `src/main/java/` avec le contenu ci-dessous :
++
+[source,java]
+----
+class Hello {
+  public static void main(String[] args) {
+    System.out.println("Hello ENSG !");
+  }
+}
+----
+
+* Essayez de compilez le projet avec `mvn compile` (SPOILER: ❌)
+
+== Définir la plateforme d'exécution
+
+Que s'est il passé ?
+
+. => Maven a téléchargé plein de dépendances depuis https://repo.maven.apache.org[]
+. => La compilation a échoué avec 2 erreurs et 1 warning :
+** ❌ `**Source** option 5 is no longer supported. Use 7 or later`
+** ❌ `**Target** option 5 is no longer supported. Use 7 or later`
+** ⚠️ File encoding has not been set, using platform encoding ANSI_X3.4-1968, i.e. build is platform dependent!
+
+== Maven et Dépendances Externes
+
+* Maven propose 2 types de dépendances externes :
+
+** *Plugin* : c'est un artefact qui sera utilisé par Maven durant son cycle de vie
+*** "Build-time dependency"
+** *Dépendance* (🇬🇧 "dependency") : c'est un artefact qui sera utilisé par votre application,
+_en dehors de Maven_
+*** "Run-time dependency"
+
+== Maven et Plugins
+
+Quand on regarde sous le capot, Maven est un framework d'exécution de plugins.
+
+=> Tout est plugin :
+
+- Effacer le dossier `./target` ? Un plugin ! (si si essayez `mvn clean` une première fois...)
+- Compiler du Java ? Un plugin !
+- Pas de plugin qui fait ce que vous voulez ? Ecrivez un autre plugin !
+
+== !
+
+C'est bien gentil mais comment corriger l'erreur
+
+❌ `**Source** option 5 is no longer supported. Use 7 or later` ?
+
+[%step]
+* C'est le `maven-compiler-plugin` qui a émis l'erreur
+* Que dit la https://maven.apache.org/plugins/maven-compiler-plugin/[documentation du plugin] ?
+* Il faut définir la cible d'exécution (e.g. la *production*) du programme
+
+== Maven Properties
+
+* Maven permet de définir des propriétés (🇬🇧 "properties") "CLEF=VALEUR" pour :
+** Configurer les plugins (😇)
+** Factoriser un élément répété (une version, une chaine de texte, etc.)
+
+* Le fichier `pom.xml` supporte donc la balise `<properties></properties>`
+pour définir des propriétés sous la forme `<clef>valeur</clef>` :
+** La propriété peut être utilisé sous la forme `${clef}`
+
+[source,xml]
+----
+<properties>
+  <spring.version>1.0.0</spring.version>
+  <ensg.student.name>Damien</ensg.student.name>
+</properties>
+
+<build>
+  <name>${ensg.student.name}</name>
+</build>
+----
+
+== Exercice : Définir la plateforme d'exécution
+
+*But* : la commande `mvn compile` doit fonctionner sans erreur, et produire un fichier `Hello.class` dans `./target/**`
+
+. Modifiez le fichier `pom.xml` pour ajouter un bloc `<properties>` et définissez la valeur de la propriété `project.build.sourceEncoding` à `UTF-8` (résolution du warning).
+
+. Utilisez https://maven.apache.org/plugins/maven-compiler-plugin/examples/set-compiler-source-and-target.html[la documentation du Maven Compile Plugin]
+pour résoudre les 2 erreurs de compilation
+** 🕵🏽 Utilisez la version majeure de `java -version`
+
+== Solution : Définir la plateforme d'exécution
+
+[source,xml]
+----
+<properties>
+  <maven.compiler.source>15</maven.compiler.source>
+  <maven.compiler.target>15</maven.compiler.target>
+  <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+</properties>
+----
+
+== Exécuter l'Application
+
+👏🏿 Succès !
+
+`mvn compile` a produit le fichier `./target/classes/Hello.class`
+
+Exécutons notre programme avec la commande `java`:
+
+[source,bash]
+----
+# "-cp" == "classpath" (Chemin vers les classes Java "compilées")
+java -cp ./target/classes/ Hello
+# Argument "Hello" == classe qui contient la méthode statique "main"
+----
+
+== Maven : Dépôts d'Artefacts
+
+Maven récupère les dépendances (et plugins) dans des dépôts d'artefacts
+
+(🇬🇧 Artifacts Repositories) qui sont de 3 types :
+
+* *Central* : un dépôt géré par la communauté - https://repo.maven.apache.org[]
+* *Remote* : un dépôt de votre organisation, similaires à un remote GitHub, hébergé par vos soins
+* *Local* : un dossier sur la machine où la commande `mvn` est exécuté, généralement dans `${HOME}/.m2`
+
+== Dépendances Maven
+
+Pour spécifier les dépendances :
+
+* Il faut utiliser la balise `<dependencies>`,
+* ... qui est une collection de dépendances (balise `<dependency>` - quelle surprise !),
+* .. chaque dépendance étant défini par un trio `<groupId>`, `<artifactId>` et `<version>` (que de surprises...)
+
+Pour les plugins c'est la même idée (`<plugins>` -> `<plugin>` -> `<groupId>`, `<artifactId>`, `<version>`)
+
+== Exemple de Dépendance : Spring
+
+* Revenons aux exercices à base de tests : nous avons utilisé le framework Spring
+
+* *Idée* : c'est un framework pour ne pas avoir à tout ré-écrire, exécuté lorsque l'application est en fonctionnement :
+c'est donc une _dépendance_ de notre application.
+
+Voilà ce que ça donne dans le fichier `pom.xml` :
+
+[source,xml]
+----
+<dependencies>
+  <dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-web</artifactId>
+    <version>2.3.3.RELEASE</version>
+  </dependency>
+</dependencies>
+----
+
+== Exercice avec les dépendances Spring
+
+=> C'est à vous. Ajoutez le bloc précédent dans votre `pom.xml`
+
+* Exécutez la commande `mvn clean compile`
+* Explorez le contenu du dossier `$HOME/.m2` (écriture équivalente à `~/.m2`)
+** En particulier :
++
+[source,bash]
+ls -l ~/.m2/repository/org/springframework/boot/spring-boot-starter-web/2.3.3.RELEASE
++
+et
++
+[source,bash]
+ls -l ~/.m2/repository/org/apache/maven/plugins/
+
+* Supprimez le dossier `~/.m2/` et relancez la commande `mvn clean compile`
+
+== Solution avec les dépendances Spring
+
+* Le dépôt local `.m2` :
+** Agit comme un "cache" local contenant dépendances et plugins
+** Respecte la structure des groupid, artifactId et version
+
+* Commande `mvn install` :
+** Exécute les étapes `package` et `verify`
+** Puis copie le résultat de package dans le dossier `.m2`
+** Essayez `mvn install` puis vérifiez le contenu de `~/.m2/repository/<groupId en format dossiers>/<artifactId>/<version>`
+
+[source,bash]
+ls -l ~/.m2/repository/com/mycompany/app/my-app/1.0-SNAPSHOT/
+
+== Convention Over Configuration
+
+* Maven fonctionne à base de "convention": lorsque nous avons corrigé les erreurs de compilation,
+le plugin Maven Compiler **s'attendait** à avoir des propriété définies comme défini dans la documentation.
+* On peut également "configurer" très finement Maven à l'aide des balises XML du `pom.xml`
+
+== Exercice : Changer le nom de l'artefact final
+
+* *But*: Produire un artefact JAR dont le nom est constant
+
+* Toujours dans link:https://gitpod.io#https://github.com/cicd-lectures/demoapp[l'environnement GitPod,window="_blank"],
+exécutez la commande `mvn package`
+
+* Quel est le nom de l'artefact généré ? Est-il constant ?
+** (SPOILER: 🙅🏽‍♀️)
+
+* En utilisant la documentation de référence link:https://maven.apache.org/pom.html#the-basebuild-element-set[],
+adaptez votre `pom.xml` afin que le fichier généré se nomme *toujours*  `hello.jar`.
+
+== Solution : Changer le nom de l'artefact final
+
+[source,xml]
+----
+<build>
+  <finalName>hello</finalName>
+</build>
+----
+
+== Maven Plugins
+
+Un plugin Maven implémente les tâches à effectuer durant les différentes phases,
+et peut appartenir à l'un ou à tous ces types :
+
+* *"Build"* : Implémente une action durant les phase de "build" (clean, compile, test, etc.),
+et est configuré dans la balise `<build>`
+* *"Reporting"* Implémente une action durant la phase de génération de "site",
+et est configuré dans la balise `<reporting>` (à votre grande surprise)
+
+== Exercice : Maven JAR Plugin
+
+* *But*: Produire l'artefact JAR dans un dossier nommé `dist` à côté du `pom.xml` et de `target/`
+
+* La génération du JAR est déclenchée lors de l'appel à `mvn package`, il nous faut une documentation !
+** Est-ce qu'il y a un plugin `package` dans la https://maven.apache.org/plugins/[page de la liste des plugins Maven] ?
+** A vous de chercher pour trouver la documentation du plugin et d'y trouver le bon réglage permettant
+de changer le dossier d'"output"
+
+== Solution : Maven JAR Plugin
+
+* https://maven.apache.org/plugins/
+** https://maven.apache.org/plugins/maven-jar-plugin/
+*** https://maven.apache.org/plugins/maven-jar-plugin/jar-mojo.html
+
+[source,xml]
+----
+<build>
+  <!-- ... -->
+  <plugins>
+    <plugin>
+      <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-jar-plugin</artifactId>
+      <executions>
+        <execution>
+          <configuration>
+            <outputDirectory>./dist/</outputDirectory>
+          </configuration>
+        </execution>
+      </executions>
+    </plugin>
+  </plugins>
+</build>
+----
+
+// == Exercice : Couverture de code avec Jacoco
+
+// * *But* : Générer un/des rapport(s) de couverture de code
+
+// * Reprenez la branche `full-maven` de `demoapp`, qui contient des tests unitaires et d'intégration
+// * En utilisant https://www.eclemma.org/jacoco/trunk/doc/maven.html[la documentation du plugin Jacoco],
+// assurez-vous de générer un rapport au format HTML d'un des types de test de votre choix
