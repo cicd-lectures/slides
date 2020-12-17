@@ -1,15 +1,93 @@
 
 [{invert}]
-= Projet 2.0 : Du premier utilisateur au prochain Netflix
+= Projet 2.0
 
-* Cantina : site web dynamique (pas que le menu : commande à distance)
-* Projet Java/Spring/Maven
+== Enoncé
 
-== Projet 2.0 : Production
+* Nous allons fournir le code source Java d'une application Spring Boot, plus ou moins bien instrumentée.
+* Votre mission: Faire en sorte d'industrialiser cette application avec les connaissance acquises durant ce cours.
 
-* Exercice guidé pour faire une image Docker java et la déployer sur autosrv
+== Un peu plus de détails: VCS
 
-== Projet 2.0 : Consigne
+* Versionner et héberger le projet dans un dépôt public GitHub ou GitLab
+* Possède une organisation de branches *représentant le cycle de vie de l'application*.
+** Deux branches: `main` et `development`
+** `main` ne devrait avoir que des **commits de merge**  (Via PR ou non ?) issus de development.
+** Chaque commit de main est "taggé" et correspond à une release du logiciel avec une *version sémantique*.
+** La branche `development` ne devrait avoir que des **commits** de merge issus de PRs.
+* Un historique de commits à peu près propre :)
 
-* Same idea, except that we have an API to manage now.
-* Your job should run tests, build a reproductible artifact, and publish to production as soon as you hit a tag.
+== Un peu plus de détails: PRs
+
+* On vous conseille de travailler sur le projet uniquement par PRs (Pull Requests) qui feront office de documentation de votre travail
+* Par exemple:
+** PR-1: Mise en place du job de CI
+** PR-2: Mise en place de Maven et activation de la compilation dans le job CI
+** PR-3: Ajout des tests unitaires et activation dans job le CI
+** PR-4: Ajout des tests d'intégration et activation dans le job CI
+** PR-5: Mise en place du job de CD
+
+== Un peu plus de détails: Tests
+
+S'assurer que la couverture de test est "satisfaisante" pour la base de code :
+
+* Tests unitaires implémentés et descriptifs du comportement testé
+* Test d'intégrations validant des "cas d'utilisations" principaux de l'application
+
+== Un peu plus de détails: Maven
+
+Utilisez maven pour gérer les dépendances et implémenter le cycle de vie technique de l'application :
+
+* `compile`: compile l'application
+* `package`: crée un jar(jar)
+* `test`: exécute les tests unitaires
+* `verify`: exécute les tests d'intégration
+
+== Un peu plus de détails: CI et CD
+
+Ce projet devra être associé à un moteur d'intégration continue
+
+(GitHub Actions, GitLab CI ou autre si vous êtes joueurs, la seule contrainte est que ce soit un SaaS gratuit et accessible publiquement)
+
+== CI: Sur une branche de travail
+
+* Compile l'application
+* Joue les tests unitaires
+* Joue les tests d'intégration
+** Bonus si récupère les rapports de tests comme artifacts du job
+
+== CI: Sur un push dans main
+
+* Compile l'application
+* Joue les tests unitaires et intégration
+
+== CD: Sur tag pushé
+
+* Compile l'application
+* Joue les tests unitaires et intégration
+* Fait une release GitHub avec le fichier JAR de l'appication (wink wink) attaché, dont le nom correspond a la version du tag.
+** Bonus si Maven tient compte de la version tagguée ;)
+
+== Critères d'évaluation
+
+* Accès au dépôt de code ET à l'outil du CI/CD du projet conformément aux consignes
+* Conformité du "graphe" Git (dans le dépôt) aux consignes (branches présente, commits de Merges liés à des PRs quand c'est applicable, messages de commits...)
+* Ouverture possible des 2 PRs par nos soins, et résultat conformes à l’attendu (succès si on intègre un changement bénin, et échec si on casse le code ou un test)
+* Conformité du Workflow aux consignes (comportement variants selon les branches)
+* Ajout/Correction de Test unitaires ET d'intégration
+* Usage correct de Maven (par rapport à ce qui a été vu en cours)
+* Engagement Personnel + ajouts Bonus (pondération non négative, basée sur vos projets 1.0, 1.1, sur les critères bonus, et les ajouts utiles et marrants)
+
+== Rendu
+
+* Envoi de l'application par email avec rappel des consignes à venir
+* *Deadline*: 5 semaines à partir du jour de livraison de l'application initiale
+* Vous devez nous répondre par mail, avec le lien vers votre dépôt de rendu
+* Les notes seront rendues 3 semaines après la deadline
+* Contestation/relecture : vous aurez ~ 1 semaine après le rendu des notes si jamais vous n'être pas d'accord ou souhaitez une clarification
+
+== Un dernier mot
+
+* Amusez vous !
+* Ne passez pas plus de 10h dessus !
+* Vous êtes la pour apprendre, pas pour vous rendre malade !
