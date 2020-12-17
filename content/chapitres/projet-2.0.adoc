@@ -70,7 +70,21 @@ Ce projet devra être associé à un moteur d'intégration continue
 
 == Critères d'évaluation
 
-TODO
+* Accès au dépôt de code ET à l'outil du CI/CD du projet conformément aux consignes
+* Conformité du "graphe" Git (dans le dépôt) aux consignes (branches présente, commits de Merges liés à des PRs quand c'est applicable, messages de commits...)
+* Ouverture possible des 2 PRs par nos soins, et résultat conformes à l’attendu (succès si on intègre un changement bénin, et échec si on casse le code ou un test)
+* Conformité du Workflow aux consignes (comportement variants selon les branches)
+* Ajout/Correction de Test unitaires ET d'intégration
+* Usage correct de Maven (par rapport à ce qui a été vu en cours)
+* Engagement Personnel + ajouts Bonus (pondération non négative, basée sur vos projets 1.0, 1.1, sur les critères bonus, et les ajouts utiles et marrants)
+
+== Rendu
+
+* Envoi de l'application par email avec rappel des consignes à venir
+* *Deadline*: 5 semaines à partir du jour de livraison de l'application initiale
+* Vous devez nous répondre par mail, avec le lien vers votre dépôt de rendu
+* Les notes seront rendues 3 semaines après la deadline
+* Contestation/relecture : vous aurez ~ 1 semaine après le rendu des notes si jamais vous n'être pas d'accord ou souhaitez une clarification
 
 == Un dernier mot
 
