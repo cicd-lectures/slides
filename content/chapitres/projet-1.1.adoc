@@ -16,7 +16,7 @@ Open sourcer le projet 1.0 !
 
 * Ouverture du menu à la contribution externe : comment tester le HTML ?
 ** 🔎 Il faut valider/tester les modifications
-** 🌍 Nous allons tester si les liens HTTP sont valides et pointent vers des pages existentes
+** 🌍 Nous allons tester si les liens HTTP sont valides et pointent vers des pages existantes
 
 * Essayez avec la commande `linkchecker` :
 +
