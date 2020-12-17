@@ -4,50 +4,77 @@
 
 == Enoncé
 
-* Nous allons fournir le code source d'une application java spring boot
-* Votre mission: Faire en sorte d'industrialiser cette application avec les standards
-  qui vous ont été transmis durant ce cours.
+* Nous allons fournir le code source d'une application java spring boot, plus ou moins bien instrumentée.
+* Votre mission: Faire en sorte d'industrialiser cette application avec les standards qui vous ont été transmis
+  durant ce cours.
 
 == Un peu plus de détails: VCS
 
 * Versioner et héberger le projet dans un dépot public Github ou Gitlab
-* Possède un historique de commit et une organisation de branches illustrant le cycle de vie de l'application.
+* Possède une organisation de branches *représentant le cycle de vie de l'application*.
 ** Deux branches: `main` et `development`
 ** `main` ne devrait avoir que des **commits de merge** issus de development.
 ** Chaque commit de main est `taggé` et correpond à une release du logiciel avec une version sémantique.
-** `development` ne devrait avoir que des **commits** de merges issus de PRs.
+** `development` ne devrait avoir que des **commits** de merge issus de PRs.
+* Un historique de commits à peu près propre :)
 
 == Un peu plus de détails: PRs
 
-* On vous conseille de travailler sur le projet uniquement par PR qui fera office de documentation de votre travail.
+* On vous conseille de travailler sur le projet uniquement par PR qui fera office de documentation de votre travail
 * Par exemple:
-** 1- Mise en place du CI
-** 2- Mise en place de Maven
-** 3- Ajout des tests unitaires et activation dans le CI
-** 4- Ajout des tests d'intégration et activation dans le CI
-** 5- Ajout des tests d'intégration et activation dans le CI
+** PR-1: Mise en place du job de CI
+** PR-2: Mise en place de Maven et activation de la compilation dans le job CI
+** PR-3: Ajout des tests unitaires et activation dans job le CI
+** PR-4: Ajout des tests d'intégration et activation dans le job CI
+** PR-5: Mise en place du job de CD
 
 == Un peu plus de détails: Tests
 
-* S'assurer que la couverture de test est "satisfaisante" pour la base de code.
-** En implémentant des tests unitaires et d'intégration.
+S'assurer que la couverture de test est "satisfaisante" pour la base de code :
 
-== Un peu plus de détails: Cycle de vie et Maven
+* Tests unitaires implémentés et descriptifs du comportement testé
+* Test d'intégration validant les "cas d'utilisations" principaux de l'application
 
-* Utilise maven pour compiler, jouer les tests et réaliser le cycle de vie de l'app.
+== Un peu plus de détails: Maven
+
+Utilise maven pour gérer les dépendances et implémenter le cycle de vie technique de l'app :
+
+- `mvn compile`: compile l'application
+- `mvn package`: crée un jar(jar)
+- `mvn test`: execute les tests unitaires
+- `mvn verify`: execute les tests d'intégration
 
 == Un peu plus de détails: CI et CD
 
-Que ce projet est associé à un moteur d'intégration continue qui effectue les taches suivantes:
+Ce projet est associé à un moteur d'intégration continue
 
-* Sur une PR:
-** Compile l'application
-** Joue les tests unitaires et intégration
-*** Bonus si récupère les rapports de tests comme artifacts
-* Sur un push dans main
-** Compile l'application
-** Joue les tests unitaires et intégration
-* Sur un tag push de tag sur main
-** Compile l'application
-** Joue les tests unitaires et intégration
-** Fait une release github avec un jar attaché et une version associée au tag.
+(Github Actions, Gitlab CI ou autre si vous êtes joueurs, la seule contrainte est que ce soit un SAAS)
+
+== CI: Sur une branche de travail
+
+* Compile l'application
+* Joue les tests unitaires
+* Joue les tests d'intégration
+** Bonus si récupère les rapports de tests comme artifacts du job
+
+== CI: Sur un push dans main
+
+* Compile l'application
+* Joue les tests unitaires et intégration
+
+== CD: Sur tag pushé
+
+* Compile l'application
+* Joue les tests unitaires et intégration
+* Fait une release github avec un jar attaché, dont le nom correspond a la version du tag.
+** Bonus si maven tient compte de la version taggée ;)
+
+== Critères d'évaluation
+
+TODO
+
+== Un dernier mot
+
+* Amusez vous !
+* Ne passez pas plus de 10h dessus !
+* Vous êtes la pour apprendre, pas pour vous rendre malade !
