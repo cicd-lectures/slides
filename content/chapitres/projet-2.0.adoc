@@ -4,23 +4,22 @@
 
 == Enoncé
 
-* Nous allons fournir le code source d'une application java spring boot, plus ou moins bien instrumentée.
-* Votre mission: Faire en sorte d'industrialiser cette application avec les standards qui vous ont été transmis
-  durant ce cours.
+* Nous allons fournir le code source Java d'une application Spring Boot, plus ou moins bien instrumentée.
+* Votre mission: Faire en sorte d'industrialiser cette application avec les connaissance acquises durant ce cours.
 
 == Un peu plus de détails: VCS
 
-* Versioner et héberger le projet dans un dépot public Github ou Gitlab
+* Versionner et héberger le projet dans un dépôt public GitHub ou GitLab
 * Possède une organisation de branches *représentant le cycle de vie de l'application*.
 ** Deux branches: `main` et `development`
-** `main` ne devrait avoir que des **commits de merge** issus de development.
-** Chaque commit de main est `taggé` et correpond à une release du logiciel avec une version sémantique.
-** `development` ne devrait avoir que des **commits** de merge issus de PRs.
+** `main` ne devrait avoir que des **commits de merge**  (Via PR ou non ?) issus de development.
+** Chaque commit de main est "taggé" et correspond à une release du logiciel avec une *version sémantique*.
+** La branche `development` ne devrait avoir que des **commits** de merge issus de PRs.
 * Un historique de commits à peu près propre :)
 
 == Un peu plus de détails: PRs
 
-* On vous conseille de travailler sur le projet uniquement par PR qui fera office de documentation de votre travail
+* On vous conseille de travailler sur le projet uniquement par PRs (Pull Requests) qui feront office de documentation de votre travail
 * Par exemple:
 ** PR-1: Mise en place du job de CI
 ** PR-2: Mise en place de Maven et activation de la compilation dans le job CI
@@ -33,22 +32,22 @@
 S'assurer que la couverture de test est "satisfaisante" pour la base de code :
 
 * Tests unitaires implémentés et descriptifs du comportement testé
-* Test d'intégration validant les "cas d'utilisations" principaux de l'application
+* Test d'intégrations validant des "cas d'utilisations" principaux de l'application
 
 == Un peu plus de détails: Maven
 
-Utilise maven pour gérer les dépendances et implémenter le cycle de vie technique de l'app :
+Utilisez maven pour gérer les dépendances et implémenter le cycle de vie technique de l'application :
 
-- `mvn compile`: compile l'application
-- `mvn package`: crée un jar(jar)
-- `mvn test`: execute les tests unitaires
-- `mvn verify`: execute les tests d'intégration
+* `compile`: compile l'application
+* `package`: crée un jar(jar)
+* `test`: exécute les tests unitaires
+* `verify`: exécute les tests d'intégration
 
 == Un peu plus de détails: CI et CD
 
-Ce projet est associé à un moteur d'intégration continue
+Ce projet devra être associé à un moteur d'intégration continue
 
-(Github Actions, Gitlab CI ou autre si vous êtes joueurs, la seule contrainte est que ce soit un SAAS)
+(GitHub Actions, GitLab CI ou autre si vous êtes joueurs, la seule contrainte est que ce soit un SaaS gratuit et accessible publiquement)
 
 == CI: Sur une branche de travail
 
@@ -66,8 +65,8 @@ Ce projet est associé à un moteur d'intégration continue
 
 * Compile l'application
 * Joue les tests unitaires et intégration
-* Fait une release github avec un jar attaché, dont le nom correspond a la version du tag.
-** Bonus si maven tient compte de la version taggée ;)
+* Fait une release GitHub avec le fichier JAR de l'appication (wink wink) attaché, dont le nom correspond a la version du tag.
+** Bonus si Maven tient compte de la version tagguée ;)
 
 == Critères d'évaluation
 
