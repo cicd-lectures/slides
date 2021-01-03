@@ -25,6 +25,15 @@ make main.html && linkchecker --check-extern ./main.html
 
 * Modifiez le contenu pour tester le cas d'un mauvais lien HTTP et ré-essayez
 
+== Pré-requis : Solution Projet 1.0
+
+Voici une proposition de solution (ce n'est donc pas la seule solution possible !) pour le Projet 1.0 :
+
+[source,yml]
+----
+include::../code-samples/projet-1.0/cantina.yml[]
+----
+
 == Projet 1.1 : Consigne
 
 Faire en sorte que le CI execute un job différent en fonction du type d'événement:

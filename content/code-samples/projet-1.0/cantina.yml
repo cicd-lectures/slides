@@ -1,0 +1,15 @@
+name: Cantina
+on: [push]
+jobs:
+  cantina-menu:
+    runs-on: ubuntu-20.04
+    steps:
+    - uses: actions/checkout@v2 # Récupère le contenu du dépôt correspondant au commit du workflow en cours
+    - run: sudo apt-get update && sudo apt-get install -y asciidoctor # Installation des outils requis
+    - run: make all # Génération du dossier livrable `./dist/`
+    - uses: netlify/actions/cli@master # Déploiement sur Netlify
+      with:
+        args: deploy --prod --dir=./dist/
+      env:
+        NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }} # A définir dans https://github.com/<votre dépôt github>/settings/secrets/actions
+        NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }} # A définir dans https://github.com/<votre dépôt github>/settings/secrets/actions
