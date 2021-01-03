@@ -68,6 +68,22 @@ Ce projet devra être associé à un moteur d'intégration continue
 * Fait une release GitHub avec le fichier JAR de l'appication (wink wink) attaché, dont le nom correspond a la version du tag.
 ** Bonus si Maven tient compte de la version tagguée ;)
 
+== Pré-requis : Solution Projet 1.1 - Makefile
+
+Voici une proposition de solution (ce n'est donc pas la seule solution possible !) pour le Projet 1.1 :
+
+[source,yml]
+----
+include::../code-samples/projet-1.1/Makefile[]
+----
+
+== Pré-requis : Solution Projet 1.1 - Workflow
+
+[source,yml]
+----
+include::../code-samples/projet-1.1/cantina.yml[]
+----
+
 == Critères d'évaluation
 
 * Accès au dépôt de code ET à l'outil du CI/CD du projet conformément aux consignes
