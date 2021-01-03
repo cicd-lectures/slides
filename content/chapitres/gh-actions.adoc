@@ -59,22 +59,7 @@ Un *évènement* du projet Github (push, merge, nouvelle issue, etc. ) déclench
 .Workflow File :
 [source,yaml]
 ----
-name: Node.js CI
-on: [push]
-jobs:
-  test-linux:
-    runs-on: ubuntu-20.04
-    steps:
-    - uses: actions/checkout@v2
-    - run: npm install
-    - run: npm test
-
-  test-mac:
-    runs-on: mac-10.15
-    steps:
-    - uses: actions/checkout@v2
-    - run: npm install
-    - run: npm test
+include::../code-samples/gh-actions/npm-example.yml[]
 ----
 
 == Concepts de Github Actions - Récapépète
@@ -98,13 +83,7 @@ image::gh-actions-concepts.svg[width=800]
 
 [source,yaml]
 ----
-name: Bonjour
-on: [push]
-jobs:
-  dire_bonjour:
-    runs-on: ubuntu-20.04
-    steps:
-    - run: echo "Bonjour 👋 "
+include::../code-samples/gh-actions/say-hello-full.yml[tags="common,simple-hello"]
 ----
 
 * Revenez sur la page GitHub de votre projet et naviguez dans l'onglet "Actions" :
@@ -121,14 +100,7 @@ image::gh-actions-simple-example.svg[width=800]
 +
 [source,yaml]
 ----
-name: Bonjour
-on: [push]
-jobs:
-  dire_bonjour:
-    runs-on: ubuntu-20.04
-    steps:
-    - run: ls -l # Liste les fichier du répertoire courant
-    - run: cat README.md # Affiche le contenu du fichier `README.md` à la base du dépôt
+include::../code-samples/gh-actions/say-hello-full.yml[tags="common,show-readme"]
 ----
 
 * Est-ce que l'étape `cat README.md` se passe bien ? (SPOILER: non ❌ )
@@ -146,14 +118,7 @@ jobs:
 
 [source,yaml]
 ----
-name: Bonjour
-on: [push]
-jobs:
-  dire_bonjour:
-    runs-on: ubuntu-20.04
-    steps:
-    - uses: actions/checkout@v2 # Récupère le contenu du dépôt correspondant au commit du workflow en cours
-    - run: cat README.md # Affiche le contenu du fichier `README.md` à la base du dépôt
+include::../code-samples/gh-actions/say-hello-full.yml[tags="common,checkout,show-readme"]
 ----
 
 == Exemple : Environnement d'exécution
@@ -182,13 +147,5 @@ jobs:
 
 [source,yaml]
 ----
-name: Bonjour
-on: [push]
-jobs:
-  dire_bonjour:
-    runs-on: ubuntu-20.04
-    steps:
-    - run: sudo apt-get update && sudo apt-get install -y cowsay
-    - uses: actions/checkout@v2
-    - run: cat README.md | cowsay
+include::../code-samples/gh-actions/say-hello-full.yml[tags="common,checkout,cowsay"]
 ----
