@@ -3,7 +3,7 @@ name: Bonjour
 on: [push]
 jobs:
   dire_bonjour:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-18.04
     steps:
 # end::common[]
 # tag::simple-hello[]

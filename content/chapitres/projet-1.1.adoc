@@ -21,7 +21,7 @@ Open sourcer le projet 1.0 !
 * Essayez avec la commande `linkchecker` :
 +
 [source,bash]
-make main.html && linkchecker --check-extern ./main.html
+make clean main.html && linkchecker --check-extern ./main.html
 
 * Modifiez le contenu pour tester le cas d'un mauvais lien HTTP et ré-essayez
 
@@ -50,5 +50,5 @@ Faire en sorte que le CI execute un job différent en fonction du type d'événe
 * Vous décidez donc de changer votre job pour qu'il ne déploie que sur un *tag*
 
 // == Projet 1.1 : Plus loin
-// * Verrouiler branche main ?
+// * Verrouiller branche main ?
 // * Netlify de staging sur builds de PRs avec un lien dans la PR par un bot?

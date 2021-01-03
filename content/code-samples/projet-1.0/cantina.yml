@@ -2,7 +2,7 @@ name: Cantina
 on: [push]
 jobs:
   cantina-menu:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-18.04
     steps:
     - uses: actions/checkout@v2 # Récupère le contenu du dépôt correspondant au commit du workflow en cours
     - run: sudo apt-get update && sudo apt-get install -y asciidoctor # Installation des outils requis

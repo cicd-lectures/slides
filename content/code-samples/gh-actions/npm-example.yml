@@ -2,7 +2,7 @@ name: Node.js CI
 on: [push]
 jobs:
   test-linux:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-18.04
     steps:
     - uses: actions/checkout@v2
     - run: npm install

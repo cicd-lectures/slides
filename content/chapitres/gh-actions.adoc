@@ -140,7 +140,7 @@ include::../code-samples/gh-actions/say-hello-full.yml[tags="common,checkout,sho
 ** Utiliser Docker pour fabriquer une action Github (❌ complexe ✅ portable)
 
 * C'est à vous :
-** Cherchez comment installer `cowsay` dans Ubuntu 20.04
+** Cherchez comment installer `cowsay` dans Ubuntu 18.04
 ** Appliquer cette solution dans votre job afin de le "réparer" et de voir la vache dans GitHub Actions.
 
 == Solution : Environnement d'exécution
