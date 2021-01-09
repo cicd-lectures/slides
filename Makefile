@@ -18,7 +18,7 @@ prepare:
 	@docker-compose build
 
 # Generate documents inside a container, all *.adoc in parallel
-build: clean $(DIST_DIR) prepare
+build: clean $(DIST_DIR) prepare qrcode
 	@docker-compose up \
 		--force-recreate \
 		--exit-code-from build \
@@ -30,7 +30,7 @@ $(DIST_DIR):
 verify:
 	@echo "Verify disabled"
 
-serve: clean $(DIST_DIR) prepare
+serve: clean $(DIST_DIR) prepare qrcode
 	@docker-compose up --force-recreate serve
 
 shell: $(DIST_DIR) prepare
