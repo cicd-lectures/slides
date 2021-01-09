@@ -9,15 +9,11 @@ module.exports = function (gulp, plugins, current_config) {
             current_config.docinfosPath + '/**/*.html' // Docinfos
         ], gulp.series('html'));
 
-        // Watch for images
+        // Watch for media
         gulp.watch([current_config.faviconPath], gulp.series('favicon'));
         gulp.watch([
-            current_config.imgSrcPath + '/*.png',
-            current_config.imgSrcPath + '/*.jpg',
-            current_config.imgSrcPath + '/*.gif',
-            current_config.imgSrcPath + '/*.tiff',
-            current_config.imgSrcPath + '/*.svg'
-        ], gulp.series('images'));
+            current_config.mediaSrcPath + '/*',
+        ], gulp.series('media'));
 
         // Watch Styles and Fonts
         gulp.watch([

@@ -4,8 +4,19 @@
 
 == Enoncé
 
-* Nous allons fournir le code source Java d'une application Spring Boot, plus ou moins bien instrumentée.
-* Votre mission: Faire en sorte d'industrialiser cette application avec les connaissance acquises durant ce cours.
+* Votre prédécesseur•se a écrit une application pour le site web de la Cantina,
+mais a soudainement démissionné pour partir élever des serpents sur Dagobah.
+
+* Cette application gère la banque de menus de la cantina. On peut créer et récupérer les dits menus. Un menu est composé de plats (Dishes).
+* En arrivant à la Cantina, le patron vous a envoyé un lien vers une archive contenant
+le code source Java d'une application Spring Boot, plus ou moins bien instrumentée...
+
+* Votre mission : Faire en sorte d'industrialiser cette application avec les connaissances acquises durant ce cours.
+
+== Récupérer l'application
+
+* Vous pouvez récupérer link:media/project-2.0-src.tar.gz[ici l'archive Tar-gzippé nommée `project-2.0-src.tar.gz`,target="_blank"].
+* Empreinte SHA256 : `0019dfc4b32d63c1392aa264aed2253c1e0c2fb09216f8e2cc269bbfb8bb49b5`.
 
 == Un peu plus de détails: VCS
 
@@ -29,17 +40,18 @@
 
 == Un peu plus de détails: Tests
 
-S'assurer que la couverture de test est "satisfaisante" pour la base de code :
+S'assurer que la couverture de test est "satisfaisante" pour la base de code fournie :
 
-* Tests unitaires implémentés et descriptifs du comportement testé
-* Test d'intégrations validant des "cas d'utilisations" principaux de l'application
+* Des tests unitaires et des tests d'intégrations sont déjà présents mais doivent être corrigés ou complétés
+** Pas de nouveau fichier à créer
+** Les tests présents sont considérés comme suffisants pour ce projet
 
 == Un peu plus de détails: Maven
 
 Utilisez maven pour gérer les dépendances et implémenter le cycle de vie technique de l'application :
 
 * `compile`: compile l'application
-* `package`: crée un jar(jar)
+* `package`: crée un jar(jar) exécutable avec la commande `java -jar <fichier.jar>`
 * `test`: exécute les tests unitaires
 * `verify`: exécute les tests d'intégration
 
@@ -86,20 +98,27 @@ include::../code-samples/projet-1.1/cantina.yml[]
 
 == Critères d'évaluation
 
-* Accès au dépôt de code ET à l'outil du CI/CD du projet conformément aux consignes
-* Conformité du "graphe" Git (dans le dépôt) aux consignes (branches présente, commits de Merges liés à des PRs quand c'est applicable, messages de commits...)
-* Ouverture possible des 2 PRs par nos soins, et résultat conformes à l’attendu (succès si on intègre un changement bénin, et échec si on casse le code ou un test)
-* Conformité du Workflow aux consignes (comportement variants selon les branches)
-* Ajout/Correction de Test unitaires ET d'intégration
-* Usage correct de Maven (par rapport à ce qui a été vu en cours)
-* Engagement Personnel + ajouts Bonus (pondération non négative, basée sur vos projets 1.0, 1.1, sur les critères bonus, et les ajouts utiles et marrants)
+* Les critères d'évaluation sont détaillés sur cette page: https://docs.google.com/spreadsheets/d/1IMj7-fYH12Lb2OXJ9AfquVwo_GbntGggMY9sVZiWqFw/edit?usp=sharing["Notations ENSG 2020/2021",target="_blank"],
+selon les grandes catégories suivantes :
+** VCS / GitHub / GitLab : 6 points
+** Tests : 5 points
+** Maven : 4 points
+** CI/CD : 5 points
 
-== Rendu
+== Consignes de rendu
 
-* Envoi de l'application par email avec rappel des consignes à venir
-* *Deadline*: 5 semaines à partir du jour de livraison de l'application initiale
-* Vous devez nous répondre par mail, avec le lien vers votre dépôt de rendu
-* Les notes seront rendues 3 semaines après la deadline
+* Envoi de l'email pointant vers ces consigne mises à jour le 09 janvier 2021
+* *Deadline du rendu*: 5 semaines à partir du jour de livraison de l'application initiale, soit le 13 février 2021
+* Vous devrez nous envoyer un mail (par binôme) avec :
+** Pour chaque membre du binôme:
+*** Nom et prénom
+*** Email
+*** Identifiant GitHub ou GitLab utilisé
+** Le lien vers votre dépôt de rendu
+
+== Rendu des notes
+
+* Les notes seront rendues 3 semaines après la deadline, soit pour le 6 mars 2021 au plus tard
 * Contestation/relecture : vous aurez ~ 1 semaine après le rendu des notes si jamais vous n'être pas d'accord ou souhaitez une clarification
 
 == Un dernier mot
