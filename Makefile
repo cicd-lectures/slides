@@ -49,10 +49,11 @@ pdf: $(DIST_DIR)/index.html
 	@docker run --rm -t \
 		-v $(DIST_DIR):/slides \
 		--user $(CURRENT_UID) \
-		astefanutti/decktape:2.9 \
+		astefanutti/decktape:3.1.0 \
 		/slides/index.html \
 		/slides/slides.pdf \
-		--size='2048x1536'
+		--size='2048x1536' \
+		--pause 0
 
 clean:
 	@docker-compose down -v --remove-orphans
