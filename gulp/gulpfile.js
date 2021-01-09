@@ -19,8 +19,7 @@ var tasks_dir_path = './tasks',
     },
     current_config = {
         docinfosPath: '/app/content/docinfos',
-        imgSrcPath: '/app/content/media',
-        videosSrcPath: '/app/content/videos',
+        mediaSrcPath: '/app/content/media',
         scriptsSrcPath: '/app/assets/scripts',
         stylesSrcPath: '/app/assets/styles',
         fontSrcPath: '/app/assets/fonts',
@@ -44,7 +43,7 @@ fs.readdirSync(tasks_dir_path).forEach(function (file) {
 gulp.task('build', gulp.series(
     gulp.parallel(
         'fonts',
-        'images',
+        'media',
         'videos',
         'favicon',
         'prepare:revealjs',
