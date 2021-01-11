@@ -15,8 +15,8 @@ le code source Java d'une application Spring Boot, plus ou moins bien instrument
 
 == Récupérer l'application
 
-* Vous pouvez récupérer link:media/project-2.0-src.tar.gz[ici l'archive Tar-gzippé nommée `project-2.0-src.tar.gz`,target="_blank"].
-* Empreinte SHA256 : `0019dfc4b32d63c1392aa264aed2253c1e0c2fb09216f8e2cc269bbfb8bb49b5`.
+* Vous pouvez récupérer link:media/project-2.0.1-src.tar.gz[ici l'archive Tar-gzippé nommée `project-2.0.1-src.tar.gz`,target="_blank"].
+* Empreinte SHA256 : `ddc634a00f64a1606f3d813e15a7e66a08a87d0cec313b0dee3bb157e9e6ddd0`.
 
 == Un peu plus de détails: VCS
 
