@@ -172,13 +172,15 @@ package main
 // Importe le package `fmt` de la librairie standard dans le fichier pour utiliser les symboles exposés par ce dernier.
 import "fmt"
 
-// Implementation de la fonction main.
+// Declaration et implementation de la fonction main.
+// Fonction particulière car c'est le point d'entrée de votre programe.
 func main() {
     // Appel de la fontion `Println` (Print Line) du package `fmt`
     // avec en argument la chaine de carractère "Hello ENSG!"
     fmt.Println("Hello ENSG!")
-}</code></pre></div></div></div></section><section id="variables_et_types"><h2>Variables et Types</h2><div class="slide-content"><div class="ulist"><ul><li><p>est un langage typé statiquement: Le type d&#8217;une variable une fois déclaré ne peut être changé.</p></li><li><p>propose des types scalaires communs (string, int, float, bool) et moins communs (rune, byte)</p></li><li><p>Des collections (maps, array  et slices)&#8230;&#8203;</p></li><li><p>Des type complexes (structures)</p></li><li><p>Des pointeurs (*int, *string)</p></li><li><p>Et des interfaces (error, interface{}, io.Reader&#8230;&#8203;)</p></li></ul></div>
-<div class="paragraph"><p>(Bien que parfois frustrant, le compilateur est votre ami)</p></div></div></section><section id="déclarer_et_manipuler_une_variable_12"><h2>Déclarer et Manipuler une Variable (1/2)</h2><div class="slide-content"><div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-golang hljs" data-noescape="true" data-lang="golang">// Declare et initialise a sa valeur par defaut (zero value) une variable de type chaine de caractères.
+}</code></pre></div></div></div></section><section id="variables_et_types_12"><h2>Variables et Types (1/2)</h2><div class="slide-content"><div class="paragraph"><p>Golang est un langage typé statiquement: Le type d&#8217;une variable une fois déclaré ne peut être changé.</p></div>
+<div class="paragraph"><p>(Bien que parfois frustrant, le compilateur est votre ami)</p></div></div></section><section id="variables_et_types_22"><h2>Variables et Types (2/2)</h2><div class="slide-content"><div class="paragraph"><p>Golang propose les types suivants</p></div>
+<div class="ulist"><ul><li><p>Des types scalaires communs (string, int, float, bool) et moins communs (rune, byte)</p></li><li><p>Des collections (maps, array  et slices)&#8230;&#8203;</p></li><li><p>Des type complexes (structures)</p></li><li><p>Des pointeurs (*int, *string)</p></li><li><p>Et des interfaces (error, interface{}, io.Reader&#8230;&#8203;)</p></li></ul></div></div></section><section id="déclarer_et_manipuler_une_variable_13"><h2>Déclarer et Manipuler une Variable (1/3)</h2><div class="slide-content"><div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-golang hljs" data-noescape="true" data-lang="golang">// Declare et initialise a sa valeur par defaut (zero value) une variable de type chaine de caractères.
 var chaine string
 
 // Assigne la valeur banane a la variable chaine.
@@ -188,7 +190,7 @@ chaine = "banane"
 chaine = 40 // Invalide: la valeur 40 n'est pas convertible (implicitement) en chaine de caractère
 
 // Assigne la valeur 40 a la variabe 'entier'.
-entier = 40 // Invalide: la variable entier n'est pas déclarée.</code></pre></div></div></div></section><section id="déclarer_et_manipuler_une_variable_22"><h2>Déclarer et Manipuler une Variable (2/2)</h2><div class="slide-content"><div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-golang hljs" data-noescape="true" data-lang="golang">// Declare et initialise a la valeur 42 une variable appelée entier de type int.
+entier = 40 // Invalide: la variable entier n'est pas déclarée.</code></pre></div></div></div></section><section id="déclarer_et_manipuler_une_variable_23"><h2>Déclarer et Manipuler une Variable (2/3)</h2><div class="slide-content"><div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-golang hljs" data-noescape="true" data-lang="golang">// Declare et initialise a la valeur 42 une variable appelée entier de type int.
 var entier int = 42
 
 // Assigne la valeur 12 a la variable entier.
@@ -196,9 +198,23 @@ entier = 12
 
 // Declare et initialise a la valeur 43 une variable appelée autreEntier
 // du type de la valeur à gauche (ici entier)
+// C'est ce que l'on appelle de l'inference de type.
 autreEntier := 43
 // equivaut a l'expression suivante
-// var autreEntier int = 43</code></pre></div></div></div></section><section id="structures_de_contrôle"><h2>Structures de contrôle</h2><div class="slide-content"><div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-golang hljs" data-noescape="true" data-lang="golang">// Sans parenthèses, mais pas d'autres surprises :)
+// var autreEntier int = 43</code></pre></div></div></div></section><section id="déclarer_et_manipuler_une_variable_23_2"><h2>Déclarer et Manipuler une Variable (2/3)</h2><div class="slide-content"><div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-golang hljs" data-noescape="true" data-lang="golang">// Déclare et initialise une variable entier1 de type entier a la valeur 42.
+entier1 := 45
+
+// Déclare et initialise une variable entier2 du type de la variabe entier1
+// et **copie** la valeur de entier1 dans entier2.
+entier2 := entier1
+
+// Assigne la valeur 12 a la valeur entier2.
+entier2 = 12
+
+// Affiche sur la sortie standard la valeur des variables entier1 et entier2.
+// Notez ici que la valeur entier1 n'est pas changée!
+// On à bien fait une copie de la valeur.
+fmt.Println(entier1, entier2) // Affiche: "45 12"</code></pre></div></div></div></section><section id="structures_de_contrôle"><h2>Structures de contrôle</h2><div class="slide-content"><div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-golang hljs" data-noescape="true" data-lang="golang">// Sans parenthèses, mais pas d'autres surprises :)
 if a &gt; 4 {
 
 } else if c &lt; 2 {
@@ -213,7 +229,8 @@ if a &gt; 4 {
     // executé si maVariable est a 2 ou 1
   default:
     // executé si mavariable a une autre valuer.
-}</code></pre></div></div></div></section><section id="structures_12"><h2>Structures (1/2)</h2><div class="slide-content"><div class="ulist"><ul><li><p>Une structure est un type composés de plusieurs autres types.</p></li><li><p>Ces valeurs sont appelées <code>attributs</code></p></li><li><p>La valeur par défaut d&#8217;une structure est la valeur par defaut des types le composant.</p></li></ul></div></div></section><section id="structures_22"><h2>Structures (2/2)</h2><div class="slide-content"><div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-golang hljs" data-noescape="true" data-lang="golang">// Declare un type Dog de type structure, composée d'un attribut Name de type string et d'un attribut Age de type entier.
+}</code></pre></div></div></div></section><section id="structures_12"><h2>Structures (1/2)</h2><div class="slide-content"><div class="ulist"><ul><li><p>Une structure est un type composé de plusieurs attributs</p></li><li><p>Ces attributs sont eux même typés</p></li><li><p>La valeur par défaut (zero value) d&#8217;une structure est la valeur par defaut des types la composant</p></li></ul></div></div></section><section id="structures_22"><h2>Structures (2/2)</h2><div class="slide-content"><div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-golang hljs" data-noescape="true" data-lang="golang">// Declare un type Dog de type structure, composée d'un attribut Name de type string
+// et d'un attribut Age de type entier.
 type Dog struct {
   Name  string
   Age   int
@@ -231,7 +248,7 @@ type Dog struct {
 
   fmt.Println(dog1, dog2)
   // ...
-}</code></pre></div></div></div></section><section id="déclarer_et_appeler_une_fonction_12"><h2>Déclarer et Appeler une fonction (1/2)</h2><div class="slide-content"><div class="ulist"><ul><li><p>Une fonction en go est déclarée à l&#8217;aide du mot clé <code>func</code></p></li><li><p>Accepte des arguments et retourne une ou plusieurs valeurs</p></li><li><p>Conventionellement, une fonction qui peut échouer retourne un resultat et une erreur</p></li></ul></div></div></section><section id="déclarer_et_appeler_une_fonction_22"><h2>Déclarer et Appeler une fonction (2/2)</h2><div class="slide-content"><div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-golang hljs" data-noescape="true" data-lang="golang">// Declare une fonction `Greet`
+}</code></pre></div></div></div></section><section id="déclarer_et_appeler_une_fonction_12"><h2>Déclarer et Appeler une fonction (1/2)</h2><div class="slide-content"><div class="ulist"><ul><li><p>Une fonction en go est déclarée à l&#8217;aide du mot clé <code>func</code></p></li><li><p>Accepte des arguments et retourne une ou plusieurs valeurs</p></li><li><p>Conventionellement, une fonction qui "peut échouer" retourne un resultat et une erreur</p></li></ul></div></div></section><section id="déclarer_et_appeler_une_fonction_22"><h2>Déclarer et Appeler une fonction (2/2)</h2><div class="slide-content"><div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-golang hljs" data-noescape="true" data-lang="golang">// Declare une fonction `Greet`
 func Greet(dog Dog) (string, error) {
   if dog.Name == "" {
     return string, errors.New("dog has no name :scream:")
@@ -270,7 +287,23 @@ func main() {
   changeName(dog)
 
   fmt.Println("Hello", dog.Name)
-}</code></pre></div></div></div></section><section id="passage_par_valeur_vs_passage_par_référence"><h2>Passage par Valeur vs Passage par Référence?</h2></section><section id="arrays_slices"><h2>Arrays &amp; Slices</h2></section><section id="maps"><h2>Maps</h2></section></section>
+}</code></pre></div></div></div></section><section id="passage_par_valeur_vs_passage_par_pointeur_13"><h2>Passage par Valeur vs Passage par Pointeur (1/3)</h2><div class="slide-content"><div class="ulist"><ul><li><p>Passer une variable en argument d&#8217;une fonction déclénche une copie de cette variable.</p></li><li><p>Cela signifie que la variable manipulé edans <code>changeName</code> est une variable différente (== se situe à une addresse différente en mémoire) de la variable manipulée dans la fonction main.</p></li><li><p>Cette variable possède la même valeur que la variable issue de main, c&#8217;est une copie</p></li></ul></div></div></section><section id="passage_par_valeur_vs_passage_par_pointeur23"><h2>Passage par Valeur vs Passage par Pointeur(2/3)</h2><div class="slide-content"><div class="ulist"><ul><li><p>Solution: au lieu de passer la 'valeur' de la variable dog, nous allons passer son adresse en mémoire.</p></li><li><p>C&#8217;est ce que l&#8217;on appelle un pointeur.</p></li></ul></div></div></section><section id="passage_par_valeur_vs_passage_par_pointeur33"><h2>Passage par Valeur vs Passage par Pointeur(3/3)</h2><div class="slide-content"><div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-golang hljs" data-noescape="true" data-lang="golang">// changeNameFixed accepte un argument de type pointeur sur Dog
+func changeNameFixed(dog *Dog) {
+  dog.Name = "roberto"
+}
+
+func main() {
+  dog := Dog {
+    Name: "jean-claude",
+    Age:  50,
+  }
+
+  // changeNameFixed est appellée en passant l'addresse de la variable dog
+  // matérialisée par le '&amp;' devant le nom de la variable
+  changeNameFixed(&amp;dog)
+
+  fmt.Println("Hello", dog.Name)
+}</code></pre></div></div></div></section><section id="pointeurs_fu"><h2>Pointeurs-Fu</h2><div class="slide-content"><div class="ulist"><ul><li><p>Un pointeur est une addresse memoire représentée sur 64bits</p></li><li><p>La zero-value d&#8217;un pointeur est nil (0x000000)</p></li><li><p>Quand on essaye d&#8217;accéder a la valeur d&#8217;un pointeur a la valeur <code>nil</code>&#8230;&#8203; :boom:</p></li></ul></div></div></section><section id="exercice"><h2>Exercice</h2><div class="slide-content"><div class="ulist"><ul><li><p>Ecrire un programme qui accepte un nom en argument.</p></li><li><p>Si il n&#8217;y a pas d&#8217;argument, le programme indique qu&#8217;il faut passer un nom en argument et quite avec le status(1)</p></li><li><p>Si il y à un argument, alors le programme affiche le ..</p></li></ul></div></div></section></section>
 <section><section id="changer_du_code" data-background-color="rgb(248, 228, 130)" data-state="invert"><h2>Changer du code</h2></section><section id="tracer_le_changement_dans_le_code"><h2>Tracer le changement dans le code</h2><div class="slide-content"><div class="paragraph"><p>avec un <strong>VCS</strong> : 🇬🇧 Version Control System</p></div>
 <div class="paragraph small"><small>également connu sous le nom de SCM (🇬🇧 Source Code Management)</small></div></div></section><section id="pourquoi_un_vcs"><h2>Pourquoi un VCS ?</h2><div class="slide-content"><div class="ulist"><ul><li><p>Pour conserver une trace de <strong>tous</strong> les changements dans un historique</p></li><li><p>Pour <strong>collaborer</strong> efficacement sur un même référentiel de code source</p></li></ul></div>
 <aside class="notes"><div class="ulist"><ul><li><p>Historique : On parle de source unique de vérité (<em>Single Source of Truth</em>)</p><div class="ulist"><ul><li><p>Historique complet des modifications</p></li><li><p>Possibilité de retour arrière à tout moment</p></li></ul></div></li><li><p>Collaboration:</p><div class="ulist"><ul><li><p>Aide à la résolution de conflits</p></li><li><p>Partage de contenu facile</p></li></ul></div></li></ul></div></aside></div></section><section id="concepts_des_vcs"><h2>Concepts des VCS</h2><div class="slide-content"><div class="imageblock" style=""><img src="media/scm-local.png" alt="scm local" width="300"></div>
@@ -470,7 +503,7 @@ verify(this.repository, never()).saveUser(user);</code></pre></div></div></div><
 <div class="paragraph"><p>Par exemple: curl, Firefox, Chrome, une autre app.</p></div></div></section><section id="usercontroller"><h2>UserController</h2><div class="slide-content"><div class="paragraph"><p>Implémentation d&#8217;une requête HTTP par une methode java.</p></div>
 <div class="paragraph small"><small>(en passant par un peu de magie spring)</small></div>
 <div class="ulist"><ul><li><p>Parse les paramètres de la requête HTTP (headers, query parameters)</p></li><li><p>Appelle la couche de données</p></li><li><p>Réponds la donnée récupérée de la couche de données dans un format négocié.</p><div class="ulist"><ul><li><p>HTML, JSON, XML &#8230;&#8203;</p></li></ul></div></li></ul></div></div></section><section id="userrepository"><h2>UserRepository</h2><div class="slide-content"><div class="ulist"><ul><li><p>Transforme un appel java en une requête à la base de données</p><div class="ulist"><ul><li><p>SQL, PL/SQL, CQL, JSON (MongoDB, Elastisearch&#8230;&#8203;)</p></li></ul></div></li><li><p>Transforme la réponse de la base de donnée en objets java</p></li></ul></div></div></section><section id="base_de_données_2"><h2>Base de données</h2><div class="slide-content"><div class="ulist"><ul><li><p>Reçoit des requêtes</p></li><li><p>Réponds des données</p></li></ul></div>
-<div class="paragraph"><p>Nous allons utiliser <a href="https://www.h2database.com">h2</a>, une base de donnée SQL implémentée en java et s&#8217;executant en mémoire.</p></div></div></section><section id="en_résumé"><h2>En résumé</h2><div class="slide-content"><div class="paragraph"><p><span class="image"><img src="media/applayers.svg" alt="applayers" width="800"></span></p></div></div></section><section id="de_quel_point_de_vue_testons_nous"><h2>De quel point de vue testons nous ?</h2><div class="slide-content"><div class="paragraph"><p>Du point de vue du client HTTP.</p></div></div></section><section id="exercice"><h2>Exercice</h2><div class="slide-content"><div class="paragraph"><p>Implémentez la méthode <code>getUsers</code> de la classe <code>UserController</code> et sa suite de tests pour qu&#8217;elle respecte le contrat suivant:</p></div>
+<div class="paragraph"><p>Nous allons utiliser <a href="https://www.h2database.com">h2</a>, une base de donnée SQL implémentée en java et s&#8217;executant en mémoire.</p></div></div></section><section id="en_résumé"><h2>En résumé</h2><div class="slide-content"><div class="paragraph"><p><span class="image"><img src="media/applayers.svg" alt="applayers" width="800"></span></p></div></div></section><section id="de_quel_point_de_vue_testons_nous"><h2>De quel point de vue testons nous ?</h2><div class="slide-content"><div class="paragraph"><p>Du point de vue du client HTTP.</p></div></div></section><section id="exercice_2"><h2>Exercice</h2><div class="slide-content"><div class="paragraph"><p>Implémentez la méthode <code>getUsers</code> de la classe <code>UserController</code> et sa suite de tests pour qu&#8217;elle respecte le contrat suivant:</p></div>
 <div class="ulist"><ul><li><p>Si le paramètre de requête "name" est vide alors on retourne tous les utilisateurs connus</p></li><li><p>Si le paramètre de requête "name" non-vide alors on retourne la liste des utilisateurs ayant ce nom.</p></li></ul></div></div></section><section id="base_de_données_2_le_retour"><h2>Base de données 2, le retour !</h2><div class="slide-content"><div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-java hljs" data-noescape="true" data-lang="java">// src/main/java/com/cicdlectures/demoapp/user/UserRepository.java
 import org.springframework.data.repository.CrudRepository;
 
