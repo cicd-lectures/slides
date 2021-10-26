@@ -98,7 +98,8 @@ include::../code-samples/projet-1.1/cantina.yml[]
 
 == Critères d'évaluation
 
-* Les critères d'évaluation sont détaillés sur cette page: https://docs.google.com/spreadsheets/d/1IMj7-fYH12Lb2OXJ9AfquVwo_GbntGggMY9sVZiWqFw/edit?usp=sharing["Notations ENSG 2020/2021",target="_blank"],
+* Les critères d'évaluation sont détaillés sur cette page:
+// TODO: add link - link:https://["Notations ENSG 2021/2022",target="_blank"],
 selon les grandes catégories suivantes :
 ** VCS / GitHub / GitLab : 6 points
 ** Tests : 5 points

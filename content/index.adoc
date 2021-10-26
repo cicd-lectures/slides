@@ -4,7 +4,7 @@
 include::./attributes.adoc[]
 
 [.title]
-ENSG - Décembre 2020
+ENSG - Décembre 2021
 
 [.small]
 * Présentation disponible à l’adresse: {presentationUrl}[{presentationUrl}]
