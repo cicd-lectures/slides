@@ -1,4 +1,4 @@
 [{invert}]
-= Versions
+= Git à plusieurs
 
 == TODO
