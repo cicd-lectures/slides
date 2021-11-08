@@ -25,113 +25,41 @@ image::qrcode.png["QRCode to this presentation",height=150]
 // Chapitre Welcome.adoc
 include::./chapitres/welcome.adoc[leveloffset=1]
 
-== Ça veut dire quoi créer un logiciel ?
+// Chapitre Introduction.adoc
+include::./chapitres/introduction.adoc[leveloffset=1]
 
-== Savoir ce que l'on veut faire !
+// Chapitre Setup Development Environment
+include::./chapitres/setup-dev-env.adoc[leveloffset=1]
 
-[.notes]
---
-* Créer un logiciel c'est écrire du code qui implémente une logique.
-* Cette logique à pour but de répondre à un besoin.
-* Il faut donc clarifier ce besoin.
---
+// Chapitre Introduction to Git
+include::./chapitres/introduction-to-git.adoc[leveloffset=1]
 
-=== Avant : le cycle en V
+// Chapitre Introduction to MenuServer
+include::./chapitres/introduction-to-menuserver.adoc[leveloffset=1]
 
-image::cycleenv.png[width="800"]
+// Chapitre Project Lifecycle
+include::./chapitres/project-lifecycle.adoc[leveloffset=1]
 
-=== What went wrong here?
-
-* On specifie et l'on engage un volume conséquent de travail sur des hypothèses
-** ... et si les hypothèses sont fausses?
-** ... et si les besoins changent?
-* Cycle trèèèèès long
-** Aucune validation à court terme
-** Coût de l'erreur décuplé
-
-[.notes]
---
-* L'informatique manipule peu de concepts tangibles, il est très difficile de mener un travail de conception purement théorique à terme.
---
-
-=== Comment éviter ça?
-
-* Valider les hypothèses au plus tôt, et étendre petit à petit le périmètre fonctionel.
-** Reduire le périmètre fonctionel au minimum.
-** Confronter le logiciel au plus tôt aux utilisateurs.
-** Refaire des hypothèses basées sur ce que l'on à appris, et recommencer!
-* "Embrasser" le changement
-** Votre logiciel va changer en **continu**
-
-[.notes]
---
-* J'itère donc je suis.
-* EMBRACE CHANGE
---
-
-=== La clé : gérer le changement!
-
-* Le changement ne doit pas être un évenement, ça doit être la norme.
-* Notre objectif : minimiser le coût du changement.
-* Faire en sorte que:
-** Changer quelque chose soit facile
-** Changer quelque chose soit rapide
-** Changer quelque chose ne casse pas tout
-
-=== Heureusement, vous avez des outils à disposition!
-
-Et c'est ce que l'on va voir ensemble aujourd'hui!
-
-[{invert}]
-== Disclaimer: les outils c'est une chose, l'important c'est le problème derrière!
-
-[.notes]
---
-* On va vous parler de beaucoup d'outils dans ce cours, ce sont des implémentations.
-* Ce qui compte, c'est les problèmes qu'ils résolvent ;-)
---
-
-// Chapitre VCS - Git
-include::./chapitres/vcs.adoc[leveloffset=1]
-
-// Chapitre Tests
-include::./chapitres/tests.adoc[leveloffset=1]
-
-// Chapitre "Cycle de vie technique"
-include::./chapitres/tech-lifecycle.adoc[leveloffset=1]
-
-// Chapitre "Rendre son changement visible"
-include::./chapitres/changement-visible.adoc[leveloffset=1]
+// Chapitre Sauvegarder son Projet
+include::./chapitres/saving-your-project.adoc[leveloffset=1]
 
 // Chapitre CI
 include::./chapitres/ci.adoc[leveloffset=1]
 
+// Chapitre Multiplayer Git
+include::./chapitres/multiplayer-git.adoc[leveloffset=1]
+
+// Chapitre Tests
+include::./chapitres/tests.adoc[leveloffset=1]
+
+// Chapitre Versions
+include::./chapitres/version.adoc[leveloffset=1]
+
 // Chapitre CD
 include::./chapitres/cd.adoc[leveloffset=1]
 
-// Chapitre Github
-include::./chapitres/github.adoc[leveloffset=1]
-
-// Chapitre GithHub Actions
-include::./chapitres/gh-actions.adoc[leveloffset=1]
-
-// Projet 1.0
-include::./chapitres/projet-1.0.adoc[leveloffset=1]
-
-// Travailler en tant qu'équipe
-include::./chapitres/work-as-a-team.adoc[leveloffset=1]
-
-// Projet 1.1
-include::./chapitres/projet-1.1.adoc[leveloffset=1]
-
-// Chapitre Version
-include::./chapitres/version.adoc[leveloffset=1]
-
-// Maven Avancé
-include::./chapitres/maven-advanced.adoc[leveloffset=1]
-
-// Projet 2.0
-include::./chapitres/projet-2.0.adoc[leveloffset=1]
+// Chapitre Conclusion
+include::./chapitres/conclusion.adoc[leveloffset=1]
 
 [{invert}]
 == Merci !
