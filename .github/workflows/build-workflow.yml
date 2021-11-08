@@ -34,8 +34,6 @@ jobs:
         run: docker push "${IMAGE_CACHE_NAME}"
       - name: 'Verify'
         run: make verify
-      - name: 'PDF'
-        run: make pdf
       - name: 'Upload dist/ as artefact'
         uses: actions/upload-artifact@v2
         with:
