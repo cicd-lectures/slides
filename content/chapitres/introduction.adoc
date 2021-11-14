@@ -1,4 +1,50 @@
 [{invert}]
 = Une petite histoire du génie logiciel
 
-== TODO
+= Comment mener un projet logiciel?
+
+== Avant : le cycle en V
+
+image::cycleenv.png[width="800"]
+
+== Que peut-il mal se passer?
+
+* On specifie et l'on engage un volume conséquent de travail sur des hypothèses
+** ... et si les hypothèses sont fausses?
+** ... et si les besoins changent?
+* Cycle trèèèèès long
+** Aucune validation à court terme
+** Coût de l'erreur décuplé
+
+[.notes]
+--
+* L'informatique manipule peu de concepts tangibles, il est très difficile de mener un travail de conception purement théorique à terme.
+--
+
+== Comment éviter ça?
+
+* Valider les hypothèses au plus tôt, et étendre petit à petit le périmètre fonctionel.
+** Reduire le périmètre fonctionel au minimum.
+** Confronter le logiciel au plus tôt aux utilisateurs.
+** Refaire des hypothèses basées sur ce que l'on à appris, et recommencer!
+* "Embrasser" le changement
+** Votre logiciel va changer en **continu**
+
+[.notes]
+--
+* J'itère donc je suis.
+* EMBRACE CHANGE
+--
+
+== La clé : gérer le changement!
+
+* Le changement ne doit pas être un évenement, ça doit être la norme.
+* Notre objectif : minimiser le coût du changement.
+* Faire en sorte que:
+** Changer quelque chose soit facile
+** Changer quelque chose soit rapide
+** Changer quelque chose ne casse pas tout
+
+== Heureusement, vous avez des outils à disposition!
+
+Et c'est ce que l'on va voir ensemble aujourd'hui!
