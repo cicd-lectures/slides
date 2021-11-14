@@ -1,4 +1,122 @@
 [{invert}]
 = Présentation de votre projet
 
-== TODO
+== Contexte Geopolitique (1/2)
+
+* Dans un effort d'optimisation de ses processus métiers, la cantina de Mos-Estafette s'est lancée dans un grand projet de digitalisation de la gestion de sa carte
+
+* Le projet est divisé en deux lots:
+** Une partie serveur qui stocke et expose la données de la carte via une API REST
+** Une partie client qui permet de consulter et de gérer les menus de la cantina via l'API du serveur
+
+== Contexte Geopolitique (2/2)
+
+* Après une longue et épique bataille de chefs de projets et autres décideurs fonctionels, la société **Bananes Services d'Entreprises**, spécialiste national des technologies du minitel, à remporté le lot de la partie serveur...
+* ...Cependant, suite à d'un **grave accident de brainstorming** entre les 18 chefs de projet travaillant sur le dit projet et 6 mois de retard sur la première livraison, l'entreprise *Bananes* s'est retrouvée dans l'incapacité de mener le projet à son terme
+* Désemparés face à cette terrible nouvelle, le conseil d'administration de la cantina à décidé de se tourner vers l'ENSG pour tenter de sauver leur transition numérique
+
+== Prise en Main du Projet (1/2)
+
+* Une équipe technique de **Bananes** avait commencé l'implémentation du serveur, et à fourni une archive link:media/menu-server.tar.gz[téléchargeable ICI], contenant le code source du projet
+* **Bananes** vous assure qu'ils ont suivi toutes les "best practices" du dévelopement logiciel sur minitel
+** Il y à un `LISEZMOI.txt` à la racine du projet :tada:
+** ... et pas grand chose d'autre?
+
+== Prise en Main du Projet (2/2)
+
+[source,bash]
+--
+# Création du répertoire menu-server
+mkdir -p workspace/menu-server && cd workspace/menu-server
+
+# Téléchargez le projet sur votre environement de dévelopement
+curl -sSLO https//cicd-lectures.github.io/slides/2021/media/menu-server.tar.gz
+
+# Décompresser et extraire l'archive téléchargée
+tar xvzf ./menu-server.tar.gz
+--
+
+A partir de la vous pouvez ouvir le fichier `LISEZMOI.txt` et commencer à savourer son contenu.
+
+[{invert}]
+== Qu'est-ce qui va / ne va pas dans ce projet d'après vous?
+
+== Triste Rencontre avec la Réalité
+
+- Pas de gestion de version...
+- Le projet ne fonctionne pas, tous les menus retournés s'appellent "TEST TODO" :sob:
+- Le correctif ne semble pas compliqué à faire...
+- ... sauf que vous ne pouvez pas compiler le projet!
+
+Il va faloir rémedier à ça d'une façon ou d'une autre, sinon vous n'allez pas aller bien loin!
+
+== Architecture du projet
+
+image::architecture.png[]
+
+== HTTP Layer
+
+- Fait la transition entre une requête HTTP et une action logique de l'application
+- Accepte en entrée une requête HTTP (headers, query parameters, verb, (JSON) body)
+- Réponds un code de statut, des headers et optionellement un body
+- Appelle la couche service en passant des DTOs (data transfer objects)
+
+== Business Layer
+
+- Implémente la logique métier de l'application
+- Accepte en entrée des DTOs et en réponds en sortie
+- Appelle d'autre services ou les repositories de l'application en leur passant des objets model
+
+== Storage Layer
+
+- Fait la transition entre le modèle objet java et le modèle de la base de données (ici relationel // SQL)
+- Accepte en entrée des objets du modèle, et peut en répondre aussi
+- Chaque methode implémentée par un repository est en réalité une requête à votre base de données
+- Implémentation ici déléguée à un outil d'ORM (object relational mapping), ici hibernate
+- On utilisera dans le cadre de ce cours une base de donnée in-memory appelée link:https://www.h2database.com/html/main.html[h2]
+
+== Architecture: résumé
+
+image::architecture.png[]
+
+== Organisation du Code Source
+
+Toutes les classes sont créées dans un sous répertoire de `src/main/java/com/cicdlectures/menuserver`
+
+Le découpage est le suivant:
+
+- `controller`: Couche d'interconnection entre HTTP et le domaine métier
+- `dto` (Data Transfer Objects): Représentation intermédiaire de la donnée
+- `service`: Couche métier
+- `repository`: Couche d'accès a la base de données
+- `model`: Représentation de votre modèle de donnée, configuration de l'ORM.
+
+== Execice: Initialisez un dépot git
+
+* Nettoyez le contenu superflu du projet et initialisez un dépot git dans le répertoire, puis creez un premier commit
+* Par contenu superflu, nous entendons:
+** Tout ce qui est potentiellement généré
+** Les scripts de lancement obsolètes et inutiles
+** Un petit renomage du LISEZMOI.txt en README.md et un coup de nettoyage de son contenu
+
+== Solution Exercice
+
+[source,bash]
+--
+# On évacue le contenu inutile
+rm -rf dist/
+rm executer.sh
+# On renomme LISEZMOI.txt en README.md
+mv LISEZMOI.txt README.md
+# On nettoie son contenu
+code README.md
+
+# On intialise un nouveau dépot git
+git init
+
+# On ajoute tous les fichiers contenus a la zone de staging.
+git add .
+
+# On crée un nouveau commit
+git commit -m "Add initial menu-server project files"
+--
