@@ -1,4 +1,19 @@
 [{invert}]
+
 = Intégration continue (CI)
 
 == TODO
+
+== Integration aux moteurs de CI/CD ?
+
+* Pour chaque evenement important du dépôt
+
+** (merge, nouvelle branche poussée sur dépôt, nouvelle Pull Request)
+** Le service peut envoyer une requête HTTP pour notifier un service tiers de l'evennement.
+*** Par exemple: à un moteur de CI/CD !
+
+== Anatomie du déclenchement d'un job CI
+
+image:ghci.svg[with="800"]
+
+TODODODODODODODODODODODODOO
