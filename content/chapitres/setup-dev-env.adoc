@@ -2,3 +2,10 @@
 = Préparer votre environement de développement
 
 == TODO
+
+== Mise en place de l'exercice (1/2)
+
+* Rendez vous sur link:https://gitpod.io/access-control[la page des droits GitPod]
+** Cochez dans la colonne github "write public repos" et "update workflows" puis validez
+
+TODODODODODODODOOD
