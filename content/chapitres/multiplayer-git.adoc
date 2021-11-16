@@ -1,4 +1,270 @@
 [{invert}]
 = Git à plusieurs
 
-== TODO
+== Limites de bosser seul
+
+* Capacité finie de travail
+
+* Victime de propres biais
+* On ne sait pas tout, tout le temps ?
+
+== !
+
+image:solo.gif[width="500"]
+
+== Travailler en équipe ? Une si bonne idée ?
+
+* ... Mais il faut communiquer ?
+* ... Mais tout le monde n'a pas les mêmes compétences ?
+* ... Mais tout le monde y code pas pareil ?
+
+== !
+
+Collaborer c'est pas évident, mais il existe des outils et des methodes pour vous aider.
+
+[.small]
+Cela reste des outils, ça ne résoud pas tout non plus.
+
+== Git multijoueur
+
+* Git permet de collaborer assez aisément
+* Chaque développeur crée et publie des commits...
+
+* ... et rapatrie ceux de de ses camarades !
+* C'est un outil très flexible... chacun peut faire ce qu'il lui semble bon !
+
+== ... et (souvent) ça finit comme ça !
+
+image:bloing.jpeg[]
+
+== Quelques règles pour éviter ça !
+
+[{invert}]
+
+== Disclaimer
+
+Attachez vous aux idées générales... les détails varient d'un projet à l'autre!
+
+== Gestion des branches
+
+* Les "versions" du logiciel sont maintenues sur des branches principales (main, staging)
+
+* Ces branches reflêtent l'état du logiciel
+** **main**: version actuelle en production
+** **staging**: prochaine version
+
+== !
+
+image:gitmulti1.svg[]
+
+== Gestion des branches
+
+* Chaque groupe de travail (développeur, binôme...)
+** Crée une branche de travail à partir de la branche staging
+
+** Une branche de travail correspond à *une chose à la fois*
+
+** Pousse des commits dessus qui implémentent le changement
+
+== !
+
+image:gitmulti2.svg[]
+
+
+== !
+
+image:gitmulti3.svg[]
+
+Quand le travail est fini, la branche de travail est mergée dans staging
+
+== !
+
+image:gitmulti4.svg[]
+
+== Gestion des remotes
+
+Où vivent ces branches ?
+
+== Plusieurs modèles possibles
+
+* Un remote pour les gouverner tous !
+* Chacun son propre remote (et les commits seront bien gardés)
+* ... whatever floats your boat!
+
+== Un remote pour les gouverner tous
+
+Tous les développeurs envoient leur commits et branches sur le même remote
+
+* Simple a gérer ...
+* ... mais nécessite que tous les contributeurs aient accès au dépot
+** Adapté a l'entreprise, peu adapté au monde de l'open source
+
+== !
+
+image:remotemulti1.svg[]
+
+== Chacun son propre remote
+
+* La motivation: le contrôle d'accès
+** Tout le monde peut lire le dépot principal. Personne ne peut écrire desuss.
+** Tout le monde peut dupliquer le dépot public et écrire sur sa copie.
+** Toute modification du dépot principal passe par une procédure de revue.
+** Si la revue est validée, alors la branche est "mergée" dans la branche cible
+
+* C'est le modèle poussé par GitHub !
+
+== !
+
+image:remotemulti2.svg[]
+
+== Forks ! Forks everywhere !
+
+Dans la terminologie GitHub:
+
+* Un fork est un remote copié d'un dépot principal
+** C'est la où les contributeurs poussent leur branche de travail.
+* Les branches de version (main, staging...) vivent sur le dépot principal
+* La procédure de ramener un changement d'un == Limites de bosser seul
+
+== Exercice: Créez un fork
+
+* Nous allons vous faire forker vos dépots respectifs
+* Trouvez vous un binôme dans le groupe.
+* Rendez vous link:https://docs.google.com/spreadsheets/d/1cVVdhvDv5ZCG13rXQOlzE62Y7SLsTtpDRprsssjZBhI/edit?usp=sharing[sur cette page,window="_blank"] pour enregistrer votre binôme, et indiquez les liens de vos dépôts respectifs.
+* Depuis la page du dépot de votre binôme, cliquez en haut à droite sur le bouton **Fork**.
+
+image:fork.png[]
+
+== La procédure de Pull Request
+
+*Objectif* : Valider les changements d'un contributeur
+
+* Technique : est-ce que ça marche ? est-ce maintenable ?
+* Fonctionnel : est-ce que le code fait ce que l'on veux ?
+* Humain : Propager la connaissance par la revue de code.
+* Méthode : Tracer les changements.
+
+== Anatomie d'une Pull Request sur GitHub
+
+* **Branche source**: La branche portant le changement
+* **Branche cible**: La branche dans lequel le changement va être mergé.
+* **Titre**: décrit de façon concise le changement apporté
+* **Description**: décrit de façon détaillée le changement. Doit donner toutes les "clés de lecture" de la PR à un relecteur
+* **Labels**: meta informations permettant de suivre le type de la PR (bugfix, feature?)
+* **Historique de commit**: Lors d'une pull request, une attention particulière doit être portée aux commits (bien nommés, atomiques), c'est un outil aidant à la relecture!
+
+[{invert}]
+== !
+
+A vous de jouer: Ajoutez la fonctionalité "supression d'un menu" au projet de votre binôme
+
+== Exercice: Contribuez au projet de votre binôme (1/5)
+
+Première étape: on clone le fork dans son environement de développement
+
+[source,bash]
+--
+cd /workspace/
+
+# Clonez votre fork
+git clone <url_de_votre_fork>
+
+# Créez votre feature branch
+git checkout -b implement-delete
+--
+
+== Exercice: Contribuez au projet de votre binôme (2/5)
+
+Maintenant voici la liste des choses à faire:
+
+* Rajouter le `MenuRepository` comme dépendance du MenuController
+* Implémenter une nouvelle methode `deleteMenu`
+** Gère les requêtes `DELETE /menus/{id}`
+** Appele la methode `deleteById` du `menuRepository`
+** Réponds 200 si la suppression est réussie
+* Bonus si vous arrivez à faire en sorte que le serveur réponde 404 si un menu à supprimer n'existe pas.
+
+Voici un link:https://spring.io/guides/tutorials/rest/[petit article bien utile] pour vous aider!
+
+== Exercice: Contribuez au projet de votre binôme (3/5)
+
+Pour tester votre changement
+
+[source, bash]
+--
+# D'abord on crée un menu
+curl -H "Content-Type: application/json" --data-raw '{"name": "Menu spécial du chef", "dishes": [{"name": "Bananes aux fraises"},{"name": "Bananes flambées"}]}' localhost:8080/menus
+
+# Puis on le supprime
+curl -XDELETE localhost:8080/menus/4
+
+# Et on vérifie que le menu est bien supprimé
+curl localhost:8080/menus
+--
+
+== Exercice: Contribuez au projet de votre binôme (4/5)
+
+Une fois que vous êtes satisfaits de votre changmement il vous faut maintenant créer un commit et pousser votre nouvelle branche sur votre fork.
+
+== Exercice: Contribuez au projet de votre binôme (5/5)
+
+* Rendez vous sur la page de votre projet
+* Sélectionnez votre branche dans le menu déroulant "branches"  en haut a gauche.
+* Cliquez ensuite sur le bouton ouvrir une pull request
+* Remplissez le contenu de votre PR (titre, description, labels) et validez.
+
+image:pr.png[]
+
+== Revue de code ?
+
+* Validation par un ou plusieur pairs (technique et non technique) des changements
+* Relecture depuis github (ou depuis le poste du developpeur)
+* Chaque relecteur emet des commentaires // suggestions de changement
+* Quand un relecteur est satisfait d'un changement, il l'approuve
+
+== !
+
+* La revue de code est un **exercice difficile** et **potentiellement frustrant** pour les deux parties.
+** Comme sur Twitter, on est bien à l'abri derrirère son écran ;=)
+* En tant que contributeur, **soyez respectueux** de vos relecteurs : votre changement peut être refusé et c'est quelque chose de normal.
+* En tant que relecteur, **soyez respectueux** du travail effectué, même si celui ci comporte des erreurs ou ne correspond pas à vos attentes.
+
+💡 Astuce: link:https://github.com/franckverrot/clamav-client/pull/12#discussion_r526222319[Proposez des solutions] plutôt que simplement pointer les problèmes.
+
+== Exercice: Relisez votre PR reçue !
+
+* Vous devriez avoir reçu une PR de votre binôme :-)
+
+* Relisez le changement de la PR
+* Effectuez quelques commentaires (bonus: utilisez la suggestion de changements)
+* Si elle vous convient, mergez la pull request dans votre dépôt.
+
+== Validation automatisée
+
+**Objectif**: Valider que le changement n'introduit pas de régressions dans le projet
+
+* A chaque fois qu'un nouveau commit est créé dans une PR, une succession de validations ("checks") sont déclenchés par GitHub
+* Effectue des vérifications automatisées sur un commit de merge entre votre branche cible et la branche de PR
+
+== Quelques exemples
+
+* Analyse syntaxique du code (lint), pour détecter les erreurs potentielles ou les violations du guide de style
+* Compilation du projet
+* Execution des tests automatisés du projet (unit, integration)
+* Déploiement du projet dans un environnement de test...
+
+Ces "checks" peuvent êtres executés par votre moteur de CI ou des outils externes.
+
+== Exercice: Déclencher un Workflow de CI sur une PR
+
+* Votre PR n'a pas déclenché le workflow de CI de votre binôme 🤔
+* Il faut changer la spec de votre workflow pour qu'il se déclenche aussi sur une PR
+* Vous pouvez changer la spec du workflow directement dans votre PR
+* La link:https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflow[documentation] se trouve par ici
+
+== !
+
+*Règle d'or*: Si le CI est rouge, on ne merge pas la pull request !
+
+[.small]
+Même si le linter ilécon, même si on a la flemme et sépanou qui avons cassé le CI.
