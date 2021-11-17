@@ -255,6 +255,10 @@ image:pr.png[]
 
 Ces "checks" peuvent êtres executés par votre moteur de CI ou des outils externes.
 
+== Exercice: Faites en sorte que votre workflow de ci s'execute sur une pull-request
+
+Il semblerait que votre PR n'aie pas déclenché votre workflow de CI :thinking:
+
 == !
 
 *Règle d'or*: Si le CI est rouge, on ne merge pas la pull request !
