@@ -1,12 +1,11 @@
 [{invert}]
 = Git à plusieurs
 
-== Limites de bosser seul
+== Limites de travailler seul
 
 * Capacité finie de travail
-
 * Victime de propres biais
-* On ne sait pas tout, tout le temps ?
+* On ne sait pas tout
 
 == !
 
@@ -29,7 +28,6 @@ Cela reste des outils, ça ne résoud pas tout non plus.
 
 * Git permet de collaborer assez aisément
 * Chaque développeur crée et publie des commits...
-
 * ... et rapatrie ceux de de ses camarades !
 * C'est un outil très flexible... chacun peut faire ce qu'il lui semble bon !
 
@@ -37,13 +35,9 @@ Cela reste des outils, ça ne résoud pas tout non plus.
 
 image:bloing.jpeg[]
 
-== Quelques règles pour éviter ça !
+== Un Example de Git Flow
 
-[{invert}]
-
-== Disclaimer
-
-Attachez vous aux idées générales... les détails varient d'un projet à l'autre!
+(Attachez vous aux idées générales... les détails varient d'un projet à l'autre!)
 
 == Gestion des branches
 
@@ -61,15 +55,12 @@ image:gitmulti1.svg[]
 
 * Chaque groupe de travail (développeur, binôme...)
 ** Crée une branche de travail à partir de la branche staging
-
 ** Une branche de travail correspond à *une chose à la fois*
-
 ** Pousse des commits dessus qui implémentent le changement
 
 == !
 
 image:gitmulti2.svg[]
-
 
 == !
 
@@ -234,10 +225,10 @@ image:pr.png[]
 == Exercice: Relisez votre PR reçue !
 
 * Vous devriez avoir reçu une PR de votre binôme :-)
-
 * Relisez le changement de la PR
-* Effectuez quelques commentaires (bonus: utilisez la suggestion de changements)
-* Si elle vous convient, mergez la pull request dans votre dépôt.
+* Effectuez quelques commentaires (bonus: utilisez la suggestion de changements), si c'est necessaire
+* Si elle vous convient, approuvez la!
+* En revanche ne la mergez pas, car il manque quelque chose...
 
 == Validation automatisée
 
@@ -250,7 +241,7 @@ image:pr.png[]
 
 * Analyse syntaxique du code (lint), pour détecter les erreurs potentielles ou les violations du guide de style
 * Compilation du projet
-* Execution des tests automatisés du projet (unit, integration)
+* Execution des tests automatisés du projet
 * Déploiement du projet dans un environnement de test...
 
 Ces "checks" peuvent êtres executés par votre moteur de CI ou des outils externes.
