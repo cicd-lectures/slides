@@ -31,7 +31,7 @@ image::youreup.gif[width="800"]
 
 * Alternance de théorie et de pratique pour être le plus interactif possible
 
-* Reproductible à la maison, pensé en context "Covid à la maison"
+* Reproductible à la maison, pensé dans le contexte du "Covid à la maison"
 
 * Contenu entièrement libre et open-source
 [.small]
