@@ -19,10 +19,10 @@ image:solo.gif[width="500"]
 
 == !
 
-Collaborer c'est pas évident, mais il existe des outils et des methodes pour vous aider.
+Collaborer c'est pas évident, mais il existe des outils et des méthodes pour vous aider.
 
 [.small]
-Cela reste des outils, ça ne résoud pas tout non plus.
+Cela reste des outils, ça ne résous pas tout non plus.
 
 == Git multijoueur
 
@@ -43,7 +43,7 @@ image:bloing.jpeg[]
 
 * Les "versions" du logiciel sont maintenues sur des branches principales (main, staging)
 
-* Ces branches reflêtent l'état du logiciel
+* Ces branches reflètent l'état du logiciel
 ** **main**: version actuelle en production
 ** **staging**: prochaine version
 
@@ -66,7 +66,7 @@ image:gitmulti2.svg[]
 
 image:gitmulti3.svg[]
 
-Quand le travail est fini, la branche de travail est mergée dans staging
+Quand le travail est fini, la branche de travail est "mergée" dans staging
 
 == !
 
@@ -87,7 +87,7 @@ Où vivent ces branches ?
 Tous les développeurs envoient leur commits et branches sur le même remote
 
 * Simple a gérer ...
-* ... mais nécessite que tous les contributeurs aient accès au dépot
+* ... mais nécessite que tous les contributeurs aient accès au dépôt
 ** Adapté a l'entreprise, peu adapté au monde de l'open source
 
 == !
@@ -97,9 +97,9 @@ image:remotemulti1.svg[]
 == Chacun son propre remote
 
 * La motivation: le contrôle d'accès
-** Tout le monde peut lire le dépot principal. Personne ne peut écrire desuss.
-** Tout le monde peut dupliquer le dépot public et écrire sur sa copie.
-** Toute modification du dépot principal passe par une procédure de revue.
+** Tout le monde peut lire le dépôt principal. Personne ne peut écrire dessus.
+** Tout le monde peut dupliquer le dépôt public et écrire sur sa copie.
+** Toute modification du dépôt principal passe par une procédure de revue.
 ** Si la revue est validée, alors la branche est "mergée" dans la branche cible
 
 * C'est le modèle poussé par GitHub !
@@ -112,17 +112,17 @@ image:remotemulti2.svg[]
 
 Dans la terminologie GitHub:
 
-* Un fork est un remote copié d'un dépot principal
+* Un fork est un remote copié d'un dépôt principal
 ** C'est la où les contributeurs poussent leur branche de travail.
-* Les branches de version (main, staging...) vivent sur le dépot principal
+* Les branches de version (main, staging...) vivent sur le dépôt principal
 * La procédure de ramener un changement d'un == Limites de bosser seul
 
 == Exercice: Créez un fork
 
-* Nous allons vous faire forker vos dépots respectifs
+* Nous allons vous faire forker vos dépôts respectifs
 * Trouvez vous un binôme dans le groupe.
 * Rendez vous link:https://docs.google.com/spreadsheets/d/1cVVdhvDv5ZCG13rXQOlzE62Y7SLsTtpDRprsssjZBhI/edit?usp=sharing[sur cette page,window="_blank"] pour enregistrer votre binôme, et indiquez les liens de vos dépôts respectifs.
-* Depuis la page du dépot de votre binôme, cliquez en haut à droite sur le bouton **Fork**.
+* Depuis la page du dépôt de votre binôme, cliquez en haut à droite sur le bouton **Fork**.
 
 image:fork.png[]
 
@@ -138,7 +138,7 @@ image:fork.png[]
 == Anatomie d'une Pull Request sur GitHub
 
 * **Branche source**: La branche portant le changement
-* **Branche cible**: La branche dans lequel le changement va être mergé.
+* **Branche cible**: La branche dans lequel le changement va être "mergé".
 * **Titre**: décrit de façon concise le changement apporté
 * **Description**: décrit de façon détaillée le changement. Doit donner toutes les "clés de lecture" de la PR à un relecteur
 * **Labels**: meta informations permettant de suivre le type de la PR (bugfix, feature?)
@@ -147,11 +147,11 @@ image:fork.png[]
 [{invert}]
 == !
 
-A vous de jouer: Ajoutez la fonctionalité "supression d'un menu" au projet de votre binôme
+A vous de jouer: Ajoutez la fonctionnalité "suppression d'un menu" au projet de votre binôme
 
 == Exercice: Contribuez au projet de votre binôme (1/5)
 
-Première étape: on clone le fork dans son environement de développement
+Première étape: on clone le fork dans son environnement de développement
 
 [source,bash]
 --
@@ -169,9 +169,9 @@ git checkout -b implement-delete
 Maintenant voici la liste des choses à faire:
 
 * Rajouter le `MenuRepository` comme dépendance du MenuController
-* Implémenter une nouvelle methode `deleteMenu`
+* Implémenter une nouvelle méthode `deleteMenu`
 ** Gère les requêtes `DELETE /menus/{id}`
-** Appele la methode `deleteById` du `menuRepository`
+** Appelle la méthode `deleteById` du `menuRepository`
 ** Réponds 200 si la suppression est réussie
 * Bonus si vous arrivez à faire en sorte que le serveur réponde 404 si un menu à supprimer n'existe pas.
 
@@ -195,7 +195,7 @@ curl localhost:8080/menus
 
 == Exercice: Contribuez au projet de votre binôme (4/5)
 
-Une fois que vous êtes satisfaits de votre changmement il vous faut maintenant créer un commit et pousser votre nouvelle branche sur votre fork.
+Une fois que vous êtes satisfaits de votre changement il vous faut maintenant créer un commit et pousser votre nouvelle branche sur votre fork.
 
 == Exercice: Contribuez au projet de votre binôme (5/5)
 
@@ -208,15 +208,15 @@ image:pr.png[]
 
 == Revue de code ?
 
-* Validation par un ou plusieur pairs (technique et non technique) des changements
-* Relecture depuis github (ou depuis le poste du developpeur)
-* Chaque relecteur emet des commentaires // suggestions de changement
+* Validation par un ou plusieurs pairs (technique et non technique) des changements
+* Relecture depuis github (ou depuis le poste du développeur)
+* Chaque relecteur émet des commentaires // suggestions de changement
 * Quand un relecteur est satisfait d'un changement, il l'approuve
 
 == !
 
 * La revue de code est un **exercice difficile** et **potentiellement frustrant** pour les deux parties.
-** Comme sur Twitter, on est bien à l'abri derrirère son écran ;=)
+** Comme sur Twitter, on est bien à l'abri derrière son écran ;=)
 * En tant que contributeur, **soyez respectueux** de vos relecteurs : votre changement peut être refusé et c'est quelque chose de normal.
 * En tant que relecteur, **soyez respectueux** du travail effectué, même si celui ci comporte des erreurs ou ne correspond pas à vos attentes.
 
@@ -226,9 +226,9 @@ image:pr.png[]
 
 * Vous devriez avoir reçu une PR de votre binôme :-)
 * Relisez le changement de la PR
-* Effectuez quelques commentaires (bonus: utilisez la suggestion de changements), si c'est necessaire
+* Effectuez quelques commentaires (bonus: utilisez la suggestion de changements), si c'est nécessaire
 * Si elle vous convient, approuvez la!
-* En revanche ne la mergez pas, car il manque quelque chose...
+* En revanche ne la "mergez" pas, car il manque quelque chose...
 
 == Validation automatisée
 
@@ -244,7 +244,7 @@ image:pr.png[]
 * Execution des tests automatisés du projet
 * Déploiement du projet dans un environnement de test...
 
-Ces "checks" peuvent êtres executés par votre moteur de CI ou des outils externes.
+Ces "checks" peuvent êtres exécutés par votre moteur de CI ou des outils externes.
 
 == Exercice: Déclencher un Workflow de CI sur une PR
 
@@ -258,4 +258,4 @@ Ces "checks" peuvent êtres executés par votre moteur de CI ou des outils exter
 *Règle d'or*: Si le CI est rouge, on ne merge pas la pull request !
 
 [.small]
-Même si le linter ilécon, même si on a la flemme et sépanou qui avons cassé le CI.
+Même si le linter "ilécon", même si on a la flemme et "sépanou" qui avons cassé le CI.

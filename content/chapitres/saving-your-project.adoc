@@ -8,7 +8,7 @@ Votre dépôt est actuellement sur votre ordinateur.
 * Que se passe t'il si :
 ** Votre disque dur tombe en panne ?
 ** On vous vole votre ordinateur ?
-** Vous échapez votre tasse de thé / café sur votre ordinateur ?
+** Vous échappez votre tasse de thé / café sur votre ordinateur ?
 ** Une météorite tombe sur votre bureau et fracasse votre ordinateur ?
 
 [%notitle]
@@ -21,7 +21,7 @@ Testé, pas approuvé.
 
 == Comment éviter ça ?
 
-* Répliquer votre dépôt sur une ou plusieur machines !
+* Répliquer votre dépôt sur une ou plusieurs machines !
 * Git est pensé pour gérer ce de problème
 
 == Gestion de version décentralisée
@@ -40,7 +40,7 @@ Source link:https://www.geeksforgeeks.org/centralized-vs-distributed-version-con
 
 Cela rends la manipulation un peu plus complexe, allons-y pas à pas :-)
 
-== Créer un dépot distant
+== Créer un dépôt distant
 
 * Rendez vous sur link:https://github.com[Github]
 ** Créez un nouveau dépôt distant en cliquant sur "New" en haut à gauche
@@ -102,7 +102,7 @@ image:remote1.svg[]
 * ... qui à accepté le changement et mis à jour sa propre branche main.
 * `git` a créé localement une branche distante `origin/main` qui suis l'état de `main` sur le remote.
 
-* Vous pouvez constater que la page github de votre dépot affiche le code source
+* Vous pouvez constater que la page github de votre dépôt affiche le code source
 
 == Refaisons un commit !
 
@@ -161,7 +161,7 @@ Github crée directement un commit sur la branche main sur le dépôt distant
 
 [source, bash]
 --
-# Mets à jour les branches distantes du dépot origin
+# Mets à jour les branches distantes du dépôt origin
 git fetch origin
 
 # La branche distante main a avancé sur le remote origin
