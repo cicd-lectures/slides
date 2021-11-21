@@ -82,13 +82,15 @@ Source : https://git-scm.com/book/fr/v2/D%C3%A9marrage-rapide-Rudiments-de-Git#_
 
 == Exercice avec Git - 1.1
 
-* Rendez vous dans le répertoire `/workspace` (`cd /workspace`)
+* Dans le terminal de votre environnement GitPod:
 
-* Créez un dossier vide nommé `projet-vcs-1` puis positionnez-vous dans ce dossier
+** Créez un dossier vide nommé `projet-vcs-1` dans le répertoire `/workspace`, puis positionnez-vous dans ce dossier
 +
 [source,bash]
-mkdir -p ./projet-vcs-1/ && cd ./projet-vcs-1/
-
+----
+mkdir -p /workspace/projet-vcs-1/
+cd /workspace/projet-vcs-1/
+----
 
 ** Est-ce qu'il y a un dossier `.git/` ?
 ** Essayez la commande `git status` ?
@@ -103,9 +105,8 @@ mkdir -p ./projet-vcs-1/ && cd ./projet-vcs-1/
 
 [source,bash]
 --
-cd /workspace
-mkdir -p ./projet-vcs-1/
-cd ./projet-vcs-1/
+mkdir -p /workspace/projet-vcs-1/
+cd /workspace/projet-vcs-1/
 ls -la # Pas de dossier .git
 git status # Erreur "fatal: not a git repository"
 git init ./

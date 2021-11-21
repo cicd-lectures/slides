@@ -29,15 +29,10 @@ image::youreup.gif[width="800"]
 
 == A propos du cours
 
-* On a essayé de s'adapter à la situation et avons essayé de faire quelque chose d'interactif
-* Il y aura donc une alternance de théorie et de pratique
-* C'est la première fois qu'on le donne, il risque d'y avoir des soucis, be kind :-)
+* Alternance de théorie et de pratique pour être le plus interactif possible
+
+* Reproductible à la maison, pensé en context "Covid à la maison"
+
+* Contenu entièrement libre et open-source
 [.small]
-** N'hésitez pas à ouvrir des PRs si vous en voyez link:https://github.com/cicd-lectures/slides/pulls[ici] (😉 wink wink)
-
-== Outils Nécessaires
-
-* Un navigateur récent (et décent)
-* Un compte link:https://github.com[GitHub,window="_blank"]
-* Un compte link:https://gitpod.io[GitPod.io,window="_blank"], notre environement de développement
-* On va vous demander de travailler en binôme, commencez à réfléchir avec qui vous souhaitez travailler !
+** N'hésitez pas ouvrir des Pull Request si vous voyez des améliorations ou problèmes: link:https://github.com/cicd-lectures/slides/pulls[sur cette page] (😉 wink wink)

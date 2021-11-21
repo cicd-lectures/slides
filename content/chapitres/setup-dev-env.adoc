@@ -1,11 +1,75 @@
 [{invert}]
-= Préparer votre environement de développement
+= Préparer votre environnement de travail
 
-== TODO
+== Outils Nécessaires 🛠
 
-== Mise en place de l'exercice (1/2)
+* Un navigateur récent (et décent)
+* Un compte sur link:https://github.com[+++<span class="fab fa-github"></span>+++ GitHub,window="_blank"]
+* On va vous demander de travailler en binôme, commencez à réfléchir avec qui vous souhaitez travailler !
 
-* Rendez vous sur link:https://gitpod.io/access-control[la page des droits GitPod]
-** Cochez dans la colonne github "write public repos" et "update workflows" puis validez
+== GitPod
 
-TODODODODODODODOOD
+link:https://gitpod.io[GitPod.io,window="_blank"] : Environnement de développement dans le ☁️ "nuage"
+
+* **But:** reproductible
+* Puissance de calcul sur un serveur distant
+* Éditeur de code VSCode dans le navigateur
+* Gratuit pour 50h par mois (⚠️)
+* Open-Source : vous pouvez l'héberger chez vous
+
+== Démarrer avec GitPod 🚀
+
+* Rendez vous sur link:https://gitpod.io[window="_blank"]
+
+* Authentifiez vous en utilisant votre compte GitHub:
+** Bouton "Login" en haut à droite
+** Puis choisissez le lien "+++<span class="fab fa-github"></span>+++ Continue with GitHub"
+
+[.small]
+Pour les "autorisations", passez sur la slide suivante
+
+== Autorisations demandées par GitPod 🔓
+
+Lors de votre 1er accès, GitPod va vous demander des autorisations (à accepter) sur votre compte GitHub:
+
+* Accès à votre email public configuré dans GitHub (identification)
+
+* Accès à vos dépôts GitHub public (accès aux dépôts dans l'éditeur)
+
+* Accès aux GitHub workflows de vos dépôts publics (partie "CI" de ce cours)
+
+== Projets GitPod 🗂
+
+* Vous devriez arriver sur la link:https://gitpod.io/projects[page des projets GitPod, window="_blank"]
+
+* Un projet GitPod est associé à un dépôt GitHub
+** Nécessaire pour stocker les réglages
+
+* On a tout préparé pour vous !
+
+[.small]
+Source disponible dans: link:https://github.com/cicd-lectures/gitpod[]
+
+== Démarrer l'environnement GitPod
+
+Cliquez sur le bouton ci-dessous pour démarrer un environnement GitPod personnalisé:
+
+image::https://gitpod.io/button/open-in-gitpod.svg[link="https://gitpod.io/#https://github.com/cicd-lectures/gitpod.git",window="_blank"]
+
+Après quelques secondes (minutes?), vous avez accès à l'environnement:
+
+* Gauche: navigateur de fichiers ("Workspace")
+* Haut: éditeur de texte ("Get Started")
+* Bas: Terminal interactif
+* À droite en bas: plein de popups à ignorer (ou pas?)
+
+== Checkpoint 🎯
+
+* Vous devriez pouvoir taper la commande `whoami` dans le terminal:
+** Retour attendu: `gitpod`
+
+* Vous devriez pouvoir fermer le fichier "Get Started"...
+** ... et ouvrir le fichier ``.gitpod.yml``
+
+[.small]
+On peut commencer !
