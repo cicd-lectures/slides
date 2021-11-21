@@ -1,7 +1,7 @@
 [{invert}]
 = Une petite histoire du génie logiciel
 
-= Comment mener un projet logiciel?
+== Comment mener un projet logiciel?
 
 == Avant : le cycle en V
 
@@ -9,7 +9,7 @@ image::cycleenv.png[width="800"]
 
 == Que peut-il mal se passer?
 
-* On specifie et l'on engage un volume conséquent de travail sur des hypothèses
+* On spécifie et l'on engage un volume conséquent de travail sur des hypothèses
 ** ... et si les hypothèses sont fausses?
 ** ... et si les besoins changent?
 * Cycle trèèèèès long
@@ -23,8 +23,8 @@ image::cycleenv.png[width="800"]
 
 == Comment éviter ça?
 
-* Valider les hypothèses au plus tôt, et étendre petit à petit le périmètre fonctionel.
-** Reduire le périmètre fonctionel au minimum.
+* Valider les hypothèses au plus tôt, et étendre petit à petit le périmètre fonctionnel.
+** Réduire le périmètre fonctionnel au minimum.
 ** Confronter le logiciel au plus tôt aux utilisateurs.
 ** Refaire des hypothèses basées sur ce que l'on à appris, et recommencer!
 * "Embrasser" le changement
@@ -38,7 +38,7 @@ image::cycleenv.png[width="800"]
 
 == La clé : gérer le changement!
 
-* Le changement ne doit pas être un évenement, ça doit être la norme.
+* Le changement ne doit pas être un événement, ça doit être la norme.
 * Notre objectif : minimiser le coût du changement.
 * Faire en sorte que:
 ** Changer quelque chose soit facile

@@ -6,10 +6,10 @@
 
 == Integration aux moteurs de CI/CD ?
 
-* Pour chaque evenement important du dépôt
+* Pour chaque événement important du dépôt
 
 ** (merge, nouvelle branche poussée sur dépôt, nouvelle Pull Request)
-** Le service peut envoyer une requête HTTP pour notifier un service tiers de l'evennement.
+** Le service peut envoyer une requête HTTP pour notifier un service tiers de l'événement.
 *** Par exemple: à un moteur de CI/CD !
 
 == Anatomie du déclenchement d'un job CI
