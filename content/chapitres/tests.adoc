@@ -9,7 +9,7 @@ C'est du code qui vérifie que du code fait ce qu'il est supposé faire.
 * Ça sert a prouver que le logiciel se comporte comme attendu a tout moment.
 * Détecte les impacts non anticipés des changements introduits
 * Evite l'introduction de régressions
-* Ecrire des tests est un acte préventif et non curratif.
+* Écrire des tests est un acte préventif et non curatif.
 
 == Qu'est ce que l'on teste ?
 
@@ -19,14 +19,14 @@ C'est du code qui vérifie que du code fait ce qu'il est supposé faire.
 
 On parle de **SUT**, System Under Test.
 
-== Différents systemes, Différentes Techniques de Tests
+== Différents systèmes, Différentes Techniques de Tests
 
 * Test unitaire
 * Test d'integration
 * Test de bout en bout
 * Smoke tests
 
-(La terminologie varie d'un développeur / langage / entreprise / ecosystème à l'autre)
+(La terminologie varie d'un développeur / langage / entreprise / écosystème à l'autre)
 
 == Test unitaire
 
@@ -35,22 +35,22 @@ On parle de **SUT**, System Under Test.
 * Un test décrit un cas
 * Par exemple :
 ** Retourne les bonnes valeur en fonction des paramètres donnés
-** Appelle la bonne methode du bon attribut avec les bons paramètres
+** Appelle la bonne méthode du bon attribut avec les bons paramètres
 
 == Mise en place de l'exercice
 
-* Depuis votre environement de développement, dans le repertoire du **fork** de votre binome
+* Depuis votre environnement de développement, dans le repertoire du **fork** de votre binôme
 * Créez une feature branch `add-tests`.
 
-== Ajout des Outils de Tests Automatiés au Projet (1/3)
+== Ajout des Outils de Tests Automatisés au Projet (1/3)
 
-L'execution de tests necessite un outillage non ajouté au projet
+L'execution de tests nécessite un outillage non ajouté au projet
 
-* Framework d'ecriture et d'execution de tests: `JUnit`
-* Librarie de création de mocks: `Mockito`
+* Framework d'écriture et d'execution de tests: `JUnit`
+* Librairie de création de mocks: `Mockito`
 * Plugin maven de lancement de tests: `surefire`
 
-== Ajout des Outils de Tests Automatiés au Projet (2/3)
+== Ajout des Outils de Tests Automatisé au Projet (2/3)
 
 Ajoutez le bloc suivant au `pom.xml`
 
@@ -67,7 +67,7 @@ Ajoutez le bloc suivant au `pom.xml`
 </dependencies>
 ----
 
-== Ajout des Outils de Tests Automatiés au Projet (3/3)
+== Ajout des Outils de Tests Automatisés au Projet (3/3)
 
 * Exécutez les tests unitaires avec la commande `mvn test`
 ** Spoiler : `No tests to run...`
@@ -76,9 +76,9 @@ image::https://media.giphy.com/media/5x89XRx3sBZFC/giphy.gif[]
 
 == Exercice : Corriger un Bug (1/11)
 
-* La classe `ListMenuService` semble être buggée...
+* La classe `ListMenuService` semble être "buggée"...
 ** Tous les noms des menus sont *TODO* 😱
-* Quand on regarde l'implémentation, on se rends compte que le problème provient de la methode statique `fromModel` de la classe `MenuDTO`
+* Quand on regarde l'implémentation, on se rends compte que le problème provient de la méthode statique `fromModel` de la classe `MenuDTO`
 * Même si la correction est aisée, on va d'abord écrire un test unitaire qui valide le comportement du service.
 * Notre SUT: `ListMenuService` + `MenuDTO`
 
@@ -168,7 +168,7 @@ Sauf qu'on avait pas un bug à corriger au fait?
 
 == Exercice : Corriger un Bug (8/11)
 
-Objectif: Vérifier que les valeurs retournées par le `ListMenuServive` sont cohérentes
+Objectif: Vérifier que les valeurs retournées par le `ListMenuService` sont cohérentes
 avec les données en base, pour cela il nous faut:
 
 * Préparer un jeu de données de test et configurer le mock du repository pour qu'il le retourne
@@ -182,7 +182,7 @@ avec les données en base, pour cela il nous faut:
 @Test
 @DisplayName("lists all known menus")
 public void listsKnownMenus() {
-  // Definit une liste de menus avec un menus.
+  // Défini une liste de menus avec un menus.
   Iterable<Menu> existingMenus = Arrays.asList(
     new Menu(
       Long.valueOf(1),
@@ -202,7 +202,7 @@ public void listsKnownMenus() {
   // On appelle notre sujet
   List<MenuDto> gotMenus = subject.listMenus();
 
-  // On definit wantMenus, les résultats attendus
+  // On défini wantMenus, les résultats attendus
   Iterable<MenuDto> wantMenus = Arrays.asList(
       new MenuDto(
         Long.valueOf(1),
@@ -251,7 +251,7 @@ image::https://media.giphy.com/media/111ebonMs90YLu/giphy.gif[width="800"]
 ** Avec les mocks, c'est facile de se faire piéger.
 * Essayez, dans la mesure du possible, d'écrire vos tests (qui échouent) avant d'écrire votre code.
 * Il n'y a pas de définition ferme du SUT
-** Attention à garder une taille raisonable (quelques classes).
+** Attention à garder une taille raisonnable (quelques classes).
 * Privilégiez les tests de méthodes publiques.
 
 == Test Unitaire : Pro / Cons
@@ -274,7 +274,7 @@ video::ut-fail-2.mp4[width="600",options="autoplay,loop,nocontrols"]
 [{invert}]
 == !
 
-Tester des composants indépendament ne prouve pas que le système fonctionne une fois intégré!
+Tester des composants indépendamment ne prouve pas que le système fonctionne une fois intégré!
 
 == Solution: Tests d'intégration
 
@@ -289,7 +289,7 @@ image::architecture.png[]
 
 == Configuration de Maven
 
-== Miste en Place d'un Test d'Intégration
+== Mise en Place d'un Test d'Intégration
 
 [source,java]
 ----
