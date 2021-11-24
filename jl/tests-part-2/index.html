@@ -454,7 +454,7 @@ but was:
           &lt;goal&gt;test&lt;/goal&gt;
         &lt;/goals&gt;
         &lt;configuration&gt;
-          &lt;skipTests&gt;false&lt;/skipTests&gt;
+          &lt;skipTests&gt;${skipUnitTests}&lt;/skipTests&gt;
           &lt;!-- Inclue et execute les tests contenus dans les fichiers ayant le suffixe Tests.java--&gt;
           &lt;includes&gt;
             &lt;include&gt;**/*Tests.java&lt;/include&gt;
@@ -479,8 +479,8 @@ but was:
     &lt;/executions&gt;
   &lt;/plugin&gt;
 &lt;/plugins&gt;</code></pre></div></div></div></section><section id="configuration_de_maven_22"><h2>Configuration de Maven (2/2)</h2><div class="slide-content"><div class="paragraph"><p>Cela crée les commandes suivantes:</p></div>
-<div class="ulist"><ul><li><p><code>mvn test</code>: lance les tests unitaires</p></li><li><p><code>mvn integration-test</code>: lance les tests d&#8217;integration du projet</p></li></ul></div>
-<div class="paragraph"><p>(TODO(jly): mvn integraion-test appelle mvn test ça me rends taréééééééé)</p></div></div></section><section id="mise_en_place_dun_test_dintégration"><h2>Mise en Place d&#8217;un Test d&#8217;Intégration</h2><div class="slide-content"><div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-java hljs" data-noescape="true" data-lang="java">// Lance l'application sur un port aléatoire.
+<div class="ulist"><ul><li><p><code>mvn test</code>: lance les tests unitaires</p></li><li><p><code>mvn verify</code>: lance les tests unitaires et d&#8217;integration</p></li><li><p><code>mvn verify -DskipUnitTests=true</code>: lance uniquement les tests d&#8217;integration</p></li></ul></div></div></section><section id="mise_en_place_dun_test_dintégration"><h2>Mise en Place d&#8217;un Test d&#8217;Intégration</h2><div class="slide-content"><div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-java hljs" data-noescape="true" data-lang="java">// src/test/java/com/cicdlectures/menuserver/controller/MenuControllerIT.java
+// Lance l'application sur un port aléatoire.
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 // Indique de relancer l'application à chaque test.
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
