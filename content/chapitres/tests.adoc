@@ -6,7 +6,7 @@ C'est du code qui vérifie que du code fait ce qu'il est supposé faire.
 
 == Pourquoi faire des tests ?
 
-* Ça sert a prouver que le logiciel se comporte comme attendu a tout moment.
+* Prouve que le logiciel se comporte comme attendu a tout moment.
 * Détecte les impacts non anticipés des changements introduits
 * Evite l'introduction de régressions
 * Écrire des tests est un acte préventif et non curatif.
@@ -78,9 +78,9 @@ image::https://media.giphy.com/media/5x89XRx3sBZFC/giphy.gif[]
 
 * La classe `ListMenuService` semble être "buggée"...
 ** Tous les noms des menus sont *TODO* 😱
-* Quand on regarde l'implémentation, on se rends compte que le problème provient de la méthode statique `fromModel` de la classe `MenuDTO`
+* Quand on regarde l'implémentation, on se rends compte que le problème provient de la méthode statique `fromModel` de la classe `MenuDto`
 * Même si la correction est aisée, on va d'abord écrire un test unitaire qui valide le comportement du service.
-* Notre SUT: `ListMenuService` + `MenuDTO`
+* Notre SUT: `ListMenuService` + `MenuDto`
 
 == Exercice : Corriger un Bug (2/11)
 
@@ -279,20 +279,90 @@ Tester des composants indépendamment ne prouve pas que le système fonctionne u
 == Solution: Tests d'intégration
 
 * Test validant qu’un assemblage d’unités se comportent comme prévu.
+* Teste votre application au travers de toute ses couches
 * Par exemple avec menu server:
 **  Prouve que GET /menus retourne la liste des menus enregistrés en base
 **  Prouve que POST /menus enregistre un nouveau menu en base avec ses plats.
 
-== Définition du SUT
+== Définition du SUT (1/2)
 
 image::architecture.png[]
 
-== Configuration de Maven
+== Définition du SUT (2/2)
+
+Un test d'intégration doit a chaque test:
+
+* DémaRrer et provisionner un environnement d’exécution (une DB, Elasticsearch, un autre service...)
+* Démarrer votre application
+* Jouer un scénario de test
+* Éteindre et nettoyer son environnement d’exécution pour garantir l'isolation des tests
+
+== !
+
+Ce sont des tests plus lents et plus complexes que des tests unitaires.
+
+== Configuration de Maven (1/2)
+
+[source,xml]
+----
+<plugins>
+  <plugin>
+    <!-- Configure le maven-surefire-plugin -->
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-surefire-plugin</artifactId>
+    <configuration>
+      <!-- Desactive tous les tests pour l'execution par defaut -->
+      <skipTests>true</skipTests>
+    </configuration>
+    <executions>
+      <execution>
+        <!--Crée une première execution pour jouer les tests unitaires -->
+        <id>unit</id>
+        <phase>test</phase>
+        <goals>
+          <goal>test</goal>
+        </goals>
+        <configuration>
+          <skipTests>${skipUnitTests}</skipTests>
+          <!-- Inclue et execute les tests contenus dans les fichiers ayant le suffixe Tests.java-->
+          <includes>
+            <include>**/*Tests.java</include>
+          </includes>
+        </configuration>
+      </execution>
+      <execution>
+        <!--Crée une seconde execution pour jouer les tests d'integration -->
+        <id>integration</id>
+        <phase>integration-test</phase>
+        <goals>
+          <goal>test</goal>
+        </goals>
+        <configuration>
+          <skipTests>false</skipTests>
+          <includes>
+            <!-- Inclue et execute les tests contenus dans les fichiers ayant le suffixe IT.java-->
+            <include>**/*IT.java</include>
+          </includes>
+        </configuration>
+      </execution>
+    </executions>
+  </plugin>
+</plugins>
+----
+
+== Configuration de Maven (2/2)
+
+Cela crée les commandes suivantes:
+
+- `mvn test`: lance les tests unitaires
+- `mvn verify`: lance les tests unitaires et d'integration
+- `mvn verify -DskipUnitTests=true`: lance uniquement les tests d'integration
 
 == Mise en Place d'un Test d'Intégration
 
 [source,java]
 ----
+// src/test/java/com/cicdlectures/menuserver/controller/MenuControllerIT.java
 // Lance l'application sur un port aléatoire.
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 // Indique de relancer l'application à chaque test.
@@ -302,7 +372,7 @@ public class MenuControllerIT {
   @LocalServerPort
   private int port;
 
-  private URL getServerURL() throws Exception {
+  private URL getMenusURL() throws Exception {
     return new URL("http://localhost:" + port + "/menus");
   }
 
@@ -312,3 +382,39 @@ public class MenuControllerIT {
   }
 }
 ----
+
+== Outillage fourni par SpringBoot
+
+[source, java]
+----
+// Injecte automatiquement l'instance du menu repository
+@Autowired
+private MenuRepository menuRepository;
+
+// Injecte automatiquement l'instance du TestRestTemplate
+@Autowired
+private TestRestTemplate template;
+
+public void listExitingMenus() throws Exception {
+   // Effectue une requête GET /menus
+   ResponseEntity<MenuDto[]> response = this.template.getForEntity(getMenusURL().toString(), MenuDto[].class);
+
+   //Parse le payload de la réponse sous forme d'array de MenuDto
+   MenuDto[] gotMenus = response.getBody();
+}
+----
+
+== Exercice: Implémentez le test d'intégration
+
+* Provisionne la base de donnée avec des données fixes
+* Effectue une requête HTTP sur `GET /menus`
+* Parse la réponse sous forme de `MenuDto`
+* Vérifie que le status de la réponse est 200.
+* Compare la réponse à un résultat attendu de la même façon que dans le test unitaire.
+
+== Exercice: Activez les tests dans votre CI
+
+Changez le workflow de ci de votre binôme (ou le votre) pour qu'à chaque build:
+
+* Les tests unitaires soient lancés
+* Les tests d'integration soient lancé
