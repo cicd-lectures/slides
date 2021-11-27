@@ -9,7 +9,7 @@ C'est du code qui vérifie que du code fait ce qu'il est supposé faire.
 * Prouve que le logiciel se comporte comme attendu a tout moment.
 * Détecte les impacts non anticipés des changements introduits
 * Evite l'introduction de régressions
-* Ecrire des tests est un acte préventif et non curratif.
+* Écrire des tests est un acte préventif et non curatif.
 
 == Qu'est ce que l'on teste ?
 
@@ -292,10 +292,10 @@ image::architecture.png[]
 
 Un test d'intégration doit a chaque test:
 
-* Démarer et provisionner un environement d'execution (une DB, Elasticsearch, un autre service...)
-* Démarer votre application
-* Jouer un scenario de test
-* Eteindre et nettoyer son environement d'execution pour garantir l'isolation des tests
+* DémaRrer et provisionner un environnement d’exécution (une DB, Elasticsearch, un autre service...)
+* Démarrer votre application
+* Jouer un scénario de test
+* Éteindre et nettoyer son environnement d’exécution pour garantir l'isolation des tests
 
 == !
 
