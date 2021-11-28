@@ -347,15 +347,48 @@ pour définir des propriétés sous la forme <code>&lt;clef&gt;valeur&lt;/clef&g
 <div class="ulist"><ul><li><p>Ajoutez le bloc <code>&lt;dependencies&gt;</code> de la slide précédente dans votre <code>pom.xml</code></p><div class="ulist"><ul><li><p>💡 <a href="https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-web/2.6.0" target="_blank">org.springframework.boot.spring-boot-starter-web 2.6.0 sur Maven Central</a></p></li></ul></div></li><li><p>Exécutez la commande <code>mvn compile</code></p></li><li><p>Résultat attendu : <strong>nouvelles</strong> ❌ erreurs de compilation (encore une dépendance manquante) :</p></li></ul></div>
 <div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-none hljs" data-noescape="true">[ERROR] COMPILATION ERROR :
 [INFO] ------------------------------------------------------------------------
-[ERROR] &lt;...&gt; package org.springframework.transaction.annotation does not exist</code></pre></div></div></div></section><section id="exercice_avec_les_dépendances_spring_22"><h2>Exercice avec les dépendances Spring 2/2</h2><div class="slide-content"><div class="ulist"><ul><li><p><strong>But:</strong> Compiler l&#8217;application complète</p></li><li><p>Continuez de modifier le fichier <code>pom.xml</code> afin d&#8217;ajouter les 2 dépendances suivantes :</p><div class="ulist"><ul><li><p><a href="https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-jpa/2.6.0" target="_blank">org.springframework.boot.spring-boot-starter-data-jpa 2.6.0 sur Maven Central</a></p></li><li><p><a href="https://mvnrepository.com/artifact/org.projectlombok/lombok/1.18.22" target="_blank">org.projectlombok.lombok 1.18.22 sur Maven Central</a></p></li></ul></div></li><li><p>Résultat attendu :</p></li></ul></div></div></section><section id="more"><h2>more</h2><div class="slide-content"><div class="paragraph"><p>INFO] -------------------------------------------------------------
-[ERROR] COMPILATION ERROR :
-[INFO] -------------------------------------------------------------
-[ERROR] /workspace/menu-server/src/main/java/com/cicdlectures/menuserver/service/CreateMenuService.java:[14,50] package org.springframework.transaction.annotation does not exist</p></div></div></section><section id="convention_over_configuration"><h2>Convention Over Configuration</h2><div class="slide-content"><div class="ulist"><ul><li><p>Maven fonctionne à base de "convention": lorsque nous avons corrigé les erreurs de compilation,
-le plugin Maven Compiler <strong>s&#8217;attendait</strong> à avoir des propriété définies comme défini dans la documentation.</p></li><li><p>On peut également "configurer" très finement Maven à l&#8217;aide des balises XML du <code>pom.xml</code></p></li></ul></div></div></section><section id="exercice_changer_le_nom_de_lartefact_final"><h2>Exercice : Changer le nom de l&#8217;artefact final</h2><div class="slide-content"><div class="ulist"><ul><li><p><strong>But</strong>: Produire un artefact JAR dont le nom est constant</p></li><li><p>Toujours dans <a href="https://gitpod.io#https://github.com/cicd-lectures/demoapp" target="_blank">l&#8217;environnement GitPod</a>,
-exécutez la commande <code>mvn package</code></p></li><li><p>Quel est le nom de l&#8217;artefact généré ? Est-il constant ?</p><div class="ulist"><ul><li><p>(SPOILER: 🙅🏽‍♀️)</p></li></ul></div></li><li><p>En utilisant la documentation de référence <a href="https://maven.apache.org/pom.html#the-basebuild-element-set" class="bare" target="_blank">https://maven.apache.org/pom.html#the-basebuild-element-set</a>,
-adaptez votre <code>pom.xml</code> afin que le fichier généré se nomme <strong>toujours</strong>  <code>hello.jar</code>.</p></li></ul></div></div></section><section id="solution_changer_le_nom_de_lartefact_final"><h2>Solution : Changer le nom de l&#8217;artefact final</h2><div class="slide-content"><div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-xml hljs" data-noescape="true" data-lang="xml">&lt;build&gt;
-  &lt;finalName&gt;hello&lt;/finalName&gt;
-&lt;/build&gt;</code></pre></div></div></div></section><section id="maven_plugins"><h2>Maven Plugins</h2><div class="slide-content"><div class="paragraph"><p>Un plugin Maven implémente les tâches à effectuer durant les différentes phases,
+[ERROR] &lt;...&gt; package org.springframework.transaction.annotation does not exist</code></pre></div></div></div></section><section id="exercice_avec_les_dépendances_spring_22"><h2>Exercice avec les dépendances Spring 2/2</h2><div class="slide-content"><div class="ulist"><ul><li><p><strong>But:</strong> Compiler l&#8217;application complète</p></li><li><p>Continuez de modifier le fichier <code>pom.xml</code> afin d&#8217;ajouter les 2 dépendances suivantes :</p><div class="ulist"><ul><li><p><a href="https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-jpa/2.6.0" target="_blank">org.springframework.boot.spring-boot-starter-data-jpa 2.6.0 sur Maven Central</a></p></li><li><p><a href="https://mvnrepository.com/artifact/org.projectlombok/lombok/1.18.22" target="_blank">org.projectlombok.lombok 1.18.22 sur Maven Central</a></p></li></ul></div></li><li><p>Résultat attendu : ✅ <code>[INFO] BUILD SUCCESS</code></p></li></ul></div></div></section><section id="solution_avec_les_dépendances_spring"><h2>Solution avec les dépendances Spring</h2><div class="slide-content"><div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-xml hljs" data-noescape="true" data-lang="xml">&lt;project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"&gt;
+  &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+    &lt;groupId&gt;com.cicdlectures&lt;/groupId&gt;
+    &lt;artifactId&gt;menuserver&lt;/artifactId&gt;
+    &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;
+
+    &lt;properties&gt;
+      &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;
+      &lt;maven.compiler.source&gt;11&lt;/maven.compiler.source&gt;
+      &lt;maven.compiler.target&gt;11&lt;/maven.compiler.target&gt;
+    &lt;/properties&gt;
+
+    &lt;dependencies&gt;
+      &lt;dependency&gt;
+        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-boot-starter-data-jpa&lt;/artifactId&gt;
+        &lt;version&gt;2.6.0&lt;/version&gt;
+      &lt;/dependency&gt;
+      &lt;dependency&gt;
+        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;
+        &lt;version&gt;2.6.0&lt;/version&gt;
+      &lt;/dependency&gt;
+      &lt;dependency&gt;
+        &lt;groupId&gt;org.projectlombok&lt;/groupId&gt;
+        &lt;artifactId&gt;lombok&lt;/artifactId&gt;
+        &lt;version&gt;1.18.22&lt;/version&gt;
+      &lt;/dependency&gt;
+    &lt;/dependencies&gt;
+&lt;/project&gt;</code></pre></div></div></div></section><section id="exécution_de_lapplication_spring_tentative_1"><h2>Exécution de l&#8217;application Spring : Tentative 1</h2><div class="slide-content"><div class="ulist"><ul><li><p>Quel est le contenu de <code>target/</code> ? Et de <code>target/classes</code> ?</p><div class="ulist"><ul><li><p>💡 <code>find ./target/classes -type f</code></p></li></ul></div></li><li><p>Essayons d&#8217;exécuter notre programme avec la commande <code>java</code> :</p><div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-bash hljs" data-noescape="true" data-lang="bash">java -cp target/classes/com/cicdlectures/menuserver/ \
+  -cp target/classes/com/cicdlectures/menuserver/controller/ \
+  -cp target/classes/com/cicdlectures/menuserver/dto/ \
+  -cp target/classes/com/cicdlectures/menuserver/model/ \
+  -cp target/classes/com/cicdlectures/menuserver/repository/ \
+  -cp target/classes/com/cicdlectures/menuserver/service/ \
+MenuServerApplication</code></pre></div></div></li></ul></div></div></section><section><div class="slide-content"><div class="paragraph"><p>Résultat :</p></div>
+<div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-none hljs" data-noescape="true">Error: Could not find or load main class MenuServerApplication
+Caused by: java.lang.ClassNotFoundException: MenuServerApplication</code></pre></div></div>
+<div class="paragraph"><p><span class="image"><img src="media/angry-panda.gif" alt="Loosing Patience"></span></p></div>
+<div class="paragraph"><p>&#8658; Il faut encore fabriquer un fichier JAR 🏺</p></div></div></section><section id="checkpoint_5"><h2>Checkpoint 🎯</h2><div class="slide-content"><div class="ulist"><ul><li><p><code>mvn compile</code> a produit des fichiers dans <code>target/classes/**</code> ✅</p></li><li><p>C&#8217;est la galère pour trouver les bonnes dépendances 🤔</p></li><li><p>Il faut encore fabriquer un fichier JAR 🏺</p></li></ul></div>
+<div class="paragraph"><p>&#8658; reprenons en lisant le documentation</p></div></div></section><section id="exercice_maven_spring_boot_initializer"><h2>Exercice Maven: Spring Boot Initializer</h2><div class="slide-content"><div class="ulist"><ul><li><p>La <a href="https://spring.io/guides/gs/spring-boot/">documentation "Get Started"</a></p></li></ul></div></div></section><section id="maven_plugins"><h2>Maven Plugins</h2><div class="slide-content"><div class="paragraph"><p>Un plugin Maven implémente les tâches à effectuer durant les différentes phases,
 et peut appartenir à l&#8217;un ou à tous ces types :</p></div>
 <div class="ulist"><ul><li><p><strong>"Build"</strong> : Implémente une action durant les phase de "build" (clean, compile, test, etc.),
 et est configuré dans la balise <code>&lt;build&gt;</code></p></li><li><p><strong>"Reporting"</strong> Implémente une action durant la phase de génération de "site",
