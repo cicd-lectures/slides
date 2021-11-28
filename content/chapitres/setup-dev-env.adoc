@@ -33,22 +33,8 @@ Pour les "autorisations", passez sur la slide suivante
 Lors de votre 1er accès, GitPod va vous demander des autorisations (à accepter) sur votre compte GitHub:
 
 * Accès à votre email public configuré dans GitHub (identification)
-
 * Accès à vos dépôts GitHub public (accès aux dépôts dans l'éditeur)
-
 * Accès aux GitHub workflows de vos dépôts publics (partie "CI" de ce cours)
-
-== Projets GitPod 🗂
-
-* Vous devriez arriver sur la link:https://gitpod.io/projects[page des projets GitPod, window="_blank"]
-
-* Un projet GitPod est associé à un dépôt GitHub
-** Nécessaire pour stocker les réglages
-
-* On a tout préparé pour vous !
-
-[.small]
-Source disponible dans: link:https://github.com/cicd-lectures/gitpod[]
 
 == Démarrer l'environnement GitPod
 
@@ -62,6 +48,16 @@ Après quelques secondes (minutes?), vous avez accès à l'environnement:
 * Haut: éditeur de texte ("Get Started")
 * Bas: Terminal interactif
 * À droite en bas: plein de popups à ignorer (ou pas?)
+
+[.small]
+Source disponible dans: link:https://github.com/cicd-lectures/gitpod[]
+
+== Workspaces GitPod 🗂
+
+* Un workspace est une instance d'un environement de travail virtuel
+* C'est un ordinateur distant
+* ⚠  Faites attention à réutiliser le même workspace tout au long de ce cours⚠
+* Referez vous à la page link:https://gitpod.io/workspaces[workspaces] pour accéder a la liste des environements que vous avez créé.
 
 == Checkpoint 🎯
 
