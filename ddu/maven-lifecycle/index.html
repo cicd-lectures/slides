@@ -386,29 +386,77 @@ pour définir des propriétés sous la forme <code>&lt;clef&gt;valeur&lt;/clef&g
 MenuServerApplication</code></pre></div></div></li></ul></div></div></section><section><div class="slide-content"><div class="paragraph"><p>Résultat :</p></div>
 <div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-none hljs" data-noescape="true">Error: Could not find or load main class MenuServerApplication
 Caused by: java.lang.ClassNotFoundException: MenuServerApplication</code></pre></div></div>
-<div class="paragraph"><p><span class="image"><img src="media/angry-panda.gif" alt="Loosing Patience"></span></p></div>
-<div class="paragraph"><p>&#8658; Il faut encore fabriquer un fichier JAR 🏺</p></div></div></section><section id="checkpoint_5"><h2>Checkpoint 🎯</h2><div class="slide-content"><div class="ulist"><ul><li><p><code>mvn compile</code> a produit des fichiers dans <code>target/classes/**</code> ✅</p></li><li><p>C&#8217;est la galère pour trouver les bonnes dépendances 🤔</p></li><li><p>Il faut encore fabriquer un fichier JAR 🏺</p></li></ul></div>
-<div class="paragraph"><p>&#8658; reprenons en lisant le documentation</p></div></div></section><section id="exercice_maven_spring_boot_initializer"><h2>Exercice Maven: Spring Boot Initializer</h2><div class="slide-content"><div class="ulist"><ul><li><p>La <a href="https://spring.io/guides/gs/spring-boot/">documentation "Get Started"</a></p></li></ul></div></div></section><section id="maven_plugins"><h2>Maven Plugins</h2><div class="slide-content"><div class="paragraph"><p>Un plugin Maven implémente les tâches à effectuer durant les différentes phases,
-et peut appartenir à l&#8217;un ou à tous ces types :</p></div>
-<div class="ulist"><ul><li><p><strong>"Build"</strong> : Implémente une action durant les phase de "build" (clean, compile, test, etc.),
-et est configuré dans la balise <code>&lt;build&gt;</code></p></li><li><p><strong>"Reporting"</strong> Implémente une action durant la phase de génération de "site",
-et est configuré dans la balise <code>&lt;reporting&gt;</code> (à votre grande surprise)</p></li></ul></div></div></section><section id="exercice_maven_jar_plugin"><h2>Exercice : Maven JAR Plugin</h2><div class="slide-content"><div class="ulist"><ul><li><p><strong>But</strong>: Produire l&#8217;artefact JAR dans un dossier nommé <code>dist</code> à côté du <code>pom.xml</code> et de <code>target/</code></p></li><li><p>La génération du JAR est déclenchée lors de l&#8217;appel à <code>mvn package</code>, il nous faut une documentation !</p><div class="ulist"><ul><li><p>Est-ce qu&#8217;il y a un plugin <code>package</code> dans la <a href="https://maven.apache.org/plugins/" target="_blank">page de la liste des plugins Maven</a> ?</p></li><li><p>A vous de chercher pour trouver la documentation du plugin et d&#8217;y trouver le bon réglage permettant
-de changer le dossier d'"output"</p></li></ul></div></li></ul></div></div></section><section id="solution_maven_jar_plugin"><h2>Solution : Maven JAR Plugin</h2><div class="slide-content"><div class="ulist"><ul><li><p><a href="https://maven.apache.org/plugins/" class="bare">https://maven.apache.org/plugins/</a></p><div class="ulist"><ul><li><p><a href="https://maven.apache.org/plugins/maven-jar-plugin/" class="bare">https://maven.apache.org/plugins/maven-jar-plugin/</a></p><div class="ulist"><ul><li><p><a href="https://maven.apache.org/plugins/maven-jar-plugin/jar-mojo.html" class="bare">https://maven.apache.org/plugins/maven-jar-plugin/jar-mojo.html</a></p></li></ul></div></li></ul></div></li></ul></div>
-<div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-xml hljs" data-noescape="true" data-lang="xml">&lt;build&gt;
-  &lt;!-- ... --&gt;
-  &lt;plugins&gt;
-    &lt;plugin&gt;
-      &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
-      &lt;artifactId&gt;maven-jar-plugin&lt;/artifactId&gt;
-      &lt;executions&gt;
-        &lt;execution&gt;
-          &lt;configuration&gt;
-            &lt;outputDirectory&gt;dist/&lt;/outputDirectory&gt;
-          &lt;/configuration&gt;
-        &lt;/execution&gt;
-      &lt;/executions&gt;
-    &lt;/plugin&gt;
-  &lt;/plugins&gt;
+<div class="paragraph"><p><span class="image"><img src="media/angry-panda.gif" alt="Loosing Patience"></span></p></div></div></section><section id="checkpoint_5"><h2>Checkpoint 🎯</h2><div class="slide-content"><div class="ulist"><ul><li><p><code>mvn compile</code> a produit des fichiers dans <code>target/classes/**</code> ✅</p></li><li><p>C&#8217;est la galère pour trouver les bonnes dépendances 🤔</p></li><li><p>Il faut encore pouvoir exécuter l&#8217;application</p></li></ul></div>
+<div class="paragraph"><p>&#8658; reprenons en lisant le documentation</p></div></div></section><section id="spring_boot_read_the_manual"><h2>Spring Boot : Read The Manual</h2><div class="slide-content"><div class="ulist"><ul><li><p>Spring Boot est bien plus simple à utiliser que ce que l&#8217;on a vu 🧸 !</p><div class="ulist small"><ul><li><p>On l&#8217;a abordé ainsi pour mieux comprendre</p></li></ul></div></li><li><p>Une documentation très complète :</p><div class="ulist"><ul><li><p><a href="https://spring.io/guides/gs/spring-boot/">"Get Started" pour bien démarrer</a></p></li><li><p><a href="https://start.spring.io/">Spring Initialzr</a> pour générer son <code>pom.xml</code> en ligne</p></li><li><p>Une <a href="https://docs.spring.io/spring-boot/docs/2.0.x/reference/html/">documentation de référence</a></p></li></ul></div></li><li><p>Un <a href="https://docs.spring.io/spring-boot/docs/2.5.6/maven-plugin/reference/htmlsingle/">plugin Maven est fourni par le projet Spring Boot</a>
+pour se simplifier la vie:</p><div class="ulist"><ul><li><p>Pas besoin de répéter les versions</p></li><li><p>Plein de fonctionnalités de développement</p></li><li><p>Moins de configuration à faire soit même</p></li></ul></div></li></ul></div></div></section><section id="maven_plugins"><h2>Maven Plugins</h2><div class="slide-content"><div class="paragraph"><p>Un plugin Maven implémente les tâches à effectuer durant les différentes phases,
+et peut appartenir à l&#8217;un ou l&#8217;autre de ces 2 types :</p></div>
+<div class="ulist"><ul><li><p><strong>"Build"</strong> : Implémente une action durant les phase du cycle de vie <code>default</code>,
+et est configuré dans la balise <code>&lt;build&gt;</code></p></li><li><p><strong>"Reporting"</strong> Implémente une action durant les phases du cycle de vie <code>site</code>,
+et est configuré dans la balise <code>&lt;reporting&gt;</code> (à votre grande surprise)</p></li></ul></div>
+<div class="paragraph"><p>C&#8217;est un fichier <code>*.jar</code> identifié par&#8230;&#8203; groupId, artifactId et version.</p></div></div></section><section id="exemple_maven_plugin_spring_boot_12"><h2>Exemple Maven : plugin Spring Boot 1/2</h2><div class="slide-content"><div class="paragraph"><p>&#8658; C&#8217;est à vous !</p></div>
+<div class="ulist"><ul><li><p><strong>But :</strong> Configurer le plugin Spring Boot pour Maven</p><div class="ulist"><ul><li><p>Vous devez mettre à jour le fichier <code>pom.xml</code> en suivant la
+<a href="https://docs.spring.io/spring-boot/docs/2.5.6/maven-plugin/reference/htmlsingle/">documentation du plugin Maven Spring Boot</a></p></li></ul></div></li><li><p>Utilisez les 2 commandes Maven suivantes AVANT et après avoir mis à jour le fichier <code>pom.xml</code></p><div class="ulist"><ul><li><p><a href="https://maven.apache.org/plugins/maven-help-plugin/effective-pom-mojo.html"><code>mvn help:effective-pom</code></a></p></li><li><p><code>mvn validate</code></p></li></ul></div></li></ul></div></div></section><section id="exemple_maven_plugin_spring_boot_22"><h2>Exemple Maven : plugin Spring Boot 2/2</h2><div class="slide-content"><div class="ulist"><ul><li><p>On vous fournit le contenu du <code>pom.xml</code> (slide suivante) généré (et adapté) depuis <a href="https://start.spring.io/">Spring Initialzr</a>,
+avec les changements suivants :</p><div class="ulist"><ul><li><p>Ajout d&#8217;un POM "parent" (dont on hérite) venant de Spring Boot</p></li><li><p>Simplification des properties (grâce au "POM parent")</p></li><li><p>Simplification des dépendances (pas de version à gérer, grâce au "POM parent")</p></li><li><p>Ajout d&#8217;une dépendance</p></li><li><p>Activation du plugin Spring Boot lors des phases de "build"</p></li></ul></div></li></ul></div></div></section><section id="exemple_maven_pom_xml_final"><h2>Exemple Maven : pom.xml final</h2><div class="slide-content"><div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-xml hljs" data-noescape="true" data-lang="xml">&lt;project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"&gt;
+  &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+    &lt;groupId&gt;com.cicdlectures&lt;/groupId&gt;
+    &lt;artifactId&gt;menuserver&lt;/artifactId&gt;
+    &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;
+
+    &lt;parent&gt;
+      &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+      &lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt;
+      &lt;version&gt;2.6.0&lt;/version&gt;
+    &lt;/parent&gt;
+
+    &lt;properties&gt;
+      &lt;java.version&gt;11&lt;/java.version&gt;
+    &lt;/properties&gt;
+
+    &lt;dependencies&gt;
+      &lt;dependency&gt;
+        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-boot-starter-data-jpa&lt;/artifactId&gt;
+      &lt;/dependency&gt;
+      &lt;dependency&gt;
+        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;
+      &lt;/dependency&gt;
+      &lt;dependency&gt;
+			&lt;groupId&gt;org.projectlombok&lt;/groupId&gt;
+        &lt;artifactId&gt;lombok&lt;/artifactId&gt;
+      &lt;/dependency&gt;
+      &lt;dependency&gt;
+        &lt;groupId&gt;com.h2database&lt;/groupId&gt;
+        &lt;artifactId&gt;h2&lt;/artifactId&gt;
+        &lt;scope&gt;runtime&lt;/scope&gt;
+      &lt;/dependency&gt;
+	&lt;/dependencies&gt;
+
+  &lt;build&gt;
+    &lt;plugins&gt;
+        &lt;plugin&gt;
+            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-boot-maven-plugin&lt;/artifactId&gt;
+        &lt;/plugin&gt;
+    &lt;/plugins&gt;
+  &lt;/build&gt;
+&lt;/project&gt;</code></pre></div></div></div></section><section id="exercice_démarrer_lapplication"><h2>Exercice : Démarrer l&#8217;application</h2><div class="slide-content"><div class="ulist"><ul><li><p><strong>But</strong>: Exécuter l&#8217;application à l&#8217;aide du plugin Spring Boot</p></li><li><p>Sprint Boot fournit une phase Maven nommée <code>spring-boot:run</code> qui exécute
+l&#8217;application en mode "développement" sur le port <code>8080</code> local</p><div class="ulist"><ul><li><p>Essayez d&#8217;appeler cette phase avec Maven</p></li></ul></div></li><li><p>Résultat attendu (une jolie bannière ASCIIArt):</p><div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-none hljs" data-noescape="true">  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v2.6.0)</code></pre></div></div></li></ul></div></div></section><section id="exercice_prévisualiser_lapplication"><h2>Exercice : Prévisualiser l&#8217;application</h2><div class="slide-content"><div class="ulist"><ul><li><p>Dans un second terminal de Gitpod, affichez la page web de l&#8217;application avec les commandes suivantes :</p><div class="ulist"><ul><li><p><code>gp url 8080</code> pour afficher l&#8217;URL publique de l&#8217;application correspondant au port <code>8080</code> local</p></li><li><p><code>gp preview "$(gp url 8080)/"</code> pour prévisualiser le "endpoint" <code>/</code> dans un navigateur local</p></li></ul></div></li><li><p>La page d&#8217;accueil doit afficher HTTP/404</p></li><li><p>Trouvez la page des menus qui doit répondre <code>[]</code> (liste vide en JSON)</p><div class="ulist"><ul><li><p>💡 <code>src/*/controller/*.java</code></p></li></ul></div></li></ul></div></div></section><section id="checkpoint_6"><h2>Checkpoint 🎯</h2><div class="slide-content"><div class="ulist"><ul><li><p>Spring Boot (et toutes ses dépendances) est configuré ✅</p></li><li><p><code>mvn spring-boot:run</code> compile et exécute l&#8217;application ✅</p></li><li><p>Il faut encore fabriquer un fichier JAR 🏺 pour la production 🤔</p></li></ul></div>
+<div class="paragraph"><p>&#8658; reprenons avec Maven</p></div></div></section><section id="exercice_maven_jar_plugin"><h2>Exercice : Maven JAR Plugin</h2><div class="slide-content"><div class="ulist"><ul><li><p><strong>But</strong>: Produire l&#8217;artefact JAR distribuable</p></li><li><p>La génération du JAR est déclenchée lors de l&#8217;appel à <code>mvn package</code> :</p><div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-bash hljs" data-noescape="true" data-lang="bash">ls -ltra ./target
+mvn clean # Nettoyez tout !
+ls -ltra ./target
+mvn package
+ls -ltra ./target # Est-ce que vous voyez un fichier JAR ?</code></pre></div></div></li><li><p>Exécution de l&#8217;application :</p><div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-bash hljs" data-noescape="true" data-lang="bash">java -jar &lt;chemin vers le fichier JAR&gt;</code></pre></div></div>
+<div class="ulist"><ul><li><p>Même fonctionnement que précédemment (bannière, port 8080, endpoint <code>/menus</code>&#8230;&#8203;)</p></li></ul></div></li></ul></div></div></section><section id="exercice_changer_le_nom_de_lartefact_final"><h2>Exercice : Changer le nom de l&#8217;artefact final</h2><div class="slide-content"><div class="ulist"><ul><li><p><strong>But</strong>: Produire un artefact JAR dont le nom est constant</p></li><li><p>Quel est le nom de l&#8217;artefact généré ? Est-il constant ?</p><div class="ulist"><ul><li><p>(SPOILER: 🙅🏽‍♀️)</p></li></ul></div></li><li><p>En utilisant la documentation de référence <a href="https://maven.apache.org/pom.html#the-basebuild-element-set" class="bare" target="_blank">https://maven.apache.org/pom.html#the-basebuild-element-set</a>,
+adaptez votre <code>pom.xml</code> afin que le fichier généré se nomme <strong>toujours</strong> <code>menu-server.jar</code>.</p></li></ul></div></div></section><section id="solution_changer_le_nom_de_lartefact_final"><h2>Solution : Changer le nom de l&#8217;artefact final</h2><div class="slide-content"><div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-xml hljs" data-noescape="true" data-lang="xml">&lt;build&gt;
+  &lt;finalName&gt;hello&lt;/finalName&gt;
 &lt;/build&gt;</code></pre></div></div></div></section></section>
 <section><section id="mettre_son_code_en_sécurité" data-background-color="rgb(248, 228, 130)" data-state="invert"><h2>Mettre son code en sécurité</h2></section><section id="une_autre_petite_histoire"><h2>Une autre petite histoire</h2><div class="slide-content"><div class="paragraph"><p>Votre dépôt est actuellement sur votre ordinateur.</p></div>
 <div class="ulist"><ul><li><p>Que se passe t&#8217;il si :</p><div class="ulist"><ul><li><p>Votre disque dur tombe en panne ?</p></li><li><p>On vous vole votre ordinateur ?</p></li><li><p>Vous échappez votre tasse de thé / café sur votre ordinateur ?</p></li><li><p>Une météorite tombe sur votre bureau et fracasse votre ordinateur ?</p></li></ul></div></li></ul></div></div></section><section><div class="slide-content"><div class="paragraph"><p><span class="image"><img src="media/crying.gif" alt="crying" width="500"></span></p></div>
