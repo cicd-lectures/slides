@@ -22,3 +22,6 @@
 :notitle: true
 :revealjs_plugins: ./assets/plugins/revealjs-plugins.js
 :revealjs_plugins_configuration: ./assets/plugins/revealjs-plugins-config.js
+:gitpod_url: https://gitpod.io/workspaces
+:springboot_version: 2.6.0
+:lombok_version: 1.18.22

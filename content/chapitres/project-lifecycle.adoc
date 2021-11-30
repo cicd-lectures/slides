@@ -1,4 +1,779 @@
 [{invert}]
 = Cycle de vie de votre projet
 
-== TODO
+== Quel est le problème ?
+
+On a du code. C'est un bon début. MAIS:
+
+* Qu'est ce qu'on "fabrique" à partir du code ?
+* Comment faire pour "fabriquer" de la même manière pour tout•e•s (💻 | 🖥 ) ?
+
+== Que "fabrique" t'on à partir du code ? 📦
+
+Un **livrable** :
+
+* C'est ce que vos utilisateurs vont utiliser: un binaire à télécharger ? L'application de production ?
+* C'est versionné
+* C'est __reproductible__
+
+== Reproduire la fabrication 🏭
+
+Comment fabriquer et tester de manière reproductible ?
+
+* Dimension technique: type de language, différents OS, différentes machines
+* Dimension temporelle: version de dépendances qui changent dans le temps
+* Dimension humaine: habitudes, connaissances, documentation (ou pas)
+
+[{invert}]
+== Exemple avec Java ☕️
+
+JAVA bien ?
+
+* Essayons un projet "Hello World" en Java dans GitPod, dans un nouveau dossier vide :
+
+image::https://gitpod.io/button/open-in-gitpod.svg[link="https://gitpod.io/#https://github.com/cicd-lectures/gitpod.git",window="_blank"]
+
+== Exemple Java : Compiler 🤲🏽
+
+* Créez un fichier source java `main.java` avec le contenu suivant :
++
+[source,java]
+----
+class HelloWorld {
+    public static void main(String[] args) {
+        System.out.println("Hello ENSG!");
+    }
+}
+----
+
+* La commande `javac` permet de "compiler" du java en bytecode java.
+** Compilez le programme dans un dossier `target/` :
++
+[source,bash]
+----
+javac ./main.java -d ./target
+ls -ltra ./target # Quel est le résultat ?
+----
+
+== Exemple Java : Exécuter (Artisanalement) 🙈
+
+* Un fichier `HelloWorld.class` a été généré
+** C'est du "bytecode binaire" Java exécutable avec la commande `java`
+
+* Essayez d'exécuter le programme :
+** La commande `java` a besoin de connaître le dossier contenant les classes
++
+[source,bash]
+----
+java -classpath ./target/ HelloWorld
+----
+
+== Exemple Java : Livrable JAR 🏺
+
+* 🤔 Il faut connaître le nom des classes à exécuter ?
+
+* Réponse : Fichier "JAR" (Java ARchive)
+** C'est une archive "ZIP" pour distribuer des applications en java
+** Pour exécuter le programme depuis le livrable :
++
+[source,bash]
+----
+java -jar <fichier.jar>
+----
+
+== Exemple Java : Fabriquer un JAR (Artisanalement) 🏺 🙈
+
+* Il faut un fichier descripteur appelé `MANIFEST.mf` :
++
+[source]
+----
+Main-Class: HelloWorld
+Class-Path: target/
+----
+
+* Il faut utiliser la commande `jar` pour fabriquer l'archive puis la tester :
++
+[source,bash]
+----
+jar --create --manifest=MANIFEST.mf --file helloworld.jar target/HelloWorld.class
+java -jar helloworld.jar
+----
+
+== Exemple réel "à la main" Java -> JAR 🤲🏽
+
+* Essayons avec un vrai projet : reprenons le projet `menu-server`
+
+* Essayez de le compiler avec `javac` :
++
+[source,bash]
+----
+javac ./src/main/java/com/cicdlectures/menuserver/MenuServerApplication.java -d ./target
+----
++
+[source]
+----
+# ...
+./src/main/java/com/cicdlectures/menuserver/MenuServerApplication.java:3: error: package org.springframework.boot does not exist
+import org.springframework.boot.SpringApplication;
+                               ^
+# ...
+----
+
+🙈 Problème de dépendances
+
+== Checkpoint 🎯
+
+=> C'est vite **complexe** alors qu'on veut fabriquer / tester un programme
+
+== Do It Ourselves or Reinvent the Wheel ?
+
+*Problème* :
+[.small]
+Doit-on redéfinir tout ce processus à chaque fois ?
+
+image::reinvent-wheel.jpg[width=20%]
+
+*Réponse(s)* :
+
+[.small]
+* Dans la vraie vie, ça dépends donc ce sera à vous de juger et de ré-évaluer
+* Pour ce cours: 🛠 il faut un outil pour gérer le cycle de vie technique (Build -> Test -> etc.)
+
+== Introduction à Maven
+
+Say Hello to "Maven":
+
+* Idée de Maven : *Cycles de vie* standardisés
+* "Convention over configuration" : fichier `pom.xml` décrivant le projet
+* Ligne de commande `mvn` qui lit le `pom.xml` et exécute les *phases*
+
+== Maven : Cycles de vie
+
+* 3 cycles de vie :
+** 🏗 `default` : pour construire les applications dans `target/`
+** 📝 `site` : pour construire un site web de documentation dans `target/`
+** 🧹 `clean` : nettoyer `target/`
+
+* Chaque cycle de vie est composé d'une série d'étapes appelées "phases"
+
+== Maven : Phases
+
+Phases du cycle de vie 🏗 `default` :
+
+* `validate` - Validation du projet (syntaxe du `pom.xml` et du Java, etc.)
+* `compile` - Fabrication des fichiers `.class` depuis le code java
+* `test` - Exécuter les tests unitaires
+* `package` - Préparer le livrable finale (`.jar` par exemple)
+* `verify` - Exécuter les tests d'intégration
+* `install` - Mettre à disposition le livrable localement pour d'autres projets Maven
+* `deploy` - Copier le livrable dans un système de stockage de dépendance distant
+
+== Maven : `pom.xml`
+
+* "POM" signifie "Project Object Model"
+
+* Contenu en XML : language de type "markup", avec un **schéma**, donc strict
+
+* "Convention au lieu de configuration" pour limiter la complexité
+** code source attendu dans `src/main/java/`
+** résultats dans `target/` (transient), etc.
+** `pom.xml` à la racine de votre projet
+
+== Maven : Ligne de commande `mvn`
+
+Ligne de commande `mvn` :
+
+* Lit le fichier `pom.xml` pour comprendre le projet
+* Attend une (ou plusieurs) phases en argument
+* Accepte des options (formes courtes `-X` ou longues `--debug`)
++
+[source,bash]
+----
+mvn clean # Appelle la phase "clean"
+mvn compile # Appelle les phases "validate" puis "compile"
+mvn clean compile -X # On peut appeler plusieurs phases et passer des options
+----
+
+== Exercice Maven : C'est à vous !
+
+*But :* fabriquer l'application menuserver avec Maven
+
+image::https://gitpod.io/button/open-in-gitpod.svg[link="https://gitpod.io/#https://github.com/cicd-lectures/gitpod.git",window="_blank"]
+
+Commençons par valider le projet en utilisant la phase
+link:https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html[`validate`] de Maven:
+
+[source,bash]
+----
+mvn validate
+----
+
+[source]
+----
+# ...
+[ERROR] The goal you specified requires a project to execute but there is no POM in this directory (/workspace/menu-server). Please verify you invoked Maven from the correct directory. -> [Help 1]
+# ...
+----
+
+❌ Il manque un fichier `pom.xml` !
+
+== Exercice Maven : fichier `pom.xml`
+
+* Commençons par créer un fichier `pom.xml` avec le contenu ci-dessous :
++
+[source,xml]
+----
+<!-- pom.xml -->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <!-- Insert content here  -->
+</project>
+----
+
+* Puis ré-essayons de valider le projet avec Maven :
++
+[source,bash]
+----
+mvn validate
+----
++
+[source]
+----
+# ...
+[ERROR] [ERROR] Some problems were encountered while processing the POMs:
+[FATAL] 'groupId' is missing. @ line 2, column 102
+[FATAL] 'artifactId' is missing. @ line 2, column 102
+[FATAL] 'version' is missing. @ line 2, column 102
+# ...
+----
+
+❌ On doit ajouter du contenu dans le `pom.xml` !
+
+== Maven : identité d'un projet
+
+Maven identifie un projet avec les 3 éléments *obligatoires* suivants :
+
+* **groupId** : Identifiant unique de votre projet suivant les règles Java de nommage de paquets
+* **artifactId** : Identifiant du projet (paquet de la classe principale)
+* **version** : Version de l'artefact
+
+[source,xml]
+----
+<!-- pom.xml -->
+<groupId>com.mycompany</groupId>
+<artifactId>my-app</artifactId>
+<version>1.0</version>
+<!-- Example avec un paquet Java `com.mycompany.my-app` dans `src/main/java/com/mycompany/my-app` -->
+----
+
+== Exercice Maven : identifiez votre projet
+
+=> C'est à vous
+
+* Identifiez votre projet en remplissant le fichier `pom.xml`
+** `groupId` et `artifactId`: utilisez le nom de package de votre classe principale `MenuServerApplication.java`
+** `version` : `1.0-SNAPSHOT`
+
+* *Objectif :* Maven doit valider le projet avec succès :
++
+[source,bash]
+----
+mvn validate
+----
++
+[source]
+----
+# ...
+[INFO] BUILD SUCCESS
+# ...
+----
+
+== Checkpoint 🎯
+
+* On a pu créer un fichier `pom.xml` valide ✅
+
+* Pensez à commiter ce changement 💡
+
+* Il est temps de compiler l'application avec Maven 🏗
+
+== Exemple Maven : Compiler 🏗
+
+* Essayez de compiler l'application à l'aide de la phase
+link:https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html[`compile`] de Maven:
++
+[source,bash]
+----
+mvn compile
+----
+
+* Résultat attendu : Message `[INFO] BUILD FAILURE` ❌
+
+== Analyse des erreurs de compilation 🏗
+
+Que s'est il passé ?
+
+. => Maven a téléchargé plein de dépendances depuis https://repo.maven.apache.org[]
+. => La compilation a échoué avec 2 erreurs et 1 warning :
+** ❌ `[ERROR] Source option 5 is no longer supported. Use 6 or later.`
+** ❌ `[ERROR] Target option 1.5 is no longer supported. Use 1.6 or later.`
+** ⚠️ `[WARNING] File encoding has not been set, using platform encoding UTF-8, i.e. build is platform dependent!`
+
+== Maven et Dépendances Externes
+
+* Maven propose 2 types de dépendances externes :
+
+** *Plugin* : c'est un artefact qui sera utilisé par Maven durant son cycle de vie
+*** "Build-time dependency"
+** *Dépendance* (🇬🇧 "dependency") : c'est un artefact qui sera utilisé par votre application,
+_en dehors de Maven_
+*** "Run-time dependency"
+
+== Maven et Plugins
+
+Quand on regarde sous le capot, Maven est un framework d'exécution de plugins.
+
+=> Tout est plugin :
+
+- Effacer le dossier `target` ? Un plugin ! (si si essayez `mvn clean` une première fois...)
+- Compiler du Java ? Un plugin !
+- Pas de plugin qui fait ce que vous voulez ? Écrivez un autre plugin !
+
+== !
+
+C'est bien gentil mais comment corriger l'erreur
+
+❌ `**Source** option 5 is no longer supported. Use 7 or later` ?
+
+[%step]
+* C'est le `maven-compiler-plugin` qui a émis l'erreur
+
+* Que dit la https://maven.apache.org/plugins/maven-compiler-plugin/[documentation du plugin] ?
+** `Also note that at present the default source setting is 1.6 and...`
+
+* Il faut définir la version de Java à utiliser pour le programme (e.g. celle en *production*)
+
+== Maven Properties
+
+* Maven permet de définir des propriétés (🇬🇧 "properties") "CLEF=VALEUR" pour :
+** Configurer les plugins (😇)
+** Factoriser un élément répété (une version, une chaîne de texte, etc.)
+
+* Le fichier `pom.xml` supporte donc la balise `<properties></properties>`
+pour définir des propriétés sous la forme `<clef>valeur</clef>` :
+** La propriété peut être utilisé sous la forme `${clef}`
+
+[source,xml]
+----
+<properties>
+  <spring.version>1.0.0</spring.version>
+  <ensg.student.name>Damien</ensg.student.name>
+</properties>
+
+<build>
+  <name>${ensg.student.name}</name>
+</build>
+----
+
+== Exercice : Corriger le "warning"
+
+=> C'est à vous !
+
+* *But* : Résoudre le message de "Warning" à propos de l'encodage des fichiers
+** On veut forcer l'encodage à `UTF-8` pour que les caractères accentuées soient supportés de manière portable
+
+* Modifiez le fichier `pom.xml` pour ajouter un bloc `<properties>` pour définir l'encodage à `UTF-8` :
+** 💡 https://maven.apache.org/general.html#encoding-warning[FAQ Maven ("How do I prevent encoding warnings ?")]
+
+== Solution : Corriger le "warning"
+
+[source,xml]
+----
+<!-- pom.xml -->
+<!-- ... -->
+<properties>
+  <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+</properties>
+<!-- ... -->
+----
+
+== Exercice : Corriger les 2 erreurs
+
+* *But* : Résoudre les 2 erreurs de compilation à propos de la version de Java
+
+* Modifiez le bloc `<properties>` du fichier `pom.xml` pour définir les versions de java pour les sources ET l'exécution :
+** 💡 https://maven.apache.org/plugins/maven-compiler-plugin/examples/set-compiler-source-and-target.html[documentation du Maven Compile Plugin]
+** 💡 Obtenir la version de java dans GitPod : `java -version`
+
+* Résultat attendu : **nouvelles** erreurs de compilation
+
+== Solution : Corriger les 2 erreurs
+
+[source,xml]
+----
+<!-- pom.xml -->
+<!-- ... -->
+<properties>
+  <!-- ... -->
+  <maven.compiler.source>11</maven.compiler.source>
+  <maven.compiler.target>11</maven.compiler.target>
+</properties>
+<!-- ... -->
+----
+
+== Checkpoint 🎯
+
+* On a pu éditer le fichier `pom.xml` pour décrire nos sources java ✅
+* Pensez à commiter ce changement 💡
+* Il manque des dépendances pour compiler :
+
+❌ `package org.springframework.beans.factory.annotation does not exist`
+
+== Dépendances Externes
+
+*Hypothèse* : on a besoin de code et d'outils externes (e.g. écrits par quelqu'un d'autre)
+
+* Comment faire si le code externe est mis à jour ?
+* Que se passe t'il si le code externe est supprimé de l'internet ?
+[.small]
+** https://github.blog/2020-11-16-standing-up-for-developers-youtube-dl-is-back/[window="_blank"]
+* Acceptez-vous d'exécuter le code de quelqu'un d'autre sur votre machine ?
+* Et si quelqu'un injecte du code malicieux dans le code externe ?
+[.small]
+** https://www.zdnet.com/article/malicious-npm-packages-caught-installing-remote-access-trojans/[window="_blank"]
+
+== TOUS les languages...
+
+// The triple plus (`+++`) are used to escape the first dot (and avoid a numbered bullet list)
++++...+++ sont concernés
+
+== Maven : Dépôts d'Artefacts
+
+Maven récupère les dépendances (et plugins) dans des dépôts d'artefacts
+
+(🇬🇧 Artifacts Repositories) qui sont de 3 types :
+
+* *Central* : un dépôt géré par la communauté - https://repo.maven.apache.org[window="_blank"]
+** https://mvnrepository.com/repos/central[Avec une interface web de recherche,window="_blank]
+* *Remote* : des dépôts privés de votre organisation
+* *Local* : un dossier sur la machine où la commande `mvn` est exécuté, généralement dans `${HOME}/.m2`
+[.small]
+** 💡 `mvn install` cible ce dépôt "local"
+
+== Dépendances Maven
+
+💡 https://maven.apache.org/guides/introduction/introduction-to-dependency-mechanism.html["Introduction au mécanisme de dépendances - documentation Maven]
+
+* Pour spécifier les dépendances (dans votre `pom.xml`):
+** Il faut utiliser la balise `<dependencies>`,
+** ... qui est une collection de dépendances (balise `<dependency>` - quelle surprise !),
+** .. chaque dépendance étant défini par un trio `<groupId>`, `<artifactId>` et `<version>` (que de surprises...)
+
+* Pour les plugins c'est la même idée (`<plugins>` -> `<plugin>` -> `<groupId>`, `<artifactId>`, `<version>`)
+
+== Exemple de Dépendance : Spring
+
+* *Idée* : Nous avons besoin d'ajouter le framework Spring en dépendance.
+
+Voilà ce que ça donne dans le fichier `pom.xml` :
+
+[source,xml,subs="+attributes"]
+----
+<dependencies>
+  <dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-web</artifactId>
+    <version>{springboot_version}</version>
+  </dependency>
+</dependencies>
+----
+
+== Exercice avec les dépendances Spring 1/2
+
+=> C'est à vous.
+
+* Ajoutez le bloc `<dependencies>` de la slide précédente dans votre `pom.xml`
+** 💡 https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-web/{springboot_version}[org.springframework.boot.spring-boot-starter-web {springboot_version} sur Maven Central,window="_blank"]
+
+* Exécutez la commande `mvn compile`
+
+* Résultat attendu : **nouvelles** ❌ erreurs de compilation (encore une dépendance manquante) :
+
+[source]
+----
+[ERROR] COMPILATION ERROR :
+[INFO] ------------------------------------------------------------------------
+[ERROR] <...> package org.springframework.transaction.annotation does not exist
+----
+
+== Exercice avec les dépendances Spring 2/2
+
+* *But:* Compiler l'application complète
+
+* Continuez de modifier le fichier `pom.xml` afin d'ajouter les 2 dépendances suivantes :
+
+** https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-jpa/{springboot_version}[org.springframework.boot.spring-boot-starter-data-jpa {springboot_version} sur Maven Central,window="_blank"]
+** https://mvnrepository.com/artifact/org.projectlombok/lombok/{lombok_version}[org.projectlombok.lombok {lombok_version} sur Maven Central,window="_blank"]
+
+* Résultat attendu : ✅ `[INFO] BUILD SUCCESS`
+
+== Solution avec les dépendances Spring
+
+[source,xml,subs="+attributes"]
+----
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+    <groupId>com.cicdlectures</groupId>
+    <artifactId>menuserver</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <properties>
+      <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+      <maven.compiler.source>11</maven.compiler.source>
+      <maven.compiler.target>11</maven.compiler.target>
+    </properties>
+
+    <dependencies>
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-data-jpa</artifactId>
+        <version>{springboot_version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-web</artifactId>
+        <version>{springboot_version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.projectlombok</groupId>
+        <artifactId>lombok</artifactId>
+        <version>{lombok_version}</version>
+      </dependency>
+    </dependencies>
+</project>
+----
+
+== Exécution de l'application Spring : Tentative 1
+
+* Quel est le contenu de `target/` ? Et de `target/classes` ?
+** 💡 `find ./target/classes -type f`
+
+* Essayons d'exécuter notre programme avec la commande `java` :
++
+[source,bash]
+----
+java -cp target/classes/com/cicdlectures/menuserver/ \
+  -cp target/classes/com/cicdlectures/menuserver/controller/ \
+  -cp target/classes/com/cicdlectures/menuserver/dto/ \
+  -cp target/classes/com/cicdlectures/menuserver/model/ \
+  -cp target/classes/com/cicdlectures/menuserver/repository/ \
+  -cp target/classes/com/cicdlectures/menuserver/service/ \
+MenuServerApplication
+----
+
+== !
+
+Résultat :
+
+[source]
+----
+Error: Could not find or load main class MenuServerApplication
+Caused by: java.lang.ClassNotFoundException: MenuServerApplication
+----
+
+image:angry-panda.gif[Loosing Patience]
+
+== Checkpoint 🎯
+
+* `mvn compile` a produit des fichiers dans `target/classes/**` ✅
+* C'est la galère pour trouver les bonnes dépendances 🤔
+* Il faut encore pouvoir exécuter l'application
+
+=> reprenons en lisant le documentation
+
+== Spring Boot : Read The Manual
+
+* Spring Boot est bien plus simple à utiliser que ce que l'on a vu 🧸 !
+[.small]
+** On l'a abordé ainsi pour mieux comprendre
+
+* Une documentation très complète :
+** https://spring.io/guides/gs/spring-boot/["Get Started" pour bien démarrer]
+** https://start.spring.io/[Spring Initialzr] pour générer son `pom.xml` en ligne
+** Une https://docs.spring.io/spring-boot/docs/2.0.x/reference/html/[documentation de référence]
+
+* Un https://docs.spring.io/spring-boot/docs/2.5.6/maven-plugin/reference/htmlsingle/[plugin Maven est fourni par le projet Spring Boot]
+pour se simplifier la vie:
+** Pas besoin de répéter les versions
+** Plein de fonctionnalités de développement
+** Moins de configuration à faire soit même
+
+== Maven Plugins
+
+Un plugin Maven implémente les tâches à effectuer durant les différentes phases,
+et peut appartenir à l'un ou l'autre de ces 2 types :
+
+* *"Build"* : Implémente une action durant les phase du cycle de vie `default`,
+et est configuré dans la balise `<build>`
+* *"Reporting"* Implémente une action durant les phases du cycle de vie `site`,
+et est configuré dans la balise `<reporting>` (à votre grande surprise)
+
+C'est un fichier `*.jar` identifié par... groupId, artifactId et version.
+
+== Exemple Maven : plugin Spring Boot 1/2
+
+=> C'est à vous !
+
+* *But :* Configurer le plugin Spring Boot pour Maven
+** Vous devez mettre à jour le fichier `pom.xml` en suivant la
+https://docs.spring.io/spring-boot/docs/{springboot_version}/maven-plugin/reference/htmlsingle/[documentation du plugin Maven Spring Boot]
+
+* Utilisez les 2 commandes Maven suivantes AVANT et après avoir mis à jour le fichier `pom.xml`
+** link:https://maven.apache.org/plugins/maven-help-plugin/effective-pom-mojo.html[`mvn help:effective-pom`]
+** `mvn validate`
+
+== Exemple Maven : plugin Spring Boot 2/2
+
+* On vous fournit le contenu du `pom.xml` (slide suivante) généré (et adapté) depuis https://start.spring.io/[Spring Initialzr],
+avec les changements suivants :
+** Ajout d'un POM "parent" (dont on hérite) venant de Spring Boot
+** Simplification des properties (grâce au "POM parent")
+** Simplification des dépendances (pas de version à gérer, grâce au "POM parent")
+** Ajout d'une dépendance
+** Activation du plugin Spring Boot lors des phases de "build"
+
+== Exemple Maven : pom.xml final
+
+[source,xml,subs="+attributes"]
+----
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+    <groupId>com.cicdlectures</groupId>
+    <artifactId>menuserver</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <parent>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-parent</artifactId>
+      <version>{springboot_version}</version>
+    </parent>
+
+    <properties>
+      <java.version>11</java.version>
+    </properties>
+
+    <dependencies>
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-data-jpa</artifactId>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-web</artifactId>
+      </dependency>
+      <dependency>
+			<groupId>org.projectlombok</groupId>
+        <artifactId>lombok</artifactId>
+      </dependency>
+      <dependency>
+        <groupId>com.h2database</groupId>
+        <artifactId>h2</artifactId>
+        <scope>runtime</scope>
+      </dependency>
+	</dependencies>
+
+  <build>
+    <plugins>
+        <plugin>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-maven-plugin</artifactId>
+        </plugin>
+    </plugins>
+  </build>
+</project>
+----
+
+== Exercice : Démarrer l'application
+
+* *But*: Exécuter l'application à l'aide du plugin Spring Boot
+
+* Sprint Boot fournit une phase Maven nommée `spring-boot:run` qui exécute
+l'application en mode "développement" sur le port `8080` local
+** Essayez d'appeler cette phase avec Maven
+
+* Résultat attendu (une jolie bannière ASCIIArt):
++
+[source,subs="+attributes"]
+----
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v{springboot_version})
+----
+
+== Exercice : Prévisualiser l'application
+
+* Dans un second terminal de Gitpod, affichez la page web de l'application avec les commandes suivantes :
+** `gp url 8080` pour afficher l'URL publique de l'application correspondant au port `8080` local
+** `gp preview "$(gp url 8080)/"` pour prévisualiser le "endpoint" `/` dans un navigateur local
+
+* La page d'accueil doit afficher HTTP/404
+
+* Trouvez la page des menus qui doit répondre `[]` (liste vide en JSON)
+** 💡 `src/\*/controller/*.java`
+
+== Checkpoint 🎯
+
+* Spring Boot (et toutes ses dépendances) est configuré ✅
+* `mvn spring-boot:run` compile et exécute l'application ✅
+* Il faut encore fabriquer un fichier JAR 🏺 pour la production 🤔
+
+=> reprenons avec Maven
+
+== Exercice : Maven JAR Plugin
+
+* *But*: Produire l'artefact JAR distribuable
+
+* La génération du JAR est déclenchée lors de l'appel à `mvn package` :
++
+[source,bash]
+----
+ls -ltra ./target
+mvn clean # Nettoyez tout !
+ls -ltra ./target
+mvn package
+ls -ltra ./target # Est-ce que vous voyez un fichier JAR ?
+----
+
+* Exécution de l'application :
++
+[source,bash]
+----
+java -jar <chemin vers le fichier JAR>
+----
+** Même fonctionnement que précédemment (bannière, port 8080, endpoint `/menus`...)
+
+== Exercice : Changer le nom de l'artefact final
+
+* *But*: Produire un artefact JAR dont le nom est constant
+
+* Quel est le nom de l'artefact généré ? Est-il constant ?
+** (SPOILER: 🙅🏽‍♀️)
+
+* En utilisant la documentation de référence link:https://maven.apache.org/pom.html#the-basebuild-element-set[window="_blank"],
+adaptez votre `pom.xml` afin que le fichier généré se nomme *toujours* `menu-server.jar`.
+
+== Solution : Changer le nom de l'artefact final
+
+[source,xml]
+----
+<build>
+  <finalName>hello</finalName>
+</build>
+----
