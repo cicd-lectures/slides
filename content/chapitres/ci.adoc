@@ -41,20 +41,20 @@ image:ghci.svg[with="800"]
 == Quelques moteurs de CI connus
 
 * A héberger soit-même : https://www.jenkins.io/[Jenkins], https://about.gitlab.com/[GitLab], https://www.drone.io/[Drone CI], https://ovh.github.io/cds/[CDS]...
-* Hébergés en ligne : https://travis-ci.org/[Travis CI], https://semaphoreci.com/[Semaphore CI], https://circleci.com/[Circle CI], https://codefresh.io/[Codefresh], https://docs.github.com/en/free-pro-team@latest/actions/quickstart[Github Actions]
+* Hébergés en ligne : https://travis-ci.org/[Travis CI], https://semaphoreci.com/[Semaphore CI], https://circleci.com/[Circle CI], https://codefresh.io/[Codefresh], https://docs.github.com/en/free-pro-team@latest/actions/quickstart[GitHub Actions]
 
-== Github Actions
+== GitHub Actions
 
-Github Actions est un moteur de CI/CD intégré à Github
+GitHub Actions est un moteur de CI/CD intégré à GitHub
 
 * ✅ : Très facile à mettre en place, gratuit et intégré complètement
-* ❌ : Utilisable uniquement avec Github, et DANS la plateforme Github
+* ❌ : Utilisable uniquement avec GitHub, et DANS la plateforme GitHub
 
-== Concepts de Github Actions
+== Concepts de GitHub Actions
 
 image::gh-actions-concepts.svg[width=800]
 
-== Concepts de Github Actions - Step
+== Concepts de GitHub Actions - Step
 
 Une *Step* (étape) est une tâche individuelle à faire effectuer par le CI :
 
@@ -62,24 +62,24 @@ Une *Step* (étape) est une tâche individuelle à faire effectuer par le CI :
 * Ou une "action" (quel est le nom du produit déjà ?) - mot clef `uses`
 ** Réutilisables et https://docs.github.com/en/free-pro-team@latest/actions/learn-github-actions/finding-and-customizing-actions[partageables]
 
-== Concepts de Github Actions - Job
+== Concepts de GitHub Actions - Job
 
 Un *Job* est un groupe logique de tâches :
 
 * Enchaînement _séquentiel_ de tâches
 * Regroupement logique : "qui a un sens" (exemple : )
 
-== Concepts de Github Actions - Runner
+== Concepts de GitHub Actions - Runner
 
 Un *Runner* est un serveur distant sur lequel s'exécute un job.
 
 * Mot clef `runs-on` dans la définition d'un job
-* Défaut : machine virtuelle Ubuntu dans le cloud utilisé par Github
+* Défaut : machine virtuelle Ubuntu dans le cloud utilisé par GitHub
 * https://docs.github.com/en/free-pro-team@latest/actions/reference/specifications-for-github-hosted-runners[D'autres types sont disponibles]
 (macOS, Windows, etc.)
 * Possibilité de fournir https://docs.github.com/en/free-pro-team@latest/actions/reference/specifications-for-github-hosted-runners[son propre serveur]
 
-== Concepts de Github Actions - Workflow
+== Concepts de GitHub Actions - Workflow
 
 Un *Workflow* est une procédure automatisée composée de plusieurs jobs,
 décrite par un fichier YAML.
@@ -88,14 +88,14 @@ décrite par un fichier YAML.
 * Chemin : `.github/workflows/<nom du workflow>.yml`
 * On peut avoir _plusieurs_ fichiers donc _plusieurs_ workflows
 
-== Concepts de Github Actions - Évènement
+== Concepts de GitHub Actions - Évènement
 
-Un *évènement* du projet Github (push, merge, nouvelle issue, etc. ) déclenche l'exécution du workflow
+Un *évènement* du projet GitHub (push, merge, nouvelle issue, etc. ) déclenche l'exécution du workflow
 
 * Plein de type d'évènements : push, issue, alarme régulière, favori, fork, etc.
 * Le workflow est exécuté pour un commit donné (Rappel : "Workflow as Code")
 
-== Concepts de Github Actions : Exemple
+== Concepts de GitHub Actions : Exemple
 
 .Workflow File :
 [source,yaml]
@@ -103,13 +103,13 @@ Un *évènement* du projet Github (push, merge, nouvelle issue, etc. ) déclench
 include::../code-samples/gh-actions/npm-example.yml[]
 ----
 
-== Concepts de Github Actions - Récapépète
+== Concepts de GitHub Actions - Récapépète
 
 image::gh-actions-concepts.svg[width=800]
 
-== Essayons Github Actions
+== Essayons GitHub Actions
 
-* *But* : nous allons créer notre premier workflow dans Github Actions
+* *But* : nous allons créer notre premier workflow dans GitHub Actions
 
 * N'hésitez pas à utiliser la documentation de GitHub Actions:
 ** https://docs.github.com/en/free-pro-team@latest/actions[Accueil]
@@ -118,7 +118,7 @@ image::gh-actions-concepts.svg[width=800]
 
 * Retournez dans le dépôt créé précédemment dans votre environnement gitpod
 
-== Exemple simple avec Github Actions
+== Exemple simple avec GitHub Actions
 
 * Créez le fichier `.github/workflows/bonjour.yml` avec le contenu suivant :
 
@@ -130,11 +130,11 @@ include::../code-samples/gh-actions/say-hello-full.yml[tags="common,simple-hello
 * Revenez sur la page GitHub de votre projet et naviguez dans l'onglet "Actions" :
 ** Voyez-vous un workflow ? Et un Job ? Et le message affiché par la commande `echo` ?
 
-== Exemple simple avec Github Actions : Récapépète
+== Exemple simple avec GitHub Actions : Récapépète
 
 image::gh-actions-simple-example.svg[width=800]
 
-== Exemple Github Actions : Checkout
+== Exemple GitHub Actions : Checkout
 
 * Supposons que l'on souhaite utiliser le code du dépôt...
 ** Essayez: modifiez le fichier `bonjour.yml` pour afficher le contenu de `README.md` :
@@ -146,7 +146,7 @@ include::../code-samples/gh-actions/say-hello-full.yml[tags="common,show-readme"
 
 * Est-ce que l'étape `cat README.md` se passe bien ? (SPOILER: non ❌ )
 
-== Exercice Github Actions : Checkout
+== Exercice GitHub Actions : Checkout
 
 * *But* : On souhaite récupérer ("checkout") le code du dépôt dans le job
 
@@ -155,7 +155,7 @@ include::../code-samples/gh-actions/say-hello-full.yml[tags="common,show-readme"
 ** Utilisez l'action "checkout" (https://github.com/marketplace/actions/checkout[Documentation]) du marketplace GitHub Action
 ** Vous pouvez vous inspirer du https://docs.github.com/en/free-pro-team@latest/actions/quickstart[Quickstart] de GitHub Actions
 
-== Solution Github Actions : Checkout
+== Solution GitHub Actions : Checkout
 
 [source,yaml]
 ----
@@ -178,7 +178,7 @@ include::../code-samples/gh-actions/say-hello-full.yml[tags="common,checkout,sho
 
 * Deux types de solutions existent, chacune avec ses inconvénients :
 ** Installer les outils manquants en préambule de chaque job (❌ lent ✅ facile )
-** Utiliser Docker pour fabriquer une action Github (❌ complexe ✅ portable)
+** Utiliser Docker pour fabriquer une action GitHub (❌ complexe ✅ portable)
 
 * C'est à vous :
 ** Cherchez comment installer `cowman` dans Ubuntu 18.04
