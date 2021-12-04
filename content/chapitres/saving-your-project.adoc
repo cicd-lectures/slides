@@ -148,7 +148,7 @@ git fetch origin
 == Créez un commit depuis GitHub directement
 
 * Cliquez sur le bouton éditer en haut à droite du "README"
-* Changez le contenu a votre README
+* Changez le contenu de votre README
 * Dans la section "Commit changes"
 ** Ajoutez un titre de commit et une description
 
@@ -169,7 +169,6 @@ git fetch origin
 
 # Ouvrez votre README
 code ./README.md
-
 
 # Mystère, le fichier README ne contient pas vos derniers changements?
 git log
