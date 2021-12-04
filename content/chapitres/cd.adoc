@@ -28,6 +28,38 @@ ____
 Your team prioritizes keeping the software *deployable* over working on new features
 ____
 
+[{invert}]
+== !
+
+La livraison continue est l'exercice de **mettre à disposition automatiquement** le produit logiciel pour qu'il soit prêt à être déployé à tout moment.
+
+== Livraison Continue avec GitHub
+
+* GitHub mets à disposition pour chaque repository un système de gestion de Releases
+
+== Anatomie d'une Release GitHub
+
+* Une release est associée à un tag git
+* Porte un titre
+* Un descriptif des changements
+* Des tarballs du code source a cette version
+* Et une collection d'assets arbitraires (des binaires compilés par exemple)
+
+image::menu-server-releases.png[]
+
+== Exercice: Créer une Release depuis le CI
+
+Changez votre workflow de CI de façon à ce que sur un push de tag de version (portant un préfixe v), le CI effectue les tâches suivantes:
+
+* Télécharge et décompresse l'artefact généré par le job `build`
+* Créer une nouvelle release dans votre dépot ayant pour titre le nom du tag
+* Upload `jar` de l'application dans cette release nouvellement créée.
+
+On vous suggère d'utiliser les actions fournies par github:
+
+* link:https://github.com/actions/download-artifact[Action Download Artifact]
+* link:https://github.com/actions/upload-release-asset#example-workflow---upload-a-release-asset[Create Release & Upload Release asset]
+
 == Déploiement Continu
 
 Continuous Deployment
@@ -36,8 +68,6 @@ Continuous Deployment
 
 * Version "avancée" de la livraison continue:
 ** Chaque changement *est* déployé en production, de manière *automatique*
-* Question importante: En avez-vous besoin ?
-** Avez-vous les mêmes besoin que Amazon Google ou Netflix ?
 
 == Continuous Delivery versus Deployment
 
@@ -45,6 +75,24 @@ image::continuous-depl-vs-delivery.jpg[caption=Continuous Delivery vs Deployment
 
 [.small]
 Source : http://blog.crisp.se/2013/02/05/yassalsundman/continuous-delivery-vs-continuous-deployment
+
+== Bénéfices du Déploiement Continu
+
+** Un travail n'est pas fini tant qu'il n'est pas en production
+
+== Qu'est ce qu'un Environement de Production?
+
+== Introduction à Héroku
+
+== Anatomie d'un Déploiement dans Heroku
+
+== Example de Dockerfile pour Heroku
+
+== Exercice: Créez et Lancez l'image Manuellement
+
+== Exercice: Créez une application sur Heroku
+
+== Exercice: Mise en Place du Déploiement Continu dans votre Workflow
 
 == Pour aller plus loin...
 
