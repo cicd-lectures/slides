@@ -109,7 +109,7 @@ public class ListMenuServiceTests {
 
 == Exercice : Corriger un Bug (3/11)
 
-* Super on à un test, il ne reste plus qu'à le lancer avec `mvn run` 🎉
+* Super on à un test, il ne reste plus qu'à le lancer avec `mvn test` 🎉
 * Spoiler `java.lang.NullPointerException`
 
 image::https://media.giphy.com/media/ceHKRKMR6Ojao/giphy.gif[]
@@ -157,7 +157,7 @@ public void listsKnownMenus() {
 
 == Exercice : Corriger un Bug (7/11)
 
-* Super on à un test, il ne reste plus qu'à le lancer avec `mvn run` 🎉
+* Super on à un test, il ne reste plus qu'à le lancer avec `mvn test` 🎉
 * Spoiler: ✅
 
 image::https://media.giphy.com/media/a0h7sAqON67nO/giphy.gif[]
@@ -223,7 +223,7 @@ public void listsKnownMenus() {
 
 == Exercice : Corriger un Bug (10/11)
 
-* Super on à un test (qui teste!), il ne reste plus qu'à le lancer avec `mvn run` 🎉
+* Super on à un test (qui teste!), il ne reste plus qu'à le lancer avec `mvn test` 🎉
 * Spoiler:
 
 [source,bash]
@@ -417,4 +417,4 @@ public void listExitingMenus() throws Exception {
 Changez le workflow de ci de votre binôme (ou le votre) pour qu'à chaque build:
 
 * Les tests unitaires soient lancés
-* Les tests d'integration soient lancé
+* Les tests d'integration soient lancés
