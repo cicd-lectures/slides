@@ -32,7 +32,6 @@ On parle de **SUT**, System Under Test.
 
 * Test validant le bon comportement une unité de code.
 * Prouve que l'unité de code interagit correctement avec les autres unités.
-* Un test décrit un cas
 * Par exemple :
 ** Retourne les bonnes valeur en fonction des paramètres donnés
 ** Appelle la bonne méthode du bon attribut avec les bons paramètres
@@ -292,7 +291,7 @@ image::architecture.png[]
 
 Un test d'intégration doit a chaque test:
 
-* DémaRrer et provisionner un environnement d’exécution (une DB, Elasticsearch, un autre service...)
+* Démarrer et provisionner un environnement d’exécution (une DB, Elasticsearch, un autre service...)
 * Démarrer votre application
 * Jouer un scénario de test
 * Éteindre et nettoyer son environnement d’exécution pour garantir l'isolation des tests

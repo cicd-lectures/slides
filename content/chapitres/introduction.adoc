@@ -47,4 +47,4 @@ image::cycleenv.png[width="800"]
 
 == Heureusement, vous avez des outils à disposition!
 
-Et c'est ce que l'on va voir ensemble aujourd'hui!
+Et c'est ce que l'on va voir ensemble pendant les trois prochains jours!
