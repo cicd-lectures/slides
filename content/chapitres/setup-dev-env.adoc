@@ -40,7 +40,7 @@ Lors de votre 1er accès, GitPod va vous demander des autorisations (à accepter
 
 Cliquez sur le bouton ci-dessous pour démarrer un environnement GitPod personnalisé:
 
-image::https://gitpod.io/button/open-in-gitpod.svg[link="{gitpod_url}",window="_blank"]
+image::https://gitpod.io/button/open-in-gitpod.svg[link="https://gitpod.io#https://github.com/cicd-lectures/gitpod",window="_blank"]
 
 Après quelques secondes (minutes?), vous avez accès à l'environnement:
 

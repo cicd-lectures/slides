@@ -28,6 +28,60 @@ ____
 Your team prioritizes keeping the software *deployable* over working on new features
 ____
 
+[{invert}]
+== !
+
+La livraison continue est l'exercice de **mettre à disposition automatiquement** le produit logiciel pour qu'il soit prêt à être déployé à tout moment.
+
+== Livraison Continue avec GitHub
+
+Hello Github Releases!
+
+== Anatomie d'une Release GitHub
+
+Une release GiHub est associée à un tag git et porte :
+
+* Un titre
+* Un descriptif des changements
+* Une collection de d'assets dont:
+** Des tarballs du code source a cette version (automatique)
+** Et éventuellement des fichiers de votre choix (des binaires compilés par exemple)
+
+image::menu-server-releases.png[]
+
+== Prérequis: Ordonnancement et exécution conditionnelle des jobs
+
+* Un workflow exécute en parallèle, par défaut, tous les jobs le composant
+* Il est possible de conditionner l’exécution d'un job à la terminaison d'un autre à l'aide du mot clé `needs` (link:https://docs.github.com/en/actions/learn-github-actions/workflow-syntax-for-github-actions#jobsjob_idneeds[documentation de `needs`])
+** Exécution séquentielle au lieu de parallèle
+* Il est possible d’exécuter conditionnellement un job ou un step à l'aide du mot clé `if` (link:https://docs.github.com/en/actions/learn-github-actions/workflow-syntax-for-github-actions#jobsjob_idif[documentation de `if`])
+
+[source,yaml]
+----
+jobs:
+  release:
+    # Lance le job release si build et test se sont terminés normalement.
+    needs: [build, test]
+    # Lance le job release uniquement si la branche est main.
+    if: contains('refs/heads/main', github.ref)
+    steps:
+      # ...
+----
+
+== Exercice: Créer une Release depuis le CI
+
+Changez votre workflow de CI de façon à ce que sur un push de tag, le CI effectue les tâches suivantes dans un nouveau job:
+
+* Une fois que l'étape `build` est terminée
+* Télécharge et décompresse l'artefact généré par le job `build`
+* Créer une nouvelle release dans votre dépot ayant pour titre le nom du tag
+* Upload `jar` de l'application dans cette release nouvellement créée
+
+On vous suggère d'utiliser les actions fournies par GitHub:
+
+* link:https://github.com/actions/download-artifact[Action Download Artifact]
+* link:https://github.com/actions/upload-release-asset#example-workflow---upload-a-release-asset[Create Release & Upload Release asset]
+
 == Déploiement Continu
 
 Continuous Deployment
@@ -36,8 +90,6 @@ Continuous Deployment
 
 * Version "avancée" de la livraison continue:
 ** Chaque changement *est* déployé en production, de manière *automatique*
-* Question importante: En avez-vous besoin ?
-** Avez-vous les mêmes besoin que Amazon Google ou Netflix ?
 
 == Continuous Delivery versus Deployment
 
@@ -45,6 +97,153 @@ image::continuous-depl-vs-delivery.jpg[caption=Continuous Delivery vs Deployment
 
 [.small]
 Source : http://blog.crisp.se/2013/02/05/yassalsundman/continuous-delivery-vs-continuous-deployment
+
+== Bénéfices du Déploiement Continu
+
+* Rends triviale les procédures de mise en production et de rollback
+** Encourage à mettre en production le plus souvent possible
+** Encourage à faire des mises en production incrémentales
+* Limite les risques d'erreur lors de la mise en production
+* Fonctionne de 1 à 1000 serveurs et plus encore...
+
+== Qu'est ce que "La production" ?
+
+* Un (ou plusieurs) ordinateur ou votre / vos applications sont executées
+* Ce sont la ou vos utilisateurs "utilisent" votre code
+** Que ce soit un serveur web pour une application web
+** Ou un téléphone pour une application mobile
+* Certaines plateformes sont plus ou moins outillées pour la mise en production automatique
+
+== Introduction à Héroku
+
+* Dans le cadre de ce cours nous allons utiliser link:https://heroku.com[Heroku]
+* Plateforme d'hébergement automatisée
+* Structurée autour de trois concepts principaux:
+** Un `Dyno` est une instance de votre serveur
+** Un `Addon` est un outil tierce dans votre application (un SGBD par exemple...)
+** Une `Application` est un ensemble de `Dynos` et d' `Addons`
+
+== Exercice: Créez une application sur Heroku (1/2)
+
+* Rendez vous sur link:https://heroku.com[Heroku] et crééz vous un compte
+* Une fois sur la page link:https://dashboard.heroku.com/apps[Apps] cliquez sur `New app` dans le menu en haut a gauche
+* Sélectionnez un nom et une région (europe de préférence)
+* Cliquez sur Create App
+
+== Exercice: Créez une application sur Heroku (2/2)
+
+* Rendez-vous sur l'onglet overview de votre app
+** Pour l'instance il ne s'y passe pas grand chose...
+* Rendez vous maintenantr dans l'écran "View Logs" en haut à droite
+** Permets de visualiser en temps réel les logs de vos Dyno en production
+* Prenez un peu le temps de naviguer dans l'interface
+
+== Déployer dans une App Heroku (1/2)
+
+Heroku supporte plusieurs modes de déploiement
+
+* Push du code source dans un remote heroku via git
+* Connection directe avec GitHub
+* Push d'une image dans une container registry
+** C'est cette méthode que nous allons utiliser (car la moins automagique)
+
+== Construire une Image de Container pour Heroku
+
+[source,Dockerfile]
+----
+# Depuis l'image de base eclipse-temurin:11 (qui embarque un JRE dans la version 11)
+FROM eclipse-temurin:11
+
+# Copier depuis l'hote tous les fichiers .jar dans le fichier /opt/app/japp.jar de l'image
+COPY target/*.jar /opt/app/japp.jar
+
+# Définis la commande par défaut du container à java -jar /opt/app/japp.jar  --server.port=${PORT}
+# La variable d'environement PORT est définie par heroku à la création du container.
+CMD ["java","-jar","/opt/app/japp.jar", "--server.port=${PORT}"]
+----
+
+== Exercice: Créez et Lancez l'image Manuellement
+
+* A la racine de votre dépot menu-server créez un fichier `Dockerfile`
+* Dans un terminal, lancez les commandes suivantes:
+
+[source,bash]
+----
+# Construit une image docker portant le tag  `cicdlectures/menu-server:test`
+docker build -t cicdlectures/menu-server:test .
+
+# Lance un container basé sur l'image `cicdlectures/menu-server:test`
+docker run -ti --rm -e PORT=9090 -p 8080:9090 cicdlectures/menu-server:test
+
+# Vérifiez que vous pouvez faire des requêtes au menu-server....
+# Et Ctrl+C pour terminer l'éxecution du container
+----
+
+== Déployer dans une App Heroku (2/2)
+
+Les grandes étapes d'un déploiement dans heroku via une container registry
+
+1. Le client construit une image de container de l'application et la pousse dans une registry d'images heroku 
+2. Le client indique a heroku de déployer cette nouvelle image dans un dyno (`heroku container:release <nom du dyno>`)
+
+== Exercice: Déployez manuellement votre application à l'aide de heroku CLI
+
+[source,bash]
+----
+# Authentifie votre instance gitpod auprès de heroku
+heroku login -i
+
+# Authentifie le démon docker de votre instance auprès de la registry heroku
+heroku container:login
+
+# On repackage l'app
+mvn package
+
+# On construit l'image du container heroku et on la publie dans la registry heroku pour le dyno web
+heroku container:push web --app <votre-app>
+
+# On déploie la nouvelle image dans le dyno:web
+heroku container:release web --app <votre-app>
+----
+
+[{invert}]
+== !
+
+Mais le faire manuellement c'est pas du CD. Il faut le faire faire à github actions
+
+== Parler à Heroku depuis GitHub Actions
+
+* Problème: Seul votre utilisateur peut controller votre application heroku (et heureusement!). Comment le CI peut-il se faire passer pour votre utilisateur Heroku?
+* Solution: Il faut fournir au moteur de CI un token d'authentification (une chaine de caractères) qui authorise le moteur de CI à prendre votre identité.
+* ⚠ Ce token est une donnée sensible: si on vous la vole on peut se faire passer pour vous auprès d'Heroku
+* Il faut donc le stocker en sécurité: sous forme de secret dans GitHub.
+
+== Exercice: Récupérez votre Token Heroku et stockez le en tant que secret dans Github
+
+* Rendez vous link:https://dashboard.heroku.com/account[dans vos parametes de comptes Heroku]
+* Dans la section API Key cliquez sur `Reveal`: cela affiche votre clé d'API
+* Copiez cette valeur dans le presse papier
+* Rendez vous maintenant dans la page de configuration de votre dépot, section `Secrets`
+* Cliquez sur `New Repository Secret`
+* Entrez comme nom de secret `HEROKU_API_KEY`
+* Collez la valeur (attention aux espaces!) et cliquez sur `Add Secret`
+
+== Exercice: Mise en Place du Déploiement Continu dans votre Workflow
+
+Changez votre workflow de CI pour que, sur un évenement de push de tag de version:
+
+* Une fois le build terminé un nouveau job `release-heroku` soit lancé
+* Ce job effectue dans l'ordre:
+** Télécharge l'arterfact de l'étape `build`
+** Checkout le dépot (pour rapatrier le Dockerfile)
+** Effectue un déploiement sur heroku, en utilisant la CLI heroku
+
+== Quelques astuces:
+
+* La CLI heroku est déja pré-installée dans votre environement de CI
+* On ne peut pas jouer `heroku login` car c'est une étape intéractive.
+** En revanche la CLI utilise aussi la variable d'environement `HEROKU_API_KEY` pour s'authentifier: il faut donc lui exposer le secret (link:https://docs.github.com/en/actions/security-guides/encrypted-secrets#using-encrypted-secrets-in-a-workflow[doc!])
+* Il ne reste plus qu'a jouer les commandes de déploiement que l'on à déja vu.
 
 == Pour aller plus loin...
 
