@@ -151,8 +151,8 @@ Heroku supporte plusieurs modes de déploiement
 
 [source,Dockerfile]
 ----
-# Depuis l'image de base eclipse-temurin:11 (qui embarque un JRE dans la version 11)
-FROM eclipse-temurin:11
+# Depuis l'image de base azul/zulu-openjdk:11 (qui embarque un JRE dans la version 11)
+FROM azul/zulu-openjdk:11
 
 # Copier depuis l'hote tous les fichiers .jar dans le fichier /opt/app/japp.jar de l'image
 COPY target/*.jar /opt/app/japp.jar
