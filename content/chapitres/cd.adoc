@@ -39,19 +39,22 @@ Hello Github Releases!
 
 == Anatomie d'une Release GitHub
 
-* Une release est associée à un tag git
-* Porte un titre
+Une release GiHub est associée à un tag git et porte :
+
+* Un titre
 * Un descriptif des changements
-* Des tarballs du code source a cette version
-* Et une collection d'assets arbitraires (des binaires compilés par exemple)
+* Une collection de d'assets dont:
+** Des tarballs du code source a cette version (automatique)
+** Et éventuellement des fichiers de votre choix (des binaires compilés par exemple)
 
 image::menu-server-releases.png[]
 
-== Prérequis: Ordonancement et Execution Contionelle des Jobs
+== Prérequis: Ordonnancement et exécution conditionnelle des jobs
 
-* Un workflow execute par défaut tous les jobs qui le compose en parallèle
-* Il est possible de conditoner l'execution d'un job à la terminaison d'un autre à l'aide du mot clé `needs` (link:https://docs.github.com/en/actions/learn-github-actions/workflow-syntax-for-github-actions#jobsjob_idneeds[doc])
-* Il est possible d'executer conditionellement un job ou un step à l'aide du mot clé `if` (link:https://docs.github.com/en/actions/learn-github-actions/workflow-syntax-for-github-actions#jobsjob_idif[doc])
+* Un workflow exécute en parallèle, par défaut, tous les jobs le composant
+* Il est possible de conditionner l’exécution d'un job à la terminaison d'un autre à l'aide du mot clé `needs` (link:https://docs.github.com/en/actions/learn-github-actions/workflow-syntax-for-github-actions#jobsjob_idneeds[documentation de `needs`])
+** Exécution séquentielle au lieu de parallèle
+* Il est possible d’exécuter conditionnellement un job ou un step à l'aide du mot clé `if` (link:https://docs.github.com/en/actions/learn-github-actions/workflow-syntax-for-github-actions#jobsjob_idif[documentation de `if`])
 
 [source,yaml]
 ----

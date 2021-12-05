@@ -157,7 +157,7 @@ public void listsKnownMenus() {
 
 == Exercice : Corriger un Bug (7/11)
 
-* Super on à un test, il ne reste plus qu'à le lancer avec `mvn test` 🎉
+* Super on a un test unitaire, il ne reste plus qu'à le lancer avec `mvn test` 🎉
 * Spoiler: ✅
 
 image::https://media.giphy.com/media/a0h7sAqON67nO/giphy.gif[]
@@ -223,7 +223,7 @@ public void listsKnownMenus() {
 
 == Exercice : Corriger un Bug (10/11)
 
-* Super on à un test (qui teste!), il ne reste plus qu'à le lancer avec `mvn test` 🎉
+* Super on a un test unitaire (qui teste!), il ne reste plus qu'à le lancer avec `mvn test` 🎉
 * Spoiler:
 
 [source,bash]
