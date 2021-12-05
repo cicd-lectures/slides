@@ -42,7 +42,7 @@ Cela rends la manipulation un peu plus complexe, allons-y pas à pas :-)
 
 == Créer un dépôt distant
 
-* Rendez vous sur link:https://github.com[Github]
+* Rendez vous sur link:https://github.com[GitHub]
 ** Créez un nouveau dépôt distant en cliquant sur "New" en haut à gauche
 ** Appelez le `menu-server`
 ** Une fois créé, mémorisez l'URL (++https://github.com/...++) de votre dépôt :-)
@@ -148,14 +148,14 @@ git fetch origin
 == Créez un commit depuis GitHub directement
 
 * Cliquez sur le bouton éditer en haut à droite du "README"
-* Changez le contenu a votre README
+* Changez le contenu de votre README
 * Dans la section "Commit changes"
 ** Ajoutez un titre de commit et une description
 
 ** Cochez "Commit directly to the main branch"
 ** Validez
 
-Github crée directement un commit sur la branche main sur le dépôt distant
+GitHub crée directement un commit sur la branche main sur le dépôt distant
 
 == Rapatrier les changements distants
 
@@ -169,7 +169,6 @@ git fetch origin
 
 # Ouvrez votre README
 code ./README.md
-
 
 # Mystère, le fichier README ne contient pas vos derniers changements?
 git log
@@ -226,9 +225,9 @@ git log
 
 Un dépôt distant peut être hébergé par n'importe quel serveur sans besoin autre qu'un accès SSH ou HTTPS.
 
-Une multitudes de services facilitent et enrichissent encore git: (Github, Gitlab, Gitea, Bitbucket...)
+Une multitudes de services facilitent et enrichissent encore git: (GitHub, Gitlab, Gitea, Bitbucket...)
 
-=> Dans le cadre du cours, nous allons utiliser +++<span class="fab fa-github"></span>+++ *Github*.
+=> Dans le cadre du cours, nous allons utiliser +++<span class="fab fa-github"></span>+++ *GitHub*.
 
 == git + Git(Hub|Lab|tea|...) = superpowers !
 
