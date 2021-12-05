@@ -79,16 +79,16 @@ Source : http://blog.crisp.se/2013/02/05/yassalsundman/continuous-delivery-vs-co
 
 == Bénéfices du Déploiement Continu
 
-* Rends triviale la procédure de mise en production et de rollback
+* Rends triviale les procédures de mise en production et de rollback
 ** Encourage à mettre en production le plus souvent possible
-** Encourage à faire des mises en production incrémentales, et donc limiter les risques
-* Limites les risques d'erreur lors de la mise en production
+** Encourage à faire des mises en production incrémentales
+* Limite les risques d'erreur lors de la mise en production
 * Fonctionne de 1 à 1000 serveurs et plus encore...
 
 == Qu'est ce que "La production" ?
 
 * Un (ou plusieurs) ordinateur ou votre / vos applications sont executées
-* Ce sont la ou vos utilisateurs "utilisent"  votre code
+* Ce sont la ou vos utilisateurs "utilisent" votre code
 ** Que ce soit un serveur web pour une application web
 ** Ou un téléphone pour une application mobile
 * Certaines plateformes sont plus ou moins outillées pour la mise en production automatique
