@@ -47,6 +47,24 @@ Hello Github Releases!
 
 image::menu-server-releases.png[]
 
+== Prérequis: Ordonancement et Execution Contionelle des Jobs
+
+* Un workflow execute par défaut tous les jobs qui le compose en parallèle
+* Il est possible de conditoner l'execution d'un job à la terminaison d'un autre à l'aide du mot clé `needs` (link:https://docs.github.com/en/actions/learn-github-actions/workflow-syntax-for-github-actions#jobsjob_idneeds[doc])
+* Il est possible d'executer conditionellement un job ou un step à l'aide du mot clé `if` (link:https://docs.github.com/en/actions/learn-github-actions/workflow-syntax-for-github-actions#jobsjob_idif[doc])
+
+[source,yaml]
+----
+jobs:
+  release:
+    # Lance le job release si build et test se sont terminés normalement.
+    needs: [build, test]
+    # Lance le job release uniquement si la branche est main.
+    if: contains('refs/heads/main', github.ref)
+    steps:
+      # ...
+----
+
 == Exercice: Créer une Release depuis le CI
 
 Changez votre workflow de CI de façon à ce que sur un push de tag, le CI effectue les tâches suivantes dans un nouveau job:
