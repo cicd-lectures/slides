@@ -173,15 +173,15 @@ include::../code-samples/gh-actions/npm-example.yml[]
 
 == Exemple simple avec GitHub Actions
 
-* Dans le répertoire `/workspaces/menu-server`
-* Créez le fichier `.github/workflows/bonjour.yml` avec le contenu suivant :
+* Dans le projet "menu-server", sur la branch `main`,
+** Créez le fichier `.github/workflows/bonjour.yml` avec le contenu suivant :
 
 [source,yaml]
 ----
 include::../code-samples/gh-actions/say-hello-full.yml[tags="common,simple-hello"]
 ----
 
-* Commitez puis poussez sur la branch `main`
+* Commitez puis poussez
 
 * Revenez sur la page GitHub de votre projet et naviguez dans l'onglet "Actions" :
 ** Voyez-vous un workflow ? Et un Job ? Et le message affiché par la commande `echo` ?
@@ -268,17 +268,21 @@ include::../code-samples/gh-actions/say-hello-full.yml[tags="common,checkout,apt
 include::../code-samples/gh-actions/say-hello-full.yml[tags="common,container,checkout,run-cowsay"]
 ----
 
-== Problème : Accélérer le workflow
+== Checkpoint 🎯
 
 * Quel est l'impact en terme de temps d'exécution du changement précédent ?
 
 * *Problème :* Le temps entre une modification et le retour est crucial
 
-// TODO: insert Interstellar meme here
+image::wait-here.jpg[]
 
-* Difficulté :
+== Problème : Accélérer le workflow
+
+* *Problème :*
 ** Optimiser prématurément est contre-productif (commencez par faire un système qui marche comme prévu)
 ** Mais il faut optimiser à un moment donné
+
+* Essayons en ajoutant des étapes Maven en plus des étapes `cowsay`
 
 == Exercice : Fonctionnalités du moteur de CI
 
@@ -307,13 +311,13 @@ include::../code-samples/gh-actions/say-hello-full.yml[tags="common,container,ch
 
 == Exercice : Intégration Continue du projet "menu-server"
 
-👷🏽‍♀️ C'est à vous de modifier le projet "menu-server" pour avoir 1 workflow nommé `ci.yaml` portant un job nommé `build` qui va sur un évenement de push:
+👷🏽‍♀️ C'est à vous de modifier le projet "menu-server" pour :
 
-* Récupérer le code
-* Installer la même version de Java (mineure) que dans GitPod
-* Générer l'artefact "JAR" de l'application à l'aide de Maven
-* Uploader l'artefact "JAR" dans GitHub Actions pour le conserver
-** 💡 `actions/upload-artifact`
+* Supprimer le workflow `bonjour.yaml`
+* N'avoir plus qu'1 seul job nommé `build` dans un workflow nommé "CI" (fichier `ci.yaml`) qui va :
 
-
-(vous pouvez supprimer votre ancien workflow `bonjour.yml`)
+** Récupérer le code
+** Installer la même version de Java (mineure) que dans GitPod
+** Générer l'artefact "JAR" de l'application à l'aide de Maven
+** Uploader l'artefact "JAR" dans GitHub Actions pour le conserver
+*** 💡 (`actions/upload-artifact`)
