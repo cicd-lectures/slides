@@ -31,7 +31,7 @@ JAVA bien ?
 
 * Essayons un projet "Hello World" en Java dans GitPod, dans un nouveau dossier vide :
 
-image::https://gitpod.io/button/open-in-gitpod.svg[link="https://gitpod.io/#https://github.com/cicd-lectures/gitpod.git",window="_blank"]
+image::https://gitpod.io/button/open-in-gitpod.svg[link="https://gitpod.io/workspaces",window="_blank"]
 
 == Exemple Java : Compiler 🤲🏽
 
@@ -198,7 +198,7 @@ mvn clean compile -X # On peut appeler plusieurs phases et passer des options
 
 *But :* fabriquer l'application menuserver avec Maven
 
-image::https://gitpod.io/button/open-in-gitpod.svg[link="https://gitpod.io/#https://github.com/cicd-lectures/gitpod.git",window="_blank"]
+image::https://gitpod.io/button/open-in-gitpod.svg[link="https://gitpod.io/workspaces",window="_blank"]
 
 Commençons par valider le projet en utilisant la phase
 link:https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html[`validate`] de Maven:
