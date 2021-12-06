@@ -79,7 +79,7 @@ image::https://media.giphy.com/media/5x89XRx3sBZFC/giphy.gif[]
 ** Tous les noms des menus sont *TODO* 😱
 * Quand on regarde l'implémentation, on se rends compte que le problème provient de la méthode statique `fromModel` de la classe `MenuDto`
 * Même si la correction est aisée, on va d'abord écrire un test unitaire qui valide le comportement du service.
-* Notre SUT: `ListMenuService` + `MenuDto`
+* Notre SUT: `ListMenuService` + `DTO` + `Model`
 
 == Exercice : Corriger un Bug (2/11)
 
@@ -356,6 +356,11 @@ Cela crée les commandes suivantes:
 - `mvn test`: lance les tests unitaires
 - `mvn verify`: lance les tests unitaires et d'integration
 - `mvn verify -DskipUnitTests=true`: lance uniquement les tests d'integration
+
+[{invert}]
+== !
+
+Nous allons écrire un test d'intégration pour l'appel `GET /menus`
 
 == Mise en Place d'un Test d'Intégration
 

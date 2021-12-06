@@ -115,7 +115,7 @@ Dans la terminologie GitHub:
 * Un fork est un remote copié d'un dépôt principal
 ** C'est la où les contributeurs poussent leur branche de travail.
 * Les branches de version (main, staging...) vivent sur le dépôt principal
-* La procédure de ramener un changement d'un == Limites de bosser seul
+* La procédure de ramener un changement d'un fork à un dépot principal s'appelle la Pull Request (PR)
 
 == Exercice: Créez un fork
 
@@ -181,6 +181,8 @@ Une fois que vous êtes satisfaits de votre changement il vous faut maintenant c
 
 == Exercice: Contribuez au projet de votre binôme (5/5)
 
+Dernière étape: ouvrir une pull request!
+
 * Rendez vous sur la page de votre projet
 * Sélectionnez votre branche dans le menu déroulant "branches"  en haut a gauche.
 * Cliquez ensuite sur le bouton ouvrir une pull request
@@ -196,16 +198,6 @@ image:pr.png[]
 * Fonctionnel : est-ce que le code fait ce que l'on veux ?
 * Humain : Propager la connaissance par la revue de code.
 * Méthode : Tracer les changements.
-
-== Anatomie d'une Pull Request sur GitHub
-
-* **Branche source**: La branche portant le changement
-* **Branche cible**: La branche dans lequel le changement va être "mergé".
-* **Titre**: décrit de façon concise le changement apporté
-* **Description**: décrit de façon détaillée le changement. Doit donner toutes les "clés de lecture" de la PR à un relecteur
-* **Labels**: meta informations permettant de suivre le type de la PR (bugfix, feature?)
-* **Historique de commit**: Lors d'une pull request, une attention particulière doit être portée aux commits (bien nommés, atomiques), c'est un outil aidant à la relecture!
-
 
 == Revue de code ?
 
