@@ -173,6 +173,7 @@ include::../code-samples/gh-actions/npm-example.yml[]
 
 == Exemple simple avec GitHub Actions
 
+* Dans le répertoire `/workspaces/menu-server`
 * Créez le fichier `.github/workflows/bonjour.yml` avec le contenu suivant :
 
 [source,yaml]
@@ -284,7 +285,7 @@ include::../code-samples/gh-actions/say-hello-full.yml[tags="common,container,ch
 * *But* : s'assurer que le workflow possède la même version de Java que GitPod...
 ** ... le plus efficacement possible
 
-* 👷🏽‍♀️ C'est à vous de mettre à jour le workflow pour ajouter un 2nd job nommé `runMaven` dans le workflow :
+* 👷🏽‍♀️ C'est à vous de mettre à jour le workflow pour ajouter un 2nd job nommé `run_maven` dans le workflow :
 ** On souhaite utiliser la même distribution majeure de Java JDK que dans GitPod (`java -version`, visez la même version mineure)
 ** 💡 https://github.com/marketplace/actions/setup-java-jdk[Setup Java JDK (Verified Action),window="_blank"]
 ** Ce job  doit récupérer le code puis afficher les versions de Maven, Java et le POM "effectif"
@@ -306,10 +307,13 @@ include::../code-samples/gh-actions/say-hello-full.yml[tags="common,container,ch
 
 == Exercice : Intégration Continue du projet "menu-server"
 
-👷🏽‍♀️ C'est à vous de modifier le projet "menu-server" pour avoir 1 job nommé `build` dans un workflow nommé "CI" (fichier `ci.yaml`) qui va :
+👷🏽‍♀️ C'est à vous de modifier le projet "menu-server" pour avoir 1 workflow nommé `ci.yaml` portant un job nommé `build` qui va sur un évenement de push:
 
 * Récupérer le code
 * Installer la même version de Java (mineure) que dans GitPod
 * Générer l'artefact "JAR" de l'application à l'aide de Maven
 * Uploader l'artefact "JAR" dans GitHub Actions pour le conserver
-** 💡 `actions/upload-artifact`)
+** 💡 `actions/upload-artifact`
+
+
+(vous pouvez supprimer votre ancien workflow `bonjour.yml`)

@@ -36,7 +36,15 @@ curl -sSLO https://cicd-lectures.github.io/slides/2021/media/menu-server.tar.gz
 tar xvzf ./menu-server.tar.gz
 --
 
-A partir de la vous pouvez ouvrir le fichier `LISEZMOI.txt` et commencer à savourer son contenu.
+A partir de la vous pouvez ouvrir le fichier `LISEZMOI.txt` et commencer à suivre ses intructions.
+
+== Comment accéder à un serveur démaré dans un Gitpod
+
+* Vous avez probablement démaré un serveur web qui écoute sur  le port 8080
+* Si vous souhaitez accéder par `curl` depuis terminal de votre gitpod, rien à faire
+* Si vous souhaitre y accéder depuis l'exterieur de votre gitpod il vous faut une URL publique:
+** `gp url 8080` vous indique l'URL du port 8080 de votre instance gitpod!
+** `gp preview "$(gp url 8080)"` ouvrir votre navigateur.
 
 [{invert}]
 == Qu'est-ce qui va / ne va pas dans ce projet d'après vous?
@@ -44,7 +52,7 @@ A partir de la vous pouvez ouvrir le fichier `LISEZMOI.txt` et commencer à savo
 == Triste Rencontre avec la Réalité
 
 - Pas de gestion de version...
-- Le projet ne fonctionne pas, tous les menus retournés s'appellent "TEST TODO" :sob:
+- Le projet ne fonctionne pas, tous les menus retournés s'appellent "TODO" :sob:
 - Le correctif ne semble pas compliqué à faire...
 - ... sauf que vous ne pouvez pas compiler le projet!
 
@@ -56,28 +64,34 @@ image::architecture.png[]
 
 == HTTP Layer
 
-- Fait la transition entre une requête HTTP et une action logique de l'application
-- Accepte en entrée une requête HTTP (headers, query parameters, verb, (JSON) body)
-- Réponds un code de statut, des headers et optionnellement un body
-- Appelle la couche service en passant des DTOs (data transfer objects)
+* Fait la transition entre une requête HTTP et une action logique de l'application
+* Accepte en entrée une requête HTTP (headers, query parameters, verb, (JSON) body)
+* Réponds un code de statut, des headers et optionnellement un body
+* Appelle la couche service en passant des DTOs (data transfer objects)
 
 == Business Layer
 
-- Implémente la logique métier de l'application
-- Accepte en entrée des DTOs et en réponds en sortie
-- Appelle d'autre services ou les repositories de l'application en leur passant des objets model
+* Implémente la logique métier de l'application
+* Accepte en entrée des DTOs et en réponds en sortie
+* Appelle d'autre services ou les repositories de l'application en leur passant des objets model
 
 == Storage Layer
 
-- Fait la transition entre le modèle objet java et le modèle de la base de données (ici relationnel // SQL)
-- Accepte en entrée des objets du modèle, et peut en répondre aussi
-- Chaque méthode implémentée par un repository est en réalité une requête à votre base de données
-- Implémentation ici déléguée à un outil d'ORM (object relational mapping), ici hibernate
-- On utilisera dans le cadre de ce cours une base de donnée in-memory appelée link:https://www.h2database.com/html/main.html[h2]
+* Fait la transition entre le modèle objet java et le modèle de la base de données (ici relationnel // SQL)
+* Accepte en entrée des objets du modèle, et peut en répondre aussi
+* Chaque méthode implémentée par un repository est en réalité une requête à votre base de données
+* Implémentation ici déléguée à un outil d'ORM (object relational mapping), ici hibernate
+* On utilisera dans le cadre de ce cours une base de donnée in-memory appelée link:https://www.h2database.com/html/main.html[h2]
 
 == Architecture: résumé
 
 image::architecture.png[]
+
+== Modèle de données
+
+* Une entité `Menu`, portant un identifiant et un titre
+* Une entité `Dish`, portant un identifiant et un tire
+* Un `Menu` est composé de 0 à N `Dish`
 
 == Organisation du Code Source
 

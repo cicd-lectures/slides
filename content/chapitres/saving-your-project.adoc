@@ -190,7 +190,6 @@ Le changement à été rapatrié, cependant il n'est pas encore présent sur vot
 git merge origin/main
 --
 
-
 == !
 
 Vu que votre branche main n'a pas divergé (== partage le même historique) de la branche distante, `git merge` effectue automatiquement un "fast forward".
@@ -220,6 +219,8 @@ git log
 # Votre nouveau commit est présent sur la branche main !
 # Juste au dessus de votre commit initial !
 --
+
+Et vous devriez voir votre changement dans le ficher README.md
 
 == Git(Hub|Lab|tea|...)
 

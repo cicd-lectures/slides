@@ -33,7 +33,7 @@ jobs:
       - run: cat README.md | cowsay
 # end::run-cowsay[]
 # tag::maven-job[]
-  runMaven:
+  run_maven:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
