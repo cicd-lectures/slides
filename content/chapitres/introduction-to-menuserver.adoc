@@ -38,7 +38,7 @@ tar xvzf ./menu-server.tar.gz
 
 A partir de la vous pouvez ouvrir le fichier `LISEZMOI.txt` et commencer à suivre ses instructions.
 
-== Comment accéder à un serveur démarré dans un Gitpod
+== Comment accéder à un serveur démarré dans un Gitpod ?
 
 * Vous avez probablement démarré un serveur web qui écoute sur  le port 8080
 * Si vous souhaitez accéder par `curl` depuis terminal de votre gitpod, rien à faire
