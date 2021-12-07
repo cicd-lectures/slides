@@ -19,7 +19,7 @@ Source : http://cartoontester.blogspot.be/2010/01/big-bugs.html
 
 == Qu'est ce que l'Intégration Continue ?
 
-**Objectif :** que l'intégration de code soit un _non-évenement_
+**Objectif :** que l'intégration de code soit un _non-évènement_
 
 * Construire et intégrer le code *en continu*
 * Le code est intégré *souvent* (au moins quotidiennement)

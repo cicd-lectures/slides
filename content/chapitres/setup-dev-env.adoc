@@ -54,10 +54,10 @@ Source disponible dans: link:https://github.com/cicd-lectures/gitpod[]
 
 == Workspaces GitPod 🗂
 
-* Un workspace est une instance d'un environement de travail virtuel
+* Un workspace est une instance d'un environnement de travail virtuel
 * C'est un ordinateur distant
 * ⚠  Faites attention à réutiliser le même workspace tout au long de ce cours⚠
-* Referez vous à la page link:https://gitpod.io/workspaces[workspaces] pour accéder a la liste des environements que vous avez créé.
+* Referez vous à la page link:https://gitpod.io/workspaces[workspaces] pour accéder a la liste des environnements que vous avez créé.
 
 == Checkpoint 🎯
 

@@ -36,7 +36,7 @@ public class Item {
 [%notitle]
 == Une petite histoire
 
-Le site décide tout d'un coup de changer le format de l'identifiant de son objet en chaine de caractères.
+Le site décide tout d'un coup de changer le format de l'identifiant de son objet en chaîne de caractères.
 
 [source,json]
 --
@@ -61,9 +61,9 @@ image::explosion.gif[width="800"]
 
 == Qu'est s'est il passé ?
 
-* Votre application ne s'attendait pas à un identifiant sous forme de chaine de caractères !
+* Votre application ne s'attendait pas à un identifiant sous forme de chaîne de caractères !
 * Le fournisseur de l'API à "changé le contrat" de son API d'une façon non rétrocompatible avec votre l'existant.
-** Cela s'appele un 🇬🇧 *Breaking Change*
+** Cela s'appelle un 🇬🇧 *Breaking Change*
 
 == Comment éviter cela ?
 
@@ -79,7 +79,7 @@ image::explosion.gif[width="800"]
 
 [.notes]
 --
-Valide d'un point de vue fonctionel et aussi technique
+Valide d'un point de vue fonctionnel et aussi technique
 --
 
 == Quoi versionner ?
@@ -87,8 +87,8 @@ Valide d'un point de vue fonctionel et aussi technique
 Le problème de la compatibilité existe des qu'une dépendance entre deux bouts de code existe.
 
 * Une API
-* Une librarie
-* Un langage de programation
+* Une librairie
+* Un langage de programmation
 * Le noyau linux
 
 == Version sémantique
@@ -102,7 +102,7 @@ image:semver.png[width="600"]
 [%notitle]
 == !
 
-Un changement **ne changeant pas le périmètre fonctionel** incrémente le numéro de version **patch**.
+Un changement **ne changeant pas le périmètre fonctionnel** incrémente le numéro de version **patch**.
 
 [.notes]
 --
@@ -114,28 +114,28 @@ Un bugfix
 [%notitle]
 == !
 
-Un changement changeant le périmètre fonctionel de façon **rétrocompatible** incrémente le numéro de version **mineure**.
+Un changement changeant le périmètre fonctionnel de façon **rétrocompatible** incrémente le numéro de version **mineure**.
 
 [.notes]
 --
 
 Example:
 
-Ajout d'une fonctionalité supplémentaire (nouvelle route dans une API).
+Ajout d'une fonctionnalité supplémentaire (nouvelle route dans une API).
 --
 
 [%notitle]
 == !
 
 
-Un changement changeant le périmètre fonctionel de façon **non rétrocompatible** incrémente le numéro de version **majeure**.
+Un changement changeant le périmètre fonctionnel de façon **non rétrocompatible** incrémente le numéro de version **majeure**.
 
 [.notes]
 --
 
 Example:
 
-Retrait d'une fonctionalité (retrait d'une route dans une API).
+Retrait d'une fonctionnalité (retrait d'une route dans une API).
 --
 
 == En résumé
@@ -158,7 +158,7 @@ Retrait d'une fonctionalité (retrait d'une route dans une API).
 * Utilisation de *tags* git pour définir des versions.
 * Un *tag* git est une référence sur un commit.
 
-== Exercice: Creez et taggez la version v0.0.1 de votre menu-server
+== Exercice: Créez et "taggez" la version v0.0.1 de votre menu-server
 
 [source,bash]
 ----
@@ -170,4 +170,3 @@ git tag -a v1.4.3 -m "Release version v1.4.3"
 # Publier un tag sur le remote origin.
 git push origin v1.4.3
 ----
-

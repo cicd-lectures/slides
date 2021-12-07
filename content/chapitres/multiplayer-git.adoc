@@ -115,7 +115,7 @@ Dans la terminologie GitHub:
 * Un fork est un remote copié d'un dépôt principal
 ** C'est la où les contributeurs poussent leur branche de travail.
 * Les branches de version (main, staging...) vivent sur le dépôt principal
-* La procédure de ramener un changement d'un fork à un dépot principal s'appelle la Pull Request (PR)
+* La procédure de ramener un changement d'un fork à un dépôt principal s'appelle la Pull Request (PR)
 
 == Exercice: Créez un fork
 
