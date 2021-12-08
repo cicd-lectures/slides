@@ -30,10 +30,10 @@ jobs:
       - name: 'Build'
         run: make build
       - name: PDF on main branch
-        if: github.ref == 'refs/heads/main'
+        if: github.ref == 'refs/heads/2021'
         run: make pdf
       - name: 'Caching for later builds'
-        if: github.ref == 'refs/heads/main'
+        if: github.ref == 'refs/heads/2021'
         run: docker push "${IMAGE_CACHE_NAME}"
       - name: 'Verify'
         run: make verify
