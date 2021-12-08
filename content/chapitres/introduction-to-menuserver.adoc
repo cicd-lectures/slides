@@ -36,13 +36,13 @@ curl -sSLO https://cicd-lectures.github.io/slides/2021/media/menu-server.tar.gz
 tar xvzf ./menu-server.tar.gz
 --
 
-A partir de la vous pouvez ouvrir le fichier `LISEZMOI.txt` et commencer à suivre ses intructions.
+A partir de la vous pouvez ouvrir le fichier `LISEZMOI.txt` et commencer à suivre ses instructions.
 
-== Comment accéder à un serveur démaré dans un Gitpod
+== Comment accéder à un serveur démarré dans un Gitpod ?
 
-* Vous avez probablement démaré un serveur web qui écoute sur  le port 8080
+* Vous avez probablement démarré un serveur web qui écoute sur  le port 8080
 * Si vous souhaitez accéder par `curl` depuis terminal de votre gitpod, rien à faire
-* Si vous souhaitre y accéder depuis l'exterieur de votre gitpod il vous faut une URL publique:
+* Si vous souhaitez y accéder depuis l'extérieur de votre gitpod il vous faut une URL publique:
 ** `gp url 8080` vous indique l'URL du port 8080 de votre instance gitpod!
 ** `gp preview "$(gp url 8080)"` ouvrir votre navigateur.
 

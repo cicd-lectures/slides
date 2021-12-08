@@ -774,6 +774,6 @@ adaptez votre `pom.xml` afin que le fichier généré se nomme *toujours* `menu-
 [source,xml]
 ----
 <build>
-  <finalName>hello</finalName>
+  <finalName>menu-server</finalName>
 </build>
 ----

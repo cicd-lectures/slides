@@ -310,7 +310,7 @@ Ce sont des tests plus lents et plus complexes que des tests unitaires.
     <groupId>org.apache.maven.plugins</groupId>
     <artifactId>maven-surefire-plugin</artifactId>
     <configuration>
-      <!-- Desactive tous les tests pour l'execution par defaut -->
+      <!-- Désactive tous les tests pour l'execution par défaut -->
       <skipTests>true</skipTests>
     </configuration>
     <executions>
