@@ -2,7 +2,7 @@
 = Tests Automatisés
 == Qu'est ce qu'un test ?
 
-C'est du code qui vérifie que du code fait ce qu'il est supposé faire.
+C'est du code qui vérifie que votre code fait ce qu'il est supposé faire.
 
 == Pourquoi faire des tests ?
 
@@ -344,6 +344,14 @@ when(dishRepository.findByName("Tiramisu")).thenReturn(existingDish);
 ** Attention à garder une taille raisonnable (quelques classes).
 * Privilégiez les tests de méthodes publiques.
 
+== Checkpoint 🎯
+
+On a vu :
+
+* 🔍 Qu'il faut tester son code
+* 🌍 Qu'il existe différents type de tests en fonction de ce que l'on veut tester
+* 🧩 Comment faire des tests unitaires
+
 == Test Unitaire : Pro / Cons
 
 * ✅ Super rapides (<1s) et légers a executer
@@ -514,9 +522,10 @@ public void listExitingMenus() throws Exception {
 * On vérifie que le menu n'existe plus en base
 * On vérifie que les dishes du menu n'existent plus en base
 
-== Exercice: Activez les tests dans votre CI
+== Checkpoint 🎯
 
-Changez le workflow de ci de votre binôme (ou le votre) pour qu'à chaque build:
+On a vu :
 
-* Les tests unitaires soient lancés
-* Les tests d'integration soient lancés
+* ❌ Les limites des tests unitaires
+* 🏭 Comment faire des tests d'intégration
+* 🤔 Tester n'est pas facile mais très utile
