@@ -150,7 +150,7 @@ Ce "mock" peut être piloté dans les tests!
 public void listsKnownMenus() {
   // Quand le repository reçoit l'appel findAll
   // Alors il retourne la valeur null.
-  when(repository.findAll()).thenReturn(null);
+  when(menuRepository.findAll()).thenReturn(null);
 }
 ----
 
