@@ -692,7 +692,7 @@ curl localhost:8080/menus</code></pre></div></div></div></section><section id="e
   &lt;/dependency&gt;
   &lt;!-- ...  --&gt;
 &lt;/dependencies&gt;</code></pre></div></div></div></section><section id="ajout_des_outils_de_tests_automatisés_au_projet_33"><h2>Ajout des Outils de Tests Automatisés au Projet (3/3)</h2><div class="slide-content"><div class="ulist"><ul><li><p>Exécutez les tests unitaires avec la commande <code>mvn test</code></p><div class="ulist"><ul><li><p>Spoiler : <code>No tests to run&#8230;&#8203;</code></p></li></ul></div></li></ul></div>
-<div class="imageblock" style=""><img src="https://media.giphy.com/media/5x89XRx3sBZFC/giphy.gif" alt="giphy"></div></div></section><section id="exercice_corriger_un_bug_111"><h2>Exercice : Corriger un Bug (1/11)</h2><div class="slide-content"><div class="ulist"><ul><li><p>La classe <code>ListMenuService</code> semble être "buggée"&#8230;&#8203;</p><div class="ulist"><ul><li><p>Tous les noms des menus sont <strong>TODO</strong> 😱</p></li></ul></div></li><li><p>Quand on regarde l&#8217;implémentation, on se rends compte que le problème provient de la méthode statique <code>fromModel</code> de la classe <code>MenuDto</code></p></li><li><p>Même si la correction est aisée, on va d&#8217;abord écrire un test unitaire qui valide le comportement du service.</p></li><li><p>Notre SUT: <code>ListMenuService</code> + <code>DTO</code> + <code>Model</code></p></li></ul></div></div></section><section id="exercice_corriger_un_bug_211"><h2>Exercice : Corriger un Bug (2/11)</h2><div class="slide-content"><div class="paragraph"><p>Mise en place du test</p></div>
+<div class="imageblock" style=""><img src="https://media.giphy.com/media/5x89XRx3sBZFC/giphy.gif" alt="giphy"></div></div></section><section id="exercice_corriger_un_bug_111"><h2>Exercice : Corriger un Bug (1/11)</h2><div class="slide-content"><div class="ulist"><ul><li><p>La classe <code>ListMenuService</code> semble être "buggée"&#8230;&#8203;</p><div class="ulist"><ul><li><p>Tous les noms des menus sont <strong>TEST TODO</strong> 😱</p></li></ul></div></li><li><p>Quand on regarde l&#8217;implémentation, on se rends compte que le problème provient de la méthode statique <code>fromModel</code> de la classe <code>MenuDto</code></p></li><li><p>Même si la correction est aisée, on va d&#8217;abord écrire un test unitaire qui valide le comportement du service.</p></li><li><p>Notre SUT: <code>ListMenuService</code> + <code>DTO</code> + <code>Model</code></p></li></ul></div></div></section><section id="exercice_corriger_un_bug_211"><h2>Exercice : Corriger un Bug (2/11)</h2><div class="slide-content"><div class="paragraph"><p>Mise en place du test</p></div>
 <div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-java hljs" data-noescape="true" data-lang="java">// src/test/java/com/cicdlectures/menuserver/service/ListMenuServiceTests.java
 
 public class ListMenuServiceTests {
@@ -715,19 +715,19 @@ public class ListMenuServiceTests {
 
 private MenuRepository menuRepository;
 
-private UserService subject;
+private ListMenuService subject;
 
 @BeforeEach
 public void init() {
-  this.repository = mock(MenuRepository.class);
-  this.subject = new ListMenuService(this.repository);
+  this.menuRepository = mock(MenuRepository.class);
+  this.subject = new ListMenuService(this.menuRepository);
 }</code></pre></div></div></div></section><section id="exercice_corriger_un_bug_611"><h2>Exercice : Corriger un Bug (6/11)</h2><div class="slide-content"><div class="paragraph"><p>Ce "mock" peut être piloté dans les tests!</p></div>
 <div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-java hljs" data-noescape="true" data-lang="java">@Test
 @DisplayName("lists all known menus")
 public void listsKnownMenus() {
   // Quand le repository reçoit l'appel findAll
   // Alors il retourne la valeur null.
-  when(repository.findAll()).thenReturn(null);
+  when(menuRepository.findAll()).thenReturn(null);
 }</code></pre></div></div></div></section><section id="exercice_corriger_un_bug_711"><h2>Exercice : Corriger un Bug (7/11)</h2><div class="slide-content"><div class="ulist"><ul><li><p>Super on a un test unitaire, il ne reste plus qu&#8217;à le lancer avec <code>mvn test</code> 🎉</p></li><li><p>Spoiler: ✅</p></li></ul></div>
 <div class="imageblock" style=""><img src="https://media.giphy.com/media/a0h7sAqON67nO/giphy.gif" alt="giphy"></div></div></section><section><div class="slide-content"><div class="paragraph"><p>Sauf qu&#8217;on avait pas un bug à corriger au fait?</p></div></div></section><section id="exercice_corriger_un_bug_811"><h2>Exercice : Corriger un Bug (8/11)</h2><div class="slide-content"><div class="paragraph"><p>Objectif: Vérifier que les valeurs retournées par le <code>ListMenuService</code> sont cohérentes
 avec les données en base, pour cela il nous faut:</p></div>
@@ -776,7 +776,7 @@ public void listsKnownMenus() {
 expected:
   &lt;[MenuDto(id=1, name=Christmas menu, dishes=[DishDto(id=2, name=Pecan Pie), DishDto(id=1, name=Turkey)])]&gt;
 but was:
-  &lt;[MenuDto(id=1, name=TODO LOL, dishes=[DishDto(id=2, name=Pecan Pie), DishDto(id=1, name=Turkey)])]&gt;</code></pre></div></div>
+  &lt;[MenuDto(id=1, name=TEST TODO, dishes=[DishDto(id=2, name=Pecan Pie), DishDto(id=1, name=Turkey)])]&gt;</code></pre></div></div>
 <div class="imageblock" style=""><img src="https://media.giphy.com/media/FG14fnY17opr2/giphy.gif" alt="giphy"></div></div></section><section id="exercice_corriger_un_bug_1111"><h2>Exercice : Corriger un Bug (11/11)</h2><div class="slide-content"><div class="ulist"><ul><li><p>Il ne reste plus qu&#8217;a faire la correction et le tour est joué!</p></li></ul></div>
 <div class="imageblock" style=""><img src="https://media.giphy.com/media/111ebonMs90YLu/giphy.gif" alt="giphy" width="800"></div></div></section><section id="tester_la_classe_createmenuservice"><h2>Tester la classe CreateMenuService</h2><div class="slide-content"><div class="ulist"><ul><li><p>Le <code>CreateMenuService</code> implémente la logique de création de menu au sein de l&#8217;application.</p></li><li><p>Elle enregistre en base un nouveau menu avec tous ses plats</p></li><li><p>Et répond le nouveau menu enregistré en base</p></li><li><p>En revanche, elle implémente une logique de déduplication des plats par nom:</p><div class="ulist"><ul><li><p>Si un plat portant le même nom existe déjà en base, il est réutilisé (pour éviter la duplication)</p></li></ul></div></li></ul></div>
 <div class="paragraph"><p>On doit faire en sorte de vérifier ce comportement.</p></div></div></section><section id="vérifier_les_interactions_avec_les_classes_mockées_12"><h2>Vérifier les interactions avec les classes Mockées (1/2)</h2><div class="slide-content"><div class="ulist"><ul><li><p>Le but d&#8217;un test unitaire est de valider le comportement d&#8217;une méthode</p></li><li><p>Par comportement nous entendons:</p><div class="ulist"><ul><li><p>Retourner les bonnes valeurs</p></li><li><p>Appelle les bonnes méthodes des classes dont elle dépend, en passant les bons paramètres.</p></li></ul></div></li></ul></div></div></section><section id="vérifier_les_interactions_avec_les_classes_mockées_22"><h2>Vérifier les interactions avec les classes Mockées (2/2)</h2><div class="slide-content"><div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-java hljs" data-noescape="true" data-lang="java">// configure le mock pour qu'il retourne une instance de menu
