@@ -258,7 +258,7 @@ On doit faire en sorte de vérifier ce comportement.
 * Le but d'un test unitaire est de valider le comportement d'une methode
 * Par comportement nous entendons:
 ** Retourner les bonnes valeurs
-** Appelle les bonnes méthodes des classes dont elle dépends, en passant les bons paramètres.
+** Appelle les bonnes méthodes des classes dont elle dépend, en passant les bons paramètres.
 
 == Vérifier les interactions avec les classes Mockées (2/2)
 
