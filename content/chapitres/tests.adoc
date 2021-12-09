@@ -255,7 +255,7 @@ On doit faire en sorte de vérifier ce comportement.
 
 == Vérifier les interactions avec les classes Mockées (1/2)
 
-* Le but d'un test unitaire est de valider le comportement d'une methode
+* Le but d'un test unitaire est de valider le comportement d'une méthode
 * Par comportement nous entendons:
 ** Retourner les bonnes valeurs
 ** Appelle les bonnes méthodes des classes dont elle dépend, en passant les bons paramètres.
@@ -269,10 +269,10 @@ when(menuRepository.save(any(Menu.class))).thenReturn(storedMenu);
 
 // On appelle le code a tester...
 
-// On déclare un ArgumentCaptor<Menu> (qui sert a capturer un argment)
+// On déclare un ArgumentCaptor<Menu> (qui sert a capturer un argument)
 ArgumentCaptor<Menu> savedMenuCaptor = ArgumentCaptor.forClass(Menu.class);
 
-// On verifie que la méthode `save` du menu repository à été appelée une seule fois
+// On vérifie que la méthode `save` du menu repository à été appelée une seule fois
 // et on capture l'argument avec lequel elle a été appelée (le menu).
 verify(menuRepository, times(1)).save(savedMenuCaptor.capture());
 
@@ -280,12 +280,12 @@ verify(menuRepository, times(1)).save(savedMenuCaptor.capture());
 savedMenu = savedMenuCaptor.getValue()
 ----
 
-== Exercice: Ecrire un test qui prouve que `CreateMenuService` sauvegarde le menu
+== Exercice: Écrire un test qui prouve que `CreateMenuService` sauvegarde le menu
 
 Plan de test
 
 * On crée une instance DishDTO qui représente le menu à créer
-* On crée une instande de Menu qui représente la valeur répondue par la base de données
+* On crée une instance de Menu qui représente la valeur répondue par la base de données
 * On appelle `CreateMenuService.createMenu` avec notre DTO
 * On capture le menu enregistré et on vérifie qu'il a les bonnes valeurs (et les bons plats).
 * On vérifie que la valeur répondue correspond à ce que que l'on attends.
@@ -317,12 +317,12 @@ Menu storedMenu = new Menu(
 );
 ----
 
-== Exercice: Ecrire un test qui prouve que `CreateMenuService` reutilise les plats existant
+== Exercice: Écrire un test qui prouve que `CreateMenuService` réutilise les plats existants
 
 Plan de test
 
 * Similaire au précédent, en revanche avant d'appeler `createMenu` on demande au `dishRepository` de répondre un Dish existant.
-* On vérifie que l'instance de menu enregistrée référence bien le dish déja créé
+* On vérifie que l'instance de menu enregistrée référence bien le dish déjà créé
 
 [source,java]
 ----
