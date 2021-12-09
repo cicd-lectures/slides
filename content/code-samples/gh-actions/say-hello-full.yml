@@ -42,5 +42,5 @@ jobs:
           distribution: 'zulu'
           java-version: '11'
       - run: mvn -v
-      - run: mvn effective:pom
+      - run: mvn help:effective-pom
 # end::maven-job[]
