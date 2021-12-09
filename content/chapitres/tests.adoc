@@ -130,12 +130,12 @@ Solution : On fournit une "fausse implémentation" au service, un mock.
 
 private MenuRepository menuRepository;
 
-private UserService subject;
+private ListMenuService subject;
 
 @BeforeEach
 public void init() {
-  this.repository = mock(MenuRepository.class);
-  this.subject = new ListMenuService(this.repository);
+  this.menuRepository = mock(MenuRepository.class);
+  this.subject = new ListMenuService(this.menuRepository);
 }
 ----
 
