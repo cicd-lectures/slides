@@ -243,6 +243,97 @@ image::https://media.giphy.com/media/FG14fnY17opr2/giphy.gif[]
 
 image::https://media.giphy.com/media/111ebonMs90YLu/giphy.gif[width="800"]
 
+== Tester la classe CreateMenuService
+
+* Le `CreateMenuService` implémente la logique de création de menu au sein de l'application.
+* Elle enregistre en base un nouveau menu avec tous ses plats
+* Et répond le nouveau menu enregistré en base
+* En revanche, elle implémente une logique de déduplication des plats par nom:
+** Si un plat portant le même nom existe déjà en base, il est réutilisé (pour éviter la duplication)
+
+On doit faire en sorte de vérifier ce comportement.
+
+== Vérifier les interactions avec les classes Mockées (1/2)
+
+* Le but d'un test unitaire est de valider le comportement d'une methode
+* Par comportement nous entendons:
+** Retourner les bonnes valeurs
+** Appelle les bonnes méthodes des classes dont elle dépend, en passant les bons paramètres.
+
+== Vérifier les interactions avec les classes Mockées (2/2)
+
+[source,java]
+----
+// configure le mock pour qu'il retourne une instance de menu
+when(menuRepository.save(any(Menu.class))).thenReturn(storedMenu);
+
+// On appelle le code a tester...
+
+// On déclare un ArgumentCaptor<Menu> (qui sert a capturer un argment)
+ArgumentCaptor<Menu> savedMenuCaptor = ArgumentCaptor.forClass(Menu.class);
+
+// On verifie que la méthode `save` du menu repository à été appelée une seule fois
+// et on capture l'argument avec lequel elle a été appelée (le menu).
+verify(menuRepository, times(1)).save(savedMenuCaptor.capture());
+
+// On récupère la valeur capturée pour pouvoir faire des assertions dessus.
+savedMenu = savedMenuCaptor.getValue()
+----
+
+== Exercice: Ecrire un test qui prouve que `CreateMenuService` sauvegarde le menu
+
+Plan de test
+
+* On crée une instance DishDTO qui représente le menu à créer
+* On crée une instande de Menu qui représente la valeur répondue par la base de données
+* On appelle `CreateMenuService.createMenu` avec notre DTO
+* On capture le menu enregistré et on vérifie qu'il a les bonnes valeurs (et les bons plats).
+* On vérifie que la valeur répondue correspond à ce que que l'on attends.
+
+== !
+
+[source, java]
+----
+MenuDto newMenu = new MenuDto(
+  null,
+  "C'est l'anniversaire de Damien aujourd'hui!",
+    new HashSet<DishDto>(
+      Arrays.asList(
+      new DishDto(null, "Turkey"),
+      new DishDto(null, "Tiramisu")
+    )
+  )
+);
+
+Menu storedMenu = new Menu(
+  Long.valueOf(1),
+  "Christmas menu",
+  new HashSet<Dish>(
+    Arrays.asList(
+      new Dish(Long.valueOf(2), "Turkey", null),
+      new Dish(Long.valueOf(33), "Tiramisu", null)
+    )
+  )
+);
+----
+
+== Exercice: Ecrire un test qui prouve que `CreateMenuService` reutilise les plats existant
+
+Plan de test
+
+* Similaire au précédent, en revanche avant d'appeler `createMenu` on demande au `dishRepository` de répondre un Dish existant.
+* On vérifie que l'instance de menu enregistrée référence bien le dish déja créé
+
+[source,java]
+----
+// Instancie un nouveau dish ayant pour identifiant 33.
+Dish existingDish = new Dish(Long.valueOf(33), "Tiramisu", null);
+
+// Configure le mock du dish repository pour retourner le dish existant
+// Quand il reçoit un appel a findByName avec la valeur ("tiramisu").
+when(dishRepository.findByName("Tiramisu")).thenReturn(existingDish);
+----
+
 == Test Unitaire : Quelques Règles
 
 * Un test unitaire teste un et un seul comportement
@@ -408,13 +499,20 @@ public void listExitingMenus() throws Exception {
 }
 ----
 
-== Exercice: Implémentez le test d'intégration
+== Exercice: Implémentez le test d'intégration de GET /menus
 
 * Provisionne la base de donnée avec des données fixes
 * Effectue une requête HTTP sur `GET /menus`
 * Parse la réponse sous forme de `MenuDto`
 * Vérifie que le status de la réponse est 200.
 * Compare la réponse à un résultat attendu de la même façon que dans le test unitaire.
+
+== Exercice: Implémentez un test d'intégration pour DELETE /menus
+
+* On crée un menu en base
+* On fait un appel a `DELETE /menus/{id}`
+* On vérifie que le menu n'existe plus en base
+* On vérifie que les dishes du menu n'existent plus en base
 
 == Exercice: Activez les tests dans votre CI
 
