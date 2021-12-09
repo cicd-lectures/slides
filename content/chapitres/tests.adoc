@@ -76,7 +76,7 @@ image::https://media.giphy.com/media/5x89XRx3sBZFC/giphy.gif[]
 == Exercice : Corriger un Bug (1/11)
 
 * La classe `ListMenuService` semble être "buggée"...
-** Tous les noms des menus sont *TODO* 😱
+** Tous les noms des menus sont *TEST TODO* 😱
 * Quand on regarde l'implémentation, on se rends compte que le problème provient de la méthode statique `fromModel` de la classe `MenuDto`
 * Même si la correction est aisée, on va d'abord écrire un test unitaire qui valide le comportement du service.
 * Notre SUT: `ListMenuService` + `DTO` + `Model`
@@ -232,7 +232,7 @@ public void listsKnownMenus() {
 expected:
   <[MenuDto(id=1, name=Christmas menu, dishes=[DishDto(id=2, name=Pecan Pie), DishDto(id=1, name=Turkey)])]>
 but was:
-  <[MenuDto(id=1, name=TODO LOL, dishes=[DishDto(id=2, name=Pecan Pie), DishDto(id=1, name=Turkey)])]>
+  <[MenuDto(id=1, name=TEST TODO, dishes=[DishDto(id=2, name=Pecan Pie), DishDto(id=1, name=Turkey)])]>
 ----
 
 image::https://media.giphy.com/media/FG14fnY17opr2/giphy.gif[]
