@@ -90,7 +90,7 @@ image::architecture.png[]
 == Modèle de données
 
 * Une entité `Menu`, portant un identifiant et un titre
-* Une entité `Dish`, portant un identifiant et un tire
+* Une entité `Dish`, portant un identifiant et un titre
 * Un `Menu` est composé de 0 à N `Dish`
 
 == Organisation du Code Source
