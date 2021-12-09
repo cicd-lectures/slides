@@ -249,7 +249,7 @@ image::https://media.giphy.com/media/111ebonMs90YLu/giphy.gif[width="800"]
 * Elle enregistre en base un nouveau menu avec tous ses plats
 * Et répond le nouveau menu enregistré en base
 * En revanche, elle implémente une logique de déduplication des plats par nom:
-** Si un plat porte le même nom existe déjà en base, il est réutilisé (pour éviter la duplication)
+** Si un plat portant le même nom existe déjà en base, il est réutilisé (pour éviter la duplication)
 
 On doit faire en sorte de vérifier ce comportement.
 
