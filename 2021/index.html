@@ -745,8 +745,8 @@ public void listsKnownMenus() {
           new Dish(Long.valueOf(2), "Pecan Pie", null)
         )
       )
-    ),
-  )
+    )
+  );
 
   // On configure le menuRepository pour qu'il retourne notre liste de menus.
   when(menuRepository.findAll()).thenReturn(existingMenus);
