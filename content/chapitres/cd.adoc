@@ -109,7 +109,7 @@ Source : http://blog.crisp.se/2013/02/05/yassalsundman/continuous-delivery-vs-co
 == Qu'est ce que "La production" ?
 
 * Un (ou plusieurs) ordinateur ou votre / vos applications sont exécutées
-* Ce sont la ou vos utilisateurs "utilisent" votre code
+* Ce sont là où vos utilisateurs "utilisent" votre code
 ** Que ce soit un serveur web pour une application web
 ** Ou un téléphone pour une application mobile
 * Certaines plateformes sont plus ou moins outillées pour la mise en production automatique
