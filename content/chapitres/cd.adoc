@@ -133,8 +133,8 @@ Source : http://blog.crisp.se/2013/02/05/yassalsundman/continuous-delivery-vs-co
 == Exercice: Créez une application sur Heroku (2/2)
 
 * Rendez-vous sur l'onglet overview de votre app
-** Pour l'instance il ne s'y passe pas grand chose...
-* Rendez-vous maintenant dans l'écran "View Logs" en haut à droite
+** Pour l'instant il ne s'y passe pas grand chose...
+* Rendez vous maintenant dans l'écran "View Logs" en haut à droite
 ** Permets de visualiser en temps réel les logs de vos Dyno en production
 * Prenez un peu le temps de naviguer dans l'interface
 
