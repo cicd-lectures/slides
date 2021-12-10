@@ -125,8 +125,8 @@ Source : http://blog.crisp.se/2013/02/05/yassalsundman/continuous-delivery-vs-co
 
 == Exercice: Créez une application sur Heroku (1/2)
 
-* Rendez vous sur link:https://heroku.com[Heroku] et créez vous un compte
-* Une fois sur la page link:https://dashboard.heroku.com/apps[Apps] cliquez sur `New app` dans le menu en haut a gauche
+* Rendez-vous sur link:https://heroku.com[Heroku] et créez vous un compte
+* Une fois sur la page link:https://dashboard.heroku.com/apps[Apps] cliquez sur `New app` dans le menu en haut à gauche
 * Sélectionnez un nom et une région (europe de préférence)
 * Cliquez sur Create App
 
