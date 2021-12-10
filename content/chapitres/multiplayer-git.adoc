@@ -167,10 +167,16 @@ Pour tester votre changement
 --
 # D'abord on crée un menu
 curl -H "Content-Type: application/json" --data-raw '{"name": "Menu spécial du chef", "dishes": [{"name": "Bananes aux fraises"},{"name": "Bananes flambées"}]}' localhost:8080/menus
+--
 
+[source, bash]
+--
 # Puis on le supprime
 curl -XDELETE localhost:8080/menus/4
+--
 
+[source, bash]
+--
 # Et on vérifie que le menu est bien supprimé
 curl localhost:8080/menus
 --
