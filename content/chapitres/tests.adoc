@@ -288,7 +288,7 @@ Plan de test
 * On crée une instance de Menu qui représente la valeur répondue par la base de données
 * On appelle `CreateMenuService.createMenu` avec notre DTO
 * On capture le menu enregistré et on vérifie qu'il a les bonnes valeurs (et les bons plats).
-* On vérifie que la valeur répondue correspond à ce que que l'on attends.
+* On vérifie que la valeur répondue correspond à ce que l'on attends.
 
 == !
 
@@ -377,7 +377,7 @@ Tester des composants indépendamment ne prouve pas que le système fonctionne u
 == Solution: Tests d'intégration
 
 * Test validant qu’un assemblage d’unités se comportent comme prévu.
-* Teste votre application au travers de toute ses couches
+* Teste votre application au travers de toutes ses couches
 * Par exemple avec menu server:
 **  Prouve que GET /menus retourne la liste des menus enregistrés en base
 **  Prouve que POST /menus enregistre un nouveau menu en base avec ses plats.
