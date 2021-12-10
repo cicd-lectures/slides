@@ -317,7 +317,7 @@ include::../code-samples/gh-actions/say-hello-full.yml[tags="common,container,ch
 * N'avoir plus qu'1 seul job nommé `build` dans un workflow nommé "CI" (fichier `ci.yaml`) qui va :
 
 ** Récupérer le code
-** Installer la même version de Java (mineure) que dans GitPod
+** Installer la même version de Java que dans GitPod
 ** Générer l'artefact "JAR" de l'application à l'aide de Maven
 ** Uploader l'artefact "JAR" dans GitHub Actions pour le conserver
 *** 💡 (`actions/upload-artifact`)
