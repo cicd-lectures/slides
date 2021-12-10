@@ -49,7 +49,7 @@ Le site décide tout d'un coup de changer le format de l'identifiant de son obje
 ]
 --
 
-Que se passe t'il du coté de votre application ?
+Que se passe t'il du côté de votre application ?
 
 [%notitle]
 == !
@@ -84,7 +84,7 @@ Valide d'un point de vue fonctionnel et aussi technique
 
 == Quoi versionner ?
 
-Le problème de la compatibilité existe des qu'une dépendance entre deux bouts de code existe.
+Le problème de la compatibilité existe dès qu'une dépendance entre deux bouts de code existe.
 
 * Une API
 * Une librairie
