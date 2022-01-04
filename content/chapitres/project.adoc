@@ -1,0 +1,155 @@
+[{invert}]
+= Projet
+
+== Enoncé
+
+* Comme présenté en début de cours, le projet menu-server est découpé en deux lots, un lot serveur et un lot client qui permet d'afficher le contenu du serveur.
+* Et bien... bingo! Le second lot vient d'être remporté par l'ENSG, vu que l'implémentation de la partie serveur s'est si bien passée ;-).
+* L'objectif est de créer un outil en ligne de commande qui pemets d'intéragir avec un menu-server via son API.
+
+== Fonctionalités (1/3)
+
+* Cette ligne de commande doit permetre de **lister** les menus stockés dans un menu serveur et d'afficher dans la sortie standard le contenu des menus et de leurs plats.
+* Pour récupérer les menus, il faudra effectuer l'appel HTTP `GET /menus` sur un menu-serveur.
+* Le format de sortie n'est pas imposé, mais gardez en tête que c'est un humain qui va lire le résultat, du coup il faudra éviter d'afficher le JSON brut.
+
+[source, bash]
+----
+$ menucli list-menus
+
+# Example de sortie
+# - (id: 123) Menu de Noel
+#  - Banane aux Fraises
+#  - Choux frisés
+#
+#- (id: 234) Menu du Nouvel An
+#  - Brocolis
+#  - Chou fleurs
+#  - Mousse au Chocolat
+----
+
+== Fonctionalités (2/3)
+
+* Votre outil doit aussi permettre de **supprimer** un menu stocké dans le menu serveur.
+* Pour supprimer un menu il faudra effectuer l'appel HTTP `DELETE /menus/<menu_id>` sur le menu serveur.
+
+[source, bash]
+----
+$ menucli delete-menu 234
+
+# Sortie
+# Menu 234 supprimé
+----
+
+== Fonctionalités (3/3)
+
+* L'URL du menu-server auxquel votre outil se connect doit pouvoir être configurable via une option `--server-url`
+
+[source, bash]
+----
+# Consule les menus du serveur situé à l'URL 'https://menu-server-production.herokuapp.com'
+$ menucli --server-url="https://menu-server-production.herokuapp.com" list-menus
+----
+
+== Langage de Programation
+
+* Le choix du langage est libre
+* Choisisez celui avec lequel vous êtes le plus à l'aise
+* Nous vous recommandons tout de même des langage d'assez haut niveau (Java, Javascript, Ruby, PHP, Python, Golang), qui fournissent des clients HTTP et des outils pour écrire une ligne de commande facilement
+** Par exemple link:https://picocli.info/[picocli pour java] ou link:https://github.com/spf13/cobra[cobra pour Golang].
+* Si vous utilisez des dépendances externes a votre projet, un gestionaire de dépendances (npm pour javascript, mvn pour java, go modules, pip pour python...) sera nécessaire.
+* Assurez vous que le langage fournisse un framework d'écriture de tests automatisés.
+* Evitez C++ qui ne remplit pas (à notre conaissance) les critères précédents.
+* Enfin, évitez aussi link:https://codewithrockstar.com/[les langages exotiques] :p
+
+== Git et Github
+
+* Le code source doit être hébergé dans un dépot publique Github uniquement (pas de Gitlab)
+* Le travail par PR est obligatoire, et la pratique de la revue de code sera évaluée
+* Un historique de commits "lisible" est encouragé.
+** Utilisez vos conventions :)
+* Un ou plusieurs tags marquant une version sont attendus quand vous effectuerez la livraison de votre outil.
+
+== Tests
+
+* Une suite de tests est attendue, qui vérifie le bon fonctionnement de votre ligne de commande
+* Bonus si combinaison entre des tests unitaires et d'intégration
+
+== Livrable
+
+* Il est attendu que votre projet soit livré dans un format ou il n'est pas nécessaire d'accéder au dépot pour lancer le projet. Par exemple:
+** Un jar pour java
+** Une gem pour ruby
+** Un binaire compilé pour go / rust
+** Une archive du code source pour d'autres langages ne fournissant pas un format d'achive executable standard (python, javascript...)
+* Votre livrable doit être executable a minima sur Linux et MacOS.
+
+== Cycle de vie de votre projet
+
+* Le projet est documenté un minimum via un README.md qui explique au minimum
+** Les outils nécessaires pour compiler votre outil
+** Comment compiler et executer votre CLI
+** Jouer les tests
+** Livrer une nouvelle version
+* Le projet utilise un outil de gestion de dépendances
+* Il est possible d'executer la suite de tests
+* Il est possible de générer un livrable facilement
+
+== CI
+
+* Votre projet doit comporter du CI
+** Sur chaque PR ouverte, le code est compilé et la suite de tests est executée
+* Le moteur de CI à utiliser est Github Actions.
+
+== CD
+
+* Lors d'un push de tag sur votre branche principale
+** La suite de tests est executée
+** Un ou plusieurs livrables sont générés
+** Une release est créée sur Github
+** Les livrables sont attachés a la release
+
+== Organisation du Travail
+
+* Le projet doit être réalisé en binôme (et un trinôme)
+** Vérifiez que vous êtes bien inscrits link:https://docs.google.com/spreadsheets/d/1cVVdhvDv5ZCG13rXQOlzE62Y7SLsTtpDRprsssjZBhI/edit?usp=sharing[sur cette page,window="_blank"]
+* On vous recommande d'organiser votre travail de la façon suivante
+** Choisir un langage et créer un dépot
+** Mettre en place une coquille vide
+** Mettre en place l'execution de tests
+** Mettre en place le CI et le CD
+** Implémenter la fonctionalité "supprimer un menu" 
+** Implémenter la fonctionalité "lister les menus"
+** Effectuez votre une livraison finale
+
+
+== Critères d’évaluation
+
+* Les critères d’évaluation sont détaillés sur cette page: link:https://docs.google.com/spreadsheets/d/1LJeWM8kCRsi8MKQ7Q7nGCW9znHiGD7hESJvrW6vlyAQ/edit?usp=sharing[Notations ENSG 2021/2022], selon les grandes catégories suivantes :
+** VCS / GitHub / GitLab : 4 points
+** Tests : 2 points
+** Cycle de vie du projet: 4 points
+** CI: 3 points
+** CD : 3 points
+
+== Consignes de rendu
+
+* Envoi de l'email pointant vers ces consigne mises à jour le 09 janvier 2022
+* *Deadline du rendu*: 5 semaines à partir du jour de livraison de l'application initiale, soit le 13 février 2022
+* Vous devrez nous envoyer un mail (par binôme ou trinôme) avec:
+** Pour chaque membre du binôme / trinôme:
+*** Nom et prénom
+*** Email
+*** Identifiant GitHub ou GitLab utilisé
+** Le lien vers votre dépôt de rendu
+
+== Rendu des notes
+
+* Les notes seront rendues 3 semaines après la deadline, soit pour le 6 mars 2022 au plus tard
+* Contestation/relecture : vous aurez ~ 1 semaine après le rendu des notes si jamais vous n'être pas d'accord ou souhaitez une clarification
+
+== Un dernier mot
+
+* Amusez vous !
+* Ne passez pas plus de 10h dessus !
+* Vous êtes la pour apprendre, pas pour vous rendre malade !

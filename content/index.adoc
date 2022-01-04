@@ -61,8 +61,8 @@ include::./chapitres/version.adoc[leveloffset=1]
 // Chapitre CD
 include::./chapitres/cd.adoc[leveloffset=1]
 
-// Chapitre Conclusion
-include::./chapitres/conclusion.adoc[leveloffset=1]
+// Chapitre Projet
+include::./chapitres/project.adoc[leveloffset=1]
 
 [{invert}]
 == Merci !
