@@ -65,6 +65,7 @@ $ menucli --server-url="https://menu-server-production.herokuapp.com" list-menus
 == Git et Github
 
 * Le code source doit être hébergé dans un dépot publique Github uniquement (pas de Gitlab)
+** Vous devrez nous ajouter comme co-maintainers du dépôt pour permettre la correction
 * Le travail par PR est obligatoire, et la pratique de la revue de code sera évaluée
 * Un historique de commits "lisible" est encouragé.
 ** Utilisez vos conventions :)
@@ -86,7 +87,7 @@ $ menucli --server-url="https://menu-server-production.herokuapp.com" list-menus
 
 == Cycle de vie de votre projet
 
-* Le projet est documenté un minimum via un README.md qui explique au minimum
+* Le projet est documenté via un README.md qui explique au minimum:
 ** Les outils nécessaires pour compiler votre outil
 ** Comment compiler et executer votre CLI
 ** Jouer les tests
