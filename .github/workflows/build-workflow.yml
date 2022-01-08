@@ -9,6 +9,7 @@ on:
       - gh_pages
     tags:
       - '*'
+  pull_request:
   workflow_dispatch:
 
 env:
@@ -46,6 +47,8 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     needs: build
+    # Only run deploy when pushing code on a branch of the repository
+    if: github.event_name == 'push'
     steps:
     - name: 'Download dist/ Artefacts'
       uses: actions/download-artifact@v2
