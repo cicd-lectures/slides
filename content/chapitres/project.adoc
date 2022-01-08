@@ -12,7 +12,7 @@
 == Fonctionnalités (1/3)
 
 * Cette ligne de commande doit permettre de **lister** les menus stockés dans un menu serveur et d'afficher dans la sortie standard le contenu des menus et de leurs plats.
-* Pour récupérer les menus, il faudra effectuer l'appel HTTP `GET /menus` sur un menu-serveur.
+* Pour récupérer les menus, il faudra effectuer l'appel HTTP `GET /menus` sur un menu-server.
 * Le format de sortie n'est pas imposé, mais gardez en tête que c'est un humain qui va lire le résultat, du coup il faudra éviter d'afficher le JSON brut.
 
 [source, bash]
@@ -45,30 +45,30 @@ $ menucli delete-menu 234
 
 == Fonctionnalités (3/3)
 
-* L'URL du menu-server auxquels votre outil se connect doit pouvoir être configurable via une option `--server-url`
+* L'URL du menu-server auquel votre outil se connecte doit pouvoir être configurable via une option.
+** Par exemple: `--server-url`.
 
 [source, bash]
 ----
-# Consule les menus du serveur situé à l'URL 'https://menu-server-production.herokuapp.com'
+# Consulte les menus du serveur situé à l'URL 'https://menu-server-production.herokuapp.com'
 $ menucli --server-url="https://menu-server-production.herokuapp.com" list-menus
 ----
 
-== Langage de Programation
+== Langage de Programmation
 
-* Le choix du langage est libre
-* Choisisez celui avec lequel vous êtes le plus à l'aise
+* Le choix du langage est libre : choisissez celui avec lequel vous êtes le plus à l'aise
 * Nous vous recommandons tout de même des langage d'assez haut niveau (Java, Javascript, Ruby, PHP, Python, Golang), qui fournissent des clients HTTP et des outils pour écrire une ligne de commande facilement
-** Par exemple link:https://picocli.info/[picocli pour java] ou link:https://github.com/spf13/cobra[cobra pour Golang].
-* Si vous utilisez des dépendances externes a votre projet, un gestionaire de dépendances (npm pour javascript, mvn pour java, go modules, pip pour python...) sera nécessaire.
+** Par exemple link:https://picocli.info/[picocli pour Java] ou link:https://github.com/spf13/cobra[cobra pour Golang].
+* Si vous utilisez des dépendances externes a votre projet, un gestionnaire de dépendances (npm pour javascript, mvn pour java, go modules, pip pour python...) sera nécessaire.
 * Assurez vous que le langage fournisse un framework d'écriture de tests automatisés.
-* Evitez C++ qui ne remplit pas (à notre conaissance) les critères précédents.
+* Évitez C++ qui ne remplit pas (à notre connaissance) les critères précédents.
 * Enfin, évitez aussi link:https://codewithrockstar.com/[les langages exotiques] :p
 
 == Git et Github
 
-* Le code source doit être hébergé dans un dépot publique Github uniquement (pas de Gitlab)
+* Le code source doit être hébergé dans un dépôt publique Github uniquement (pas de Gitlab)
 ** Vous devrez nous ajouter comme co-maintainers du dépôt pour permettre la correction
-* Le travail par PR est obligatoire, et la pratique de la revue de code sera évaluée
+* Le travail par PR est obligatoire et la pratique de la revue de code sera évaluée
 * Un historique de commits "lisible" est encouragé.
 ** Utilisez vos conventions :)
 * Un ou plusieurs tags marquant une version sont attendus quand vous effectuerez la livraison de votre outil.
@@ -80,16 +80,16 @@ $ menucli --server-url="https://menu-server-production.herokuapp.com" list-menus
 
 == Livrable
 
-* Il est attendu que votre projet soit livré dans un format ou il n'est pas nécessaire d'accéder au dépot pour lancer le projet. Par exemple:
+* Il est attendu que votre projet soit livré dans un format où il n'est pas nécessaire d'accéder au dépôt pour lancer le projet. Par exemple:
 ** Un jar pour java
 ** Une gem pour ruby
 ** Un binaire compilé pour go / rust
-** Une archive du code source pour d'autres langages ne fournissant pas un format d'achive executable standard (python, javascript...)
-* Votre livrable doit être executable a minima sur Linux et MacOS.
+** Une archive du code source pour d'autres langages ne fournissant pas un format d'archive executable standard (python, javascript...)
+* Votre livrable doit être executable a minima sur Linux et macOS.
 
 == Cycle de vie de votre projet
 
-* Le projet est documenté via un README.md qui explique au minimum:
+* Le projet doit être documenté via un README.md qui explique au minimum:
 ** Les outils nécessaires pour compiler votre outil
 ** Comment compiler et executer votre CLI
 ** Jouer les tests
@@ -101,13 +101,13 @@ $ menucli --server-url="https://menu-server-production.herokuapp.com" list-menus
 == CI
 
 * Votre projet doit comporter du CI
-** Sur chaque PR ouverte, le code est compilé et la suite de tests est executée
+** Sur chaque PR ouverte, le code est compilé et la suite de tests est exécutée
 * Le moteur de CI à utiliser est Github Actions.
 
 == CD
 
 * Lors d'un push de tag sur votre branche principale
-** La suite de tests est executée
+** La suite de tests est exécutée
 ** Un ou plusieurs livrables sont générés
 ** Une release est créée sur Github
 ** Les livrables sont attachés a la release
@@ -117,12 +117,12 @@ $ menucli --server-url="https://menu-server-production.herokuapp.com" list-menus
 * Le projet doit être réalisé en binôme (et un trinôme)
 ** Vérifiez que vous êtes bien inscrits link:https://docs.google.com/spreadsheets/d/1cVVdhvDv5ZCG13rXQOlzE62Y7SLsTtpDRprsssjZBhI/edit?usp=sharing[sur cette page,window="_blank"]
 * On vous recommande d'organiser votre travail de la façon suivante
-** Choisir un langage et créer un dépot
+** Choisir un langage et créer un dépôt
 ** Mettre en place une coquille vide
 ** Mettre en place l'execution de tests
 ** Mettre en place le CI et le CD
-** Implémenter la fonctionalité "supprimer un menu" 
-** Implémenter la fonctionalité "lister les menus"
+** Implémenter la fonctionnalité "supprimer un menu"
+** Implémenter la fonctionnalité "lister les menus"
 ** Effectuez votre une livraison finale
 
 
