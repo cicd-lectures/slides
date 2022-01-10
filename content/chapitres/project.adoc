@@ -129,7 +129,7 @@ $ menucli --server-url="https://menu-server-production.herokuapp.com" list-menus
 == Critères d’évaluation
 
 * Les critères d’évaluation sont détaillés sur cette page: link:https://docs.google.com/spreadsheets/d/1LJeWM8kCRsi8MKQ7Q7nGCW9znHiGD7hESJvrW6vlyAQ/edit?usp=sharing[Notations ENSG 2021/2022], selon les grandes catégories suivantes :
-** VCS / GitHub / GitLab : 4 points
+** Git / GitHub  : 4 points
 ** Tests : 2 points
 ** Cycle de vie du projet: 4 points
 ** CI: 3 points
@@ -137,13 +137,13 @@ $ menucli --server-url="https://menu-server-production.herokuapp.com" list-menus
 
 == Consignes de rendu
 
-* Envoi de l'email pointant vers ces consigne mises à jour le 09 janvier 2022
-* *Deadline du rendu*: 5 semaines à partir du jour de livraison de l'application initiale, soit le 13 février 2022
+* Envoi de l'email pointant vers ces consigne mises à jour le 10 janvier 2022
+* *Deadline du rendu*: 5 semaines à partir du jour de livraison de l'application initiale, soit le 14 février 2022 à midi heure de Paris.
 * Vous devrez nous envoyer un mail (par binôme ou trinôme) avec:
 ** Pour chaque membre du binôme / trinôme:
 *** Nom et prénom
 *** Email
-*** Identifiant GitHub ou GitLab utilisé
+*** Identifiant GitHub utilisé
 ** Le lien vers votre dépôt de rendu
 
 == Rendu des notes
