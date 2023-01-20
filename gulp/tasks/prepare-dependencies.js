@@ -2,7 +2,7 @@
 module.exports = function (gulp, plugins, current_config) {
     'use strict';
     gulp.task('prepare:revealjs', function () {
-        var baseRevealJSPath = current_config.nodeModulesDir + '/reveal.js',
+        var baseRevealJSPath = current_config.nodeModulesDir + '/@asciidoctor/reveal.js/node_modules/reveal.js',
             revealJsDestDir = current_config.distDir + '/reveal.js',
             mainRevealCss = gulp.src(baseRevealJSPath + '/css/reveal.css')
                 .pipe(gulp.dest(revealJsDestDir + '/css/')),
@@ -41,18 +41,12 @@ module.exports = function (gulp, plugins, current_config) {
     // so.. reusing. cf. https://github.com/hakimel/reveal.js/#dependencies
     /////////////////
     gulp.task('prepare:highlightjs', function () {
-        var highlightNodeModule = current_config.nodeModulesDir + '/highlight.js',
+        var highlightNodeModule = current_config.nodeModulesDir + '/@asciidoctor/reveal.js/node_modules/reveal.js/plugin/highlight',
             highlightDestDir = current_config.distDir + '/reveal.js/plugin/highlight',
-            highlightjsStyleRename = gulp.src(highlightNodeModule + '/styles/*.css')
-                .pipe(plugins.rename(function (path) {
-                    // Removing the ".min" part of the name to avoid revealjs messing up
-                    path.basename += ".min";
-                }))
-                .pipe(gulp.dest(highlightDestDir + '/styles/')),
-            highlightScript = gulp.src(highlightNodeModule + '/lib/highlight.js')
+            highlightScript = gulp.src(highlightNodeModule + '/highlight.js')
                 .pipe(gulp.dest(highlightDestDir));
 
-        return plugins.mergeStreams(highlightjsStyleRename, highlightScript);
+        return plugins.mergeStreams(highlightScript);
 
     });
 

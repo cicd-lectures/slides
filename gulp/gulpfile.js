@@ -15,7 +15,7 @@ var tasks_dir_path = './tasks',
         mergeStreams: require('merge-stream'),
         path: require('path'),
         rename: require('gulp-rename'),
-        sass: require('gulp-sass'),
+        sass: require('gulp-sass')(require('sass')),
     },
     current_config = {
         docinfosPath: '/app/content/docinfos',
