@@ -128,7 +128,7 @@ $ menucli --server-url="https://menu-server-production.herokuapp.com" list-menus
 
 == Critères d’évaluation
 
-* Les critères d’évaluation sont détaillés sur cette page: link:https://docs.google.com/spreadsheets/d/1LJeWM8kCRsi8MKQ7Q7nGCW9znHiGD7hESJvrW6vlyAQ/edit?usp=sharing[Notations ENSG 2021/2022], selon les grandes catégories suivantes :
+* Les critères d’évaluation sont détaillés sur cette page: link:https://docs.google.com/spreadsheets/d/1LJeWM8kCRsi8MKQ7Q7nGCW9znHiGD7hESJvrW6vlyAQ/edit?usp=sharing[Notations ENSG 2022/2023], selon les grandes catégories suivantes :
 ** Git / GitHub  : 4 points
 ** Tests : 2 points
 ** Cycle de vie du projet: 4 points
@@ -137,8 +137,8 @@ $ menucli --server-url="https://menu-server-production.herokuapp.com" list-menus
 
 == Consignes de rendu
 
-* Envoi de l'email pointant vers ces consigne mises à jour le 10 janvier 2022
-* *Deadline du rendu*: 5 semaines à partir du jour de livraison de l'application initiale, soit le 14 février 2022 à midi heure de Paris.
+* Envoi de l'email pointant vers ces consigne
+* *Deadline du rendu*: 5 semaines à partir du jour de livraison de l'application initiale.
 * Vous devrez nous envoyer un mail (par binôme ou trinôme) avec:
 ** Pour chaque membre du binôme / trinôme:
 *** Nom et prénom
@@ -148,7 +148,7 @@ $ menucli --server-url="https://menu-server-production.herokuapp.com" list-menus
 
 == Rendu des notes
 
-* Les notes seront rendues 3 semaines après la deadline, soit pour le 6 mars 2022 au plus tard
+* Les notes seront rendues 3 semaines après la deadline
 * Contestation/relecture : vous aurez ~ 1 semaine après le rendu des notes si jamais vous n'être pas d'accord ou souhaitez une clarification
 
 == Un dernier mot

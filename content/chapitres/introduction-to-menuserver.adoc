@@ -30,7 +30,7 @@
 mkdir -p workspace/menu-server && cd workspace/menu-server
 
 # Téléchargez le projet sur votre environnement de développement
-curl -sSLO https://cicd-lectures.github.io/slides/2021/media/menu-server.tar.gz
+curl -sSLO https://cicd-lectures.github.io/slides/2023/media/menu-server.tar.gz
 
 # Décompresser et extraire l'archive téléchargée
 tar xvzf ./menu-server.tar.gz
