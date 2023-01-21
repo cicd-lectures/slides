@@ -2,7 +2,7 @@ CURRENT_UID = $(shell id -u):$(shell id -g)
 DIST_DIR ?= $(CURDIR)/dist
 
 REPOSITORY_URL = https://github.com/cicd-lectures/slides
-PRESENTATION_URL = https://cicd-lectures.github.io/slides/2021
+PRESENTATION_URL = https://cicd-lectures.github.io/slides/2023
 
 export PRESENTATION_URL CURRENT_UID REPOSITORY_URL
 
