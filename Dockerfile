@@ -18,7 +18,7 @@ RUN ln -s /app/npm-packages/package.json /app/package.json \
   && ln -s /app/npm-packages/package-lock.json /app/package-lock.json
 
 WORKDIR /app
-RUN npm install
+RUN npm install-clean
 ## Link some NPM commands installed as dependencies to be available within the PATH
 # There muste be 1 and only 1 `npm link` for each command
 RUN npm link gulp
