@@ -228,8 +228,8 @@ image::scm-branches.png[caption="SCM branches"]
 
 [source,bash]
 --
-git branch feature/html && git checkout feature/html
-# Ou git checkout -b feature/html
+git branch feature/html && git switch feature/html
+# Ou git switch --create feature/html
 echo '<h1>Hello</h1>' > ./index.html
 git add ./index.html && git commit -m "Ajout d'une page HTML par défaut"
 
@@ -258,7 +258,7 @@ image::scm-merge.png[caption="SCM Merge"]
 [source,bash]
 
 --
-git checkout master
+git switch master
 git merge --no-ff feature/html
 git log --graph
 
