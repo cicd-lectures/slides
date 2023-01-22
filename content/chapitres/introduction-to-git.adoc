@@ -233,7 +233,7 @@ git add ./index.html && git commit --message="Ajout d'une page HTML par défaut"
 
 git log
 git log --graph
-git lg # cat ~/.gitconfig => section [alias]
+git lg # cat ~/.gitconfig => regardez la section section [alias], cette commande est déjà définie!
 --
 
 == Terminologie de Git - Merge
