@@ -97,7 +97,7 @@ Un *Job* est un groupe logique de tâches :
 jobs: # Map de jobs
   build: # 1er job, identifié comme 'build'
     name: 'Build Slides'
-    runs-on: ubuntu-latest # cf. prochaine slide "Concepts de GitHub Actions - Runner"
+    runs-on: ubuntu-22.04 # cf. prochaine slide "Concepts de GitHub Actions - Runner"
     steps: # Collection de steps du job
       - name: 'Build the JAR'
         run: mvn package
