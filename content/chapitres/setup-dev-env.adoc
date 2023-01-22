@@ -30,7 +30,7 @@ link:https://gitpod.io[GitPod.io,window="_blank"] : Environnement de développem
 
 == Autorisations demandées par GitPod 🔓
 
-Lors de votre premier accès, GitPod va vous demander l'accès (à accepter) à votre email public configuré dans GitHub :
+Lors de votre première connexion, GitPod va vous demander l'accès (à accepter) à votre email public configuré dans GitHub :
 
 image::gitpod-github-permissions.png[width=400]
 
