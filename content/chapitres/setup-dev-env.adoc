@@ -26,15 +26,45 @@ link:https://gitpod.io[GitPod.io,window="_blank"] : Environnement de développem
 ** Puis choisissez le lien "+++<span class="fab fa-github"></span>+++ Continue with GitHub"
 
 [.small]
-Pour les "autorisations", passez sur la slide suivante
+⚠️ Pour les "autorisations", passez sur la slide suivante
 
 == Autorisations demandées par GitPod 🔓
 
-Lors de votre 1er accès, GitPod va vous demander des autorisations (à accepter) sur votre compte GitHub:
+Lors de votre première connexion, GitPod va vous demander l'accès (à accepter) à votre email public configuré dans GitHub :
 
-* Accès à votre email public configuré dans GitHub (identification)
-* Accès à vos dépôts GitHub public (accès aux dépôts dans l'éditeur)
-* Accès aux GitHub workflows de vos dépôts publics (partie "CI" de ce cours)
+image::gitpod-github-permissions.png[width=400]
+
+[.small]
+⚠️ Passez à la slide suivante avant d'aller plus loin
+
+== Validation du Compte GitPod 📱
+
+GitPod vous demande votre numéro de téléphone mobile afin d'éviter les abus (service gratuit).
+Saisissez un numéro de téléphone valide pour recevoir par SMS un code de déblocage :
+
+image::gitpod-phone-validation.png[width=400]
+
+[.small]
+⚠️ Passez à la slide suivante avant d'aller plus loin
+
+== Choix de l'Éditeur de Code ✎
+
+Choisissez l'éditeur "VSCode Browser" (la première tuile) :
+
+image::gitpod-select-editor.png[width=600]
+
+[.small]
+⚠️ Passez à la slide suivante avant d'aller plus loin
+
+== Workspaces GitPod 🗂
+
+* Vous arrivez sur la link:https://gitpod.io/workspaces[page listant les "workspaces" GitPod] :
+
+* Un workspace est une instance d'un environnement de travail virtuel (C'est un ordinateur distant)
+
+* ⚠  Faites attention à réutiliser le même workspace tout au long de ce cours⚠
+
+image::gitpod-workspaces.png[width=600]
 
 == Démarrer l'environnement GitPod
 
@@ -52,16 +82,9 @@ Après quelques secondes (minutes?), vous avez accès à l'environnement:
 [.small]
 Source disponible dans: link:https://github.com/cicd-lectures/gitpod[]
 
-== Workspaces GitPod 🗂
-
-* Un workspace est une instance d'un environnement de travail virtuel
-* C'est un ordinateur distant
-* ⚠  Faites attention à réutiliser le même workspace tout au long de ce cours⚠
-* Referez vous à la page link:https://gitpod.io/workspaces[workspaces] pour accéder a la liste des environnements que vous avez créé.
-
 == Checkpoint 🎯
 
-* Vous devriez pouvoir taper la commande `whoami` dans le terminal:
+* Vous devriez pouvoir taper la commande `whoami` dans le terminal de GitPod:
 ** Retour attendu: `gitpod`
 
 * Vous devriez pouvoir fermer le fichier "Get Started"...
