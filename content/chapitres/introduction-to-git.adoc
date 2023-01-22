@@ -258,7 +258,7 @@ image::scm-merge.png[caption="SCM Merge"]
 [source,bash]
 
 --
-git switch master
+git switch main
 git merge --no-ff feature/html
 git log --graph
 
