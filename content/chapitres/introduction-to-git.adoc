@@ -127,7 +127,6 @@ git status # Succès avec un message "On branch master No commits yet"
 
 
 * Créez un commit qui ajoute le fichier `README.md` avec un message,
-
 à l'aide de la commande `git commit -m <message>`
 
 ** Essayez la commande `git status` ?
@@ -200,7 +199,6 @@ git status
 
 git checkout -- README.md
 git status
-
 --
 
 
@@ -231,10 +229,11 @@ image::scm-branches.png[caption="SCM branches"]
 git branch feature/html && git switch feature/html
 # Ou git switch --create feature/html
 echo '<h1>Hello</h1>' > ./index.html
-git add ./index.html && git commit -m "Ajout d'une page HTML par défaut"
+git add ./index.html && git commit --message="Ajout d'une page HTML par défaut" # -m / --message
 
+git log
 git log --graph
-# git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+git lg # cat ~/.gitconfig => section [alias]
 --
 
 == Terminologie de Git - Merge
@@ -259,11 +258,10 @@ image::scm-merge.png[caption="SCM Merge"]
 
 --
 git switch main
-git merge --no-ff feature/html
+git merge --no-ff feature/html # Enregistrer puis fermer le fichier 'MERGE_MSG' qui a été ouvert
 git log --graph
 
-# git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
-
+# git lg
 --
 
 == Feature Branch Flow
