@@ -796,7 +796,7 @@ dramatically easier to find and remove.</p></div></blockquote><div class="attrib
 <div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-yaml hljs" data-noescape="true" data-lang="yaml">jobs: # Map de jobs
   build: # 1er job, identifié comme 'build'
     name: 'Build Slides'
-    runs-on: ubuntu-latest # cf. prochaine slide "Concepts de GitHub Actions - Runner"
+    runs-on: ubuntu-22.04 # cf. prochaine slide "Concepts de GitHub Actions - Runner"
     steps: # Collection de steps du job
       - name: 'Build the JAR'
         run: mvn package
@@ -820,13 +820,13 @@ on: # Évènements déclencheurs
     - cron: "*/15 * * * *" # Toutes les 15 minutes
 jobs:
   test-linux:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-22.04
     steps:
     - uses: actions/checkout@v2
     - run: npm install
     - run: npm test
   test-mac:
-    runs-on: mac-10.15
+    runs-on: macos-12
     steps:
     - uses: actions/checkout@v2
     - run: npm install
@@ -836,7 +836,7 @@ on:
   - push
 jobs:
   dire_bonjour:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     steps:
       - run: echo "Bonjour 👋"</code></pre></div></div>
 <div class="ulist"><ul><li><p>Commitez puis poussez</p></li><li><p>Revenez sur la page GitHub de votre projet et naviguez dans l&#8217;onglet "Actions" :</p><div class="ulist"><ul><li><p>Voyez-vous un workflow ? Et un Job ? Et le message affiché par la commande <code>echo</code> ?</p></li></ul></div></li></ul></div></div></section><section id="exemple_simple_avec_github_actions_récapépète"><h2>Exemple simple avec GitHub Actions : Récapépète</h2><div class="slide-content"><div class="imageblock"><img src="media/gh-actions-simple-example.svg" alt="gh actions simple example" width="800"></div></div></section><section id="exemple_github_actions_checkout"><h2>Exemple GitHub Actions : Checkout</h2><div class="slide-content"><div class="ulist"><ul><li><p>Supposons que l&#8217;on souhaite utiliser le code du dépôt&#8230;&#8203;</p><div class="ulist"><ul><li><p>Essayez: modifiez le fichier <code>bonjour.yml</code> pour afficher le contenu de <code>README.md</code> :</p><div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-yaml hljs" data-noescape="true" data-lang="yaml">name: Bonjour
@@ -844,7 +844,7 @@ on:
   - push
 jobs:
   dire_bonjour:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     steps:
       - run: ls -l # Liste les fichier du répertoire courant
       - run: cat README.md # Affiche le contenu du fichier `README.md` à la base du dépôt</code></pre></div></div></li></ul></div></li><li><p>Est-ce que l&#8217;étape  se passe bien ? (SPOILER: non ❌ )</p></li></ul></div></div></section><section id="exercice_github_actions_checkout"><h2>Exercice GitHub Actions : Checkout</h2><div class="slide-content"><div class="ulist"><ul><li><p><strong>But</strong> : On souhaite récupérer ("checkout") le code du dépôt dans le job</p></li><li><p>👷🏽‍♀️ C&#8217;est à vous d&#8217;essayer de <em>réparer</em> 🛠 le job :</p><div class="ulist"><ul><li><p>L&#8217;étape  doit être conservée et doit fonctionner</p></li><li><p>Utilisez l&#8217;action "checkout" (<a href="https://github.com/marketplace/actions/checkout" target="_blank">Documentation</a>) du marketplace GitHub Action</p></li><li><p>Vous pouvez vous inspirer du <a href="https://docs.github.com/en/free-pro-team@latest/actions/quickstart" target="_blank">Quickstart</a> de GitHub Actions</p></li></ul></div></li></ul></div></div></section><section id="solution_github_actions_checkout"><h2>Solution GitHub Actions : Checkout</h2><div class="slide-content"><div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-yaml hljs" data-noescape="true" data-lang="yaml">name: Bonjour
@@ -852,7 +852,7 @@ on:
   - push
 jobs:
   dire_bonjour:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v2 # Récupère le contenu du dépôt correspondant au commit du workflow en cours
       - run: ls -l # Liste les fichier du répertoire courant
@@ -862,7 +862,7 @@ on:
   - push
 jobs:
   dire_bonjour:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v2 # Récupère le contenu du dépôt correspondant au commit du workflow en cours
       - run: |
@@ -873,7 +873,7 @@ on:
   - push
 jobs:
   dire_bonjour:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     container:
       image: ghcr.io/cicd-lectures/gitpod:latest
       options: --user=root
@@ -885,7 +885,7 @@ on:
   - push
 jobs:
   dire_bonjour:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     container:
       image: ghcr.io/cicd-lectures/gitpod:latest
       options: --user=root
@@ -893,7 +893,7 @@ jobs:
       - uses: actions/checkout@v2 # Récupère le contenu du dépôt correspondant au commit du workflow en cours
       - run: cat README.md | cowsay
   run_maven:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-java@v2
