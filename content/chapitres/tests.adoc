@@ -41,15 +41,22 @@ On parle de **SUT**, System Under Test.
 * Depuis votre environnement de développement, dans le repertoire du **fork** de votre binôme
 * Créez une feature branch `add-tests`.
 
-== Ajout des Outils de Tests Automatisés au Projet (1/3)
+== Ajout des Outils de Tests Unitaires au Projet (1/3)
 
 L'execution de tests nécessite un outillage non ajouté au projet
 
 * Framework d'écriture et d'execution de tests: `JUnit`
 * Librairie de création de mocks: `Mockito`
-* Plugin maven de lancement de tests: `surefire`
+* Plugin maven de lancement de tests unitaires: `surefire`
 
-== Ajout des Outils de Tests Automatisé au Projet (2/3)
+== Cycle de Vie Maven et Tests
+
+* Rappel: Maven definit un cycle de vie de votre logiciel par phases:
+* `surefire` execute les tests contenus dans tous les fichiers ayant le suffixe `Tests.java` (`MaClasseTests.java`)
+* Le plugin `surefire` s'execute lors de la phase `tests`
+* Lancer `mvn test` va executer les phases `validate` -> `compile` -> `test`
+
+== Ajout des Outils de Tests Unitaires au Projet (2/3)
 
 Ajoutez le bloc suivant au `pom.xml`
 
@@ -60,7 +67,9 @@ Ajoutez le bloc suivant au `pom.xml`
   <dependency>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-test</artifactId>
-    <scope>test</scope>
+    <configuration>
+      <skipTests>${skipUnitTests}</skipTests>
+    </configuration>
   </dependency>
   <!-- ...  -->
 </dependencies>
@@ -70,6 +79,7 @@ Ajoutez le bloc suivant au `pom.xml`
 
 * Exécutez les tests unitaires avec la commande `mvn test`
 ** Spoiler : `No tests to run...`
+** Pourquoi ca?
 
 image::https://media.giphy.com/media/5x89XRx3sBZFC/giphy.gif[]
 
@@ -388,7 +398,7 @@ image::architecture.png[]
 
 == Définition du SUT (2/2)
 
-Un test d'intégration doit a chaque test:
+Une suite de tests d'intégration doit:
 
 * Démarrer et provisionner un environnement d’exécution (une DB, Elasticsearch, un autre service...)
 * Démarrer votre application
@@ -397,64 +407,54 @@ Un test d'intégration doit a chaque test:
 
 == !
 
-Ce sont des tests plus lents et plus complexes que des tests unitaires.
+Ce sont des tests plus lents et plus complexes que des tests unitaires. Comment gerer ca?
 
-== Configuration de Maven (1/2)
+== Executer Les Tests d'Integration: Cycle de Vie Maven
+
+* Les tests d'integration sont une autre partie du cycle de vie de l'applicaion: la phase `verify`.
+* `verify` est une meta-phase composee de 3 sous phases
+** `pre-integration-test`: prepare l'environnement des tests d'integration
+** `integration-test`: execute la suite de tests d'integrration
+** `post-integration-test`: nettoie l'environnement des tests d'integration
+
+⚠️ Il faut toujours appeler `verify` et non `integration-test`: `post-integration-test` ne s'executera pas ⚠️
+
+== Executer Les Tests d'Integration: Le Plugin `failsafe` (1/3)
+
+* Pour executer les tests d'integration nous allons introduire un nouveau plugin: `failsafe`
+* Ce plugin execute les tests ayant le suffixe `IT.java` (par exemple: `MaClasseIT.java`)
+* Ce plugin s'execute lors de la phase `integration-test`
+
+== Executer Les Tests d'Integration: Le Plugin `failsafe` (2/3)
 
 [source,xml]
 ----
 <plugins>
   <plugin>
-    <!-- Configure le maven-surefire-plugin -->
     <groupId>org.apache.maven.plugins</groupId>
-    <artifactId>maven-surefire-plugin</artifactId>
+    <artifactId>maven-failsafe-plugin</artifactId>
     <configuration>
-      <!-- Désactive tous les tests pour l'execution par défaut -->
-      <skipTests>true</skipTests>
+      <skipTests>${skipIntegrationTests}</skipTests>
     </configuration>
-    <executions>
-      <execution>
-        <!--Crée une première execution pour jouer les tests unitaires -->
-        <id>unit</id>
-        <phase>test</phase>
-        <goals>
-          <goal>test</goal>
-        </goals>
-        <configuration>
-          <skipTests>${skipUnitTests}</skipTests>
-          <!-- Inclue et execute les tests contenus dans les fichiers ayant le suffixe Tests.java-->
-          <includes>
-            <include>**/*Tests.java</include>
-          </includes>
-        </configuration>
-      </execution>
-      <execution>
-        <!--Crée une seconde execution pour jouer les tests d'integration -->
-        <id>integration</id>
-        <phase>integration-test</phase>
-        <goals>
-          <goal>test</goal>
-        </goals>
-        <configuration>
-          <skipTests>false</skipTests>
-          <includes>
-            <!-- Inclue et execute les tests contenus dans les fichiers ayant le suffixe IT.java-->
-            <include>**/*IT.java</include>
-          </includes>
-        </configuration>
-      </execution>
-    </executions>
-  </plugin>
+  <plugin>
 </plugins>
 ----
 
-== Configuration de Maven (2/2)
+== Executer Les Tests d'Integration: Le Plugin `failsafe` (2/3)
 
 Cela crée les commandes suivantes:
 
-- `mvn test`: lance les tests unitaires
-- `mvn verify`: lance les tests unitaires et d'integration
-- `mvn verify -DskipUnitTests=true`: lance uniquement les tests d'integration
+* `mvn test`: lance les tests unitaires
+* `mvn verify`: lance les tests unitaires et d'integration
+* `mvn verify -DskipUnitTests=true`: lance uniquement les tests d'integration
+
+== Tests d'Integrations: Et concretement avec le menu server?
+
+* Dans les faits... nous n'allons pas utiliser les phases `pre-integration-test` et `post-integration-test`
+** -> Nous n'avons pas de serveur de base de données a demarer.
+** -> SpringBoot integre le demarage et l'arret du serveur web dans l'execution des tests via l'annotation `@SprintBootTest`.
+* C'est un projet pedagogique!
+** Dans un "vrai" projet, on voudrait peutetre demarer/eteindre un serveur de base de données dans ces etapes.
 
 [{invert}]
 == !
