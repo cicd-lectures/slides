@@ -51,10 +51,10 @@ L'execution de tests nécessite un outillage non ajouté au projet
 
 == Cycle de Vie Maven et Tests
 
-* Rappel: Maven definit un cycle de vie de votre logiciel par phases:
-* `surefire` execute les tests contenus dans tous les fichiers ayant le suffixe `Tests.java` (`MaClasseTests.java`)
-* Le plugin `surefire` s'execute lors de la phase `tests`
-* Lancer `mvn test` va executer les phases `validate` -> `compile` -> `test`
+* Rappel : Maven définit un cycle de vie de votre logiciel par phases:
+* `surefire` exécute les tests contenus dans tous les fichiers ayant le suffixe `Tests.java` (`MaClasseTests.java`)
+* Le plugin `surefire` s’exécute (par défaut) lors de la phase `tests`
+* Lancer `mvn test` va exécuter les phases `validate` -> `compile` -> `test`
 
 == Ajout des Outils de Tests Unitaires au Projet (2/3)
 
@@ -79,7 +79,7 @@ Ajoutez le bloc suivant au `pom.xml`
 
 * Exécutez les tests unitaires avec la commande `mvn test`
 ** Spoiler : `No tests to run...`
-** Pourquoi ca?
+** Pourquoi ca ?
 
 image::https://media.giphy.com/media/5x89XRx3sBZFC/giphy.gif[]
 
@@ -407,25 +407,25 @@ Une suite de tests d'intégration doit:
 
 == !
 
-Ce sont des tests plus lents et plus complexes que des tests unitaires. Comment gerer ca?
+Ce sont des tests plus lents et plus complexes que des tests unitaires. Comment gérer ça?
 
-== Executer Les Tests d'Integration: Cycle de Vie Maven
+== Exécuter Les Tests d’Intégration: Cycle de Vie Maven
 
-* Les tests d'integration sont une autre partie du cycle de vie de l'applicaion: la phase `verify`.
-* `verify` est une meta-phase composee de 3 sous phases
-** `pre-integration-test`: prepare l'environnement des tests d'integration
-** `integration-test`: execute la suite de tests d'integrration
-** `post-integration-test`: nettoie l'environnement des tests d'integration
+* Les tests d’intégration sont une autre partie du cycle de vie de l’application: la phase `verify`.
+* `verify` est une méta-phase composée de 3 sous-phases :
+** `pre-integration-test`: prépare l'environnement des tests d’intégration
+** `integration-test`: execute la suite de tests d'intégration
+** `post-integration-test`: nettoie l'environnement des tests d’intégration
 
-⚠️ Il faut toujours appeler `verify` et non `integration-test`: `post-integration-test` ne s'executera pas ⚠️
+⚠️ Il faut toujours appeler `verify` et non pas `integration-test`, sinon la sous-phase`post-integration-test` ne s’exécutera pas ⚠️
 
-== Executer Les Tests d'Integration: Le Plugin `failsafe` (1/3)
+== Exécuter Les Tests d’Intégration: Le Plugin `failsafe` (1/3)
 
-* Pour executer les tests d'integration nous allons introduire un nouveau plugin: `failsafe`
-* Ce plugin execute les tests ayant le suffixe `IT.java` (par exemple: `MaClasseIT.java`)
-* Ce plugin s'execute lors de la phase `integration-test`
+* Pour exécuter les tests d’intégration nous allons introduire un nouveau plugin: `failsafe`
+* Ce plugin exécute les tests ayant le suffixe `IT.java` (par exemple: `MaClasseIT.java`)
+* Ce plugin s’exécute lors de la phase `integration-test`
 
-== Executer Les Tests d'Integration: Le Plugin `failsafe` (2/3)
+== Exécuter Les Tests d’Intégration: Le Plugin `failsafe` (2/3)
 
 [source,xml]
 ----
@@ -440,21 +440,21 @@ Ce sont des tests plus lents et plus complexes que des tests unitaires. Comment 
 </plugins>
 ----
 
-== Executer Les Tests d'Integration: Le Plugin `failsafe` (2/3)
+== Exécuter Les Tests d’Intégration: Le Plugin `failsafe` (2/3)
 
 Cela crée les commandes suivantes:
 
 * `mvn test`: lance les tests unitaires
-* `mvn verify`: lance les tests unitaires et d'integration
-* `mvn verify -DskipUnitTests=true`: lance uniquement les tests d'integration
+* `mvn verify`: lance les tests unitaires et d’intégration
+* `mvn verify -DskipUnitTests=true`: lance uniquement les tests d’intégration
 
-== Tests d'Integrations: Et concretement avec le menu server?
+== Tests d’Intégrations: Et concrètement avec le menu-server?
 
 * Dans les faits... nous n'allons pas utiliser les phases `pre-integration-test` et `post-integration-test`
-** -> Nous n'avons pas de serveur de base de données a demarer.
-** -> SpringBoot integre le demarage et l'arret du serveur web dans l'execution des tests via l'annotation `@SprintBootTest`.
-* C'est un projet pedagogique!
-** Dans un "vrai" projet, on voudrait peutetre demarer/eteindre un serveur de base de données dans ces etapes.
+** -> Nous n'avons pas de serveur de base de données a démarrer.
+** -> SpringBoot intègre le démarrage et l’arrêt du serveur web dans l’exécution des tests via l'annotation `@SprintBootTest`.
+* C'est un projet pédagogique!
+** Dans un "vrai" projet, on voudrait peut-être démarrer / éteindre un serveur de base de données dans ces étapes.
 
 [{invert}]
 == !
