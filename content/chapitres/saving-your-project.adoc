@@ -228,7 +228,7 @@ Un dépôt distant peut être hébergé par n'importe quel serveur sans besoin a
 
 Une multitudes de services facilitent et enrichissent encore git: (GitHub, Gitlab, Gitea, Bitbucket...)
 
-=> Dans le cadre du cours, nous allons utiliser +++<span class="fab fa-github"></span>+++ *GitHub*.
+=> Dans le cadre du cours, nous allons utiliser {github_icon} *GitHub*.
 
 == git + Git(Hub|Lab|tea|...) = superpowers !
 

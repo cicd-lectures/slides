@@ -8,9 +8,9 @@ ENSG - Décembre 2023
 
 [.small]
 * Présentation disponible à l’adresse: {presentationUrl}[{presentationUrl}]
-* Version PDF de la présentation : link:slides.pdf[+++<span class="far fa-file-pdf"></span>+++ Cliquez ici]
+* Version PDF de la présentation : link:slides.pdf[{pdf_icon} Cliquez ici]
 * This work is licensed under a Creative Commons Attribution 4.0 International License
-* Code source de la présentation: link:{repositoryUrl}[+++<span class="fab fa-github"></span>+++ {repositoryUrl}]
+* Code source de la présentation: link:{repositoryUrl}[{github_icon} {repositoryUrl}]
 
 image::qrcode.png["QRCode to this presentation",height=150]
 
@@ -67,10 +67,10 @@ include::./chapitres/project.adoc[leveloffset=1]
 [{invert}]
 == Merci !
 
-* +++<span class="fa fa-envelope"></span>+++ damien.duportal+pro <chez> gmail.com
-* link:https://twitter.com/DamienDuportal[+++<span class="fab fa-twitter"></span>+++ @DamienDuportal,window=_blank]
-* +++<span class="fa fa-envelope"></span>+++ jlevesy <chez> gmail.com
-* link:https://twitter.com/jlevesy[+++<span class="fab fa-twitter"></span>+++ @jlevesy,window=_blank]
+* {mail_icon} damien.duportal+pro <chez> gmail.com
+* link:https://twitter.com/DamienDuportal[{twitter_icon} @DamienDuportal,window=_blank]
+* {mail_icon} jlevesy <chez> gmail.com
+* link:https://twitter.com/jlevesy[{twitter_icon} @jlevesy,window=_blank]
 
 [.small]
 link:{presentationUrl}[Slides: {presentationUrl}]
@@ -78,4 +78,4 @@ link:{presentationUrl}[Slides: {presentationUrl}]
 image::qrcode.png["QRCode to this presentation",height=150]
 
 [.small]
-link:{repositoryUrl}[Source on +++<span class="fab fa-github"></span>+++: {repositoryUrl}]
+link:{repositoryUrl}[Source on {github_icon}: {repositoryUrl}]

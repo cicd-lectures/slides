@@ -8,9 +8,9 @@
 * Freelancer
 
 * Me contacter :
-** +++<span class="fa fa-envelope"></span>+++ damien.duportal <chez> gmail.com
-** link:https://www.linkedin.com/in/damien-duportal-ab70b524/[+++<span class="fab fa-linkedin"></span>+++ Damien Duportal,window=_blank]
-** link:https://twitter.com/DamienDuportal[+++<span class="fab fa-twitter"></span>+++ @DamienDuportal,window=_blank]
+** {mail_icon} damien.duportal <chez> gmail.com
+** link:https://www.linkedin.com/in/damien-duportal-ab70b524/[{linkedin_icon} Damien Duportal,window=_blank]
+** link:https://twitter.com/DamienDuportal[{twitter_icon} @DamienDuportal,window=_blank]
 
 [{invert}]
 == Julien LEVESY
@@ -18,9 +18,9 @@
 * Senior Platform Engineer @ link:https://www.voi.com/[Voi] 🛴
 
 * Me contacter :
-** +++<span class="fa fa-envelope"></span>+++ jlevesy <chez> gmail.com
-** link:https://www.linkedin.com/in/julien-levesy-5b80ab149/[+++<span class="fab fa-linkedin"></span>+++ Julien Levesy,window=_blank]
-** link:https://github.com/jlevesy[+++<span class="fab fa-github"></span>+++ @jlevesy,window=_blank]
+** {mail_icon} jlevesy <chez> gmail.com
+** link:https://www.linkedin.com/in/julien-levesy-5b80ab149/[{linkedin_icon} Julien Levesy,window=_blank]
+** link:https://github.com/jlevesy[{github_icon} @jlevesy,window=_blank]
 
 == Et vous ?
 

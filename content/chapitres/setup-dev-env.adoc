@@ -4,7 +4,7 @@
 == Outils Nécessaires 🛠
 
 * Un navigateur récent (et décent)
-* Un compte sur link:https://github.com[+++<span class="fab fa-github"></span>+++ GitHub,window="_blank"]
+* Un compte sur link:https://github.com[{github_icon} GitHub,window="_blank"]
 * On va vous demander de travailler en binôme, commencez à réfléchir avec qui vous souhaitez travailler !
 
 == GitPod
@@ -23,7 +23,7 @@ link:https://gitpod.io[GitPod.io,window="_blank"] : Environnement de développem
 
 * Authentifiez vous en utilisant votre compte GitHub:
 ** Bouton "Login" en haut à droite
-** Puis choisissez le lien "+++<span class="fab fa-github"></span>+++ Continue with GitHub"
+** Puis choisissez le lien "{github_icon} Continue with GitHub"
 
 [.small]
 ⚠️ Pour les "autorisations", passez sur la slide suivante
