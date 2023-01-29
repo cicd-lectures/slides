@@ -31,6 +31,9 @@ include::./chapitres/introduction.adoc[leveloffset=1]
 // Chapitre Setup Development Environment
 include::./chapitres/setup-dev-env.adoc[leveloffset=1]
 
+// Chapitre Guide de Survie en ligne de command
+include::./chapitres/cli.adoc[leveloffset=1]
+
 // Chapitre Introduction to Git
 include::./chapitres/introduction-to-git.adoc[leveloffset=1]
 
