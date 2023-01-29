@@ -8,7 +8,7 @@
 * Freelancer
 
 * Me contacter :
-** {author_mail}
+** {mail_icon} damien.duportal <chez> gmail.com
 ** link:https://github.com/dduportal[{github_icon} dduportal,window="_blank"]
 ** link:https://www.linkedin.com/in/damien-duportal-ab70b524/[{linkedin_icon} Damien Duportal,window=_blank]
 ** link:https://twitter.com/DamienDuportal[{twitter_icon} @DamienDuportal,window=_blank]
