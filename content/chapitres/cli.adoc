@@ -9,14 +9,6 @@ Remise à niveau / Rappels
 - 🇬🇧 CLI == "Command Line Interface"
 - 🇫🇷 "Interface de Ligne de Commande"
 
-== REPL
-
-Pour les théoriciens et curieux :
-
-- 🇬🇧 REPL == "Read–eval–print loop"
-
-https://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop[REPL sur Wikipedia,window="_blank"]
-
 == Anatomie d'une commande
 
 [source,bash]
@@ -81,10 +73,27 @@ Dans un terminal Unix/Linux/WSL :
 * `touch` : Créer un fichier
 * `grep` : Chercher un motif de texte
 
-== Arborescence de fichiers
+== Arborescence de fichiers 1/2
 
-* La racine du disque dur c'est `/` : 🎓 `ls -l /`
-* Le séparateur c'est également `/` : 🎓 `ls -l /usr/bin`
+* Le système de fichier a une structure d'arbre
+** La racine du disque dur c'est `/` : 🎓 `ls -l /`
+** Le séparateur c'est également `/` : 🎓 `ls -l /usr/bin`
+
+* Deux types de chemins :
+** Absolu (depuis la racine): Commence par `/` (Ex. `/usr/bin`)
+** Sinon c'est relatif (e.g. depuis le dossier courant) (Ex `./bin` ou `local/bin/`)
+
+image::linux-directory-structure.png[width=400]
+
+[.small]
+link:https://linuxhandbook.com/linux-directory-structure/[Source,windows="_blank"]
+
+== Arborescence de fichiers 2/2
+
+* Le dossier "courant" c'est `.` : 🎓 `ls -l ./bin # Dans le dossier /usr`
+* Le dossier "parent" c'est `..` : 🎓 `ls -l ../ # Dans le dossier /usr`
+
+
 * `~` (tilde) c'est un raccourci vers le dossier de l'utilisateur courant : 🎓 `ls -l ~`
 * Sensible à la casse (majuscules/minuscules) et aux espaces :
 🎓
