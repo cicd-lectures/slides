@@ -25,20 +25,23 @@ ls --color=always -l /bin
 
 == Manuel des commande
 
-Afficher le manuel de `<commande>` :
-
+* Afficher le manuel de `<commande>` :
++
 [source,bash]
-man <commande>
+----
+man <commande> # Commande 'man' avec comme argument le nom de ladite commande
+----
 
-* Navigation avec les flèches haut et bas
-* Tapez `/` puis une chaîne de texte pour chercher
-** Touche `n` pour sauter d’occurrence en occurrence
-* Touche `q` pour quitter
+** Navigation avec les flèches haut et bas
+*** Tapez `/` puis une chaîne de texte pour chercher
+*** Touche `n` pour sauter d’occurrence en occurrence
+** Touche `q` pour quitter
 
 🎓 Essayez avec `ls`, chercher le mot `color`
 
 [.small]
-Google c'est pratique aussi hein !
+- 💡 La majorité des commandes fournit également une option (`--help`), un flag (`-h`)  ou un argument (`help`)
+- Google c'est pratique aussi hein !
 
 == Raccourcis
 
