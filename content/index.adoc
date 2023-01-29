@@ -70,7 +70,7 @@ include::./chapitres/project.adoc[leveloffset=1]
 [{invert}]
 == Merci !
 
-* {mail_icon} damien.duportal+pro <chez> gmail.com
+* {mail_icon} damien.duportal <chez> gmail.com
 * link:https://twitter.com/DamienDuportal[{twitter_icon} @DamienDuportal,window=_blank]
 * {mail_icon} jlevesy <chez> gmail.com
 * link:https://twitter.com/jlevesy[{twitter_icon} @jlevesy,window=_blank]
