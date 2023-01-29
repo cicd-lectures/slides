@@ -151,7 +151,7 @@ echo $?
 ls /do_not_exist
 echo $?
 
-# Une second fois. Que se passes-t'il ?
+# Une seconde fois. Que se passe-t'il ?
 echo $?
 ----
 
