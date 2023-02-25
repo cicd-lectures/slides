@@ -1,7 +1,7 @@
 [{invert}]
 = Présentation de votre projet
 
-== Contexte Géopolitique (1/2)
+== Contexte (1/2)
 
 * Dans un effort d'optimisation de ses processus métiers, la cantina de Mos-Estafette s'est lancée dans un grand projet de digitalisation de la gestion de sa carte
 
@@ -9,7 +9,7 @@
 ** Une partie serveur qui stocke et expose la données de la carte via une API REST
 ** Une partie client qui permet de consulter et de gérer les menus de la cantina via l'API du serveur
 
-== Contexte Géopolitique (2/2)
+== Contexte (2/2)
 
 * Après une longue et épique bataille de chefs de projets et autres décideurs fonctionnels, la société **Bananes Services d'Entreprises**, spécialiste national des technologies du minitel, à remporté le lot de la partie serveur...
 * ...Cependant, suite à d'un **grave accident de brainstorming** entre les 18 chefs de projet travaillant sur le dit projet et 6 mois de retard sur la première livraison, l'entreprise *Bananes* s'est retrouvée dans l'incapacité de mener le projet à son terme
