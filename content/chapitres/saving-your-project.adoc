@@ -46,6 +46,7 @@ Cela rends la manipulation un peu plus complexe, allons-y pas à pas :-)
 ** Créez un nouveau dépôt distant en cliquant sur "New" en haut à gauche
 ** Appelez le `menu-server`
 ** Une fois créé, mémorisez l'URL (++https://github.com/...++) de votre dépôt :-)
+** Inscrivez l'URL de votre depot link:https://docs.google.com/spreadsheets/d/1RyRn930gQpTKGoU_hpuZ70fAi2SpTm36oDxc44rGZwE/edit?usp=sharing[ici].
 
 == Consulter l'historique de commits
 
