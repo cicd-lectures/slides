@@ -133,7 +133,7 @@ Source : http://blog.crisp.se/2013/02/05/yassalsundman/continuous-delivery-vs-co
 
 == Construire une Image de Container pour Cloud Run
 
-* A la racine de votre dépôt menu-server créez un fichier `Dockerfile` avec le contenu suivant.
+* A la racine de votre dépôt menu-server créez un fichier `Dockerfile` avec le contenu suivant :
 
 [source,Dockerfile]
 ----
