@@ -124,8 +124,9 @@ Source : http://blog.crisp.se/2013/02/05/yassalsundman/continuous-delivery-vs-co
 
 == Image de Container?
 
-* Un container est une instance d'une application packagée
-* Un container est créé a partir d'une image, le disque d'installation de l'application
+* Un container est:
+** Une instance d'une application empaquetée
+** Créé a partir d'une image (le disque d'installation de l'application)
 * Pour exécuter un conteneur, il nous faut une image et un moteur d'execution de conteneurs
 ** Le plus connu est `Docker`!
 ** Cloud Run execute aussi des images Docker!
