@@ -121,7 +121,7 @@ Dans la terminologie GitHub:
 
 * Nous allons vous faire forker vos dépôts respectifs
 * Trouvez vous un binôme dans le groupe.
-* Rendez vous link:https://docs.google.com/spreadsheets/d/1cVVdhvDv5ZCG13rXQOlzE62Y7SLsTtpDRprsssjZBhI/edit?usp=sharing[sur cette page,window="_blank"] pour enregistrer votre binôme, et indiquez les liens de vos dépôts respectifs.
+* Rendez vous link:https://docs.google.com/spreadsheets/d/1RyRn930gQpTKGoU_hpuZ70fAi2SpTm36oDxc44rGZwE/edit?usp=sharing[sur cette page,window="_blank"] pour inscrire votre binôme.
 * Depuis la page du dépôt de votre binôme, cliquez en haut à droite sur le bouton **Fork**.
 
 image:fork.png[]

@@ -5,7 +5,9 @@
 
 * Un navigateur récent (et décent)
 * Un compte sur link:https://github.com[{github_icon} GitHub,window="_blank"]
+* Un compte sur link:https://google.com[Google,window="_blank"]
 * On va vous demander de travailler en binôme, commencez à réfléchir avec qui vous souhaitez travailler !
+* Enregistrez vous par link:https://docs.google.com/spreadsheets/d/1RyRn930gQpTKGoU_hpuZ70fAi2SpTm36oDxc44rGZwE/edit?usp=sharing[ici,window="_blank"]!
 
 == GitPod
 

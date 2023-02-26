@@ -114,45 +114,31 @@ Source : http://blog.crisp.se/2013/02/05/yassalsundman/continuous-delivery-vs-co
 ** Ou un téléphone pour une application mobile
 * Certaines plateformes sont plus ou moins outillées pour la mise en production automatique
 
-== Introduction à Heroku
+== Introduction à Google Cloud Run
 
-* Dans le cadre de ce cours nous allons utiliser link:https://heroku.com[Heroku]
-* Plateforme d'hébergement automatisée
-* Structurée autour de trois concepts principaux:
-** Un `Dyno` est une instance de votre serveur
-** Un `Addon` est un outil tierce dans votre application (un SGBD par exemple...)
-** Une `Application` est un ensemble de `Dynos` et d' `Addons`
+* Dans le cadre de ce cours nous allons utiliser link:https://cloud.google.com/run[Google Cloud  Run]
+** Un Produit de Google Cloud Platform (GCP)
+* Cloud Run Permets d'exécuter des images de containers et de les exposer sur internet sans avoir a se soucier de l'infrastructure en dessous.
+* Ideal dans le cadre de notre projet!
+* Environment sponsorise par Voi pour le cours.
 
-== Exercice: Créez une application sur Heroku (1/2)
+== Image de Container?
 
-* Rendez-vous sur link:https://heroku.com[Heroku] et créez vous un compte
-* Une fois sur la page link:https://dashboard.heroku.com/apps[Apps] cliquez sur `New app` dans le menu en haut à gauche
-* Sélectionnez un nom et une région (europe de préférence)
-* Cliquez sur Create App
+* Un container est:
+** Une instance d'une application empaquetée
+** Créé a partir d'une image (le disque d'installation de l'application)
+* Pour exécuter un conteneur, il nous faut une image et un moteur d'execution de conteneurs
+** Le plus connu est `Docker`!
+** Cloud Run execute aussi des images Docker!
 
-== Exercice: Créez une application sur Heroku (2/2)
+== Construire une Image de Container pour Cloud Run
 
-* Rendez-vous sur l'onglet overview de votre app
-** Pour l'instant il ne s'y passe pas grand chose...
-* Rendez vous maintenant dans l'écran "View Logs" en haut à droite
-** Permets de visualiser en temps réel les logs de vos Dyno en production
-* Prenez un peu le temps de naviguer dans l'interface
-
-== Déployer dans une App Heroku (1/2)
-
-Heroku supporte plusieurs modes de déploiement
-
-* Push du code source dans un remote heroku via git
-* Connection directe avec GitHub
-* Push d'une image dans une container registry
-** C'est cette méthode que nous allons utiliser (car la moins auto-magique)
-
-== Construire une Image de Container pour Heroku
+* A la racine de votre dépôt menu-server créez un fichier `Dockerfile` avec le contenu suivant :
 
 [source,Dockerfile]
 ----
 # Depuis l'image de base azul/zulu-openjdk:11 (qui embarque un JRE dans la version 11)
-FROM azul/zulu-openjdk:11
+FROM azul/zulu-openjdk:17
 
 # Copier l'archive JAR depuis l'hôte dans le fichier /opt/app/menu-server.jar de l'image
 COPY target/menu-server.jar /opt/app/menu-server.jar
@@ -162,13 +148,15 @@ COPY target/menu-server.jar /opt/app/menu-server.jar
 CMD ["java","-jar","/opt/app/menu-server.jar", "--server.port=${PORT}"]
 ----
 
-== Exercice: Créez et Lancez l'image Manuellement
+== Exercice: Créez et Executez l'image dans votre Workspace
 
-* A la racine de votre dépôt menu-server créez un fichier `Dockerfile`
 * Dans un terminal, lancez les commandes suivantes:
 
 [source,bash]
 ----
+# On repackage l'app
+mvn package
+
 # Construit une image docker portant le tag  `cicdlectures/menu-server:test`
 docker build -t cicdlectures/menu-server:test .
 
@@ -179,56 +167,49 @@ docker run -ti --rm -e PORT=9090 -p 8080:9090 cicdlectures/menu-server:test
 # Et Ctrl+C pour terminer l'exécution du container
 ----
 
-== Déployer dans une App Heroku (2/2)
+== Déployer dans Cloud Run
 
-Les grandes étapes d'un déploiement dans heroku via une container registry
+Les grandes étapes d'un déploiement dans Cloud Run
 
-1. Le client construit une image de container de l'application et la pousse dans une registry d'images heroku
-2. Le client indique a heroku de déployer cette nouvelle image dans un dyno (`heroku container:release <nom du dyno>`)
+1. On construit une image de container de l'application et la publie dans une registry d'images Google Cloud.
+2. On demande ensuite a Cloud Run d'instancier un nouveau container utilisant la nouvelle image publiee.
 
-== Exercice: Déployez manuellement votre application à l'aide de heroku CLI
+== Exercice: Connectez vous a Google Cloud depuis votre Workspace
+
+Cela necessite un compte Google, si vous n'en avez pas vous pouvez en creer un link:https://accounts.google.com/signup[ici].
 
 [source,bash]
 ----
-# Authentifie votre instance gitpod auprès de heroku
-heroku login -i
+# Authentifie votre instance gitpod auprès de google cloud
+gcloud auth login
 
-# Authentifie le démon docker de votre instance auprès de la registry heroku
-heroku container:login
+# Indique a la CLI google cloud d'utiliser le projet partage pour le cours.
+gcloud config set project voi-sdbx-ensg-2023
 
-# On repackage l'app
-mvn package
+# Authentifie le démon docker de votre instance auprès de la registry Google Cloud.
+gcloud auth configure-docker europe-west9-docker.pkg.dev
+----
 
-# On construit l'image du container heroku et on la publie dans la registry heroku pour le dyno web
-heroku container:push web --app <votre-app>
+== Exercice: Déployez votre Menu Server dans Cloud Run
 
-# On déploie la nouvelle image dans le dyno:web
-heroku container:release web --app <votre-app>
+[source,bash]
+----
+# On renome l'image avec le nom de la registry
+docker tag cicdlectures/menu-server:test europe-west9-docker.pkg.dev/voi-sdbx-ensg-2023/<votre-binome>/menu-server:test-cloudrun
+
+# On publie l'image dans la registry google cloud
+docker push europe-west9-docker.pkg.dev/voi-sdbx-ensg-2023/<votre-binome>/menu-server:test-cloudrun
+
+# On déploie l'image publiee dans cloud run
+gcloud run deploy <identifiant-service-unique> --image=europe-west9-docker.pkg.dev/voi-sdbx-ensg-2023/<votre-binome>/menu-server:test-cloudrun --region=europe-west9  --allow-unauthenticated
 ----
 
 [{invert}]
 == !
 
-Mais le faire manuellement c'est pas du CD. Il faut le faire faire à github actions
+Mais le faire manuellement c'est pas du deploiement continu! Il faut le faire depuis GitHub action!
 
-== Parler à Heroku depuis GitHub Actions
-
-* Problème: Seul votre utilisateur peut controller votre application heroku (et heureusement!). Comment le CI peut-il se faire passer pour votre utilisateur Heroku?
-* Solution: Il faut fournir au moteur de CI un token d'authentification (une chaîne de caractères) qui autorise le moteur de CI à prendre votre identité.
-* ⚠ Ce token est une donnée sensible: si on vous la vole on peut se faire passer pour vous auprès d'Heroku
-* Il faut donc le stocker en sécurité: sous forme de secret dans GitHub.
-
-== Exercice: Récupérez votre Token Heroku et stockez le en tant que secret dans Github
-
-* Rendez vous link:https://dashboard.heroku.com/account[dans vos paramètres de comptes Heroku]
-* Dans la section API Key cliquez sur `Reveal`: cela affiche votre clé d'API
-* Copiez cette valeur dans le presse papier
-* Rendez vous maintenant dans la page de configuration de votre dépôt, section `Secrets`
-* Cliquez sur `New Repository Secret`
-* Entrez comme nom de secret `HEROKU_API_KEY`
-* Collez la valeur (attention aux espaces!) et cliquez sur `Add Secret`
-
-== Exercice: Mise en Place du Déploiement Continu dans votre Workflow
+== Exercice: Mise en Place du Déploiement Continu dans Cloud Run depuis votre Workflow
 
 Changez votre workflow de CI pour que, sur un évènement de push de tag de version:
 
@@ -236,14 +217,7 @@ Changez votre workflow de CI pour que, sur un évènement de push de tag de vers
 * Ce job effectue dans l'ordre:
 ** Télécharge l'artefact de l'étape `build`
 ** Checkout le depot (pour rapatrier le Dockerfile)
-** Effectue un déploiement sur heroku, en utilisant la CLI heroku
-
-== Quelques astuces:
-
-* La CLI heroku est déjà pré-installée dans votre environnement de CI
-* On ne peut pas jouer `heroku login` car c'est une étape interactive.
-** En revanche la CLI utilise aussi la variable d'environnement `HEROKU_API_KEY` pour s'authentifier: il faut donc lui exposer le secret (link:https://docs.github.com/en/actions/security-guides/encrypted-secrets#using-encrypted-secrets-in-a-workflow[doc!])
-* Il ne reste plus qu'a jouer les commandes de déploiement que l'on à déjà vu.
+** Appelle l'action link:https://github.com/cicd-lectures/cloudrun-release[Cloud Run Release] pour deployer automatiquement une nouvelle version de votre application.
 
 == Pour aller plus loin...
 
