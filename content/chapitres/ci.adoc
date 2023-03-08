@@ -25,7 +25,7 @@ Source : http://cartoontester.blogspot.be/2010/01/big-bugs.html
 * Le code est intégré *souvent* (au moins quotidiennement)
 * Chaque intégration est validée par une exécution *automatisée*
 
-== Et concrètement ?
+== Et concrètement ? 1/2
 
 image::fail-fast-continuous-integration.png[height=250]
 
@@ -33,6 +33,10 @@ image::fail-fast-continuous-integration.png[height=250]
 ** une requête HTTP est envoyée au système de "CI"
 * Le système de CI compile et teste le code
 * On ferme la boucle : Le résultat est renvoyé au dévelopeu•se•r•s
+
+== Et concrètement ? 2/2
+
+image:ghci.svg[with="800"]
 
 == Quelques moteurs de CI connus
 
@@ -45,10 +49,6 @@ GitHub Actions est un moteur de CI/CD intégré à GitHub
 
 * ✅ : Très facile à mettre en place, gratuit et intégré complètement
 * ❌ : Utilisable uniquement avec GitHub, et DANS la plateforme GitHub
-
-== Anatomie de déclenchement de GitHub Actions
-
-image:ghci.svg[with="800"]
 
 == Concepts de GitHub Actions
 
