@@ -529,3 +529,17 @@ On a vu :
 * ❌ Les limites des tests unitaires
 * 🏭 Comment faire des tests d'intégration
 * 🤔 Tester n'est pas facile mais très utile
+
+[{invert}]
+= Encore plus d'intégration continue
+
+C'est quand même le sujet du cours :)
+
+== Exercice: Activez les tests dans votre CI
+
+Changez le workflow de ci de votre binôme (ou le votre) pour qu'à chaque build:
+
+* Les tests unitaires soient lancés
+* Les tests d'integrations soient lancés
+
+💡 Pensez à bien regarder le cycle de vie des phases Maven

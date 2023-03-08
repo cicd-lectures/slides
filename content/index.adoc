@@ -55,17 +55,11 @@ include::./chapitres/multiplayer-git.adoc[leveloffset=1]
 // Chapitre Tests
 include::./chapitres/tests.adoc[leveloffset=1]
 
-// Chapitre CI Advanced
-include::./chapitres/ci-advanced.adoc[leveloffset=1]
-
 // Chapitre Versions
 include::./chapitres/version.adoc[leveloffset=1]
 
 // Chapitre CD
 include::./chapitres/cd.adoc[leveloffset=1]
-
-// Chapitre Projet
-include::./chapitres/project.adoc[leveloffset=1]
 
 [{invert}]
 == Merci !

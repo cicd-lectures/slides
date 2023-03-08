@@ -239,7 +239,9 @@ git lg # cat ~/.gitconfig => regardez la section section [alias], cette commande
 == Terminologie de Git - Merge
 
 * On intègre une branche dans une autre en effectuant un *merge*
-** Un nouveau commit est créé, fruit de la combinaison de 2 autres commits
+* Plusieurs strategies sont possibles pour merger:
+** Quand l'historique de commit n'a pas diverge: git fait avancer la branche directement, c'est un *fast-forward*
+** Dans le cas contraire, un nouveau commit est créé, fruit de la combinaison de 2 autres commits
 
 
 image::scm-merge.png[caption="SCM Merge"]
@@ -247,7 +249,7 @@ image::scm-merge.png[caption="SCM Merge"]
 == Exercice avec Git - 4
 
 * Merger la branche `feature/html` dans la branche principale
-** ⚠️ Pensez à utiliser l'option `--no-ff`
+** ⚠️ Pensez à utiliser l'option `--no-ff` (no fast forward) pour forcer git a créer un commit de merge.
 
 * Afficher le graphe correspondant à cette branche avec `git log --graph`
 
@@ -263,22 +265,6 @@ git log --graph
 
 # git lg
 --
-
-== Feature Branch Flow
-
-* *Une seule* branche *par* fonctionnalité
-
-image::scm-feature-branch-workflow.png[caption="Feature Branch SCM Workflow",link=https://twitter.com/jay_gee/status/702638177471873024]
-
-[NOTE.speaker]
-
-====
-** Encapsulation allows working without disturbing the main codebase
-** Allows easier collaboration
-
-** Merge conflicts map the conceptual conflicts: easier to track
-** Useful when inclusion of a feature in the main code base is open to debate
-====
 
 == Exemple d'usages de VCS
 
