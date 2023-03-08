@@ -266,22 +266,6 @@ git log --graph
 # git lg
 --
 
-== Feature Branch Flow
-
-* *Une seule* branche *par* fonctionnalité
-
-image::scm-feature-branch-workflow.png[caption="Feature Branch SCM Workflow",link=https://twitter.com/jay_gee/status/702638177471873024]
-
-[NOTE.speaker]
-
-====
-** Encapsulation allows working without disturbing the main codebase
-** Allows easier collaboration
-
-** Merge conflicts map the conceptual conflicts: easier to track
-** Useful when inclusion of a feature in the main code base is open to debate
-====
-
 == Exemple d'usages de VCS
 
 * "Infrastructure as Code" :
