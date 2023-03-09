@@ -160,6 +160,10 @@ mvn package
 # Construit une image docker portant le tag  `cicdlectures/menu-server:test`
 docker build -t cicdlectures/menu-server:test .
 
+# Lance un container basé sur l'image `cicdlectures/menu-server:test` sans specifier la variable d'environnement PORT
+docker run -ti --rm -p 8080:9090 cicdlectures/menu-server:test
+# Badaboum attendu!
+
 # Lance un container basé sur l'image `cicdlectures/menu-server:test`
 docker run -ti --rm -e PORT=9090 -p 8080:9090 cicdlectures/menu-server:test
 
