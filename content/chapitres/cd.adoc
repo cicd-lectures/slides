@@ -202,10 +202,10 @@ gcloud auth configure-docker europe-west9-docker.pkg.dev
 docker tag cicdlectures/menu-server:test europe-west9-docker.pkg.dev/voi-sdbx-ensg-2023/<votre-binome>/menu-server:test-cloudrun
 
 # On publie l'image dans la registry google cloud
-docker push europe-west9-docker.pkg.dev/voi-sdbx-ensg-2023/<votre-binome>/menu-server:test-cloudrun
+docker push europe-west9-docker.pkg.dev/voi-sdbx-ensg-2023/cicd-registry/<votre-binome>/menu-server:test-cloudrun
 
 # On déploie l'image publiee dans cloud run
-gcloud run deploy <identifiant-service-unique> --image=europe-west9-docker.pkg.dev/voi-sdbx-ensg-2023/<votre-binome>/menu-server:test-cloudrun --region=europe-west9  --allow-unauthenticated
+gcloud run deploy <votre-depot> --image=europe-west9-docker.pkg.dev/voi-sdbx-ensg-2023/cicd-registry/<votre-binome>/menu-server:test-cloudrun --region=europe-west9
 ----
 
 [{invert}]
