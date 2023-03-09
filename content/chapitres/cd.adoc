@@ -222,12 +222,3 @@ Changez votre workflow de CI pour que, sur un évènement de push de tag de vers
 ** Télécharge l'artefact de l'étape `build`
 ** Checkout le depot (pour rapatrier le Dockerfile)
 ** Appelle l'action link:https://github.com/cicd-lectures/cloudrun-release[Cloud Run Release] pour deployer automatiquement une nouvelle version de votre application.
-
-== Pour aller plus loin...
-
-* http://martinfowler.com/articles/continuousIntegration.html
-* http://martinfowler.com/bliki/ContinuousDelivery.html
-* https://jaxenter.com/implementing-continuous-delivery-117916.html
-* https://technologyconversations.com/2014/04/29/continuous-delivery-introduction-to-concepts-and-tools/
-* http://blog.arungupta.me/continuous-integration-delivery-deployment-maturity-model
-* http://blog.crisp.se/2013/02/05/yassalsundman/continuous-delivery-vs-continuous-deployment
