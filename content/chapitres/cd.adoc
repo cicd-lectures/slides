@@ -77,10 +77,10 @@ Changez votre workflow de CI de façon à ce que sur un push de tag, le CI effec
 * Créer une nouvelle release dans votre dépôt ayant pour titre le nom du tag
 * Upload `jar` de l'application dans cette release nouvellement créée
 
-On vous suggère d'utiliser les actions fournies par GitHub:
+On vous suggère d'utiliser la CLI `gh` fournie par GitHub:
 
-* link:https://github.com/actions/download-artifact[Action Download Artifact]
-* link:https://github.com/actions/upload-release-asset#example-workflow---upload-a-release-asset[Create Release & Upload Release asset]
+* link:https://cli.github.com/manual/gh_release_create[Documentation de `gh release create`]
+* Astuce: pensez a bien utiliser l'option `--generate-notes`
 
 == Déploiement Continu
 
