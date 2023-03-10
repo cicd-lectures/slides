@@ -58,21 +58,28 @@ L'execution de tests nécessite un outillage non ajouté au projet
 
 == Ajout des Outils de Tests Unitaires au Projet (2/3)
 
-Ajoutez le bloc suivant au `pom.xml`
-
+* Ajoutez la dépendance suivante dans votre `pom.xml` (section `<dependencies>`):
++
 [source,xml]
 ----
-<dependencies>
-  <!-- ...  -->
-  <dependency>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-starter-test</artifactId>
-    <configuration>
-      <skipTests>${skipUnitTests}</skipTests>
-    </configuration>
-  </dependency>
-  <!-- ...  -->
-</dependencies>
+<dependency>
+  <groupId>org.springframework.boot</groupId>
+  <artifactId>spring-boot-starter-test</artifactId>
+  <scope>test</scope>
+</dependency>
+----
+
+* Puis configurez le plugin Maven Spring Boot pour les tests unitaires (section `<build><plugins>`):
++
+[source,xml]
+----
+<plugin>
+  <groupId>org.apache.maven.plugins</groupId>
+  <artifactId>maven-surefire-plugin</artifactId>
+  <configuration>
+    <skipTests>${skipUnitTests}</skipTests>
+  </configuration>
+</plugin>
 ----
 
 == Ajout des Outils de Tests Automatisés au Projet (3/3)
@@ -336,17 +343,17 @@ Ce sont des tests plus lents et plus complexes que des tests unitaires. Comment 
 
 == Exécuter Les Tests d’Intégration: Le Plugin `failsafe` (2/3)
 
+* Configurez le plugin Maven Spring Boot pour les tests d'intégration (section `<build><plugins>`):
+
 [source,xml]
 ----
-<plugins>
-  <plugin>
-    <groupId>org.apache.maven.plugins</groupId>
-    <artifactId>maven-failsafe-plugin</artifactId>
-    <configuration>
-      <skipTests>${skipIntegrationTests}</skipTests>
-    </configuration>
-  <plugin>
-</plugins>
+<plugin>
+  <groupId>org.apache.maven.plugins</groupId>
+  <artifactId>maven-failsafe-plugin</artifactId>
+  <configuration>
+    <skipTests>${skipIntegrationTests}</skipTests>
+  </configuration>
+</plugin>
 ----
 
 == Exécuter Les Tests d’Intégration: Le Plugin `failsafe` (2/3)
