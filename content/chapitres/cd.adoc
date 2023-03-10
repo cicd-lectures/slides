@@ -77,10 +77,10 @@ Changez votre workflow de CI de façon à ce que sur un push de tag, le CI effec
 * Créer une nouvelle release dans votre dépôt ayant pour titre le nom du tag
 * Upload `jar` de l'application dans cette release nouvellement créée
 
-On vous suggère d'utiliser les actions fournies par GitHub:
+On vous suggère d'utiliser la CLI `gh` fournie par GitHub:
 
-* link:https://github.com/actions/download-artifact[Action Download Artifact]
-* link:https://github.com/actions/upload-release-asset#example-workflow---upload-a-release-asset[Create Release & Upload Release asset]
+* link:https://cli.github.com/manual/gh_release_create[Documentation de `gh release create`]
+* Astuce: pensez a bien utiliser l'option `--generate-notes`
 
 == Déploiement Continu
 
@@ -160,6 +160,10 @@ mvn package
 # Construit une image docker portant le tag  `cicdlectures/menu-server:test`
 docker build -t cicdlectures/menu-server:test .
 
+# Lance un container basé sur l'image `cicdlectures/menu-server:test` sans specifier la variable d'environnement PORT
+docker run -ti --rm -p 8080:9090 cicdlectures/menu-server:test
+# Badaboum attendu!
+
 # Lance un container basé sur l'image `cicdlectures/menu-server:test`
 docker run -ti --rm -e PORT=9090 -p 8080:9090 cicdlectures/menu-server:test
 
@@ -198,10 +202,10 @@ gcloud auth configure-docker europe-west9-docker.pkg.dev
 docker tag cicdlectures/menu-server:test europe-west9-docker.pkg.dev/voi-sdbx-ensg-2023/<votre-binome>/menu-server:test-cloudrun
 
 # On publie l'image dans la registry google cloud
-docker push europe-west9-docker.pkg.dev/voi-sdbx-ensg-2023/<votre-binome>/menu-server:test-cloudrun
+docker push europe-west9-docker.pkg.dev/voi-sdbx-ensg-2023/cicd-registry/<votre-binome>/menu-server:test-cloudrun
 
 # On déploie l'image publiee dans cloud run
-gcloud run deploy <identifiant-service-unique> --image=europe-west9-docker.pkg.dev/voi-sdbx-ensg-2023/<votre-binome>/menu-server:test-cloudrun --region=europe-west9  --allow-unauthenticated
+gcloud run deploy <votre-depot> --image=europe-west9-docker.pkg.dev/voi-sdbx-ensg-2023/cicd-registry/<votre-binome>/menu-server:test-cloudrun --region=europe-west9
 ----
 
 [{invert}]
@@ -218,12 +222,3 @@ Changez votre workflow de CI pour que, sur un évènement de push de tag de vers
 ** Télécharge l'artefact de l'étape `build`
 ** Checkout le depot (pour rapatrier le Dockerfile)
 ** Appelle l'action link:https://github.com/cicd-lectures/cloudrun-release[Cloud Run Release] pour deployer automatiquement une nouvelle version de votre application.
-
-== Pour aller plus loin...
-
-* http://martinfowler.com/articles/continuousIntegration.html
-* http://martinfowler.com/bliki/ContinuousDelivery.html
-* https://jaxenter.com/implementing-continuous-delivery-117916.html
-* https://technologyconversations.com/2014/04/29/continuous-delivery-introduction-to-concepts-and-tools/
-* http://blog.arungupta.me/continuous-integration-delivery-deployment-maturity-model
-* http://blog.crisp.se/2013/02/05/yassalsundman/continuous-delivery-vs-continuous-deployment

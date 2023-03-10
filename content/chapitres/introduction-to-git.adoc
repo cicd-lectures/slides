@@ -276,16 +276,3 @@ git log --graph
 ** https://github.com/steeve/france.code-civil
 ** https://github.com/steeve/france.code-civil/pull/40
 ** https://github.com/steeve/france.code-civil/commit/b805ecf05a86162d149d3d182e04074ecf72c066
-
-== Pour aller plus loin avec Git et les VCS...
-
-Un peu de lecture :
-
-* https://git-scm.com/book/en/v2/Getting-Started-About-Version-Control
-
-* http://martinfowler.com/bliki/VersionControlTools.html
-* http://martinfowler.com/bliki/FeatureBranch.html
-
-* https://about.gitlab.com/2014/09/29/gitlab-flow/
-* https://www.atlassian.com/git/tutorials/comparing-workflows
-* http://nvie.com/posts/a-successful-git-branching-model/
