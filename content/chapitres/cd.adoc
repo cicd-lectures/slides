@@ -157,15 +157,15 @@ CMD ["java","-jar","/opt/app/menu-server.jar", "--server.port=${PORT}"]
 # On repackage l'app
 mvn package
 
-# Construit une image docker portant le tag  `cicdlectures/menu-server:test`
-docker build -t cicdlectures/menu-server:test .
+# Construit une image docker portant le tag `cicdlectures/menu-server:test`
+docker image build --tag="cicdlectures/menu-server:test" ./
 
 # Lance un container basé sur l'image `cicdlectures/menu-server:test` sans specifier la variable d'environnement PORT
-docker run -ti --rm -p 8080:9090 cicdlectures/menu-server:test
+docker container run --tty --interactive --rm --publish 8080:9090 cicdlectures/menu-server:test
 # Badaboum attendu!
 
 # Lance un container basé sur l'image `cicdlectures/menu-server:test`
-docker run -ti --rm -e PORT=9090 -p 8080:9090 cicdlectures/menu-server:test
+docker container run --tty --interactive --rm --env PORT=9090 --publish 8080:9090 cicdlectures/menu-server:test
 
 # Vérifiez que vous pouvez faire des requêtes au menu-server....
 # Et Ctrl+C pour terminer l'exécution du container
@@ -199,10 +199,10 @@ gcloud auth configure-docker europe-west9-docker.pkg.dev
 [source,bash]
 ----
 # On renome l'image avec le nom de la registry
-docker tag cicdlectures/menu-server:test europe-west9-docker.pkg.dev/voi-sdbx-ensg-2023/<votre-binome>/menu-server:test-cloudrun
+docker image tag cicdlectures/menu-server:test europe-west9-docker.pkg.dev/voi-sdbx-ensg-2023/<votre-binome>/menu-server:test-cloudrun
 
 # On publie l'image dans la registry google cloud
-docker push europe-west9-docker.pkg.dev/voi-sdbx-ensg-2023/cicd-registry/<votre-binome>/menu-server:test-cloudrun
+docker image push europe-west9-docker.pkg.dev/voi-sdbx-ensg-2023/cicd-registry/<votre-binome>/menu-server:test-cloudrun
 
 # On déploie l'image publiee dans cloud run
 gcloud run deploy <votre-depot> --image=europe-west9-docker.pkg.dev/voi-sdbx-ensg-2023/cicd-registry/<votre-binome>/menu-server:test-cloudrun --region=europe-west9
