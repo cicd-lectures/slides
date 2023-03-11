@@ -143,7 +143,7 @@ COPY target/menu-server.jar /opt/app/menu-server.jar
 CMD ["java","-jar","/opt/app/menu-server.jar", "--server.port=${PORT}"]
 ----
 
-== Exercice: Créez et Executez l'image dans votre Workspace
+== Exercice: créez et exécutez l'image dans votre Workspace
 
 * Dans un terminal, lancez les commandes suivantes:
 
@@ -171,11 +171,11 @@ docker container run --tty --interactive --rm --env PORT=9090 --publish 8080:909
 Les grandes étapes d'un déploiement dans Cloud Run
 
 1. On construit une image de container de l'application et la publie dans une registry d'images Google Cloud.
-2. On demande ensuite a Cloud Run d'instancier un nouveau container utilisant la nouvelle image publiee.
+2. On demande ensuite a Cloud Run d'instancier un nouveau container utilisant la nouvelle image publiée.
 
 == Exercice: Connectez vous a Google Cloud depuis votre Workspace
 
-Cela necessite un compte Google, si vous n'en avez pas vous pouvez en creer un link:https://accounts.google.com/signup[ici,window="_blank"].
+Cela nécessite un compte Google, si vous n'en avez pas vous pouvez en créer un link:https://accounts.google.com/signup[ici,window="_blank"].
 
 [source,bash]
 ----
@@ -193,20 +193,20 @@ gcloud auth configure-docker europe-west9-docker.pkg.dev
 
 [source,bash]
 ----
-# On renome l'image avec le nom de la registry
-docker image tag cicdlectures/menu-server:test europe-west9-docker.pkg.dev/voi-sdbx-ensg-2023/<votre-binome>/menu-server:test-cloudrun
+# On renomme l'image avec le nom de la registry
+docker image tag cicdlectures/menu-server:test europe-west9-docker.pkg.dev/voi-sdbx-ensg-2023/<votre-binôme>/menu-server:test-cloudrun
 
 # On publie l'image dans la registry google cloud
-docker image push europe-west9-docker.pkg.dev/voi-sdbx-ensg-2023/cicd-registry/<votre-binome>/menu-server:test-cloudrun
+docker image push europe-west9-docker.pkg.dev/voi-sdbx-ensg-2023/cicd-registry/<votre-binôme>/menu-server:test-cloudrun
 
-# On déploie l'image publiee dans cloud run
-gcloud run deploy <votre-depot> --image=europe-west9-docker.pkg.dev/voi-sdbx-ensg-2023/cicd-registry/<votre-binome>/menu-server:test-cloudrun --region=europe-west9
+# On déploie l'image publiée dans cloud run
+gcloud run deploy <votre-dépôt> --image=europe-west9-docker.pkg.dev/voi-sdbx-ensg-2023/cicd-registry/<votre-binôme>/menu-server:test-cloudrun --region=europe-west9
 ----
 
 [{invert}]
 == !
 
-Mais le faire manuellement c'est pas du deploiement continu! Il faut le faire depuis GitHub action!
+Mais le faire manuellement c'est pas du déploiement continu! Il faut le faire depuis GitHub action!
 
 == Exercice: Mise en Place du Déploiement Continu dans Cloud Run depuis votre Workflow
 
