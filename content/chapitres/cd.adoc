@@ -49,19 +49,14 @@ Une release GiHub est associée à un tag git et porte :
 
 image::menu-server-releases.png[]
 
-== Prérequis: Ordonnancement et exécution conditionnelle des jobs
+== Prérequis: exécution conditionnelle des jobs
 
-* Un workflow exécute en parallèle, par défaut, tous les jobs qui le composent
-* Il est possible de conditionner l’exécution d'un job à la terminaison d'un autre à l'aide du mot clé `needs` (link:https://docs.github.com/en/actions/learn-github-actions/workflow-syntax-for-github-actions#jobsjob_idneeds[documentation de `needs`,window="_blank"])
-** Exécution séquentielle au lieu de parallèle
-* Il est possible d’exécuter conditionnellement un job ou un step à l'aide du mot clé `if` (link:https://docs.github.com/en/actions/learn-github-actions/workflow-syntax-for-github-actions#jobsjob_idif[documentation de `if`,window="_blank"]])
+Il est possible d’exécuter conditionnellement un job ou un step à l'aide du mot clé `if` (link:https://docs.github.com/en/actions/learn-github-actions/workflow-syntax-for-github-actions#jobsjob_idif[documentation de `if`,window="_blank"]])
 
 [source,yaml]
 ----
 jobs:
   release:
-    # Lance le job release si build et test se sont terminés normalement.
-    needs: [build, test]
     # Lance le job release uniquement si la branche est main.
     if: contains('refs/heads/main', github.ref)
     steps:
