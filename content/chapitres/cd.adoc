@@ -139,7 +139,7 @@ FROM azul/zulu-openjdk:17
 COPY target/menu-server.jar /opt/app/menu-server.jar
 
 # Définis la commande par défaut du container à java -jar /opt/app/menu-server.jar  --server.port=${PORT}
-# La variable d'environnement PORT est définie par heroku à la création du container.
+# La variable d'environnement PORT est définie par Google Cloud Run à la création du container.
 CMD ["java","-jar","/opt/app/menu-server.jar", "--server.port=${PORT}"]
 ----
 
@@ -212,7 +212,7 @@ Mais le faire manuellement c'est pas du déploiement continu! Il faut le faire d
 
 Changez votre workflow de CI pour que, sur un évènement de push de tag de version:
 
-* Une fois le build terminé un nouveau job `release-heroku` soit lancé
+* Une fois le build terminé un nouveau job `release-cloud-run` soit lancé
 * Ce job effectue dans l'ordre:
 ** Télécharge l'artefact de l'étape `build`
 ** Checkout le depot (pour rapatrier le Dockerfile)
