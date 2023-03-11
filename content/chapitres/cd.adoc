@@ -5,7 +5,7 @@
 
 Continuous Delivery (CD)
 
-== Pourquoi la Livraison Continue ?
+== 🤔 Pourquoi la Livraison Continue ?
 
 * Diminuer les risque liés au déploiement
 * Permettre de récolter des retours utilisateurs plus souvent
@@ -63,7 +63,7 @@ jobs:
       # ...
 ----
 
-== Exercice: Créer une Release depuis le CI
+== 🎓 Exercice: Créer une Release depuis le CI
 
 Changez votre workflow de CI de façon à ce que sur un push de tag, le CI effectue les tâches suivantes dans un nouveau job:
 
@@ -81,7 +81,7 @@ On vous suggère d'utiliser la CLI `gh` fournie par GitHub:
 
 Continuous Deployment
 
-== Qu'est ce que le Déploiement Continu ?
+== 🤔 Qu'est ce que le Déploiement Continu ?
 
 * Version "avancée" de la livraison continue:
 ** Chaque changement *est* déployé en production, de manière *automatique*
@@ -143,7 +143,7 @@ COPY target/menu-server.jar /opt/app/menu-server.jar
 CMD ["java","-jar","/opt/app/menu-server.jar", "--server.port=${PORT}"]
 ----
 
-== Exercice: créez et exécutez l'image dans votre Workspace
+== 🎓 Exercice: créez et exécutez l'image dans votre Workspace
 
 * Dans un terminal, lancez les commandes suivantes:
 
@@ -173,7 +173,7 @@ Les grandes étapes d'un déploiement dans Cloud Run
 1. On construit une image de container de l'application et la publie dans une registry d'images Google Cloud.
 2. On demande ensuite a Cloud Run d'instancier un nouveau container utilisant la nouvelle image publiée.
 
-== Exercice: Connectez vous a Google Cloud depuis votre Workspace
+== 🎓 Exercice: Connectez vous a Google Cloud depuis votre Workspace
 
 Cela nécessite un compte Google, si vous n'en avez pas vous pouvez en créer un link:https://accounts.google.com/signup[ici,window="_blank"].
 
@@ -189,7 +189,7 @@ gcloud config set project voi-sdbx-ensg-2023
 gcloud auth configure-docker europe-west9-docker.pkg.dev
 ----
 
-== Exercice: Déployez votre Menu Server dans Cloud Run
+== 🎓 Exercice: Déployez votre Menu Server dans Cloud Run
 
 [source,bash]
 ----
@@ -208,7 +208,7 @@ gcloud run deploy <votre-dépôt> --image=europe-west9-docker.pkg.dev/voi-sdbx-e
 
 Mais le faire manuellement c'est pas du déploiement continu! Il faut le faire depuis GitHub action!
 
-== Exercice: Mise en Place du Déploiement Continu dans Cloud Run depuis votre Workflow
+== 🎓 Exercice: Mise en Place du Déploiement Continu dans Cloud Run depuis votre Workflow
 
 Changez votre workflow de CI pour que, sur un évènement de push de tag de version:
 
