@@ -52,9 +52,9 @@ image::menu-server-releases.png[]
 == Prérequis: Ordonnancement et exécution conditionnelle des jobs
 
 * Un workflow exécute en parallèle, par défaut, tous les jobs qui le composent
-* Il est possible de conditionner l’exécution d'un job à la terminaison d'un autre à l'aide du mot clé `needs` (link:https://docs.github.com/en/actions/learn-github-actions/workflow-syntax-for-github-actions#jobsjob_idneeds[documentation de `needs`])
+* Il est possible de conditionner l’exécution d'un job à la terminaison d'un autre à l'aide du mot clé `needs` (link:https://docs.github.com/en/actions/learn-github-actions/workflow-syntax-for-github-actions#jobsjob_idneeds[documentation de `needs`,window="_blank"])
 ** Exécution séquentielle au lieu de parallèle
-* Il est possible d’exécuter conditionnellement un job ou un step à l'aide du mot clé `if` (link:https://docs.github.com/en/actions/learn-github-actions/workflow-syntax-for-github-actions#jobsjob_idif[documentation de `if`])
+* Il est possible d’exécuter conditionnellement un job ou un step à l'aide du mot clé `if` (link:https://docs.github.com/en/actions/learn-github-actions/workflow-syntax-for-github-actions#jobsjob_idif[documentation de `if`,window="_blank"]])
 
 [source,yaml]
 ----
@@ -79,7 +79,7 @@ Changez votre workflow de CI de façon à ce que sur un push de tag, le CI effec
 
 On vous suggère d'utiliser la CLI `gh` fournie par GitHub:
 
-* link:https://cli.github.com/manual/gh_release_create[Documentation de `gh release create`]
+* link:https://cli.github.com/manual/gh_release_create[Documentation de `gh release create`,window="_blank"]
 * Astuce: pensez a bien utiliser l'option `--generate-notes`
 
 == Déploiement Continu
@@ -116,11 +116,11 @@ Source : http://blog.crisp.se/2013/02/05/yassalsundman/continuous-delivery-vs-co
 
 == Introduction à Google Cloud Run
 
-* Dans le cadre de ce cours nous allons utiliser link:https://cloud.google.com/run[Google Cloud  Run]
+* Dans le cadre de ce cours nous allons utiliser link:https://cloud.google.com/run[Google Cloud  Run,window="_blank"]
 ** Un Produit de Google Cloud Platform (GCP)
 * Cloud Run Permets d'exécuter des images de containers et de les exposer sur internet sans avoir a se soucier de l'infrastructure en dessous.
 * Ideal dans le cadre de notre projet!
-* Environment sponsorise par Voi pour le cours.
+* Environment sponsorise par https://www.voi.com/[Voi,window="_blank"] pour le cours.
 
 == Image de Container?
 
@@ -180,7 +180,7 @@ Les grandes étapes d'un déploiement dans Cloud Run
 
 == Exercice: Connectez vous a Google Cloud depuis votre Workspace
 
-Cela necessite un compte Google, si vous n'en avez pas vous pouvez en creer un link:https://accounts.google.com/signup[ici].
+Cela necessite un compte Google, si vous n'en avez pas vous pouvez en creer un link:https://accounts.google.com/signup[ici,window="_blank"].
 
 [source,bash]
 ----
@@ -221,4 +221,4 @@ Changez votre workflow de CI pour que, sur un évènement de push de tag de vers
 * Ce job effectue dans l'ordre:
 ** Télécharge l'artefact de l'étape `build`
 ** Checkout le depot (pour rapatrier le Dockerfile)
-** Appelle l'action link:https://github.com/cicd-lectures/cloudrun-release[Cloud Run Release] pour deployer automatiquement une nouvelle version de votre application.
+** Appelle l'action link:https://github.com/cicd-lectures/cloudrun-release[Cloud Run Release,window="_blank"] pour deployer automatiquement une nouvelle version de votre application.
