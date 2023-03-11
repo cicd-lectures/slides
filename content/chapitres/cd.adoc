@@ -113,18 +113,9 @@ Source : http://blog.crisp.se/2013/02/05/yassalsundman/continuous-delivery-vs-co
 
 * Dans le cadre de ce cours nous allons utiliser link:https://cloud.google.com/run[Google Cloud  Run,window="_blank"]
 ** Un Produit de Google Cloud Platform (GCP)
-* Cloud Run Permets d'exécuter des images de containers et de les exposer sur internet sans avoir a se soucier de l'infrastructure en dessous.
+* Cloud Run Permets d'exécuter des images de containers (🐳 wink wink) et de les exposer sur internet sans avoir a se soucier de l'infrastructure en dessous.
 * Ideal dans le cadre de notre projet!
 * Environment sponsorise par https://www.voi.com/[Voi,window="_blank"] pour le cours.
-
-== Image de Container?
-
-* Un container est:
-** Une instance d'une application empaquetée
-** Créé a partir d'une image (le disque d'installation de l'application)
-* Pour exécuter un conteneur, il nous faut une image et un moteur d'execution de conteneurs
-** Le plus connu est `Docker`!
-** Cloud Run execute aussi des images Docker!
 
 == Construire une Image de Container pour Cloud Run
 
