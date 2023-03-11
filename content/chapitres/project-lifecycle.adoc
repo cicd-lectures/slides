@@ -1,7 +1,7 @@
 [{invert}]
 = Cycle de vie de votre projet
 
-== Quel est le problème ?
+== 🤔 Quel est le problème ?
 
 On a du code. C'est un bon début. MAIS:
 
@@ -23,6 +23,44 @@ Comment fabriquer et tester de manière reproductible ?
 * Dimension technique: type de language, différents OS, différentes machines
 * Dimension temporelle: version de dépendances qui changent dans le temps
 * Dimension humaine: habitudes, connaissances, documentation (ou pas)
+
+== (Mauvais) Exemple
+
+Que pensez-vous de :
+
+[source,bash]
+----
+# Compilation
+javac ./src/main/cicdlectures/menuserver/Main.java.java \
+  ./src/main/cicdlectures/menuserver/ \
+  ./src/main/cicdlectures/menuserver/controller/ \
+  ./src/main/cicdlectures/menuserver/dto/ \
+  ./src/main/cicdlectures/menuserver/model/ \
+  ./src/main/cicdlectures/menuserver/repository/ \
+  ./src/main/cicdlectures/menuserver/service/ \
+  -d ./target
+
+# Exécution
+java -cp target/classes/com/cicdlectures/menuserver/ \
+  -cp target/classes/com/cicdlectures/menuserver/controller/ \
+  -cp target/classes/com/cicdlectures/menuserver/dto/ \
+  -cp target/classes/com/cicdlectures/menuserver/model/ \
+  -cp target/classes/com/cicdlectures/menuserver/repository/ \
+  -cp target/classes/com/cicdlectures/menuserver/service/ \
+MenuServerApplication
+----
+
+== !
+
+Résultat :
+
+[source]
+----
+Error: Could not find or load main class MenuServerApplication
+Caused by: java.lang.ClassNotFoundException: MenuServerApplication
+----
+
+image:angry-panda.gif[Loosing Patience]
 
 == Maven
 
@@ -363,31 +401,6 @@ Voilà ce que ça donne dans le fichier `pom.xml` :
 # 💡 Chercher tous les fichier dans le sous-dossier ./target/classes
 find ./target/classes -type f
 ----
-
-* Essayons d'exécuter notre programme avec la commande `java` :
-+
-[source,bash]
-----
-java -cp target/classes/com/cicdlectures/menuserver/ \
-  -cp target/classes/com/cicdlectures/menuserver/controller/ \
-  -cp target/classes/com/cicdlectures/menuserver/dto/ \
-  -cp target/classes/com/cicdlectures/menuserver/model/ \
-  -cp target/classes/com/cicdlectures/menuserver/repository/ \
-  -cp target/classes/com/cicdlectures/menuserver/service/ \
-MenuServerApplication
-----
-
-== !
-
-Résultat :
-
-[source]
-----
-Error: Could not find or load main class MenuServerApplication
-Caused by: java.lang.ClassNotFoundException: MenuServerApplication
-----
-
-image:angry-panda.gif[Loosing Patience]
 
 == Checkpoint 🎯
 
