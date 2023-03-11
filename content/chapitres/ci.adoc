@@ -278,11 +278,6 @@ image::wait-here.jpg[]
 
 == 🎓 Exercice : Optimiser avec les fonctionnalités du moteur de CI
 
-[quote]
---
-**Premature** optimization is the root of all evil
---
-
 * *But* : s'assurer que GitHub actions install et utilise `cowsay` le plus efficacement possible
 
 * C'est à vous de mettre à jour le workflow pour:
