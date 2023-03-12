@@ -143,15 +143,17 @@ CMD ["java","-jar","/opt/app/menu-server.jar", "--server.port=${PORT}"]
 # On repackage l'app
 mvn package
 
+IMAGE_NAME="cicdlectures/menu-server:test"
+
 # Construit une image docker portant le tag `cicdlectures/menu-server:test`
-docker image build --tag="cicdlectures/menu-server:test" ./
+docker image build --tag="${IMAGE_NAME}" ./
 
 # Lance un container basé sur l'image `cicdlectures/menu-server:test` sans specifier la variable d'environnement PORT
-docker container run --tty --interactive --rm --publish 8080:9090 cicdlectures/menu-server:test
+docker container run --tty --interactive --rm --publish 8080:9090 "${IMAGE_NAME}"
 # Badaboum attendu!
 
 # Lance un container basé sur l'image `cicdlectures/menu-server:test`
-docker container run --tty --interactive --rm --env PORT=9090 --publish 8080:9090 cicdlectures/menu-server:test
+docker container run --tty --interactive --rm --env PORT=9090 --publish 8080:9090 "${IMAGE_NAME}"
 
 # Vérifiez que vous pouvez faire des requêtes au menu-server....
 # Et Ctrl+C pour terminer l'exécution du container
@@ -173,25 +175,31 @@ Cela nécessite un compte Google, si vous n'en avez pas vous pouvez en créer un
 # Authentifie votre instance gitpod auprès de google cloud
 gcloud auth login
 
+# Paramétrise le projet
+GCP_PROJECT_NAME=voi-sdbx-ensg-2023
+GCP_REGISTRY=europe-west9-docker.pkg.dev
+
 # Indique a la CLI google cloud d'utiliser le projet partage pour le cours.
-gcloud config set project voi-sdbx-ensg-2023
+gcloud config set project "${GCP_PROJECT_NAME}"
 
 # Authentifie le démon docker de votre instance auprès de la registry Google Cloud.
-gcloud auth configure-docker europe-west9-docker.pkg.dev
+gcloud auth configure-docker "${GCP_REGISTRY}"
 ----
 
 == 🎓 Exercice: Déployez votre Menu Server dans Cloud Run
 
 [source,bash]
 ----
+GCP_IMAGE_NAME="${GCP_REGISTRY}/${GCP_PROJECT_NAME}/cicd-registry/<votre-binôme>/menu-server:test-cloudrun"
+
 # On renomme l'image avec le nom de la registry
-docker image tag cicdlectures/menu-server:test europe-west9-docker.pkg.dev/voi-sdbx-ensg-2023/<votre-binôme>/menu-server:test-cloudrun
+docker image tag "${IMAGE_NAME}" "${GCP_IMAGE_NAME}"
 
 # On publie l'image dans la registry google cloud
-docker image push europe-west9-docker.pkg.dev/voi-sdbx-ensg-2023/cicd-registry/<votre-binôme>/menu-server:test-cloudrun
+docker image push "${GCP_IMAGE_NAME}"
 
 # On déploie l'image publiée dans cloud run
-gcloud run deploy <votre-dépôt> --image=europe-west9-docker.pkg.dev/voi-sdbx-ensg-2023/cicd-registry/<votre-binôme>/menu-server:test-cloudrun --region=europe-west9
+gcloud run deploy <votre-dépôt> --image="${GCP_IMAGE_NAME}" --region=europe-west9
 ----
 
 [{invert}]
