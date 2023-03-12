@@ -165,9 +165,9 @@ include::../code-samples/gh-actions/npm-example.yml[]
 * *But* : nous allons créer notre premier workflow dans GitHub Actions
 
 * N'hésitez pas à utiliser la documentation de GitHub Actions:
-** https://docs.github.com/en/free-pro-team@latest/actions[Accueil,window=_blank]
-** https://docs.github.com/en/free-pro-team@latest/actions/quickstart[Quickstart,window=_blank]
-** https://docs.github.com/en/free-pro-team@latest/actions/reference[Référence,window=_blank]
+** https://docs.github.com/en/free-pro-team@latest/actions[Accueil,window="_blank"]
+** https://docs.github.com/en/free-pro-team@latest/actions/quickstart[Quickstart,window="_blank"]
+** https://docs.github.com/en/free-pro-team@latest/actions/reference[Référence,window="_blank"]
 
 * Retournez dans le dépôt créé précédemment dans votre environnement GitPod
 
@@ -284,17 +284,16 @@ image::wait-here.jpg[]
 ** Lire le contenu du fichier `README.md` dans un "output" (une variable temporaire de GitHub Actions)
 ** Passer le contenu (via l'output) à une version de cowsay gérée par GitHub Actions
 
-
 * 💡 Utilisez les GitHub Actions et documentations suivantes :
-** https://github.com/marketplace/actions/neo-cowsay[GitHub Action for cowsay]
-** https://github.com/marketplace/actions/file-reader[GitHub Action to read a file to an `output`]
-** https://docs.github.com/en/actions/learn-github-actions/contexts#steps-context[Documentation de `steps.outputs`]
+** https://github.com/marketplace/actions/neo-cowsay[GitHub Action pour cowsay,window="_blank"]
+** https://github.com/juliangruber/read-file-action[GitHub Action pour lire un fichier dans une variable `output`,window="_blank"]
+** https://docs.github.com/en/actions/learn-github-actions/contexts#steps-context[Documentation de `steps.outputs`,window="_blank"]
 
-== ✅ Solution : Fonctionnalités du moteur de CI
+== ✅ Solution : Optimiser avec les fonctionnalités du moteur de CI
 
 [source,yaml]
 ----
-include::../code-samples/gh-actions/say-hello-full.yml[tags="common,container,checkout,run-cowsay,maven-job"]
+include::../code-samples/gh-actions/say-hello-full.yml[tags="common,checkout,gha-cowsay"]
 ----
 
 == 🎓 Exercice : Intégration Continue du projet "menu-server"
@@ -304,10 +303,27 @@ include::../code-samples/gh-actions/say-hello-full.yml[tags="common,container,ch
 A chaque commit poussé sur votre dépôt GitHub, un workflow va :
 
 * Récupérer le code de l'application depuis GitHub
-* S'assurer que les *même* versions de Java et Maven sont installées
-** 💡 https://github.com/marketplace/actions/setup-maven-action
+* S'assurer d'utiliser les *même* versions de Java et Maven que dans Gitpod
+** 💡 `mvn -v`
+** 💡 https://github.com/marketplace/actions/setup-java-jdk[window="_blank"]
+** 💡 https://github.com/marketplace/actions/setup-maven[window="_blank"]
 * L'application est compilée
 * Le `jar` de l'application est fabriqué
 
 [.small]
 * Pensez à supprimer le workflow `bonjour.yaml`
+
+== ✅ Solution : Intégration Continue du projet "menu-server"
+
+[source,yaml]
+----
+include::../code-samples/gh-actions/menu-server.yml[tags="!pr"]
+----
+
+== 🎯 Checkpoint
+
+* Pour chaque commit poussé dans la branche `main` de Menu Server,
+* GitHub action vérifie que l'application est compilable et fabriquée,
+* Avec un feedback (notification GitHub).
+
+=> On peut modifier notre code avec plus de confiance !

@@ -32,15 +32,12 @@ jobs:
 # tag::run-cowsay[]
       - run: cat README.md | cowsay
 # end::run-cowsay[]
-# tag::maven-job[]
-  run_maven:
-    runs-on: ubuntu-22.04
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-java@v3
+# tag::gha-cowsay[]
+      - uses: juliangruber/read-file-action@v1
+        id: readfile
         with:
-          distribution: 'zulu'
-          java-version: '11content/code-samples'
-      - run: mvn -v
-      - run: mvn help:effective-pom
-# end::maven-job[]
+          path: ./README.md
+      - uses: Code-Hex/neo-cowsay-action@v1
+        with:
+          message: "${{ steps.readfile.outputs.content }}"
+# end::gha-cowsay[]

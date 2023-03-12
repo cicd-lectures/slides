@@ -1,0 +1,29 @@
+name: Menu Server CI
+on:
+  - push
+# tag::pr[]
+  - pull_request
+# end::pr[]
+jobs:
+  menu_server:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+      - name: Checkout Code
+        uses: actions/checkout@v3
+      - name: Setup JDK Zulu 17
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+      - name: Setup Maven 3.8.6
+        uses: stCarolas/setup-maven@v4.5
+        with:
+          maven-version: 3.8.6
+      - name: Check Maven tooling
+        run: mvn -v
+      - name: Build application
+        run: mvn compile
+      - name: Package application
+        run: mvn package
