@@ -64,13 +64,13 @@ image:gitmulti2.svg[]
 
 == !
 
-image:gitmulti3.svg[]
+image:gitmulti3.svg[width=500]
 
 Quand le travail est fini, la branche de travail est "mergée" dans staging
 
 == !
 
-image:gitmulti4.svg[]
+image:gitmulti4.svg[width=500]
 
 == Gestion des remotes
 
@@ -106,7 +106,7 @@ image:remotemulti1.svg[]
 
 == !
 
-image:remotemulti2.svg[]
+image:remotemulti2.svg[width=800]
 
 == Forks ! Forks everywhere !
 
@@ -117,7 +117,7 @@ Dans la terminologie GitHub:
 * Les branches de version (main, staging...) vivent sur le dépôt principal
 * La procédure de ramener un changement d'un fork à un dépôt principal s'appelle la Pull Request (PR)
 
-== Exercice: Créez un fork
+== 🎓 Exercice : Créez un fork
 
 * Nous allons vous faire forker vos dépôts respectifs
 * Trouvez vous un binôme dans le groupe.
@@ -131,7 +131,7 @@ image:fork.png[]
 
 A vous de jouer: Ajoutez la fonctionnalité "suppression d'un menu" au projet de votre binôme
 
-== Exercice: Contribuez au projet de votre binôme (1/5)
+== 🎓 Exercice : Contribuez au projet de votre binôme (1/5)
 
 Première étape: on clone le fork dans son environnement de développement
 
@@ -144,9 +144,10 @@ git clone <url_de_votre_fork>
 
 # Créez votre feature branch
 git switch --create implement-delete
+# Équivalent de git checkout -b <...>
 --
 
-== Exercice: Contribuez au projet de votre binôme (2/5)
+== 🎓 Exercice : Contribuez au projet de votre binôme (2/5)
 
 Maintenant voici la liste des choses à faire:
 
@@ -157,9 +158,9 @@ Maintenant voici la liste des choses à faire:
 ** Réponds 200 si la suppression est réussie
 * Bonus si vous arrivez à faire en sorte que le serveur réponde 404 si un menu à supprimer n'existe pas.
 
-Voici un link:https://spring.io/guides/tutorials/rest/#_http_is_the_platform[petit article bien utile] pour vous aider!
+Voici un link:https://spring.io/guides/tutorials/rest/#_http_is_the_platform[petit article bien utile,window="_blank"] pour vous aider!
 
-== Exercice: Contribuez au projet de votre binôme (3/5)
+== 🎓 Exercice : Contribuez au projet de votre binôme (3/5)
 
 Pour tester votre changement
 
@@ -181,11 +182,11 @@ curl -XDELETE localhost:8080/menus/4
 curl localhost:8080/menus
 --
 
-== Exercice: Contribuez au projet de votre binôme (4/5)
+== 🎓 Exercice : Contribuez au projet de votre binôme (4/5)
 
 Une fois que vous êtes satisfaits de votre changement il vous faut maintenant créer un commit et pousser votre nouvelle branche sur votre fork.
 
-== Exercice: Contribuez au projet de votre binôme (5/5)
+== 🎓 Exercice : Contribuez au projet de votre binôme (5/5)
 
 Dernière étape: ouvrir une pull request!
 
@@ -194,7 +195,7 @@ Dernière étape: ouvrir une pull request!
 * Cliquez ensuite sur le bouton ouvrir une pull request
 * Remplissez le contenu de votre PR (titre, description, labels) et validez.
 
-image:pr.png[]
+image:pr.png[width=500]
 
 == La procédure de Pull Request
 
@@ -219,9 +220,9 @@ image:pr.png[]
 * En tant que contributeur, **soyez respectueux** de vos relecteurs : votre changement peut être refusé et c'est quelque chose de normal.
 * En tant que relecteur, **soyez respectueux** du travail effectué, même si celui ci comporte des erreurs ou ne correspond pas à vos attentes.
 
-💡 Astuce: link:https://github.com/franckverrot/clamav-client/pull/12#discussion_r526222319[Proposez des solutions] plutôt que simplement pointer les problèmes.
+💡 Astuce: link:https://github.com/franckverrot/clamav-client/pull/12#discussion_r526222319[Proposez des solutions,window="_blank"] plutôt que simplement pointer les problèmes.
 
-== Exercice: Relisez votre PR reçue !
+== 🎓 Exercice : Relisez votre PR reçue !
 
 * Vous devriez avoir reçu une PR de votre binôme :-)
 * Relisez le changement de la PR
@@ -245,14 +246,14 @@ image:pr.png[]
 
 Ces "checks" peuvent êtres exécutés par votre moteur de CI ou des outils externes.
 
-== Exercice: Déclencher un Workflow de CI sur une PR
+== 🎓 Exercice : Déclencher un Workflow de CI sur une PR
 
 * Votre PR n'a pas déclenché le workflow de CI de votre binôme 🤔
 * Il faut changer la spec de votre workflow pour qu'il se déclenche aussi sur une PR
 * Vous pouvez changer la spec du workflow directement dans votre PR
-* La link:https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows[documentation] se trouve par ici
+* La link:https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows[documentation,window="_blank"] se trouve par ici
 
-== !
+== 🎯 Checkpoint
 
 *Règle d'or*: Si le CI est rouge, on ne merge pas la pull request !
 
