@@ -27,7 +27,7 @@
 [source,bash]
 --
 # Création du répertoire menu-server
-mkdir -p workspace/menu-server && cd workspace/menu-server
+mkdir -p /workspace/menu-server && cd /workspace/menu-server
 
 # Téléchargez le projet sur votre environnement de développement
 curl -sSLO https://cicd-lectures.github.io/slides/2023/media/menu-server.tar.gz
@@ -113,12 +113,12 @@ Le découpage est le suivant:
 ** Les scripts de lancement obsolètes et inutiles
 ** Un petit renommage du LISEZMOI.txt en README.md et un coup de nettoyage de son contenu
 
-== Solution Exercice
+== ✅ Solution Exercice
 
 [source,bash]
 --
 # On évacue le contenu inutile
-rm -rf dist/
+rm -rf dist/ menu-server.tar.gz
 rm executer.sh
 # On renomme LISEZMOI.txt en README.md
 mv LISEZMOI.txt README.md

@@ -90,7 +90,7 @@ L'execution de tests nécessite un outillage non ajouté au projet
 
 image::https://media.giphy.com/media/5x89XRx3sBZFC/giphy.gif[]
 
-== Exercice : Corriger un Bug (1/11)
+== 🎓 Exercice : Corriger un Bug (1/11)
 
 * La classe `ListMenuService` semble être "buggée"...
 ** Tous les noms des menus sont *TEST TODO* 😱
@@ -98,7 +98,7 @@ image::https://media.giphy.com/media/5x89XRx3sBZFC/giphy.gif[]
 * Même si la correction est aisée, on va d'abord écrire un test unitaire qui valide le comportement du service.
 * Notre SUT: `ListMenuService` + `DTO` + `Model`
 
-== Exercice : Corriger un Bug (2/11)
+== 🎓 Exercice : Corriger un Bug (2/11)
 
 Mise en place du test
 
@@ -123,21 +123,21 @@ public class ListMenuServiceTests {
 }
 --
 
-== Exercice : Corriger un Bug (3/11)
+== 🎓 Exercice : Corriger un Bug (3/11)
 
 * Super on à un test, il ne reste plus qu'à le lancer avec `mvn test` 🎉
 * Spoiler `java.lang.NullPointerException`
 
 image::https://media.giphy.com/media/ceHKRKMR6Ojao/giphy.gif[]
 
-== Exercice : Corriger un Bug (4/11)
+== 🎓 Exercice : Corriger un Bug (4/11)
 
 * Le `ListMenuService` à besoin d'un `MenuRepository` pour fonctionner.
 * Cependant :
 ** On ne veut pas valider le comportement du `MenuRepository`, il est en dehors de notre SUT.
 ** Pire, on ne veut pas se connecter à une base de donnée pendant un test unitaire.
 
-== Exercice : Corriger un Bug (5/11)
+== 🎓 Exercice : Corriger un Bug (5/11)
 
 Solution : On fournit une "fausse implémentation" au service, un mock.
 
@@ -156,7 +156,7 @@ public void init() {
 }
 ----
 
-== Exercice : Corriger un Bug (6/11)
+== 🎓 Exercice : Corriger un Bug (6/11)
 
 Ce "mock" peut être piloté dans les tests!
 
@@ -171,7 +171,7 @@ public void listsKnownMenus() {
 }
 ----
 
-== Exercice : Corriger un Bug (7/11)
+== 🎓 Exercice : Corriger un Bug (7/11)
 
 * Super on a un test unitaire, il ne reste plus qu'à le lancer avec `mvn test` 🎉
 * Spoiler: ✅
@@ -182,7 +182,7 @@ image::https://media.giphy.com/media/a0h7sAqON67nO/giphy.gif[]
 
 Sauf qu'on avait pas un bug à corriger au fait?
 
-== Exercice : Corriger un Bug (8/11)
+== 🎓 Exercice : Corriger un Bug (8/11)
 
 Objectif: Vérifier que les valeurs retournées par le `ListMenuService` sont cohérentes
 avec les données en base, pour cela il nous faut:
@@ -191,7 +191,7 @@ avec les données en base, pour cela il nous faut:
 * Appeler notre service
 * Comparer le résultat obtenu du service avec des valeurs attendues.
 
-== Exercice : Corriger un Bug (9/11)
+== 🎓 Exercice : Corriger un Bug (9/11)
 
 [source,java]
 ----
@@ -237,7 +237,7 @@ public void listsKnownMenus() {
 }
 ----
 
-== Exercice : Corriger un Bug (10/11)
+== 🎓 Exercice : Corriger un Bug (10/11)
 
 * Super on a un test unitaire (qui teste!), il ne reste plus qu'à le lancer avec `mvn test` 🎉
 * Spoiler:
@@ -254,7 +254,7 @@ but was:
 
 image::https://media.giphy.com/media/FG14fnY17opr2/giphy.gif[]
 
-== Exercice : Corriger un Bug (11/11)
+== 🎓 Exercice : Corriger un Bug (11/11)
 
 * Il ne reste plus qu'a faire la correction et le tour est joué!
 
@@ -300,7 +300,7 @@ video::ut-fail-2.mp4[width="600",options="autoplay,loop,nocontrols"]
 
 Tester des composants indépendamment ne prouve pas que le système fonctionne une fois intégré!
 
-== Solution: Tests d'intégration
+== ✅ Solution: Tests d'intégration
 
 * Test validant qu’un assemblage d’unités se comportent comme prévu.
 * Teste votre application au travers de toutes ses couches
@@ -498,20 +498,7 @@ public class MenuControllerIT {
 }
 ----
 
-== Checkpoint 🎯
-
-On a vu :
-
-* ❌ Les limites des tests unitaires
-* 🏭 Comment faire des tests d'intégration
-* 🤔 Tester n'est pas facile mais très utile
-
-[{invert}]
-= Encore plus d'intégration continue
-
-C'est quand même le sujet du cours :)
-
-== Exercice: Activez les tests dans votre CI
+== 🎓 Exercice: Activez les tests dans votre CI
 
 Changez le workflow de ci de votre binôme (ou le votre) pour qu'à chaque build:
 
@@ -519,3 +506,14 @@ Changez le workflow de ci de votre binôme (ou le votre) pour qu'à chaque build
 * Les tests d'integrations soient lancés
 
 💡 Pensez à bien regarder le cycle de vie des phases Maven
+
+// TODO: solution
+
+// Todo add a bullet
+== Checkpoint 🎯
+
+On a vu :
+
+* ❌ Les limites des tests unitaires
+* 🏭 Comment faire des tests d'intégration
+* 🤔 Tester n'est pas facile mais très utile

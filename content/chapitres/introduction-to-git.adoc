@@ -80,7 +80,7 @@ image::git-3-etats.png[width=300]
 [.small]
 Source : https://git-scm.com/book/fr/v2/D%C3%A9marrage-rapide-Rudiments-de-Git#_les_trois_%C3%A9tats
 
-== Exercice avec Git - 1.1
+== 🎓 Exercice :avec Git - 1.1
 
 * Dans le terminal de votre environnement GitPod:
 
@@ -100,7 +100,7 @@ cd /workspace/projet-vcs-1/
 ** Est-ce qu'il y a un dossier `.git/` ?
 ** Essayez la commande `git status` ?
 
-== Solution de l'exercice avec Git - 1.1
+== ✅ Solution : avec Git - 1.1
 
 
 [source,bash]
@@ -115,7 +115,7 @@ git status # Succès avec un message "On branch master No commits yet"
 --
 
 
-== Exercice avec Git - 1.2
+== 🎓 Exercice :avec Git - 1.2
 
 
 * Créez un fichier `README.md` dedans avec un titre et vos nom et prénoms
@@ -131,7 +131,7 @@ git status # Succès avec un message "On branch master No commits yet"
 
 ** Essayez la commande `git status` ?
 
-== Solution de l'exercice avec Git - 1.2
+== ✅ Solution : avec Git - 1.2
 
 [source,bash]
 --
@@ -172,7 +172,7 @@ image::scm-basics-legend.png[]
 
 image::scm-basics-history.png[]
 
-== Exercice avec Git - 2
+== 🎓 Exercice :avec Git - 2
 
 
 * Afficher la liste des commits
@@ -184,7 +184,7 @@ image::scm-basics-history.png[]
 * Annulez ce changement sur `README.md`
 
 
-== Solution de l'exercice avec Git - 2
+== ✅ Solution : avec Git - 2
 
 
 [source,bash]
@@ -212,7 +212,7 @@ git status
 
 image::scm-branches.png[caption="SCM branches"]
 
-== Exercice avec Git - 3
+== 🎓 Exercice :avec Git - 3
 
 * Créer une branche nommée `feature/html`
 
@@ -222,7 +222,7 @@ image::scm-branches.png[caption="SCM branches"]
 
 * Afficher le graphe correspondant à cette branche avec `git log --graph`
 
-== Solution de l'exercice avec Git - 3
+== ✅ Solution : avec Git - 3
 
 [source,bash]
 --
@@ -243,10 +243,9 @@ git lg # cat ~/.gitconfig => regardez la section section [alias], cette commande
 ** Quand l'historique de commit n'a pas diverge: git fait avancer la branche directement, c'est un *fast-forward*
 ** Dans le cas contraire, un nouveau commit est créé, fruit de la combinaison de 2 autres commits
 
+image::scm-merge.png[caption="SCM Merge",width=400]
 
-image::scm-merge.png[caption="SCM Merge"]
-
-== Exercice avec Git - 4
+== 🎓 Exercice :avec Git - 4
 
 * Merger la branche `feature/html` dans la branche principale
 ** ⚠️ Pensez à utiliser l'option `--no-ff` (no fast forward) pour forcer git a créer un commit de merge.
@@ -254,7 +253,7 @@ image::scm-merge.png[caption="SCM Merge"]
 * Afficher le graphe correspondant à cette branche avec `git log --graph`
 
 
-== Solution de l'exercice avec Git - 4
+== ✅ Solution : avec Git - 4
 
 [source,bash]
 
@@ -276,3 +275,12 @@ git log --graph
 ** https://github.com/steeve/france.code-civil
 ** https://github.com/steeve/france.code-civil/pull/40
 ** https://github.com/steeve/france.code-civil/commit/b805ecf05a86162d149d3d182e04074ecf72c066
+
+== 🎯 Checkpoint
+
+On a vu :
+
+* A quoi sert `git` et sa nomenclature de base (diff, changest, commit, branch)
+* A quoi reconnaître un dépôt initialisé local et l'espace de travail associé
+* Comment utiliser git localement (ajouter au staging, commiter)
+* l'historique et un merge avec git (localement)
