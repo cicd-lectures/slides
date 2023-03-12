@@ -377,7 +377,7 @@ Cela crée les commandes suivantes:
 
 Nous allons écrire un test d'intégration pour l'appel `GET /menus`
 
-== Exercice: Ecrire un test d'integration (1/4)
+== 🎓 Exercice : Ecrire un test d'integration (1/4)
 
 Mise en place d'un test vide
 
@@ -404,7 +404,7 @@ public class MenuControllerIT {
 }
 ----
 
-== Exercice: Ecrire un test d'integration (2/4)
+== 🎓 Exercice : Ecrire un test d'integration (2/4)
 
 Maintenant, on appelle le serveur et on verifie que l'appelle qu'il nous reponds une 200
 
@@ -434,7 +434,7 @@ public class MenuControllerIT {
 
 Bon, c'est bien sympa mais notre test n'est pas satisfaisant en l'etat. Il faut maintenat valider notre comportement pricipal: lister tous les menus connus
 
-== Exercice: Ecrire un test d'integration (3/4)
+== 🎓 Exercice : Ecrire un test d'integration (3/4)
 
 D'abord il faut provisionner des données en base.
 
@@ -462,7 +462,7 @@ public class MenuControllerIT {
 }
 ----
 
-== Exercice: Ecrire un test d'integration (4/4)
+== 🎓 Exercice : Ecrire un test d'integration (4/4)
 
 Il ne nous reste qu'a changer le corps du test pour verifier que le contenu de la reponse est celui auquel on s'attends.
 

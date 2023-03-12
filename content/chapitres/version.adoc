@@ -158,7 +158,7 @@ Retrait d'une fonctionnalité (retrait d'une route dans une API).
 * Utilisation de *tags* git pour définir des versions.
 * Un *tag* git est une référence sur un commit.
 
-== Exercice: Créez et "taggez" la version v0.0.1 de votre menu-server
+== 🎓 Exercice : Créez et "taggez" la version v0.0.1 de votre menu-server
 
 [source,bash]
 ----

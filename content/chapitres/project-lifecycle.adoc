@@ -150,14 +150,14 @@ mvn validate
 
 ❌ Il manque un fichier `pom.xml` !
 
-== 🎓 Exercice :Maven : fichier `pom.xml`
+== 🎓 Exercice Maven : fichier `pom.xml`
 
 * Commençons par créer un fichier `pom.xml` avec le contenu ci-dessous :
 +
 [source,xml]
 ----
-<!-- pom.xml -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <!-- Insert content here  -->
@@ -193,11 +193,10 @@ Maven identifie un projet avec les 3 éléments *obligatoires* suivants :
 
 [source,xml]
 ----
-<!-- pom.xml -->
-<groupId>com.mycompany</groupId>
-<artifactId>my-app</artifactId>
-<version>1.0</version>
-<!-- Exemple avec un paquet Java `com.mycompany.my-app` dans `src/main/java/com/mycompany/my-app` -->
+  <!-- Exemple avec un paquet Java `com.cicdlectures.menuserver` dans `src/main/java/com/cicdlectures/menuserver` -->
+  <groupId>com.cicdlectures</groupId>
+  <artifactId>menuserver</artifactId>
+  <version>1.0-SNAPSHOT</version>
 ----
 
 == 🎓 Exercice Maven : identifiez votre projet
@@ -411,6 +410,17 @@ Voilà ce que ça donne dans le fichier `pom.xml` :
 find ./target/classes -type f
 ----
 
+* Vous avez un état stable : pensez à `git` :
+** Dites à `git` d'ignorer le dossier `target/` (fichier `.gitignore`)
+** Ajoutez et commitez dans `git`
++
+[source,bash]
+----
+echo 'target/' >> .gitignore
+git add .gitignore pom.xml
+git commit -m "Ajout de la configuration pour compiler l'application"
+----
+
 == Checkpoint 🎯
 
 * C'est la galère pour trouver les bonnes dépendances 🤔
@@ -595,6 +605,10 @@ adaptez votre `pom.xml` afin que le fichier généré se nomme *toujours* `menu-
   <!-- ... <plugins> ... -->
 </build>
 ----
+
+== !
+
+💡 Pensez à ajouter / commiter quand c'est fonctionnel pour vous !
 
 == ✅ Solution: pom.xml final
 

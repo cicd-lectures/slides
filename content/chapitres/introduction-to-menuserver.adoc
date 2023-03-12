@@ -105,13 +105,16 @@ Le découpage est le suivant:
 - `repository`: Couche d'accès a la base de données
 - `model`: Représentation de votre modèle de donnée, configuration de l'ORM.
 
-== Exercice: Initialisez un dépôt git
+== 🎓 Exercice : Initialisez un dépôt git
 
 * Nettoyez le contenu superflu du projet et initialisez un dépôt git dans le répertoire, puis créez un premier commit
+
 * Par contenu superflu, nous entendons:
 ** Tout ce qui est potentiellement généré
 ** Les scripts de lancement obsolètes et inutiles
 ** Un petit renommage du LISEZMOI.txt en README.md et un coup de nettoyage de son contenu
+
+* 💡 Pour chaque "popup" de l'éditeur (en bas à droite), choisissez "Oui" ou "Reload"
 
 == ✅ Solution Exercice
 
@@ -134,3 +137,10 @@ git add .
 # On crée un nouveau commit
 git commit -m "Add initial menu-server project files"
 --
+
+== Checkpoint 🎯
+
+* Vous avez récupéré un projet Java qui semble fonctionner...
+** ..mais pas vraiment à l'état de l'art.
+
+* Application du chapitre précédent : vous avez initialisé un projet `git` local
