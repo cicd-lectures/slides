@@ -410,6 +410,17 @@ Voilà ce que ça donne dans le fichier `pom.xml` :
 find ./target/classes -type f
 ----
 
+* Vous avez un état stable : pensez à `git` :
+** Dites à `git` d'ignorer le dossier `target/` (fichier `.gitignore`)
+** Ajoutez et commitez dans `git`
++
+[source,bash]
+----
+echo 'target/' >> .gitignore
+git add .gitignore pom.xml
+git commit -m "Ajout de la configuration pour compiler l'application"
+----
+
 == Checkpoint 🎯
 
 * C'est la galère pour trouver les bonnes dépendances 🤔
@@ -594,6 +605,10 @@ adaptez votre `pom.xml` afin que le fichier généré se nomme *toujours* `menu-
   <!-- ... <plugins> ... -->
 </build>
 ----
+
+== !
+
+💡 Pensez à ajouter / commiter quand c'est fonctionnel pour vous !
 
 == ✅ Solution: pom.xml final
 
