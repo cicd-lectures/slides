@@ -55,6 +55,9 @@ include::./chapitres/multiplayer-git.adoc[leveloffset=1]
 // Chapitre Tests
 include::./chapitres/tests.adoc[leveloffset=1]
 
+// Chapitre Docker
+include::./chapitres/docker.adoc[leveloffset=1]
+
 // Chapitre Versions
 include::./chapitres/version.adoc[leveloffset=1]
 
