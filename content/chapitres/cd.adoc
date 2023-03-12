@@ -5,7 +5,7 @@
 
 Continuous Delivery (CD)
 
-== Pourquoi la Livraison Continue ?
+== 🤔 Pourquoi la Livraison Continue ?
 
 * Diminuer les risque liés au déploiement
 * Permettre de récolter des retours utilisateurs plus souvent
@@ -49,26 +49,21 @@ Une release GiHub est associée à un tag git et porte :
 
 image::menu-server-releases.png[]
 
-== Prérequis: Ordonnancement et exécution conditionnelle des jobs
+== Prérequis: exécution conditionnelle des jobs
 
-* Un workflow exécute en parallèle, par défaut, tous les jobs qui le composent
-* Il est possible de conditionner l’exécution d'un job à la terminaison d'un autre à l'aide du mot clé `needs` (link:https://docs.github.com/en/actions/learn-github-actions/workflow-syntax-for-github-actions#jobsjob_idneeds[documentation de `needs`])
-** Exécution séquentielle au lieu de parallèle
-* Il est possible d’exécuter conditionnellement un job ou un step à l'aide du mot clé `if` (link:https://docs.github.com/en/actions/learn-github-actions/workflow-syntax-for-github-actions#jobsjob_idif[documentation de `if`])
+Il est possible d’exécuter conditionnellement un job ou un step à l'aide du mot clé `if` (link:https://docs.github.com/en/actions/learn-github-actions/workflow-syntax-for-github-actions#jobsjob_idif[documentation de `if`,window="_blank"]])
 
 [source,yaml]
 ----
 jobs:
   release:
-    # Lance le job release si build et test se sont terminés normalement.
-    needs: [build, test]
     # Lance le job release uniquement si la branche est main.
     if: contains('refs/heads/main', github.ref)
     steps:
       # ...
 ----
 
-== Exercice: Créer une Release depuis le CI
+== 🎓 Exercice: Créer une Release depuis le CI
 
 Changez votre workflow de CI de façon à ce que sur un push de tag, le CI effectue les tâches suivantes dans un nouveau job:
 
@@ -79,14 +74,14 @@ Changez votre workflow de CI de façon à ce que sur un push de tag, le CI effec
 
 On vous suggère d'utiliser la CLI `gh` fournie par GitHub:
 
-* link:https://cli.github.com/manual/gh_release_create[Documentation de `gh release create`]
+* link:https://cli.github.com/manual/gh_release_create[Documentation de `gh release create`,window="_blank"]
 * Astuce: pensez a bien utiliser l'option `--generate-notes`
 
 == Déploiement Continu
 
 Continuous Deployment
 
-== Qu'est ce que le Déploiement Continu ?
+== 🤔 Qu'est ce que le Déploiement Continu ?
 
 * Version "avancée" de la livraison continue:
 ** Chaque changement *est* déployé en production, de manière *automatique*
@@ -116,20 +111,11 @@ Source : http://blog.crisp.se/2013/02/05/yassalsundman/continuous-delivery-vs-co
 
 == Introduction à Google Cloud Run
 
-* Dans le cadre de ce cours nous allons utiliser link:https://cloud.google.com/run[Google Cloud  Run]
+* Dans le cadre de ce cours nous allons utiliser link:https://cloud.google.com/run[Google Cloud  Run,window="_blank"]
 ** Un Produit de Google Cloud Platform (GCP)
-* Cloud Run Permets d'exécuter des images de containers et de les exposer sur internet sans avoir a se soucier de l'infrastructure en dessous.
+* Cloud Run Permets d'exécuter des images de containers (🐳 wink wink) et de les exposer sur internet sans avoir a se soucier de l'infrastructure en dessous.
 * Ideal dans le cadre de notre projet!
-* Environment sponsorise par Voi pour le cours.
-
-== Image de Container?
-
-* Un container est:
-** Une instance d'une application empaquetée
-** Créé a partir d'une image (le disque d'installation de l'application)
-* Pour exécuter un conteneur, il nous faut une image et un moteur d'execution de conteneurs
-** Le plus connu est `Docker`!
-** Cloud Run execute aussi des images Docker!
+* Environment sponsorise par https://www.voi.com/[Voi,window="_blank"] pour le cours.
 
 == Construire une Image de Container pour Cloud Run
 
@@ -144,11 +130,11 @@ FROM azul/zulu-openjdk:17
 COPY target/menu-server.jar /opt/app/menu-server.jar
 
 # Définis la commande par défaut du container à java -jar /opt/app/menu-server.jar  --server.port=${PORT}
-# La variable d'environnement PORT est définie par heroku à la création du container.
+# La variable d'environnement PORT est définie par Google Cloud Run à la création du container.
 CMD ["java","-jar","/opt/app/menu-server.jar", "--server.port=${PORT}"]
 ----
 
-== Exercice: Créez et Executez l'image dans votre Workspace
+== 🎓 Exercice: créez et exécutez l'image dans votre Workspace
 
 * Dans un terminal, lancez les commandes suivantes:
 
@@ -157,15 +143,15 @@ CMD ["java","-jar","/opt/app/menu-server.jar", "--server.port=${PORT}"]
 # On repackage l'app
 mvn package
 
-# Construit une image docker portant le tag  `cicdlectures/menu-server:test`
-docker build -t cicdlectures/menu-server:test .
+# Construit une image docker portant le tag `cicdlectures/menu-server:test`
+docker image build --tag="cicdlectures/menu-server:test" ./
 
 # Lance un container basé sur l'image `cicdlectures/menu-server:test` sans specifier la variable d'environnement PORT
-docker run -ti --rm -p 8080:9090 cicdlectures/menu-server:test
+docker container run --tty --interactive --rm --publish 8080:9090 cicdlectures/menu-server:test
 # Badaboum attendu!
 
 # Lance un container basé sur l'image `cicdlectures/menu-server:test`
-docker run -ti --rm -e PORT=9090 -p 8080:9090 cicdlectures/menu-server:test
+docker container run --tty --interactive --rm --env PORT=9090 --publish 8080:9090 cicdlectures/menu-server:test
 
 # Vérifiez que vous pouvez faire des requêtes au menu-server....
 # Et Ctrl+C pour terminer l'exécution du container
@@ -176,11 +162,11 @@ docker run -ti --rm -e PORT=9090 -p 8080:9090 cicdlectures/menu-server:test
 Les grandes étapes d'un déploiement dans Cloud Run
 
 1. On construit une image de container de l'application et la publie dans une registry d'images Google Cloud.
-2. On demande ensuite a Cloud Run d'instancier un nouveau container utilisant la nouvelle image publiee.
+2. On demande ensuite a Cloud Run d'instancier un nouveau container utilisant la nouvelle image publiée.
 
-== Exercice: Connectez vous a Google Cloud depuis votre Workspace
+== 🎓 Exercice: Connectez vous a Google Cloud depuis votre Workspace
 
-Cela necessite un compte Google, si vous n'en avez pas vous pouvez en creer un link:https://accounts.google.com/signup[ici].
+Cela nécessite un compte Google, si vous n'en avez pas vous pouvez en créer un link:https://accounts.google.com/signup[ici,window="_blank"].
 
 [source,bash]
 ----
@@ -194,31 +180,31 @@ gcloud config set project voi-sdbx-ensg-2023
 gcloud auth configure-docker europe-west9-docker.pkg.dev
 ----
 
-== Exercice: Déployez votre Menu Server dans Cloud Run
+== 🎓 Exercice: Déployez votre Menu Server dans Cloud Run
 
 [source,bash]
 ----
-# On renome l'image avec le nom de la registry
-docker tag cicdlectures/menu-server:test europe-west9-docker.pkg.dev/voi-sdbx-ensg-2023/<votre-binome>/menu-server:test-cloudrun
+# On renomme l'image avec le nom de la registry
+docker image tag cicdlectures/menu-server:test europe-west9-docker.pkg.dev/voi-sdbx-ensg-2023/<votre-binôme>/menu-server:test-cloudrun
 
 # On publie l'image dans la registry google cloud
-docker push europe-west9-docker.pkg.dev/voi-sdbx-ensg-2023/cicd-registry/<votre-binome>/menu-server:test-cloudrun
+docker image push europe-west9-docker.pkg.dev/voi-sdbx-ensg-2023/cicd-registry/<votre-binôme>/menu-server:test-cloudrun
 
-# On déploie l'image publiee dans cloud run
-gcloud run deploy <votre-depot> --image=europe-west9-docker.pkg.dev/voi-sdbx-ensg-2023/cicd-registry/<votre-binome>/menu-server:test-cloudrun --region=europe-west9
+# On déploie l'image publiée dans cloud run
+gcloud run deploy <votre-dépôt> --image=europe-west9-docker.pkg.dev/voi-sdbx-ensg-2023/cicd-registry/<votre-binôme>/menu-server:test-cloudrun --region=europe-west9
 ----
 
 [{invert}]
 == !
 
-Mais le faire manuellement c'est pas du deploiement continu! Il faut le faire depuis GitHub action!
+Mais le faire manuellement c'est pas du déploiement continu! Il faut le faire depuis GitHub action!
 
-== Exercice: Mise en Place du Déploiement Continu dans Cloud Run depuis votre Workflow
+== 🎓 Exercice: Mise en Place du Déploiement Continu dans Cloud Run depuis votre Workflow
 
 Changez votre workflow de CI pour que, sur un évènement de push de tag de version:
 
-* Une fois le build terminé un nouveau job `release-heroku` soit lancé
+* Une fois le build terminé un nouveau job `release-cloud-run` soit lancé
 * Ce job effectue dans l'ordre:
 ** Télécharge l'artefact de l'étape `build`
 ** Checkout le depot (pour rapatrier le Dockerfile)
-** Appelle l'action link:https://github.com/cicd-lectures/cloudrun-release[Cloud Run Release] pour deployer automatiquement une nouvelle version de votre application.
+** Appelle l'action link:https://github.com/cicd-lectures/cloudrun-release[Cloud Run Release,window="_blank"] pour deployer automatiquement une nouvelle version de votre application.
