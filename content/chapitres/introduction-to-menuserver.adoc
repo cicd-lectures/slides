@@ -105,7 +105,7 @@ Le découpage est le suivant:
 - `repository`: Couche d'accès a la base de données
 - `model`: Représentation de votre modèle de donnée, configuration de l'ORM.
 
-== Exercice: Initialisez un dépôt git
+== 🎓 Exercice : Initialisez un dépôt git
 
 * Nettoyez le contenu superflu du projet et initialisez un dépôt git dans le répertoire, puis créez un premier commit
 * Par contenu superflu, nous entendons:

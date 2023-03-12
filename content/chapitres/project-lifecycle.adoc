@@ -150,7 +150,7 @@ mvn validate
 
 ❌ Il manque un fichier `pom.xml` !
 
-== 🎓 Exercice :Maven : fichier `pom.xml`
+== 🎓 Exercice Maven : fichier `pom.xml`
 
 * Commençons par créer un fichier `pom.xml` avec le contenu ci-dessous :
 +
