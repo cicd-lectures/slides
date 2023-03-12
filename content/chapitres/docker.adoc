@@ -17,7 +17,7 @@ L'IT n'est pas la seule industrie à résoudre des problèmes...
 
 image::also-a-matrix-from-hell.png[]
 
-== Solution: Le conteneur intermodal
+== ✅ Solution: Le conteneur intermodal
 
 "Separation of Concerns"
 

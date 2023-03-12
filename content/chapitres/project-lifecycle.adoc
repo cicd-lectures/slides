@@ -31,15 +31,18 @@ Que pensez-vous de :
 [source,bash]
 ----
 # Compilation
-javac ./src/main/cicdlectures/menuserver/Main.java.java \
-  ./src/main/cicdlectures/menuserver/ \
-  ./src/main/cicdlectures/menuserver/controller/ \
-  ./src/main/cicdlectures/menuserver/dto/ \
-  ./src/main/cicdlectures/menuserver/model/ \
-  ./src/main/cicdlectures/menuserver/repository/ \
-  ./src/main/cicdlectures/menuserver/service/ \
-  -d ./target
+javac -d ./target \
+    ./src/main/java/com/cicdlectures/menuserver/MenuServerApplication.java \
+    ./src/main/java/com/cicdlectures/menuserver/*.java \
+    ./src/main/java/com/cicdlectures/menuserver/controller/*.java \
+    ./src/main/java/com/cicdlectures/menuserver/dto/*.java \
+    ./src/main/java/com/cicdlectures/menuserver/model/*.java \
+    ./src/main/java/com/cicdlectures/menuserver/repository/*.java \
+    ./src/main/java/com/cicdlectures/menuserver/service/*.java
+----
 
+[source,bash]
+----
 # Exécution
 java -cp target/classes/com/cicdlectures/menuserver/ \
   -cp target/classes/com/cicdlectures/menuserver/controller/ \
@@ -52,7 +55,13 @@ MenuServerApplication
 
 == !
 
-Résultat :
+Résultat(s) :
+
+[source]
+----
+./src/main/java/com/cicdlectures/menuserver/dto/DishDto.java:16: error: cannot find symbol
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
+----
 
 [source]
 ----
@@ -141,7 +150,7 @@ mvn validate
 
 ❌ Il manque un fichier `pom.xml` !
 
-== Exercice Maven : fichier `pom.xml`
+== 🎓 Exercice :Maven : fichier `pom.xml`
 
 * Commençons par créer un fichier `pom.xml` avec le contenu ci-dessous :
 +
@@ -587,7 +596,7 @@ adaptez votre `pom.xml` afin que le fichier généré se nomme *toujours* `menu-
 </build>
 ----
 
-== ✅ Solution: pom.xml final pour ce chapitre
+== ✅ Solution: pom.xml final
 
 [source,xml]
 ----
