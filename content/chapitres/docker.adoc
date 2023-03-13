@@ -85,13 +85,8 @@ CONTAINER ID   IMAGE         COMMAND    CREATED          STATUS                 
 
 == 🎓 Exercice : Cycle de vie d'un conteneur en tâche de fond
 
-* Lancez un nouveau conteneur :
-** Nommé `webserver-1`,
-** basé sur l'image `nginx`,
-** En tâche de fond
-
-[.small]
-💡 `docker container run --help` ou https://docs.docker.com/engine/reference/commandline/container_run/[Documentation en ligne,window="_blank"]
+* Lancez un nouveau conteneur en tâche de fond, nommé `webserver-1` et basé sur l'image `nginx`
+** 💡 `docker container run --help` ou https://docs.docker.com/engine/reference/commandline/container_run/[Documentation en ligne,window="_blank"]
 
 * Affichez les "logs" du conteneur (==traces d'exécution écrites sur le stdout + stderr de la commande conteneurisée)
 ** 💡 `docker container logs  --help` ou https://docs.docker.com/engine/reference/commandline/container_logs/[Documentation en ligne,window="_blank"]
@@ -128,7 +123,13 @@ ee5b70fa72c3   nginx     "/docker-entrypoint.…"   3 seconds ago   Up 2 seconds
 
 * ✅ Super, le port 80 (TCP) est annoncé (on parle d'"exposé")...
 * ❌ ... mais c'est sur une adresse IP privée
-** `docker container inspect --format='{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' webserver-1`
++
+[source,bash]
+----
+docker container inspect \
+  --format='{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' \
+  webserver-1
+----
 
 == 🎓 Exercice : Accéder au serveur web via un port publié
 
@@ -143,13 +144,16 @@ ee5b70fa72c3   nginx     "/docker-entrypoint.…"   3 seconds ago   Up 2 seconds
 [source,bash]
 ----
 docker container run --detach --name=webserver-public --publish 8080:80 nginx
-1c5020a818887b1eb4b14b7e75f490db97fac4172c96cc918df63c8c2a0fbaff
+# ... container ID ...
+
+docker container ls
+# Le port 8080 de 0.0.0.0 est mappé sur le 80 du conteneur
 
 curl http://localhost:8080
 # ...
 ----
 
-== 🤔 D'où viennent "hello-world" et "nginx" ?
+== 🤔 D'où vient "hello-world" ?
 
 * Docker Hub (https://hub.docker.com[window="_blank"]) : C'est le registre d'images "par défaut"
 ** Exemple : Image officielle de https://hub.docker.com/_/nginx["nginx"]
@@ -211,7 +215,7 @@ docker container run --rm --tty --interactive ubuntu:20.04 git --version
 
 * *But :* fabriquer une image Docker qui contient `git`
 
-* Dans votre workspace Gitpod, créez un dossier nommé `docker-git/`
+* Dans votre workspace Gitpod, créez un nouveau dossier `/workspace/docker-git/`
 * Dans ce dossier, créer un fichier `Dockerfile` avec le contenu ci-dessous :
 +
 [source,Dockerfile]
@@ -229,6 +233,8 @@ RUN apt-get update && apt-get install --yes --no-install-recommends git
 
 [source,bash]
 ----
+mkdir -p /workspace/docker-git/ && cd /workspace/docker-git/
+
 cat <<EOF >Dockerfile
 FROM ubuntu:20.04
 RUN apt-get update && apt-get install --yes --no-install-recommends git
