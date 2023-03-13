@@ -164,9 +164,9 @@ Retrait d'une fonctionnalité (retrait d'une route dans une API).
 ----
 
 # Créer un tag.
-git tag -a v1.4.3 -m "Release version v1.4.3"
+git tag -a v0.0.1 -m "Release version v0.0.1"
 
 
 # Publier un tag sur le remote origin.
-git push origin v1.4.3
+git push origin v0.0.1
 ----
