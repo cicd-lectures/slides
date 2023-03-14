@@ -25,6 +25,7 @@ On parle de **SUT**, System Under Test.
 * Test d'integration
 * Test de bout en bout
 * Smoke tests
+* Test de performance
 
 (La terminologie varie d'un développeur / langage / entreprise / écosystème à l'autre)
 
