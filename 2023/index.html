@@ -1163,6 +1163,8 @@ public class MenuControllerIT {
 public class MenuControllerIT {
   // ...
 
+  private RestTemplate template = new RestTemplate();
+
   @Test
   @DisplayName("lists all known menus")
   public void listsAllMenus() throws Exception {
