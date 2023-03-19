@@ -418,6 +418,8 @@ Maintenant, on appelle le serveur et on verifie que l'appelle qu'il nous reponds
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
 public class MenuControllerIT {
   // ...
+  
+  private RestTemplate template = new RestTemplate();
 
   @Test
   @DisplayName("lists all known menus")
