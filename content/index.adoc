@@ -49,6 +49,9 @@ include::./chapitres/saving-your-project.adoc[leveloffset=1]
 // Chapitre CI
 include::./chapitres/ci.adoc[leveloffset=1]
 
+// Chapitre OOP
+include::./chapitres/oop-refresher.adoc[leveloffset=1]
+
 // Chapitre Multiplayer Git
 include::./chapitres/multiplayer-git.adoc[leveloffset=1]
 
