@@ -893,13 +893,13 @@ jobs:
   test-linux:
     runs-on: ubuntu-22.04
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - run: npm install
     - run: npm test
   test-mac:
     runs-on: macos-12
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - run: npm install
     - run: npm test</code></pre></div></div></div></section><section id="essayons_github_actions"><h2>Essayons GitHub Actions</h2><div class="slide-content"><div class="ulist"><ul><li><p><strong>But</strong> : nous allons créer notre premier workflow dans GitHub Actions</p></li><li><p>N&#8217;hésitez pas à utiliser la documentation de GitHub Actions:</p><div class="ulist"><ul><li><p><a href="https://docs.github.com/en/free-pro-team@latest/actions" target="_blank">Accueil</a></p></li><li><p><a href="https://docs.github.com/en/free-pro-team@latest/actions/quickstart" target="_blank">Quickstart</a></p></li><li><p><a href="https://docs.github.com/en/free-pro-team@latest/actions/reference" target="_blank">Référence</a></p></li></ul></div></li><li><p>Retournez dans le dépôt créé précédemment dans votre environnement GitPod</p></li></ul></div></div></section><section id="exemple_simple_avec_github_actions"><h2>Exemple simple avec GitHub Actions</h2><div class="slide-content"><div class="ulist"><ul><li><p>Dans le projet "menu-server", sur la branch <code>main</code>,</p><div class="ulist"><ul><li><p>Créez le fichier <code>.github/workflows/bonjour.yml</code> avec le contenu suivant :</p></li></ul></div></li></ul></div>
 <div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-yaml hljs" data-noescape="true" data-lang="yaml">name: Bonjour
@@ -925,7 +925,7 @@ jobs:
   dire_bonjour:
     runs-on: ubuntu-22.04
     steps:
-      - uses: actions/checkout@v3 # Récupère le contenu du dépôt correspondant au commit du workflow en cours
+      - uses: actions/checkout@v4 # Récupère le contenu du dépôt correspondant au commit du workflow en cours
       - run: ls -l # Liste les fichier du répertoire courant
       - run: cat README.md # Affiche le contenu du fichier `README.md` à la base du dépôt</code></pre></div></div></div></section><section id="exemple_environnement_dexécution"><h2>Exemple : Environnement d&#8217;exécution</h2><div class="slide-content"><div class="ulist"><ul><li><p>Notre workflow doit s&#8217;assurer que "la vache" 🐮 doit nous lire 💬 le contenu du fichier <code>README.md</code></p><div class="ulist"><ul><li><p><a href="https://www.destroyallsoftware.com/talks/wat" target="_blank">WAT 🤪</a> ?</p></li></ul></div></li></ul></div>
 <div class="ulist"><ul><li><p>Essayez la commande <code>cat README.md | cowsay</code> dans GitPod</p><div class="ulist"><ul><li><p>Modifiez l&#8217;étape  du workflow pour faire la même chose dans GitHub Actions</p></li><li><p>SPOILER: ❌ (la commande <code>cowsay</code> n&#8217;est pas disponible dans le runner GitHub Actions)</p></li></ul></div></li></ul></div></div></section><section id="problème_environnement_dexécution"><h2>Problème : Environnement d&#8217;exécution</h2><div class="slide-content"><div class="ulist"><ul><li><p><strong>Problème</strong> : On souhaite utiliser les mêmes outils dans notre workflow ainsi que dans nos environnement de développement</p></li><li><p>Plusieurs solutions existent pour personnaliser l&#8217;outillage, chacune avec ses avantages / inconvénients :</p><div class="ulist"><ul><li><p>Personnaliser l&#8217;environnement dans votre workflow: (⚠️ sensible aux mises à jour, ✅ facile à mettre en place)</p></li><li><p>Spécifier un environnement préfabriqué pour le workflow (⚠️ complexe, ✅ portable)</p></li><li><p>Utiliser les fonctionnalités de votre outil de CI (⚠️ spécifique au moteur de CI, ✅ efficacité)</p></li></ul></div></li></ul></div></div></section><section id="exercice_personnalisation_dans_le_workflow"><h2>🎓 Exercice : Personnalisation dans le workflow</h2><div class="slide-content"><div class="ulist"><ul><li><p><strong>But</strong> : exécuter la commande <code>cat README.md | cowsay</code> dans le workflow comme dans GitPod</p></li><li><p>👷🏽‍♀️ C&#8217;est à vous de mettre à jour le workflow pour personnaliser l&#8217;environnement :</p><div class="ulist"><ul><li><p>💡 Cherchez comment installer <code>cowsay</code> dans le runner GitHub (<code>runs-on</code>, <a href="https://packages.ubuntu.com/search?keywords=cowsay">paquet <code>cowsay</code> dans Ubuntu 22.04</a>)</p></li></ul></div></li></ul></div></div></section><section id="solution_personnalisation_dans_le_workflow"><h2>✅ Solution : Personnalisation dans le workflow</h2><div class="slide-content"><div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-yaml hljs" data-noescape="true" data-lang="yaml">name: Bonjour
@@ -935,7 +935,7 @@ jobs:
   dire_bonjour:
     runs-on: ubuntu-22.04
     steps:
-      - uses: actions/checkout@v3 # Récupère le contenu du dépôt correspondant au commit du workflow en cours
+      - uses: actions/checkout@v4 # Récupère le contenu du dépôt correspondant au commit du workflow en cours
       - run: |
           sudo apt-get update
           sudo apt-get install -y cowsay
@@ -949,7 +949,7 @@ jobs:
       image: ghcr.io/cicd-lectures/gitpod:latest
       options: --user=root
     steps:
-      - uses: actions/checkout@v3 # Récupère le contenu du dépôt correspondant au commit du workflow en cours
+      - uses: actions/checkout@v4 # Récupère le contenu du dépôt correspondant au commit du workflow en cours
       - run: cat README.md | cowsay</code></pre></div></div></div></section><section id="checkpoint_8"><h2>Checkpoint 🎯</h2><div class="slide-content"><div class="ulist"><ul><li><p>Quel est l&#8217;impact en terme de temps d&#8217;exécution du changement précédent ?</p></li><li><p><strong>Problème :</strong> Le temps entre une modification et le retour est crucial</p></li></ul></div>
 <div class="imageblock"><img src="media/wait-here.jpg" alt="wait here"></div></div></section><section id="exercice_optimiser_avec_les_fonctionnalités_du_moteur_de_ci"><h2>🎓 Exercice : Optimiser avec les fonctionnalités du moteur de CI</h2><div class="slide-content"><div class="ulist"><ul><li><p><strong>But</strong> : s&#8217;assurer que GitHub actions install et utilise <code>cowsay</code> le plus efficacement possible</p></li><li><p>C&#8217;est à vous de mettre à jour le workflow pour:</p><div class="ulist"><ul><li><p>Lire le contenu du fichier <code>README.md</code> dans un "output" (une variable temporaire de GitHub Actions)</p></li><li><p>Passer le contenu (via l&#8217;output) à une version de cowsay gérée par GitHub Actions</p></li></ul></div></li><li><p>💡 Utilisez les GitHub Actions et documentations suivantes :</p><div class="ulist"><ul><li><p><a href="https://github.com/marketplace/actions/neo-cowsay" target="_blank">GitHub Action pour cowsay</a></p></li><li><p><a href="https://github.com/juliangruber/read-file-action" target="_blank">GitHub Action pour lire un fichier dans une variable <code>output</code></a></p></li><li><p><a href="https://docs.github.com/en/actions/learn-github-actions/contexts#steps-context" target="_blank">Documentation de <code>steps.outputs</code></a></p></li></ul></div></li></ul></div></div></section><section id="solution_optimiser_avec_les_fonctionnalités_du_moteur_de_ci"><h2>✅ Solution : Optimiser avec les fonctionnalités du moteur de CI</h2><div class="slide-content"><div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-yaml hljs" data-noescape="true" data-lang="yaml">name: Bonjour
 on:
@@ -958,7 +958,7 @@ jobs:
   dire_bonjour:
     runs-on: ubuntu-22.04
     steps:
-      - uses: actions/checkout@v3 # Récupère le contenu du dépôt correspondant au commit du workflow en cours
+      - uses: actions/checkout@v4 # Récupère le contenu du dépôt correspondant au commit du workflow en cours
       - uses: juliangruber/read-file-action@v1
         id: readfile
         with:
@@ -976,16 +976,14 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v3
-      - name: Checkout Code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Setup JDK Zulu 17
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v4
         with:
           distribution: 'zulu'
           java-version: '17'
       - name: Setup Maven 3.9.0
-        uses: stCarolas/setup-maven@v4.5
+        uses: stCarolas/setup-maven@v5
         with:
           maven-version: 3.9.0
       - name: Check Maven tooling
