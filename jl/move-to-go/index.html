@@ -477,7 +477,10 @@ Poster du contenu sera vers l&#8217;API.</p></div></div></section><section id="e
 <section><section id="le_langage_go" data-background-color="rgb(248, 228, 130)" data-state="invert"><h2>Le Langage Go</h2><div class="slide-content"><div class="imageblock"><img src="media/go.jpeg" alt="go" width="1024"></div></div></section><section id="quest_ce_que_go"><h2>Qu&#8217;est ce que Go?</h2><div class="slide-content"><div class="ulist"><ul><li><p>🧱 Langage fortement typé</p></li><li><p>💻 Compilé</p></li><li><p>© Syntaxe proche du C</p></li><li><p>☁️ Gestion de la mémoire automatisée</p></li><li><p>🔄 Conçu pour le traitement concurrent</p></li></ul></div></div></section><section id="go_propulse_jean_cloud"><h2>Go Propulse Jean Cloud!</h2><div class="slide-content"><div class="ulist"><ul><li><p>Issu de Google.</p></li><li><p>Première version publique en 2009</p></li><li><p>v1.0 en 2012 &#8230;&#8203; et rétrocompatible depuis!</p></li><li><p>Utilisé dans de nombreux projets!</p><div class="ulist"><ul><li><p>Docker, Kubernetes, Terraform, Prometheus, Grafana&#8230;&#8203;</p></li></ul></div></li></ul></div></div></section><section id="exercice_un_premier_programme_en_go"><h2>🎓 Exercice: Un Premier Programme en Go</h2><div class="slide-content"><div class="ulist"><ul><li><p>Dans le répertoire <code>workspace</code> créez un repertoire <code>helloworld</code></p></li><li><p>Dans ce répertoire, créez un fichier <code>main.go</code> et copiez le code ci-dessous.</p></li></ul></div>
 <div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-go hljs" data-noescape="true" data-lang="go">package main
 
-import "fmt"
+import (
+	"errors"
+	"fmt"
+)
 
 func main() {
 	fmt.Println("Hello ENSG!")
@@ -491,22 +494,28 @@ go build ./main.go
 <div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-bash hljs" data-noescape="true" data-lang="bash">$ go run ./main.go
 Hello ENSG!</code></pre></div></div></div></section><section id="anatomie_dun_fichier_go_12"><h2>Anatomie d&#8217;un Fichier go (1/2)</h2><div class="slide-content"><div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-go hljs" data-noescape="true" data-lang="go">package main
 
-import "fmt"
+import (
+	"errors"
+	"fmt"
+)
 
 func main() {
 	fmt.Println("Hello ENSG!")
 }</code></pre></div></div></div></section><section id="anatomie_dun_fichier_go_22"><h2>Anatomie d&#8217;un Fichier go (2/2)</h2><div class="slide-content"><div class="ulist"><ul><li><p><code>func</code>: Declare une fonction <code>main</code>:</p><div class="ulist"><ul><li><p>Cette fonction appelle la fonction <code>Println</code> du package <code>fmt</code></p></li><li><p>En passant la chaine de caractères "Hello ENSG!"</p></li></ul></div></li><li><p><code>package</code>: declare que ce fichier fait partie du package <code>main</code>.</p></li><li><p><code>import</code>: importe le package <code>fmt</code> dans le fichier</p></li></ul></div></div></section><section id="packages_imports_12"><h2>Packages &amp; Imports (1/2)</h2><div class="slide-content"><div class="ulist"><ul><li><p>Un package est un groupe logique de symboles (variables, constantes, types et fonction)</p><div class="ulist"><ul><li><p>Ex: <code>net/http</code>, <code>os</code></p></li></ul></div></li><li><p>Un package est importé par un autre package.</p></li><li><p>Un package est représenté par un répertoire.</p></li><li><p>Tous les fichiers presents dans le repertoire doivent declarer le meme package</p></li><li><p><strong>Convention</strong>: Le nom du package déclaré est le même que celui du répertoire</p><div class="ulist"><ul><li><p>&#8230;&#8203; Mais ce n&#8217;est pas le cas de notre programme?</p></li></ul></div></li></ul></div></div></section><section id="le_package_spécial_main"><h2>Le Package Spécial <code>main</code></h2><div class="slide-content"><div class="ulist"><ul><li><p>ℹ️ Ce package est le <code>point d&#8217;entrée</code> du programme.</p></li><li><p>La fonction <code>main</code> du package <code>main</code> est la première fonction appellée lors de l&#8217;exécution.</p></li></ul></div></div></section><section id="variables_12"><h2>Variables (1/2)</h2><div class="slide-content"><div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-go hljs" data-noescape="true" data-lang="go">package main
 
-import "fmt"
+import (
+	"errors"
+	"fmt"
+)
 
 func main() {
 	// Declare une variable de type string et assigne à la valeur par defaut du type.
 	// "" pour string.
 	var message string
-	// Assigne la valueur "Hello ENSG!" a la variable message.
+	// Assigne (copie) la valeur "Hello ENSG!" a la variable message.
 	message = "Hello ENSG!"
 
-	// Est équivalent a.
+	// Est équivalent a:
 	var message string = "Hello ENSG!"
 
 	// Est encore équivalent a... avec une syntaxe compacte.
@@ -518,7 +527,10 @@ func main() {
 }</code></pre></div></div></div></section><section id="variables_22"><h2>Variables (2/2)</h2><div class="slide-content"><div class="paragraph"><p>⚠️ Go est un langage fortement typé ⚠️</p></div>
 <div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-go hljs" data-noescape="true" data-lang="go">package main
 
-import "fmt"
+import (
+	"errors"
+	"fmt"
+)
 
 func main() {
 	// Déclare et initialise une variable message de type string.
@@ -530,9 +542,48 @@ func main() {
 	// ❌ Ne compile pas!
 	// message: cannot use age (variable of type int) as string value in assignment.
 	message = age
+}</code></pre></div></div></div></section><section id="types_scalaires"><h2>Types Scalaires</h2><div class="slide-content"><div class="ulist"><ul><li><p>Numeriques: <code>int</code>, <code>intX</code>, <code>uint</code>, <code>uintX</code>, <code>float32</code>, <code>float64</code></p></li><li><p>Booléen: <code>bool</code></p></li><li><p>Chaine de caractères UTF-8: <code>string</code></p></li><li><p>Autres: <code>byte</code> (octet), <code>rune</code> (caractère UTF-8)</p></li></ul></div></div></section><section id="fonctions12"><h2>Fonctions(1/2)</h2><div class="slide-content"><div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-go hljs" data-noescape="true" data-lang="go">// Un fonction qui accepte une string et ne retourne rien.
+func sayHello(message string) {
+	fmt.Println("Hello:", message)
+}
+
+// Une fonction qui accepte deux entiers et qui retourne un float64 et une erreur.
+func divide(numerator, denominator int) (float64, error) {
+	if denominator == 0 {
+		return 0, errors.New("can't divide by 0")
+	}
+
+	return numerator / denominator, nil
+}
+
+// Une fonction qui accepte une chaine de caractères
+// ... et qui retourne une fonction qui n'accepte aucun argument
+// mais qui retourne une chaine de caractères.
+func messWithFuncs(name string) func() string {
+	// Les fonctions peuvent etre manipulées comme des valeurs!
+	fn := func() string {
+		return "Hello " + name
+	}
+
+	return fn
+}</code></pre></div></div></div></section><section id="fonctions22"><h2>Fonctions(2/2)</h2><div class="slide-content"><div class="ulist"><ul><li><p>Les arguments de fonction en go sont en passage par valeur</p></li><li><p>Cela signifie que les valeurs des arguments sont copiés en mémoire au moment de l&#8217;appel de la fonction</p></li></ul></div>
+<div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-go hljs" data-noescape="true" data-lang="go">func sayHello() {
+	name := "John"
+
+	addGreeting(name)
+
+	// Affiche "John" et non "Hello John"
+	fmt.Println(name)
+}
+
+func addGreeting(name string) {
+	name = "Hello " + name
 }</code></pre></div></div></div></section><section id="pointeurs"><h2>Pointeurs</h2><div class="slide-content"><div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-go hljs" data-noescape="true" data-lang="go">package main
 
-import "fmt"
+import (
+	"errors"
+	"fmt"
+)
 
 func main() {
 	// On déclare et initialise une variable.
@@ -543,7 +594,7 @@ func main() {
 
 	// TODO deref.
 	var pointerToMessage *string = &amp;message
-}</code></pre></div></div></div></section><section id="types_scalaires"><h2>Types Scalaires</h2><div class="slide-content"><div class="ulist"><ul><li><p>Numeriques: <code>int</code>, <code>intX</code>, <code>uint</code>, <code>uintX</code>, <code>float32</code>, <code>float64</code></p></li><li><p>Booléen: <code>bool</code></p></li><li><p>Chaine de caractères UTF-8: <code>string</code></p></li><li><p>Autres: <code>byte</code> (octet), <code>rune</code> (caractère UTF-8)</p></li></ul></div></div></section><section id="controles_de_flot_en_go"><h2>Controles de flot en go</h2><div class="slide-content"><div class="ulist"><ul><li><p>Il y en a quatre, if, for, switch et select les detailler (sauf select)</p></li><li><p>Parler de range pour les collections.</p></li></ul></div></div></section><section id="typage"><h2>Typage</h2><div class="slide-content"><div class="ulist"><ul><li><p>Go est un langage fortement type</p></li><li><p>On distingue deux grandes familles</p></li><li><p>types concrets</p></li><li><p>types abstraits</p></li></ul></div></div></section><section id="type_concrets_basiques"><h2>Type concrets basiques</h2><div class="slide-content"><div class="ulist"><ul><li><p>int, string, bool, byte, rune</p></li><li><p>valeurs par defaut</p></li><li><p>Fonctions:</p><div class="ulist"><ul><li><p>pass by value</p></li><li><p>defer!</p></li></ul></div></li><li><p>Reference types (pointers, slices, maps, channels)</p></li></ul></div>
+}</code></pre></div></div></div></section><section id="controles_de_flot_en_go"><h2>Controles de flot en go</h2><div class="slide-content"><div class="ulist"><ul><li><p>Il y en a quatre, if, for, switch et select les detailler (sauf select)</p></li><li><p>Parler de range pour les collections.</p></li></ul></div></div></section><section id="ooofo"><h2>ooofo</h2><div class="slide-content"><div class="ulist"><ul><li><p>Fonctions:</p><div class="ulist"><ul><li><p>pass by value</p></li><li><p>defer!</p></li></ul></div></li><li><p>Reference types (pointers, slices, maps, channels)</p></li></ul></div>
 <div class="paragraph"><p>Exercice: Ecrire une fonction qui incremente un entier passe par pointeur, 10 fois.</p></div></div></section><section id="collections"><h2>Collections</h2><div class="slide-content"><div class="ulist"><ul><li><p>array, map et slices, parler de leur manipulation des slices.</p></li></ul></div></div></section><section id="structures"><h2>Structures</h2><div class="slide-content"><div class="ulist"><ul><li><p>Structures: collection d&#8217;attributs. Parler de comment les instancier, les initaliser, faire le parallele avec les constructeurs.</p></li></ul></div></div></section><section id="definir_des_types"><h2>Definir des types</h2><div class="slide-content"><div class="ulist"><ul><li><p>Definir des nouveaux types</p></li><li><p>Attacher des methodes aux types</p></li><li><p>struct + methodes attachees == classes</p></li></ul></div></div></section><section id="types_abstraits"><h2>Types abstraits</h2><div class="slide-content"><div class="ulist"><ul><li><p>Interfaces, Polymorphisme,</p></li><li><p>Une interface doit decrire un comportement d&#8217;un type</p></li><li><p>Pourquoi ecrire des interfaces?</p></li><li><p>Permettre des points d&#8217;interception, cacher la complexite</p></li><li><p>Exemple io.Reader, io.Writer, fichiers et sockets.</p></li><li><p>C&#8217;est la meme d&#8217;un point de vue utilisateur.</p></li></ul></div></div></section><section id="packages_and_modules"><h2>Packages and Modules</h2><div class="slide-content"><div class="ulist"><ul><li><p>Tout symbole go vit dans un package</p></li><li><p>Visibilite des symboles (Public Prive)</p></li><li><p>Imports</p></li><li><p>Librairies standard vs librairie externe.</p></li><li><p>Modules (mais pas gestion de dependence tout de suite)</p></li></ul></div></div></section><section id="gestion_derreur"><h2>Gestion d&#8217;erreur</h2><div class="slide-content"><div class="ulist"><ul><li><p>Type error</p></li><li><p>Pas d&#8217;exceptions, gestion des erreurs comme des valeurs</p></li><li><p>(if err != nil)</p></li><li><p>Panic == (RuntimeException en java) == aaah je sais plus comment m&#8217;executer.</p></li></ul></div></div></section><section id="tooling"><h2>Tooling</h2><div class="slide-content"><div class="ulist"><ul><li><p>Formatage du code automatique,</p></li><li><p>implemente par un outil, au moins tout le monde est d&#8217;accord.</p></li></ul></div></div></section><section id="exemples_concrets"><h2>Exemples concrets</h2><div class="slide-content"><div class="ulist"><ul><li><p>Decoder du JSON</p></li><li><p>Faire une requete HTTP.</p></li></ul></div></div></section><section id="exercice_2"><h2>Exercice:</h2><div class="slide-content"><div class="paragraph"><p>Ecrire un programme qui fait une requete http vers une API en JSON, definir un type structure decoder le payload et affiche un resultat.</p></div>
 <div class="paragraph"><p><a href="https://swapi.dev/" class="bare">https://swapi.dev/</a> par exemple, on leur fait chercher le diametre de Tatooine en indiquant que tatooine c&#8217;est ID 1</p></div>
 <div class="paragraph"><p>Si ils sont chaud on leur fait chercher la cargo capacity de la death star, sans leur donner l&#8217;ID du coup ils vont devoir fait un appel a index</p></div></div></section><section id="references"><h2>References</h2><div class="slide-content"><div class="ulist"><ul><li><p><a href="https://www.youtube.com/watch?v=xi8732QO33Y" class="bare">https://www.youtube.com/watch?v=xi8732QO33Y</a></p></li><li><p><a href="https://go-proverbs.github.io/" class="bare">https://go-proverbs.github.io/</a></p></li><li><p><a href="https://go.dev/doc/effective_go" class="bare">https://go.dev/doc/effective_go</a></p></li><li><p><a href="https://go.dev/doc/" class="bare">https://go.dev/doc/</a></p></li></ul></div></div></section></section>
