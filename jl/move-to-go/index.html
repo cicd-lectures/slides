@@ -566,7 +566,57 @@ func main() {
 	// ❌ Ne compile pas!
 	// message: cannot use age (variable of type int) as string value in assignment.
 	message = age
-}</code></pre></div></div></div></section><section id="types_scalaires"><h2>Types Scalaires</h2><div class="slide-content"><div class="ulist"><ul><li><p>Numeriques: <code>int</code>, <code>intX</code>, <code>uint</code>, <code>uintX</code>, <code>float32</code>, <code>float64</code></p></li><li><p>Booléen: <code>bool</code></p></li><li><p>Chaine de caractères UTF-8: <code>string</code></p></li><li><p>Autres: <code>byte</code> (octet), <code>rune</code> (caractère UTF-8)</p></li></ul></div></div></section><section id="fonctions13"><h2>Fonctions(1/3)</h2><div class="slide-content"><div class="ulist"><ul><li><p>Une fonction est un groupement logique d&#8217;instructions</p></li><li><p>Accepte entre 0 et N arguments</p></li><li><p>🎉 Retourne entre 0 et N résultats 🎉</p></li></ul></div>
+}</code></pre></div></div></div></section><section id="types_scalaires"><h2>Types Scalaires</h2><div class="slide-content"><div class="ulist"><ul><li><p>Numeriques: <code>int</code>, <code>intX</code>, <code>uint</code>, <code>uintX</code>, <code>float32</code>, <code>float64</code></p></li><li><p>Booléen: <code>bool</code></p></li><li><p>Chaine de caractères UTF-8: <code>string</code></p></li><li><p>Autres: <code>byte</code> (octet), <code>rune</code> (caractère UTF-8)</p></li></ul></div></div></section><section id="controle_de_flot"><h2>Controle de flot</h2></section><section id="controle_de_flot_if_12"><h2>Controle de flot: if (1/2)</h2><div class="slide-content"><div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-go hljs" data-noescape="true" data-lang="go">func main() {
+	// if / else classique.
+	ok := doSomething()
+	if ok {
+		fmt.Println("C'est OK!")
+	} else {
+		fmt.Println("C'est pas OK!")
+	}
+}
+
+func doSomething() bool {
+	return true
+}</code></pre></div></div></div></section><section id="controle_de_flot_if_22"><h2>Controle de flot: if (2/2)</h2><div class="slide-content"><div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-go hljs" data-noescape="true" data-lang="go">func main() {
+	// if / else avec short statement.
+	// avantage: ok n'exsite que dans le scope du if.
+	if ok := doSomething(); ok {
+		fmt.Println("C'est OK!")
+	} else {
+		fmt.Println("C'est pas OK!")
+	}
+
+	// Ne compile pas: ok n'est pas défini.
+	ok = true
+}
+
+func doSomething() bool {
+	return true
+}</code></pre></div></div></div></section><section id="controle_de_flot_switch"><h2>Controle de flot: switch</h2><div class="slide-content"><div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-go hljs" data-noescape="true" data-lang="go">func main() {
+	// switch
+	age := readAge()
+	switch age {
+	case 10:
+		fmt.Println("Hello 10")
+	case 42:
+		fmt.Println("Hello 42")
+	default:
+		fmt.Prinln("Hello darkness my old friend")
+	}
+}
+
+func readAge() int {
+	return 42
+}</code></pre></div></div></div></section><section id="controle_de_flot_boucle_for"><h2>Controle de flot: boucle for</h2><div class="slide-content"><div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-go hljs" data-noescape="true" data-lang="go">func sum0to9() {
+	var total int
+
+	for i := 0; i &lt; 10; i++ {
+		total += i
+	}
+
+	fmt.Println("Total", total)
+}</code></pre></div></div></div></section><section id="fonctions14"><h2>Fonctions(1/4)</h2><div class="slide-content"><div class="ulist"><ul><li><p>Une fonction est un groupement logique d&#8217;instructions</p></li><li><p>Accepte entre 0 et N arguments</p></li><li><p>🎉 Retourne entre 0 et N résultats 🎉</p></li></ul></div>
 <div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-go hljs" data-noescape="true" data-lang="go">// Un fonction qui accepte une string et ne retourne rien.
 func sayHello(message string) {
 	fmt.Println("Hello:", message)
@@ -579,7 +629,7 @@ func divide(numerator, denominator int) (float64, error) {
 	}
 
 	return numerator / denominator, nil
-}</code></pre></div></div></div></section><section id="fonctions23"><h2>Fonctions(2/3)</h2><div class="slide-content"><div class="ulist"><ul><li><p>Les fonctions peuvent être manipulées comme des valeurs!</p></li></ul></div>
+}</code></pre></div></div></div></section><section id="fonctions24"><h2>Fonctions(2/4)</h2><div class="slide-content"><div class="ulist"><ul><li><p>Les fonctions peuvent être manipulées comme des valeurs!</p></li></ul></div>
 <div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-go hljs" data-noescape="true" data-lang="go">// Une fonction qui accepte une chaine de caractères
 // ... et qui retourne une fonction qui n'accepte aucun argument
 // mais qui retourne une chaine de caractères.
@@ -590,7 +640,23 @@ func messWithFuncs(name string) func() string {
 	}
 
 	return fn
-}</code></pre></div></div></div></section><section id="fonctions33"><h2>Fonctions(3/3)</h2><div class="slide-content"><div class="ulist"><ul><li><p>Les arguments de fonctions sont passés par valeur.</p></li><li><p>Cela signifie que les valeurs des arguments sont copiés lors de l&#8217;appel</p></li></ul></div>
+}</code></pre></div></div></div></section><section id="fonctions34"><h2>Fonctions(3/4)</h2><div class="slide-content"><div class="ulist"><ul><li><p>Go permets de "reporter" l&#8217;exécution d&#8217;une fonction quand une fonction parente se termine</p></li><li><p>Pratique pour garantir qu&#8217;une resource soit libérée quoi qu&#8217;il se passe lors de l&#8217;exécution de la fonction.</p><div class="ulist"><ul><li><p>Similaire aux "destructeurs" en C++</p></li></ul></div></li></ul></div>
+<div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-go hljs" data-noescape="true" data-lang="go">func faireDeLaPolitique() {
+	rendreLargent := func() {
+		fmt.Println("Argent rendu")
+	}
+
+	// Quoi qu'il advienne, l'argent sera rendu.
+	// Peu importe le résultat des élections.
+	defer rendreLargent()
+
+	if elu := elections(); elu {
+		fmt.Println("Je suis élu")
+		return
+	}
+
+	fmt.Printn("Je ne suis pas élu :(")
+}</code></pre></div></div></div></section><section id="fonctions44"><h2>Fonctions(4/4)</h2><div class="slide-content"><div class="ulist"><ul><li><p>Les arguments de fonctions sont passés par valeur.</p></li><li><p>Cela signifie que les valeurs des arguments sont copiés lors de l&#8217;appel</p></li></ul></div>
 <div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-go hljs" data-noescape="true" data-lang="go">func main() {
 	name := "John"
 
@@ -680,57 +746,7 @@ func addGreeting(namePtr *string) {
 	// la valeur de la variable référencée par namePtr.
 	*namePtr = "Hello " + *namePtr
 }</code></pre></div></div>
-<div class="ulist"><ul><li><p><strong>Bonus</strong>: est-ce qu&#8217;il y a eu une copie ici?</p></li></ul></div></div></section><section id="controle_de_flot_if_12"><h2>Controle de flot: if (1/2)</h2><div class="slide-content"><div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-go hljs" data-noescape="true" data-lang="go">func main() {
-	// if / else classique.
-	ok := doSomething()
-	if ok {
-		fmt.Println("C'est OK!")
-	} else {
-		fmt.Println("C'est pas OK!")
-	}
-}
-
-func doSomething() bool {
-	return true
-}</code></pre></div></div></div></section><section id="controle_de_flot_if_22"><h2>Controle de flot: if (2/2)</h2><div class="slide-content"><div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-go hljs" data-noescape="true" data-lang="go">func main() {
-	// if / else avec short statement.
-	// avantage: ok n'exsite que dans le scope du if.
-	if ok := doSomething(); ok {
-		fmt.Println("C'est OK!")
-	} else {
-		fmt.Println("C'est pas OK!")
-	}
-
-	// Ne compile pas: ok n'est pas défini.
-	ok = true
-}
-
-func doSomething() bool {
-	return true
-}</code></pre></div></div></div></section><section id="controle_de_flot_switch"><h2>Controle de flot: switch</h2><div class="slide-content"><div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-go hljs" data-noescape="true" data-lang="go">func main() {
-	// switch
-	age := readAge()
-	switch age {
-	case 10:
-		fmt.Println("Hello 10")
-	case 42:
-		fmt.Println("Hello 42")
-	default:
-		fmt.Prinln("Hello darkness my old friend")
-	}
-}
-
-func readAge() int {
-	return 42
-}</code></pre></div></div></div></section><section id="controle_de_flot_boucle_for"><h2>Controle de flot: boucle for</h2><div class="slide-content"><div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-go hljs" data-noescape="true" data-lang="go">func sum0to9() {
-	var total int
-
-	for i := 0; i &lt; 10; i++ {
-		total += i
-	}
-
-	fmt.Println("Total", total)
-}</code></pre></div></div></div></section><section id="collections_arrays"><h2>Collections: Arrays</h2><div class="slide-content"><div class="ulist"><ul><li><p>Un tableau de taille fixe de N elements.</p></li><li><p>⚠️  La taille du tableau fait partie de son type</p><div class="ulist"><ul><li><p><strong>Limite</strong>: ne peut pas être changée une fois le tableau instancié.</p></li></ul></div></li></ul></div>
+<div class="ulist"><ul><li><p><strong>Bonus</strong>: est-ce qu&#8217;il y a eu une copie ici?</p></li></ul></div></div></section><section id="collections"><h2>Collections</h2></section><section id="collections_arrays"><h2>Collections: Arrays</h2><div class="slide-content"><div class="ulist"><ul><li><p>Un tableau de taille fixe de N elements.</p></li><li><p>⚠️  La taille du tableau fait partie de son type</p><div class="ulist"><ul><li><p><strong>Limite</strong>: ne peut pas être changée une fois le tableau instancié.</p></li></ul></div></li></ul></div>
 <div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-go hljs" data-noescape="true" data-lang="go">func main() {
 	// Declare et initialise un tableau de 2 strings.
 	var intArray [2]string
@@ -831,7 +847,65 @@ func toStringSlice(input []int) []string {
 
 	return result
 }</code></pre></div></div>
-<div class="paragraph"><p><strong>Bonus</strong>: Une autre implémententation est possible avec <code>append</code>, mais celle présentée est plus rapide&#8230;&#8203; pourquoi?</p></div></div></section><section id="collections_maps"><h2>Collections: maps</h2></section><section id="todo"><h2>TODO</h2><div class="slide-content"><div class="ulist"><ul><li><p>defer!</p></li></ul></div></div></section><section id="structures"><h2>Structures</h2><div class="slide-content"><div class="ulist"><ul><li><p>Structures: collection d&#8217;attributs. Parler de comment les instancier, les initaliser, faire le parallele avec les constructeurs.</p></li></ul></div></div></section><section id="definir_des_types"><h2>Definir des types</h2><div class="slide-content"><div class="ulist"><ul><li><p>Definir des nouveaux types</p></li><li><p>Attacher des methodes aux types</p></li><li><p>struct + methodes attachees == classes</p></li></ul></div></div></section><section id="types_abstraits"><h2>Types abstraits</h2><div class="slide-content"><div class="ulist"><ul><li><p>Interfaces, Polymorphisme,</p></li><li><p>Une interface doit decrire un comportement d&#8217;un type</p></li><li><p>Pourquoi ecrire des interfaces?</p></li><li><p>Permettre des points d&#8217;interception, cacher la complexite</p></li><li><p>Exemple io.Reader, io.Writer, fichiers et sockets.</p></li><li><p>C&#8217;est la meme d&#8217;un point de vue utilisateur.</p></li></ul></div></div></section><section id="nomage_de_variables"><h2>Nomage de variables</h2><div class="slide-content"><div class="ulist"><ul><li><p><strong>Convention</strong>: La longueur du nom d&#8217;une variable est proportionnele a sa durée de vie.</p><div class="ulist"><ul><li><p>Cela améliore grandement la visibilité</p></li></ul></div></li><li><p>Certaines exceptions:</p><div class="ulist"><ul><li><p><code>err</code> for errors</p></li><li><p><code>ctx</code> for any instance of a <code>context.Context</code></p></li><li><p>methods receivers: one/two letters (ie <code>*Store</code> &#8658;  <code>st</code>)</p></li></ul></div></li></ul></div></div></section><section id="packages_and_modules"><h2>Packages and Modules</h2><div class="slide-content"><div class="ulist"><ul><li><p>Tout symbole go vit dans un package</p></li><li><p>Visibilite des symboles (Public Prive)</p></li><li><p>Imports</p></li><li><p>Librairies standard vs librairie externe.</p></li><li><p>Modules (mais pas gestion de dependence tout de suite)</p></li></ul></div></div></section><section id="gestion_derreur"><h2>Gestion d&#8217;erreur</h2><div class="slide-content"><div class="ulist"><ul><li><p>Type error</p></li><li><p>Pas d&#8217;exceptions, gestion des erreurs comme des valeurs</p></li><li><p>(if err != nil)</p></li><li><p>Panic == (RuntimeException en java) == aaah je sais plus comment m&#8217;executer.</p></li></ul></div></div></section><section id="tooling"><h2>Tooling</h2><div class="slide-content"><div class="ulist"><ul><li><p>Formatage du code automatique,</p></li><li><p>implemente par un outil, au moins tout le monde est d&#8217;accord.</p></li></ul></div></div></section><section id="exemples_concrets"><h2>Exemples concrets</h2><div class="slide-content"><div class="ulist"><ul><li><p>Decoder du JSON</p></li><li><p>Faire une requete HTTP.</p></li></ul></div></div></section><section id="exercice_2"><h2>Exercice:</h2><div class="slide-content"><div class="paragraph"><p>Ecrire un programme qui fait une requete http vers une API en JSON, definir un type structure decoder le payload et affiche un resultat.</p></div>
+<div class="paragraph"><p><strong>Bonus</strong>: Une autre implémentation est possible avec <code>append</code>, mais celle présentée est plus rapide&#8230;&#8203; pourquoi?</p></div></div></section><section id="collections_maps_13"><h2>Collections: maps (1/3)</h2><div class="slide-content"><div class="ulist"><ul><li><p>Tableau associatif clé-valeur</p></li><li><p>Initialisée de façon littérale, ou avec <code>make</code></p></li><li><p>On récupère sa taille avec <code>len</code></p></li><li><p>Type référence, comme les pointeurs out les slices</p><div class="ulist"><ul><li><p>Une map peut être nil, <code>len</code> retournera 0.</p></li></ul></div></li></ul></div></div></section><section id="collections_maps_23"><h2>Collections: maps (2/3)</h2><div class="slide-content"><div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-go hljs" data-noescape="true" data-lang="go">func main() {
+	// Déclaration et initialisation d'une map de façon littérale.
+	mapAges := map[string]int{
+		"Julien": 35,
+		"Damien": 35,
+	}
+
+	// Déclaration et initialisation d'une map de taille 2.
+	mapVilles := make(map[string]string, 2)
+	// Ecritures des valeurs dans la map.
+	mapVilles["Julien"] = "Lyon"
+	mapVilles["Damien"] = "St-Etienne"
+
+	var nilMap map[int]int
+	nilMap[21] = 42 // Arrête d'exécution, écriture dans une map qui n'existe pas.
+
+	// Affiche 2, 2 et 0.
+	fmt.Println(len(mapAges), len(mapVilles), len(nilMap))
+}</code></pre></div></div></div></section><section id="collections_maps_33"><h2>Collections: maps (3/3)</h2><div class="slide-content"><div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-go hljs" data-noescape="true" data-lang="go">func main() {
+	// Déclaration et initialisation d'une map de façon littérale.
+	mapAges := map[string]int{
+		"Julien": 35,
+		"Damien": 35,
+	}
+
+	// Lecture sans vérification.
+	// Si la clé existe, retourne la valeur associée.
+	// Si la clé n'existe pas, retoure la valeur par défaut du type de la valeur.
+	ageJulien := mapAges["Julien"]
+
+	fmt.Println("Age de Julien", ageJulien)
+
+	// Lecture avec vérification.
+	// Si la clé existe, la valeur sera retournée, et ok sera a true
+	// Si la clé n'existe pas, ok sera false.
+	ageMichel, ok := mapAges["Michel"]
+	if !ok {
+		fmt.Println("Pas d'age pour Michel")
+	} else {
+		fmt.Println("Age de Michel", ageMichel)
+	}
+}</code></pre></div></div></div></section><section id="parcourir_une_map"><h2>Parcourir une map</h2><div class="slide-content"><div class="ulist"><ul><li><p><code>range</code> supporte aussi les maps dans une boucle for</p></li><li><p>Assigne la clé et la valeur courante</p></li><li><p>⚠️ L&#8217;ordre de parcours n&#8217;est pas déterministe! Il ne faut pas en dépendre!</p></li></ul></div>
+<div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-go hljs" data-noescape="true" data-lang="go">func main() {
+	mapAges := map[string]int{
+		"Julien": 35,
+		"Damien": 35,
+	}
+
+	// Affiche soit:
+	// Julien a 35 ans
+	// Damien a 35 ans
+	// OU
+	// Damien a 35 ans
+	// Julien a 35 ans
+	for name, age := range mapAges {
+		fmt.Printf("%s a %d ans\n", name, age)
+	}
+
+}</code></pre></div></div></div></section><section id="structures"><h2>Structures</h2><div class="slide-content"><div class="ulist"><ul><li><p>Structures: collection d&#8217;attributs. Parler de comment les instancier, les initaliser, faire le parallele avec les constructeurs.</p></li></ul></div></div></section><section id="definir_des_types"><h2>Definir des types</h2><div class="slide-content"><div class="ulist"><ul><li><p>Definir des nouveaux types</p></li><li><p>Attacher des methodes aux types</p></li><li><p>struct + methodes attachees == classes</p></li></ul></div></div></section><section id="types_abstraits"><h2>Types abstraits</h2><div class="slide-content"><div class="ulist"><ul><li><p>Interfaces, Polymorphisme,</p></li><li><p>Une interface doit decrire un comportement d&#8217;un type</p></li><li><p>Pourquoi ecrire des interfaces?</p></li><li><p>Permettre des points d&#8217;interception, cacher la complexite</p></li><li><p>Exemple io.Reader, io.Writer, fichiers et sockets.</p></li><li><p>C&#8217;est la meme d&#8217;un point de vue utilisateur.</p></li></ul></div></div></section><section id="nomage_de_variables"><h2>Nomage de variables</h2><div class="slide-content"><div class="ulist"><ul><li><p><strong>Convention</strong>: La longueur du nom d&#8217;une variable est proportionnele a sa durée de vie.</p><div class="ulist"><ul><li><p>Cela améliore grandement la visibilité</p></li></ul></div></li><li><p>Certaines exceptions:</p><div class="ulist"><ul><li><p><code>err</code> for errors</p></li><li><p><code>ctx</code> for any instance of a <code>context.Context</code></p></li><li><p>methods receivers: one/two letters (ie <code>*Store</code> &#8658;  <code>st</code>)</p></li></ul></div></li></ul></div></div></section><section id="packages_and_modules"><h2>Packages and Modules</h2><div class="slide-content"><div class="ulist"><ul><li><p>Tout symbole go vit dans un package</p></li><li><p>Visibilite des symboles (Public Prive)</p></li><li><p>Imports</p></li><li><p>Librairies standard vs librairie externe.</p></li><li><p>Modules (mais pas gestion de dependence tout de suite)</p></li></ul></div></div></section><section id="gestion_derreur"><h2>Gestion d&#8217;erreur</h2><div class="slide-content"><div class="ulist"><ul><li><p>Type error</p></li><li><p>Pas d&#8217;exceptions, gestion des erreurs comme des valeurs</p></li><li><p>(if err != nil)</p></li><li><p>Panic == (RuntimeException en java) == aaah je sais plus comment m&#8217;executer.</p></li></ul></div></div></section><section id="tooling"><h2>Tooling</h2><div class="slide-content"><div class="ulist"><ul><li><p>Formatage du code automatique,</p></li><li><p>implemente par un outil, au moins tout le monde est d&#8217;accord.</p></li></ul></div></div></section><section id="exemples_concrets"><h2>Exemples concrets</h2><div class="slide-content"><div class="ulist"><ul><li><p>Decoder du JSON</p></li><li><p>Faire une requete HTTP.</p></li></ul></div></div></section><section id="exercice_2"><h2>Exercice:</h2><div class="slide-content"><div class="paragraph"><p>Ecrire un programme qui fait une requete http vers une API en JSON, definir un type structure decoder le payload et affiche un resultat.</p></div>
 <div class="paragraph"><p><a href="https://swapi.dev/" class="bare">https://swapi.dev/</a> par exemple, on leur fait chercher le diametre de Tatooine en indiquant que tatooine c&#8217;est ID 1</p></div>
 <div class="paragraph"><p>Si ils sont chaud on leur fait chercher la cargo capacity de la death star, sans leur donner l&#8217;ID du coup ils vont devoir fait un appel a index</p></div></div></section><section id="réferences"><h2>Réferences</h2><div class="slide-content"><div class="ulist"><ul><li><p><a href="https://www.youtube.com/watch?v=xi8732QO33Y" class="bare">https://www.youtube.com/watch?v=xi8732QO33Y</a></p></li><li><p><a href="https://go.dev/tour/" class="bare">https://go.dev/tour/</a></p></li><li><p><a href="https://gobyexample.com/" class="bare">https://gobyexample.com/</a></p></li><li><p><a href="https://go.dev/doc/effective_go" class="bare">https://go.dev/doc/effective_go</a></p></li><li><p><a href="https://go.dev/doc/" class="bare">https://go.dev/doc/</a></p></li><li><p><a href="https://go-proverbs.github.io/" class="bare">https://go-proverbs.github.io/</a></p></li><li><p><a href="https://go.dev/play/" class="bare">https://go.dev/play/</a></p></li></ul></div></div></section></section>
 <section><section id="les_fondamentaux_de_git" data-background-color="rgb(248, 228, 130)" data-state="invert"><h2>Les fondamentaux de git</h2></section><section id="tracer_le_changement_dans_le_code"><h2>Tracer le changement dans le code</h2><div class="slide-content"><div class="paragraph"><p>avec un <strong>VCS</strong> : 🇬🇧 Version Control System</p></div>
