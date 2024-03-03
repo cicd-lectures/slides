@@ -474,12 +474,13 @@ $ ./monscript.sh
 <section><section id="comment_fonctionnent_les_internets" data-background-color="rgb(248, 228, 130)" data-state="invert"><h2>Comment fonctionnent les Internets?</h2></section><section><div class="slide-content"><div class="paragraph"><p>Que se passe t&#8217;il quand je tape google.com dans mon navigateur et que j&#8217;appuie sur entree?</p></div></div></section><section><div class="slide-content"><div class="olist arabic"><ol class="arabic"><li><p>Resolution DNS</p></li><li><p>Connection TCP (eventuellement TLS)</p></li><li><p>Envoi d&#8217;une requette HTTP</p></li><li><p>Reception d&#8217;une reponse</p></li><li><p>Rendu de la page.</p></li></ol></div></div></section><section id="zoom_sur_http"><h2>Zoom sur HTTP</h2><div class="slide-content"><div class="paragraph"><p>Faire l&#8217;anatomie d&#8217;une requette / reponse HTTP, Verbes, Headers, Body, Status code etc&#8230;&#8203;</p></div>
 <div class="paragraph"><p>Expliquer que le but c&#8217;est de normaliser un format d&#8217;echange de donnees.</p></div></div></section><section id="comment_parler_http_depuis_le_terminal"><h2>Comment parler HTTP depuis le terminal?</h2><div class="slide-content"><div class="paragraph"><p>Presentation de curl. donner des exemples pratiques pour utilser <code>-v</code>, <code>-L</code>, <code>--data</code>, <code>-X</code>.
 Poster du contenu sera vers l&#8217;API.</p></div></div></section><section id="exercice"><h2>Exercice</h2><div class="slide-content"><div class="paragraph"><p>Les faire curler voi.com, les faire observer toutes les etapes de la requete, la 301 upgrade vers https avec -v et -o /dev/null</p></div></div></section></section>
-<section><section id="le_langage_go" data-background-color="rgb(248, 228, 130)" data-state="invert"><h2>Le Langage Go</h2><div class="slide-content"><div class="imageblock"><img src="media/go.jpeg" alt="go" width="1024"></div></div></section><section id="quest_ce_que_go"><h2>Qu&#8217;est ce que Go?</h2><div class="slide-content"><div class="ulist"><ul><li><p>🧱 Langage fortement typé</p></li><li><p>💻 Compilé</p></li><li><p>© Syntaxe proche du C</p></li><li><p>☁️ Gestion de la mémoire automatisée</p></li><li><p>🔄 Conçu pour le traitement concurrent</p></li></ul></div></div></section><section id="go_propulse_jean_cloud"><h2>Go Propulse Jean Cloud!</h2><div class="slide-content"><div class="ulist"><ul><li><p>Issu de Google.</p></li><li><p>Première version publique en 2009</p></li><li><p>v1.0 en 2012 &#8230;&#8203; et rétrocompatible depuis!</p></li><li><p>Utilisé dans de nombreux projets!</p><div class="ulist"><ul><li><p>Docker, Kubernetes, Terraform, Prometheus, Grafana&#8230;&#8203;</p></li></ul></div></li></ul></div></div></section><section id="exercice_un_premier_programme_en_go"><h2>🎓 Exercice: Un Premier Programme en Go</h2><div class="slide-content"><div class="ulist"><ul><li><p>Dans le répertoire <code>workspace</code> créez un repertoire <code>helloworld</code></p></li><li><p>Dans ce répertoire, créez un fichier <code>main.go</code> et copiez le code ci-dessous.</p></li></ul></div>
+<section><section id="le_langage_go" data-background-color="rgb(248, 228, 130)" data-state="invert"><h2>Le Langage Go</h2><div class="slide-content"><div class="imageblock"><img src="media/go.jpeg" alt="go" width="1024"></div></div></section><section id="quest_ce_que_go"><h2>Qu&#8217;est ce que Go?</h2><div class="slide-content"><div class="ulist"><ul><li><p>🧱 Langage fortement typé</p></li><li><p>💻 Compilé</p></li><li><p>© Syntaxe proche du C</p></li><li><p>☁️ Gestion de la mémoire automatisée</p></li><li><p>🔄 Conçu pour le traitement concurrent</p></li></ul></div></div></section><section id="go_propulse_le_cloud"><h2>Go Propulse Le Cloud!</h2><div class="slide-content"><div class="ulist"><ul><li><p>Issu de Googl.</p></li><li><p>Première version publique en 2009</p></li><li><p>v1.0 en 2012 &#8230;&#8203; et rétrocompatible depuis!</p></li><li><p>Utilisé dans de nombreux projets!</p><div class="ulist"><ul><li><p>Docker, Kubernetes, Terraform, Prometheus, Grafana&#8230;&#8203;</p></li></ul></div></li></ul></div></div></section><section id="exercice_un_premier_programme_en_go"><h2>🎓 Exercice: Un Premier Programme en Go</h2><div class="slide-content"><div class="ulist"><ul><li><p>Dans le répertoire <code>workspace</code> créez un repertoire <code>helloworld</code></p></li><li><p>Dans ce répertoire, créez un fichier <code>main.go</code> et copiez le code ci-dessous.</p></li></ul></div>
 <div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-go hljs" data-noescape="true" data-lang="go">package main
 
 import (
 	"errors"
 	"fmt"
+	"strconv"
 )
 
 func main() {
@@ -497,6 +498,7 @@ Hello ENSG!</code></pre></div></div></div></section><section id="anatomie_dun_fi
 import (
 	"errors"
 	"fmt"
+	"strconv"
 )
 
 func main() {
@@ -507,6 +509,7 @@ func main() {
 import (
 	"errors"
 	"fmt"
+	"strconv"
 )
 
 func main() {
@@ -550,6 +553,7 @@ func readAge() int64 {
 import (
 	"errors"
 	"fmt"
+	"strconv"
 )
 
 func main() {
@@ -604,6 +608,7 @@ func addGreeting(name string) {
 import (
 	"errors"
 	"fmt"
+	"strconv"
 )
 
 func main() {
@@ -623,6 +628,7 @@ func main() {
 import (
 	"errors"
 	"fmt"
+	"strconv"
 )
 
 func main() {
@@ -637,10 +643,11 @@ func main() {
 import (
 	"errors"
 	"fmt"
+	"strconv"
 )
 
 func main() {
-	// Le `= nil` est optionel ici.
+	// Le `= nil` est optionel ici: la valeur par défaut d'un pointeur est nil.
 	var nilPointer *string = nil
 
 	fmt.Println("address is:", nilPointer)
@@ -724,7 +731,7 @@ func readAge() int {
 
 	fmt.Println("Total", total)
 }</code></pre></div></div></div></section><section id="collections_arrays"><h2>Collections: Arrays</h2><div class="slide-content"><div class="ulist"><ul><li><p>Un tableau de taille fixe de N elements.</p></li><li><p>⚠️  La taille du tableau fait partie de son type</p><div class="ulist"><ul><li><p><strong>Limite</strong>: ne peut pas être changée une fois le tableau instancié.</p></li></ul></div></li></ul></div>
-<div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-go hljs" data-noescape="true" data-lang="go">func doSomething() {
+<div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-go hljs" data-noescape="true" data-lang="go">func main() {
 	// Declare et initialise un tableau de 2 strings.
 	var intArray [2]string
 	// On peut assigner un élément du tableau en utilisant son index.
@@ -738,8 +745,8 @@ func readAge() int {
 	// On assigne un tableau de 4 entrées a un tableau de deux entrées
 	intArray = anotherArray
 }</code></pre></div></div>
-<div class="paragraph"><p>👉 On évite en général de les utiliser directement, sauf bonne raison.</p></div></div></section><section id="collections_slices_13"><h2>Collections: Slices (1/3)</h2><div class="slide-content"><div class="paragraph"><p>Une <code>slice</code> est une référence sur un sous ensemble d&#8217;entrées dans un tableau</p></div>
-<div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-go hljs" data-noescape="true" data-lang="go">func doSomething() {
+<div class="paragraph"><p>👉 On évite en général de les utiliser directement, sauf bonne raison.</p></div></div></section><section id="collections_slices_15"><h2>Collections: Slices (1/5)</h2><div class="slide-content"><div class="paragraph"><p>Une <code>slice</code> est une référence sur un sous ensemble d&#8217;entrées dans un tableau</p></div>
+<div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-go hljs" data-noescape="true" data-lang="go">func main() {
 	anArray := [4]int{2, 4, 6, 8}
 
 	// Declare et initialise une slice référençant les entrées
@@ -751,8 +758,8 @@ func readAge() int {
 	aSlice[0] = 9
 	fmt.Println(aSlice)  // [9, 6, 8]
 	fmt.Println(anArray) // [2, 9, 6, 8]
-}</code></pre></div></div></div></section><section id="collections_slices_23"><h2>Collections: Slices (2/3)</h2><div class="slide-content"><div class="ulist"><ul><li><p>On peut initialiser directement une slice sans passer par un tableau.</p></li><li><p>On peut aussi initialiser une slice avec l&#8217;operateur <code>make</code></p></li></ul></div>
-<div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-go hljs" data-noescape="true" data-lang="go">func doSomething() {
+}</code></pre></div></div></div></section><section id="collections_slices_25"><h2>Collections: Slices (2/5)</h2><div class="slide-content"><div class="ulist"><ul><li><p>On peut initialiser directement une slice sans passer par un tableau.</p></li><li><p>On peut aussi initialiser une slice avec l&#8217;operateur <code>make</code></p></li></ul></div>
+<div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-go hljs" data-noescape="true" data-lang="go">func main() {
 	aSlice := []int{2, 4, 6, 8}
 	// Sélectionne les entrées entre l'index 2 et 3 de la slice aSlice.
 	anotherSlice := aSlice[2:4]
@@ -762,8 +769,15 @@ func readAge() int {
 	// Initialise une slice de strings de 3 entrées.
 	yetAnotherSlice := make([]string, 3)
 	fmt.Println(yetAnotherSlice) // ["", "", ""]
-}</code></pre></div></div></div></section><section id="collections_slices_33"><h2>Collections: Slices (3/3)</h2><div class="slide-content"><div class="ulist"><ul><li><p>On peut concaténer des objets à une slice avec l&#8217;operateur <code>append</code></p></li><li><p>⚠️  Cela n&#8217;ajoute pas nécessairement un entrée a la slice passée en parametre.</p><div class="ulist"><ul><li><p>Dans le cas ou le tableau sous jacent est plein, <code>append</code> va réallouer un tableau et copier toutes les entées dans ce nouveau tableau.</p></li><li><p>En conséquence: il faut <strong>TOUJOURS</strong> assigner la valeur retournée par <code>append</code></p></li></ul></div></li></ul></div>
-<div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-go hljs" data-noescape="true" data-lang="go">func doSomething() {
+}</code></pre></div></div></div></section><section id="collections_slices_35"><h2>Collections: Slices (3/5)</h2><div class="slide-content"><div class="paragraph"><p>Une <code>slice</code> possède deux caractéristiques importantes:</p></div>
+<div class="ulist"><ul><li><p>Sa taille: le nombre d&#8217;éléments présents dans la slice</p><div class="ulist"><ul><li><p>On y accède a l&#8217;aide de la fonction <code>len</code></p></li></ul></div></li><li><p>Sa capacité: la taille totale du tableau référencé</p><div class="ulist"><ul><li><p>On y accède a l&#8217;aide de la fonction <code>cap</code></p></li></ul></div></li></ul></div>
+<div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-go hljs" data-noescape="true" data-lang="go">func main() {
+	sliceOne := []int{0, 1, 2, 3}
+	sliceTwo := sliceOne[0:2]
+	// Affiche "Length: 2 Capacity: 4"
+	fmt.Println("Length: ", len(sliceTwo), "Capacity: ", cap(sliceTwo))
+}</code></pre></div></div></div></section><section id="collections_slices_45"><h2>Collections: Slices (4/5)</h2><div class="slide-content"><div class="ulist"><ul><li><p>On peut concaténer des objets à une slice avec l&#8217;operateur <code>append</code></p></li><li><p>⚠️  Cela n&#8217;ajoute pas nécessairement un entrée a la slice passée en parametre.</p><div class="ulist"><ul><li><p>Dans le cas ou le tableau sous jacent est plein (len == cap), <code>append</code> va réallouer un tableau et copier toutes les entées dans ce nouveau tableau.</p></li><li><p>👉 En conséquence: il faut <strong>TOUJOURS</strong> assigner la valeur retournée par <code>append</code></p></li></ul></div></li></ul></div>
+<div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-go hljs" data-noescape="true" data-lang="go">func main() {
 	// On ajoute l'entrée 10 a la slice  aSlice
 	aSlice := []int{2, 4, 6, 8}
 	aSlice = append(aSlice, 10)
@@ -775,7 +789,49 @@ func readAge() int {
 	anotherSlice := []int{10, 12, 14, 16}
 	yetAnotherSlice := append(aSlice, anotherSlice...)
 	fmt.Println(yetAnotherSlice) // [2, 4, 6, 8, 10, 12, 14, 16]
-}</code></pre></div></div></div></section><section id="parcourir_une_slice_ou_un_tableau"><h2>Parcourir une slice ou un tableau</h2></section><section id="collections_maps"><h2>Collections: maps</h2></section><section id="todo"><h2>TODO</h2><div class="slide-content"><div class="ulist"><ul><li><p>Parler de range pour les collections.</p></li><li><p>defer!</p></li></ul></div></div></section><section id="structures"><h2>Structures</h2><div class="slide-content"><div class="ulist"><ul><li><p>Structures: collection d&#8217;attributs. Parler de comment les instancier, les initaliser, faire le parallele avec les constructeurs.</p></li></ul></div></div></section><section id="definir_des_types"><h2>Definir des types</h2><div class="slide-content"><div class="ulist"><ul><li><p>Definir des nouveaux types</p></li><li><p>Attacher des methodes aux types</p></li><li><p>struct + methodes attachees == classes</p></li></ul></div></div></section><section id="types_abstraits"><h2>Types abstraits</h2><div class="slide-content"><div class="ulist"><ul><li><p>Interfaces, Polymorphisme,</p></li><li><p>Une interface doit decrire un comportement d&#8217;un type</p></li><li><p>Pourquoi ecrire des interfaces?</p></li><li><p>Permettre des points d&#8217;interception, cacher la complexite</p></li><li><p>Exemple io.Reader, io.Writer, fichiers et sockets.</p></li><li><p>C&#8217;est la meme d&#8217;un point de vue utilisateur.</p></li></ul></div></div></section><section id="nomage_de_variables"><h2>Nomage de variables</h2><div class="slide-content"><div class="ulist"><ul><li><p><strong>Convention</strong>: La longueur du nom d&#8217;une variable est proportionnele a sa durée de vie.</p><div class="ulist"><ul><li><p>Cela améliore grandement la visibilité</p></li></ul></div></li><li><p>Certaines exceptions:</p><div class="ulist"><ul><li><p><code>err</code> for errors</p></li><li><p><code>ctx</code> for any instance of a <code>context.Context</code></p></li><li><p>methods receivers: one/two letters (ie <code>*Store</code> &#8658;  <code>st</code>)</p></li></ul></div></li></ul></div></div></section><section id="packages_and_modules"><h2>Packages and Modules</h2><div class="slide-content"><div class="ulist"><ul><li><p>Tout symbole go vit dans un package</p></li><li><p>Visibilite des symboles (Public Prive)</p></li><li><p>Imports</p></li><li><p>Librairies standard vs librairie externe.</p></li><li><p>Modules (mais pas gestion de dependence tout de suite)</p></li></ul></div></div></section><section id="gestion_derreur"><h2>Gestion d&#8217;erreur</h2><div class="slide-content"><div class="ulist"><ul><li><p>Type error</p></li><li><p>Pas d&#8217;exceptions, gestion des erreurs comme des valeurs</p></li><li><p>(if err != nil)</p></li><li><p>Panic == (RuntimeException en java) == aaah je sais plus comment m&#8217;executer.</p></li></ul></div></div></section><section id="tooling"><h2>Tooling</h2><div class="slide-content"><div class="ulist"><ul><li><p>Formatage du code automatique,</p></li><li><p>implemente par un outil, au moins tout le monde est d&#8217;accord.</p></li></ul></div></div></section><section id="exemples_concrets"><h2>Exemples concrets</h2><div class="slide-content"><div class="ulist"><ul><li><p>Decoder du JSON</p></li><li><p>Faire une requete HTTP.</p></li></ul></div></div></section><section id="exercice_2"><h2>Exercice:</h2><div class="slide-content"><div class="paragraph"><p>Ecrire un programme qui fait une requete http vers une API en JSON, definir un type structure decoder le payload et affiche un resultat.</p></div>
+}</code></pre></div></div></div></section><section id="collections_slices_55"><h2>Collections: Slices (5/5)</h2><div class="slide-content"><div class="ulist"><ul><li><p>Le type <strong>slice de X</strong>, comme le type <strong>pointeur sur X</strong>, est un type référence.</p></li><li><p>Sa valeur par défaut est <code>nil</code></p></li><li><p>Accéder à une slice nil provoque un arrêt de l&#8217;exécution</p></li><li><p>En revanche: <code>append</code> et <code>len</code> savent gérer une nil slice.</p></li></ul></div>
+<div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-go hljs" data-noescape="true" data-lang="go">func main() {
+	var nilSlice []string
+
+	// Cette ligne arrête le programme: on accède a un tableau qui n'existe pas.
+	v := nilSlice[0] // 💥
+
+	fmt.Println(len(nilSlice), cap(nilSlice)) // 0, 0
+
+	nilSlice = append(nilSlice, "foo", "bar", "biz")
+	fmt.Println(nilSlice) // ["foo", "bar", "biz"]
+}</code></pre></div></div></div></section><section id="parcourir_une_slice_ou_un_tableau"><h2>Parcourir une slice ou un tableau</h2><div class="slide-content"><div class="ulist"><ul><li><p>Go fournit la fonction <code>range</code> qui permet de parcourir une collection.</p></li><li><p><code>range</code> accepte une collection, et retourne deux valeurs:</p><div class="ulist"><ul><li><p>L&#8217;index courant dans la collection</p></li><li><p>La valeur de la collection a l&#8217;index</p></li></ul></div></li></ul></div>
+<div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-go hljs" data-noescape="true" data-lang="go">func main() {
+	slice := []int{2, 4, 6, 8}
+
+	// Affiche:
+	// Index: 0 Value: 2
+	// Index: 1 Value: 4
+	// Index: 2 Value: 6
+	// Index: 3 Value: 8
+	for index, value := range slice {
+		fmt.Println("Index: ", index, "Value: ", value)
+	}
+}</code></pre></div></div></div></section><section id="exercice_convertir_une_collection_dentiers_en_une_collection_de_strings"><h2>🎓 Exercice: Convertir une collection d&#8217;entiers en une collection de strings</h2><div class="slide-content"><div class="ulist"><ul><li><p>Ecrire une fonction <code>toStringSlice</code> qui convertit slice d&#8217;entiers en une slice de strings.</p><div class="ulist"><ul><li><p>🕵️: Il faut utiliser la fonction <strong>strconv.Itoa</strong> <a href="https://pkg.go.dev/strconv#Itoa">doc</a></p></li></ul></div></li></ul></div></div></section><section id="solution_convertir_une_collection_dentiers_en_une_collection_de_strings"><h2>✅ Solution: Convertir une collection d&#8217;entiers en une collection de strings</h2><div class="slide-content"><div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-go hljs" data-noescape="true" data-lang="go">func main() {
+	input := []int{1, 2, 3, 4}
+	output := toStringSlice(input)
+	fmt.Println(output)
+}
+
+func toStringSlice(input []int) []string {
+	// On alloue une slice de string de la taille de la slice d'entiers donnée en paramètre.
+	result := make([]string, len(input))
+
+	// Pour chaque entrée de la slice input...
+	for i, v := range input {
+		// On ecrit le resultat de la conversion
+		// dans la slice de resultat a l'index courant.
+		result[i] = strconv.Itoa(v)
+	}
+
+	return result
+}</code></pre></div></div>
+<div class="paragraph"><p><strong>Bonus</strong>: Une autre implémententation est possible avec <code>append</code>, mais celle présentée est plus rapide&#8230;&#8203; pourquoi?</p></div></div></section><section id="collections_maps"><h2>Collections: maps</h2></section><section id="todo"><h2>TODO</h2><div class="slide-content"><div class="ulist"><ul><li><p>defer!</p></li></ul></div></div></section><section id="structures"><h2>Structures</h2><div class="slide-content"><div class="ulist"><ul><li><p>Structures: collection d&#8217;attributs. Parler de comment les instancier, les initaliser, faire le parallele avec les constructeurs.</p></li></ul></div></div></section><section id="definir_des_types"><h2>Definir des types</h2><div class="slide-content"><div class="ulist"><ul><li><p>Definir des nouveaux types</p></li><li><p>Attacher des methodes aux types</p></li><li><p>struct + methodes attachees == classes</p></li></ul></div></div></section><section id="types_abstraits"><h2>Types abstraits</h2><div class="slide-content"><div class="ulist"><ul><li><p>Interfaces, Polymorphisme,</p></li><li><p>Une interface doit decrire un comportement d&#8217;un type</p></li><li><p>Pourquoi ecrire des interfaces?</p></li><li><p>Permettre des points d&#8217;interception, cacher la complexite</p></li><li><p>Exemple io.Reader, io.Writer, fichiers et sockets.</p></li><li><p>C&#8217;est la meme d&#8217;un point de vue utilisateur.</p></li></ul></div></div></section><section id="nomage_de_variables"><h2>Nomage de variables</h2><div class="slide-content"><div class="ulist"><ul><li><p><strong>Convention</strong>: La longueur du nom d&#8217;une variable est proportionnele a sa durée de vie.</p><div class="ulist"><ul><li><p>Cela améliore grandement la visibilité</p></li></ul></div></li><li><p>Certaines exceptions:</p><div class="ulist"><ul><li><p><code>err</code> for errors</p></li><li><p><code>ctx</code> for any instance of a <code>context.Context</code></p></li><li><p>methods receivers: one/two letters (ie <code>*Store</code> &#8658;  <code>st</code>)</p></li></ul></div></li></ul></div></div></section><section id="packages_and_modules"><h2>Packages and Modules</h2><div class="slide-content"><div class="ulist"><ul><li><p>Tout symbole go vit dans un package</p></li><li><p>Visibilite des symboles (Public Prive)</p></li><li><p>Imports</p></li><li><p>Librairies standard vs librairie externe.</p></li><li><p>Modules (mais pas gestion de dependence tout de suite)</p></li></ul></div></div></section><section id="gestion_derreur"><h2>Gestion d&#8217;erreur</h2><div class="slide-content"><div class="ulist"><ul><li><p>Type error</p></li><li><p>Pas d&#8217;exceptions, gestion des erreurs comme des valeurs</p></li><li><p>(if err != nil)</p></li><li><p>Panic == (RuntimeException en java) == aaah je sais plus comment m&#8217;executer.</p></li></ul></div></div></section><section id="tooling"><h2>Tooling</h2><div class="slide-content"><div class="ulist"><ul><li><p>Formatage du code automatique,</p></li><li><p>implemente par un outil, au moins tout le monde est d&#8217;accord.</p></li></ul></div></div></section><section id="exemples_concrets"><h2>Exemples concrets</h2><div class="slide-content"><div class="ulist"><ul><li><p>Decoder du JSON</p></li><li><p>Faire une requete HTTP.</p></li></ul></div></div></section><section id="exercice_2"><h2>Exercice:</h2><div class="slide-content"><div class="paragraph"><p>Ecrire un programme qui fait une requete http vers une API en JSON, definir un type structure decoder le payload et affiche un resultat.</p></div>
 <div class="paragraph"><p><a href="https://swapi.dev/" class="bare">https://swapi.dev/</a> par exemple, on leur fait chercher le diametre de Tatooine en indiquant que tatooine c&#8217;est ID 1</p></div>
 <div class="paragraph"><p>Si ils sont chaud on leur fait chercher la cargo capacity de la death star, sans leur donner l&#8217;ID du coup ils vont devoir fait un appel a index</p></div></div></section><section id="réferences"><h2>Réferences</h2><div class="slide-content"><div class="ulist"><ul><li><p><a href="https://www.youtube.com/watch?v=xi8732QO33Y" class="bare">https://www.youtube.com/watch?v=xi8732QO33Y</a></p></li><li><p><a href="https://go.dev/tour/" class="bare">https://go.dev/tour/</a></p></li><li><p><a href="https://gobyexample.com/" class="bare">https://gobyexample.com/</a></p></li><li><p><a href="https://go.dev/doc/effective_go" class="bare">https://go.dev/doc/effective_go</a></p></li><li><p><a href="https://go.dev/doc/" class="bare">https://go.dev/doc/</a></p></li><li><p><a href="https://go-proverbs.github.io/" class="bare">https://go-proverbs.github.io/</a></p></li><li><p><a href="https://go.dev/play/" class="bare">https://go.dev/play/</a></p></li></ul></div></div></section></section>
 <section><section id="les_fondamentaux_de_git" data-background-color="rgb(248, 228, 130)" data-state="invert"><h2>Les fondamentaux de git</h2></section><section id="tracer_le_changement_dans_le_code"><h2>Tracer le changement dans le code</h2><div class="slide-content"><div class="paragraph"><p>avec un <strong>VCS</strong> : 🇬🇧 Version Control System</p></div>
