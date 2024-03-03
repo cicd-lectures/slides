@@ -480,7 +480,9 @@ Poster du contenu sera vers l&#8217;API.</p></div></div></section><section id="e
 import (
 	"errors"
 	"fmt"
+	"os"
 	"strconv"
+	"time"
 )
 
 func main() {
@@ -498,18 +500,40 @@ Hello ENSG!</code></pre></div></div></div></section><section id="anatomie_dun_fi
 import (
 	"errors"
 	"fmt"
+	"os"
 	"strconv"
+	"time"
 )
 
 func main() {
 	fmt.Println("Hello ENSG!")
-}</code></pre></div></div></div></section><section id="anatomie_dun_fichier_go_22"><h2>Anatomie d&#8217;un Fichier go (2/2)</h2><div class="slide-content"><div class="ulist"><ul><li><p><code>func</code>: Declare une fonction <code>main</code>:</p><div class="ulist"><ul><li><p>Cette fonction appelle la fonction <code>Println</code> du package <code>fmt</code></p></li><li><p>En passant la chaine de caractères "Hello ENSG!"</p></li></ul></div></li><li><p><code>package</code>: declare que ce fichier fait partie du package <code>main</code>.</p></li><li><p><code>import</code>: importe le package <code>fmt</code> dans le fichier</p></li></ul></div></div></section><section id="packages_imports_12"><h2>Packages &amp; Imports (1/2)</h2><div class="slide-content"><div class="ulist"><ul><li><p>Un package est un groupe logique de symboles (variables, constantes, types et fonction)</p><div class="ulist"><ul><li><p>Ex: <code>net/http</code>, <code>os</code></p></li></ul></div></li><li><p>Un package est importé par un autre package</p><div class="ulist"><ul><li><p>Ici notre programme importe le package <code>fmt</code></p></li></ul></div></li></ul></div></div></section><section id="packages_imports_22"><h2>Packages &amp; Imports (2/2)</h2><div class="slide-content"><div class="ulist"><ul><li><p>Un package est représenté par un répertoire</p></li><li><p>Tous les fichiers go presents dans un même repertoire doivent declarer le meme package</p></li><li><p><strong>Convention</strong>: Le nom du package déclaré est le même que celui du répertoire content le fichier</p><div class="ulist"><ul><li><p>&#8230;&#8203; Mais ce n&#8217;est pas le cas de notre programme?</p></li></ul></div></li></ul></div></div></section><section id="ℹ_le_package_spécial_main"><h2>ℹ️ Le Package Spécial <code>main</code></h2><div class="slide-content"><div class="ulist"><ul><li><p>Ce package est le <code>point d&#8217;entrée</code> du programme.</p></li><li><p>La fonction <code>main</code> du package <code>main</code> est la première fonction appellée lors de l&#8217;exécution d&#8217;un programme go.</p></li></ul></div></div></section><section id="variables_13"><h2>Variables (1/3)</h2><div class="slide-content"><div class="paragraph"><p>Une variable est une zone mémoire allouée contenant une valeur</p></div>
+}</code></pre></div></div></div></section><section id="anatomie_dun_fichier_go_22"><h2>Anatomie d&#8217;un Fichier go (2/2)</h2><div class="slide-content"><div class="ulist"><ul><li><p><code>func</code>: Declare une fonction <code>main</code>:</p><div class="ulist"><ul><li><p>Cette fonction appelle la fonction <code>Println</code> du package <code>fmt</code></p></li><li><p>En passant la chaine de caractères "Hello ENSG!"</p></li></ul></div></li><li><p><code>package</code>: declare que ce fichier fait partie du package <code>main</code>.</p></li><li><p><code>import</code>: importe le package <code>fmt</code> dans le fichier</p></li></ul></div></div></section><section id="packages_imports_12"><h2>Packages &amp; Imports (1/2)</h2><div class="slide-content"><div class="ulist"><ul><li><p>Un package est un groupe logique de symboles (variables, constantes, types et fonction)</p><div class="ulist"><ul><li><p>Ex: <code>net/http</code>, <code>os</code></p></li></ul></div></li><li><p>Un package est importé par un autre package</p><div class="ulist"><ul><li><p>Ici notre programme importe le package <code>fmt</code></p></li></ul></div></li></ul></div></div></section><section id="packages_imports_22"><h2>Packages &amp; Imports (2/2)</h2><div class="slide-content"><div class="ulist"><ul><li><p>Un package est représenté par un répertoire</p></li><li><p>Tous les fichiers go presents dans un même repertoire doivent declarer le meme package</p></li><li><p><strong>Convention</strong>: Le nom du package déclaré est le même que celui du répertoire content le fichier</p><div class="ulist"><ul><li><p>&#8230;&#8203; Mais ce n&#8217;est pas le cas de notre programme?</p></li></ul></div></li></ul></div></div></section><section id="ℹ_le_package_spécial_main"><h2>ℹ️ Le Package Spécial <code>main</code></h2><div class="slide-content"><div class="ulist"><ul><li><p>Ce package est le <code>point d&#8217;entrée</code> du programme.</p></li><li><p>La fonction <code>main</code> du package <code>main</code> est la première fonction appellée lors de l&#8217;exécution d&#8217;un programme go.</p></li></ul></div></div></section><section id="packages_et_visibilité"><h2>Packages et Visibilité</h2><div class="slide-content"><div class="ulist"><ul><li><p>La visibilité en dehors du package d&#8217;un symbole déclaré dans un package est controllée par l&#8217;utilisation d&#8217;une majuscule ou minuscule en premier caractère.</p><div class="ulist"><ul><li><p>Une <strong>majuscule</strong> rendra le symbole publique et utilisable en dehors du package.</p></li><li><p>Une <strong>minuscule</strong> rendra le symbole privé seulement accessible dans le package courant.</p></li></ul></div></li></ul></div>
+<div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-go hljs" data-noescape="true" data-lang="go">// fonction privée du package courant. Ne peut pas être utilisée a l'extérieur.
+func privateFunc() {
+	// appelle la fonction `readContent` du package os.
+	// ❌ Ne compile pas: `readContent` n'est pas exportée.
+	content := os.readContent("/some/file")
+}
+
+// fonction publique du package courant.
+// Peut être appellée depuis un autre package.
+func PublicFunc() {
+	// appelle la fonction `OpenFile` du package os.
+	// ✅ compile, `OpenFile` est exportée!
+	file, _ := os.OpenFile("/some/file")
+}
+
+// Variable de package publique.
+var PublicVar int = 12</code></pre></div></div></div></section><section><div class="slide-content"><div class="paragraph"><p>Controller la visibilité des symboles exporté permet de s&#8217;assurer que le package sera bien utilisé!</p></div>
+<div class="paragraph"><p>C&#8217;est l&#8217;idée <strong>d&#8217;encapsulation</strong>, on expose uniquement ce dont l&#8217;utilisateur à besoin.</p></div></div></section><section id="variables_13"><h2>Variables (1/3)</h2><div class="slide-content"><div class="paragraph"><p>Une variable est une zone mémoire allouée contenant une valeur</p></div>
 <div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-go hljs" data-noescape="true" data-lang="go">package main
 
 import (
 	"errors"
 	"fmt"
+	"os"
 	"strconv"
+	"time"
 )
 
 func main() {
@@ -553,7 +577,9 @@ func readAge() int64 {
 import (
 	"errors"
 	"fmt"
+	"os"
 	"strconv"
+	"time"
 )
 
 func main() {
@@ -674,7 +700,9 @@ func addGreeting(name string) {
 import (
 	"errors"
 	"fmt"
+	"os"
 	"strconv"
+	"time"
 )
 
 func main() {
@@ -694,7 +722,9 @@ func main() {
 import (
 	"errors"
 	"fmt"
+	"os"
 	"strconv"
+	"time"
 )
 
 func main() {
@@ -709,7 +739,9 @@ func main() {
 import (
 	"errors"
 	"fmt"
+	"os"
 	"strconv"
+	"time"
 )
 
 func main() {
@@ -847,11 +879,11 @@ func toStringSlice(input []int) []string {
 
 	return result
 }</code></pre></div></div>
-<div class="paragraph"><p><strong>Bonus</strong>: Une autre implémentation est possible avec <code>append</code>, mais celle présentée est plus rapide&#8230;&#8203; pourquoi?</p></div></div></section><section id="collections_maps_13"><h2>Collections: maps (1/3)</h2><div class="slide-content"><div class="ulist"><ul><li><p>Tableau associatif clé-valeur</p></li><li><p>Initialisée de façon littérale, ou avec <code>make</code></p></li><li><p>On récupère sa taille avec <code>len</code></p></li><li><p>Type référence, comme les pointeurs out les slices</p><div class="ulist"><ul><li><p>Une map peut être nil, <code>len</code> retournera 0.</p></li></ul></div></li></ul></div></div></section><section id="collections_maps_23"><h2>Collections: maps (2/3)</h2><div class="slide-content"><div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-go hljs" data-noescape="true" data-lang="go">func main() {
+<div class="paragraph"><p><strong>Bonus</strong>: Une autre implémentation est possible avec <code>append</code>, mais celle présentée est plus rapide&#8230;&#8203; pourquoi?</p></div></div></section><section id="collections_maps_13"><h2>Collections: maps (1/3)</h2><div class="slide-content"><div class="ulist"><ul><li><p>Tableau associatif clé-valeur</p></li><li><p>Initialisée de façon littérale, ou avec <code>make</code></p></li><li><p>On récupère sa taille avec <code>len</code></p></li><li><p>On supprime une clé avec <code>delete</code></p></li><li><p>Type référence, comme les pointeurs out les slices</p><div class="ulist"><ul><li><p>Une map peut être nil, <code>len</code> retournera 0.</p></li></ul></div></li></ul></div></div></section><section id="collections_maps_23"><h2>Collections: maps (2/3)</h2><div class="slide-content"><div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-go hljs" data-noescape="true" data-lang="go">func main() {
 	// Déclaration et initialisation d'une map de façon littérale.
 	mapAges := map[string]int{
 		"Julien": 35,
-		"Damien": 35,
+		"Damien": 36,
 	}
 
 	// Déclaration et initialisation d'une map de taille 2.
@@ -863,13 +895,16 @@ func toStringSlice(input []int) []string {
 	var nilMap map[int]int
 	nilMap[21] = 42 // Arrête d'exécution, écriture dans une map qui n'existe pas.
 
-	// Affiche 2, 2 et 0.
+	// On peut suprimer une entrée d'une map
+	delete(mapVilles, "Julien")
+
+	// Affiche 2, 1, 0.
 	fmt.Println(len(mapAges), len(mapVilles), len(nilMap))
 }</code></pre></div></div></div></section><section id="collections_maps_33"><h2>Collections: maps (3/3)</h2><div class="slide-content"><div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-go hljs" data-noescape="true" data-lang="go">func main() {
 	// Déclaration et initialisation d'une map de façon littérale.
 	mapAges := map[string]int{
 		"Julien": 35,
-		"Damien": 35,
+		"Damien": 36,
 	}
 
 	// Lecture sans vérification.
@@ -892,7 +927,7 @@ func toStringSlice(input []int) []string {
 <div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-go hljs" data-noescape="true" data-lang="go">func main() {
 	mapAges := map[string]int{
 		"Julien": 35,
-		"Damien": 35,
+		"Damien": 36,
 	}
 
 	// Affiche soit:
@@ -904,8 +939,71 @@ func toStringSlice(input []int) []string {
 	for name, age := range mapAges {
 		fmt.Printf("%s a %d ans\n", name, age)
 	}
+}</code></pre></div></div></div></section><section id="structures_13"><h2>Structures (1/3)</h2><div class="slide-content"><div class="ulist"><ul><li><p>Type déclaré représentant une collection fixe d&#8217;attributs (aussi appelés membres)</p></li><li><p>Les attributs commençant par une lettre majuscules sont accessibles en dehors du package. Ceux qui commencent par une lettre minuscule ne le sont pas.</p></li></ul></div>
+<div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-go hljs" data-noescape="true" data-lang="go">// Déclaration du type lecture, composé de 3 attributs.
+type Lecture struct {
+	Topic    string
+	Duration time.Duration
+	Credits  int
+}
 
-}</code></pre></div></div></div></section><section id="structures"><h2>Structures</h2><div class="slide-content"><div class="ulist"><ul><li><p>Structures: collection d&#8217;attributs. Parler de comment les instancier, les initaliser, faire le parallele avec les constructeurs.</p></li></ul></div></div></section><section id="definir_des_types"><h2>Definir des types</h2><div class="slide-content"><div class="ulist"><ul><li><p>Definir des nouveaux types</p></li><li><p>Attacher des methodes aux types</p></li><li><p>struct + methodes attachees == classes</p></li></ul></div></div></section><section id="types_abstraits"><h2>Types abstraits</h2><div class="slide-content"><div class="ulist"><ul><li><p>Interfaces, Polymorphisme,</p></li><li><p>Une interface doit decrire un comportement d&#8217;un type</p></li><li><p>Pourquoi ecrire des interfaces?</p></li><li><p>Permettre des points d&#8217;interception, cacher la complexite</p></li><li><p>Exemple io.Reader, io.Writer, fichiers et sockets.</p></li><li><p>C&#8217;est la meme d&#8217;un point de vue utilisateur.</p></li></ul></div></div></section><section id="nomage_de_variables"><h2>Nomage de variables</h2><div class="slide-content"><div class="ulist"><ul><li><p><strong>Convention</strong>: La longueur du nom d&#8217;une variable est proportionnele a sa durée de vie.</p><div class="ulist"><ul><li><p>Cela améliore grandement la visibilité</p></li></ul></div></li><li><p>Certaines exceptions:</p><div class="ulist"><ul><li><p><code>err</code> for errors</p></li><li><p><code>ctx</code> for any instance of a <code>context.Context</code></p></li><li><p>methods receivers: one/two letters (ie <code>*Store</code> &#8658;  <code>st</code>)</p></li></ul></div></li></ul></div></div></section><section id="packages_and_modules"><h2>Packages and Modules</h2><div class="slide-content"><div class="ulist"><ul><li><p>Tout symbole go vit dans un package</p></li><li><p>Visibilite des symboles (Public Prive)</p></li><li><p>Imports</p></li><li><p>Librairies standard vs librairie externe.</p></li><li><p>Modules (mais pas gestion de dependence tout de suite)</p></li></ul></div></div></section><section id="gestion_derreur"><h2>Gestion d&#8217;erreur</h2><div class="slide-content"><div class="ulist"><ul><li><p>Type error</p></li><li><p>Pas d&#8217;exceptions, gestion des erreurs comme des valeurs</p></li><li><p>(if err != nil)</p></li><li><p>Panic == (RuntimeException en java) == aaah je sais plus comment m&#8217;executer.</p></li></ul></div></div></section><section id="tooling"><h2>Tooling</h2><div class="slide-content"><div class="ulist"><ul><li><p>Formatage du code automatique,</p></li><li><p>implemente par un outil, au moins tout le monde est d&#8217;accord.</p></li></ul></div></div></section><section id="exemples_concrets"><h2>Exemples concrets</h2><div class="slide-content"><div class="ulist"><ul><li><p>Decoder du JSON</p></li><li><p>Faire une requete HTTP.</p></li></ul></div></div></section><section id="exercice_2"><h2>Exercice:</h2><div class="slide-content"><div class="paragraph"><p>Ecrire un programme qui fait une requete http vers une API en JSON, definir un type structure decoder le payload et affiche un resultat.</p></div>
+func main() {
+	// On declare et initialise une nouvelle variable de type Lecture.
+	coursCICD := Lecture{
+		Topic:    "CICD",
+		Duration: 3 * 6 * time.Hour,
+		Credits:  2,
+	}
+	// On prends la référence de la variableCICD
+	var ptrVersCoursCICD *Lecure = &amp;coursCICD
+
+	// On accède aux valeurs des membres de la variable coursCICD avec `.`.
+	fmt.Println("Sujet du cours", coursCICD.Topic)
+	// `.` Fonctionne aussi sur un pointeur!
+	fmt.Println("Durée du cours", ptrVersCoursCICD.Duration)
+}</code></pre></div></div></div></section><section id="structures_23"><h2>Structures (2/3)</h2><div class="slide-content"><div class="ulist"><ul><li><p>La valeur par défaut d&#8217;une structure est égale a l&#8217;ensemble des valeurs par défaut de ses membres.</p></li></ul></div>
+<div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-go hljs" data-noescape="true" data-lang="go">// Déclaration du type lecture, composé de 4 attributs.
+type Lecture struct {
+	Topic    string
+	Duration time.Duration
+	Credits  int
+	// attribut secret, seulement accessible dans le package courant.
+	secret string
+}
+
+func main() {
+	coursVide := Lecture{
+		Topic:    "",
+		Duration: time.Duration(0),
+		Credits:  0,
+	}
+	coursDéfaut := Lecture{}
+
+	if coursVide == coursDéfaut {
+		// Affiche OK.
+		fmt.Println("OK")
+	}
+}</code></pre></div></div></div></section><section id="structures_33"><h2>Structures (3/3)</h2><div class="slide-content"><div class="ulist"><ul><li><p>Toute structure doit instanciée doit être dans un état utilisable.</p></li><li><p>Si les valeurs par défaut ne suffisent pas, on peut fournir une fonction d&#8217;initialisation.</p><div class="ulist"><ul><li><p>Similaire aux "constructeurs" dans d&#8217;autres langages.</p></li></ul></div></li></ul></div>
+<div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-go hljs" data-noescape="true" data-lang="go">// Déclaration du type lecture, composé de 4 attributs.
+type FileReader struct {
+	File *os.File
+}
+
+func NewFileReader(path string) *FileReader {
+	file, _ := os.Open(path)
+
+	return &amp;FileReader{
+		File: file,
+	}
+}
+
+func main() {
+	// ❌ instanciation sans utiliser la fonction d'initialisation.
+	var reader FileReader
+
+	// ✅
+	reader := NewFileReader("/some/file")
+}</code></pre></div></div></div></section><section id="definir_des_types"><h2>Definir des types</h2><div class="slide-content"><div class="ulist"><ul><li><p>Definir des nouveaux types</p></li><li><p>Attacher des methodes aux types</p></li><li><p>struct + methodes attachees == classes</p></li></ul></div></div></section><section id="types_abstraits"><h2>Types abstraits</h2><div class="slide-content"><div class="ulist"><ul><li><p>Interfaces, Polymorphisme,</p></li><li><p>Une interface doit decrire un comportement d&#8217;un type</p></li><li><p>Pourquoi ecrire des interfaces?</p></li><li><p>Permettre des points d&#8217;interception, cacher la complexite</p></li><li><p>Exemple io.Reader, io.Writer, fichiers et sockets.</p></li><li><p>C&#8217;est la meme d&#8217;un point de vue utilisateur.</p></li></ul></div></div></section><section id="nomage_de_variables"><h2>Nomage de variables</h2><div class="slide-content"><div class="ulist"><ul><li><p><strong>Convention</strong>: La longueur du nom d&#8217;une variable est proportionnele a sa durée de vie.</p><div class="ulist"><ul><li><p>Cela améliore grandement la visibilité</p></li></ul></div></li><li><p>Certaines exceptions:</p><div class="ulist"><ul><li><p><code>err</code> for errors</p></li><li><p><code>ctx</code> for any instance of a <code>context.Context</code></p></li><li><p>methods receivers: one/two letters (ie <code>*Store</code> &#8658;  <code>st</code>)</p></li></ul></div></li></ul></div></div></section><section id="packages_and_modules"><h2>Packages and Modules</h2><div class="slide-content"><div class="ulist"><ul><li><p>Tout symbole go vit dans un package</p></li><li><p>Visibilite des symboles (Public Prive)</p></li><li><p>Imports</p></li><li><p>Librairies standard vs librairie externe.</p></li><li><p>Modules (mais pas gestion de dependence tout de suite)</p></li></ul></div></div></section><section id="gestion_derreur"><h2>Gestion d&#8217;erreur</h2><div class="slide-content"><div class="ulist"><ul><li><p>Type error</p></li><li><p>Pas d&#8217;exceptions, gestion des erreurs comme des valeurs</p></li><li><p>(if err != nil)</p></li><li><p>Panic == (RuntimeException en java) == aaah je sais plus comment m&#8217;executer.</p></li></ul></div></div></section><section id="tooling"><h2>Tooling</h2><div class="slide-content"><div class="ulist"><ul><li><p>Formatage du code automatique,</p></li><li><p>implemente par un outil, au moins tout le monde est d&#8217;accord.</p></li></ul></div></div></section><section id="exemples_concrets"><h2>Exemples concrets</h2><div class="slide-content"><div class="ulist"><ul><li><p>Decoder du JSON</p></li><li><p>Faire une requete HTTP.</p></li></ul></div></div></section><section id="exercice_2"><h2>Exercice:</h2><div class="slide-content"><div class="paragraph"><p>Ecrire un programme qui fait une requete http vers une API en JSON, definir un type structure decoder le payload et affiche un resultat.</p></div>
 <div class="paragraph"><p><a href="https://swapi.dev/" class="bare">https://swapi.dev/</a> par exemple, on leur fait chercher le diametre de Tatooine en indiquant que tatooine c&#8217;est ID 1</p></div>
 <div class="paragraph"><p>Si ils sont chaud on leur fait chercher la cargo capacity de la death star, sans leur donner l&#8217;ID du coup ils vont devoir fait un appel a index</p></div></div></section><section id="réferences"><h2>Réferences</h2><div class="slide-content"><div class="ulist"><ul><li><p><a href="https://www.youtube.com/watch?v=xi8732QO33Y" class="bare">https://www.youtube.com/watch?v=xi8732QO33Y</a></p></li><li><p><a href="https://go.dev/tour/" class="bare">https://go.dev/tour/</a></p></li><li><p><a href="https://gobyexample.com/" class="bare">https://gobyexample.com/</a></p></li><li><p><a href="https://go.dev/doc/effective_go" class="bare">https://go.dev/doc/effective_go</a></p></li><li><p><a href="https://go.dev/doc/" class="bare">https://go.dev/doc/</a></p></li><li><p><a href="https://go-proverbs.github.io/" class="bare">https://go-proverbs.github.io/</a></p></li><li><p><a href="https://go.dev/play/" class="bare">https://go.dev/play/</a></p></li></ul></div></div></section></section>
 <section><section id="les_fondamentaux_de_git" data-background-color="rgb(248, 228, 130)" data-state="invert"><h2>Les fondamentaux de git</h2></section><section id="tracer_le_changement_dans_le_code"><h2>Tracer le changement dans le code</h2><div class="slide-content"><div class="paragraph"><p>avec un <strong>VCS</strong> : 🇬🇧 Version Control System</p></div>
