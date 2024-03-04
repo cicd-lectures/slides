@@ -531,6 +531,7 @@ import (
 	"fmt"
 	"os"
 	"strconv"
+	"strings"
 	"time"
 )
 
@@ -577,6 +578,7 @@ import (
 	"fmt"
 	"os"
 	"strconv"
+	"strings"
 	"time"
 )
 
@@ -700,6 +702,7 @@ import (
 	"fmt"
 	"os"
 	"strconv"
+	"strings"
 	"time"
 )
 
@@ -721,6 +724,7 @@ import (
 	"fmt"
 	"os"
 	"strconv"
+	"strings"
 	"time"
 )
 
@@ -738,6 +742,7 @@ import (
 	"fmt"
 	"os"
 	"strconv"
+	"strings"
 	"time"
 )
 
@@ -936,6 +941,22 @@ func toStringSlice(input []int) []string {
 	for name, age := range mapAges {
 		fmt.Printf("%s a %d ans\n", name, age)
 	}
+}</code></pre></div></div></div></section><section id="exercice_comptez_les_occurences_de_mots_dans_une_chaine_de_caractère"><h2>🎓 Exercice: Comptez les occurences de mots dans une chaine de caractère</h2><div class="slide-content"><div class="ulist"><ul><li><p>Ecrivez une fonction <code>WordCount</code> en go qui accepte une chaine de caractère et qui retourne le nombre d&#8217;occurences de chacun des mots contenu dans la chaine.</p><div class="ulist"><ul><li><p><strong>Indice</strong>: La signature de votre fonction devrait resembler a <code>func WordCount(str string) map[string]int</code>.</p><div class="ulist"><ul><li><p>La valeur de retour mappe le mot vers son nombre d&#8217;occurence.</p></li></ul></div></li><li><p><strong>Indice</strong>: <code>strings.Fields</code> <a href="https://pkg.go.dev/strings#Fields">(doc)</a> sépare les mots d&#8217;une chaine de caractère et retourne une string.</p></li></ul></div></li></ul></div></div></section><section id="solution_comptez_les_occurences_de_mots_dans_une_chaine_de_caractère"><h2>✅ Solution: Comptez les occurences de mots dans une chaine de caractère</h2><div class="slide-content"><div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-go hljs" data-noescape="true" data-lang="go">func main() {
+	input := "The quick quick brown fox jumps over the lazy lazy dog"
+
+	result := WordCount(input)
+
+	fmt.Println(result)
+}
+
+func WordCount(input string) map[string]int {
+	result := make(map[string]int)
+
+	for _, word := range strings.Fields(input) {
+		result[word]++
+	}
+
+	return result
 }</code></pre></div></div></div></section><section id="structures_13"><h2>Structures (1/3)</h2><div class="slide-content"><div class="ulist"><ul><li><p>Type déclaré représentant une collection fixe d&#8217;attributs (aussi appelés membres)</p></li><li><p>Les attributs commençant par une lettre majuscules sont accessibles en dehors du package. Ceux qui commencent par une lettre minuscule ne le sont pas.</p></li></ul></div>
 <div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-go hljs" data-noescape="true" data-lang="go">// Déclaration du type lecture, composé de 3 attributs.
 type Lecture struct {
@@ -1001,26 +1022,15 @@ func main() {
 	// ✅
 	reader := NewFileReader("/some/file")
 }</code></pre></div></div></div></section><section id="definir_des_types_13"><h2>Definir des types (1/3)</h2><div class="slide-content"><div class="ulist"><ul><li><p>Nous avons utilisé le mot clef <code>type</code> pour définir un nouveau type de structure.</p></li><li><p>Mais <code>type</code> peut être appliqué á des tas d&#8217;autre choses.</p></li></ul></div>
-<div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-go hljs" data-noescape="true" data-lang="go">// Déclaration du type lecture, composé de 4 attributs.
-type FileReader struct {
-	File *os.File
+<div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-go hljs" data-noescape="true" data-lang="go">// Déclare un type StatusCode
+type StatusCode int
+
+type Object struct {
 }
 
-func NewFileReader(path string) *FileReader {
-	file, _ := os.Open(path)
+type Storage map[string]Object
 
-	return &amp;FileReader{
-		File: file,
-	}
-}
-
-func main() {
-	// ❌ instanciation sans utiliser la fonction d'initialisation.
-	var reader FileReader
-
-	// ✅
-	reader := NewFileReader("/some/file")
-}</code></pre></div></div></div></section><section id="types_abstraits"><h2>Types abstraits</h2><div class="slide-content"><div class="ulist"><ul><li><p>Interfaces, Polymorphisme,</p></li><li><p>Une interface doit decrire un comportement d&#8217;un type</p></li><li><p>Pourquoi ecrire des interfaces?</p></li><li><p>Permettre des points d&#8217;interception, cacher la complexite</p></li><li><p>Exemple io.Reader, io.Writer, fichiers et sockets.</p></li><li><p>C&#8217;est la meme d&#8217;un point de vue utilisateur.</p></li></ul></div></div></section><section id="gestion_derreur"><h2>Gestion d&#8217;erreur</h2><div class="slide-content"><div class="ulist"><ul><li><p>Type error</p></li><li><p>Pas d&#8217;exceptions, gestion des erreurs comme des valeurs</p></li><li><p>(if err != nil)</p></li><li><p>Panic == (RuntimeException en java) == aaah je sais plus comment m&#8217;executer.</p></li></ul></div></div></section><section id="nomage_de_variables"><h2>Nomage de variables</h2><div class="slide-content"><div class="ulist"><ul><li><p><strong>Convention</strong>: La longueur du nom d&#8217;une variable est proportionnele a sa durée de vie.</p><div class="ulist"><ul><li><p>Cela améliore grandement la visibilité</p></li></ul></div></li><li><p>Certaines exceptions:</p><div class="ulist"><ul><li><p><code>err</code> for errors</p></li><li><p><code>ctx</code> for any instance of a <code>context.Context</code></p></li><li><p>methods receivers: one/two letters (ie <code>*Store</code> &#8658;  <code>st</code>)</p></li></ul></div></li></ul></div></div></section><section id="packages_and_modules"><h2>Packages and Modules</h2><div class="slide-content"><div class="ulist"><ul><li><p>Tout symbole go vit dans un package</p></li><li><p>Visibilite des symboles (Public Prive)</p></li><li><p>Imports</p></li><li><p>Librairies standard vs librairie externe.</p></li><li><p>Modules (mais pas gestion de dependence tout de suite)</p></li></ul></div></div></section><section id="tooling"><h2>Tooling</h2><div class="slide-content"><div class="ulist"><ul><li><p>Formatage du code automatique,</p></li><li><p>implemente par un outil, au moins tout le monde est d&#8217;accord.</p></li></ul></div></div></section><section id="exemples_concrets"><h2>Exemples concrets</h2><div class="slide-content"><div class="ulist"><ul><li><p>Decoder du JSON</p></li><li><p>Faire une requete HTTP.</p></li></ul></div></div></section><section id="exercice_2"><h2>Exercice:</h2><div class="slide-content"><div class="paragraph"><p>Ecrire un programme qui fait une requete http vers une API en JSON, definir un type structure decoder le payload et affiche un resultat.</p></div>
+type Callback func(int) error</code></pre></div></div></div></section><section id="types_abstraits"><h2>Types abstraits</h2><div class="slide-content"><div class="ulist"><ul><li><p>Interfaces, Polymorphisme,</p></li><li><p>Une interface doit decrire un comportement d&#8217;un type</p></li><li><p>Pourquoi ecrire des interfaces?</p></li><li><p>Permettre des points d&#8217;interception, cacher la complexite</p></li><li><p>Exemple io.Reader, io.Writer, fichiers et sockets.</p></li><li><p>C&#8217;est la meme d&#8217;un point de vue utilisateur.</p></li></ul></div></div></section><section id="gestion_derreur"><h2>Gestion d&#8217;erreur</h2><div class="slide-content"><div class="ulist"><ul><li><p>Type error</p></li><li><p>Pas d&#8217;exceptions, gestion des erreurs comme des valeurs</p></li><li><p>(if err != nil)</p></li><li><p>Panic == (RuntimeException en java) == aaah je sais plus comment m&#8217;executer.</p></li></ul></div></div></section><section id="nomage_de_variables"><h2>Nomage de variables</h2><div class="slide-content"><div class="ulist"><ul><li><p><strong>Convention</strong>: La longueur du nom d&#8217;une variable est proportionnele a sa durée de vie.</p><div class="ulist"><ul><li><p>Cela améliore grandement la visibilité</p></li></ul></div></li><li><p>Certaines exceptions:</p><div class="ulist"><ul><li><p><code>err</code> for errors</p></li><li><p><code>ctx</code> for any instance of a <code>context.Context</code></p></li><li><p>methods receivers: one/two letters (ie <code>*Store</code> &#8658;  <code>st</code>)</p></li></ul></div></li></ul></div></div></section><section id="packages_and_modules"><h2>Packages and Modules</h2><div class="slide-content"><div class="ulist"><ul><li><p>Tout symbole go vit dans un package</p></li><li><p>Visibilite des symboles (Public Prive)</p></li><li><p>Imports</p></li><li><p>Librairies standard vs librairie externe.</p></li><li><p>Modules (mais pas gestion de dependence tout de suite)</p></li></ul></div></div></section><section id="tooling"><h2>Tooling</h2><div class="slide-content"><div class="ulist"><ul><li><p>Formatage du code automatique,</p></li><li><p>implemente par un outil, au moins tout le monde est d&#8217;accord.</p></li></ul></div></div></section><section id="exemples_concrets"><h2>Exemples concrets</h2><div class="slide-content"><div class="ulist"><ul><li><p>Decoder du JSON</p></li><li><p>Faire une requete HTTP.</p></li></ul></div></div></section><section id="exercice_2"><h2>Exercice:</h2><div class="slide-content"><div class="paragraph"><p>Ecrire un programme qui fait une requete http vers une API en JSON, definir un type structure decoder le payload et affiche un resultat.</p></div>
 <div class="paragraph"><p><a href="https://swapi.dev/" class="bare">https://swapi.dev/</a> par exemple, on leur fait chercher le diametre de Tatooine en indiquant que tatooine c&#8217;est ID 1</p></div>
 <div class="paragraph"><p>Si ils sont chaud on leur fait chercher la cargo capacity de la death star, sans leur donner l&#8217;ID du coup ils vont devoir fait un appel a index</p></div></div></section><section id="réferences"><h2>Réferences</h2><div class="slide-content"><div class="ulist"><ul><li><p><a href="https://www.youtube.com/watch?v=xi8732QO33Y" class="bare">https://www.youtube.com/watch?v=xi8732QO33Y</a></p></li><li><p><a href="https://go.dev/tour/" class="bare">https://go.dev/tour/</a></p></li><li><p><a href="https://gobyexample.com/" class="bare">https://gobyexample.com/</a></p></li><li><p><a href="https://go.dev/doc/effective_go" class="bare">https://go.dev/doc/effective_go</a></p></li><li><p><a href="https://go.dev/doc/" class="bare">https://go.dev/doc/</a></p></li><li><p><a href="https://go-proverbs.github.io/" class="bare">https://go-proverbs.github.io/</a></p></li><li><p><a href="https://go.dev/play/" class="bare">https://go.dev/play/</a></p></li></ul></div></div></section></section>
 <section><section id="les_fondamentaux_de_git" data-background-color="rgb(248, 228, 130)" data-state="invert"><h2>Les fondamentaux de git</h2></section><section id="tracer_le_changement_dans_le_code"><h2>Tracer le changement dans le code</h2><div class="slide-content"><div class="paragraph"><p>avec un <strong>VCS</strong> : 🇬🇧 Version Control System</p></div>
