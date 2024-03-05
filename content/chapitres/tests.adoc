@@ -42,46 +42,7 @@ On parle de **SUT**, System Under Test.
 * Depuis votre environnement de développement, dans le repertoire du **fork** de votre binôme
 * Créez une feature branch `add-tests`.
 
-== Ajout des Outils de Tests Unitaires au Projet (1/3)
-
-L'execution de tests nécessite un outillage non ajouté au projet
-
-* Framework d'écriture et d'execution de tests: `JUnit`
-* Librairie de création de mocks: `Mockito`
-* Plugin maven de lancement de tests unitaires: `surefire`
-
-== Cycle de Vie Maven et Tests
-
-* Rappel : Maven définit un cycle de vie de votre logiciel par phases:
-* `surefire` exécute les tests contenus dans tous les fichiers ayant le suffixe `Tests.java` (`MaClasseTests.java`)
-* Le plugin `surefire` s’exécute (par défaut) lors de la phase `tests`
-* Lancer `mvn test` va exécuter les phases `validate` -> `compile` -> `test`
-
-== Ajout des Outils de Tests Unitaires au Projet (2/3)
-
-* Ajoutez la dépendance suivante dans votre `pom.xml` (section `<dependencies>`):
-+
-[source,xml]
-----
-<dependency>
-  <groupId>org.springframework.boot</groupId>
-  <artifactId>spring-boot-starter-test</artifactId>
-  <scope>test</scope>
-</dependency>
-----
-
-* Puis configurez le plugin Maven Spring Boot pour les tests unitaires (section `<build><plugins>`):
-+
-[source,xml]
-----
-<plugin>
-  <groupId>org.apache.maven.plugins</groupId>
-  <artifactId>maven-surefire-plugin</artifactId>
-  <configuration>
-    <skipTests>${skipUnitTests}</skipTests>
-  </configuration>
-</plugin>
-----
+== TODO REFAIRE TOUT CA avec go.
 
 == Ajout des Outils de Tests Automatisés au Projet (3/3)
 
