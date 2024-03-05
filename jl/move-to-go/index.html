@@ -542,6 +542,7 @@ code main.go
 go build ./main.go
 # Exécute le programme.
 ./main</code></pre></div></div></div></section><section><div class="slide-content"><div class="paragraph"><p>💡 <code>go run ./main.go</code> compile et execute le programme directement!</p></div>
+<div class="paragraph"><p>⚠️  Ne génère pas de binaire utilisable.</p></div>
 <div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-bash hljs" data-noescape="true" data-lang="bash">$ go run ./main.go
 Hello ENSG!</code></pre></div></div></div></section><section id="formatage_de_code"><h2>Formatage de Code</h2><div class="slide-content"><div class="ulist"><ul><li><p>Formatage du code automatique, si vous appuyez sur <code>Ctrl+S</code></p></li><li><p>Pas de débat tabs vs spaces 🤡, c&#8217;est des tabs.</p></li></ul></div></div></section><section id="anatomie_dun_fichier_go_12"><h2>Anatomie d&#8217;un Fichier go (1/2)</h2><div class="slide-content"><div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-go hljs" data-noescape="true" data-lang="go">package main
 
@@ -809,8 +810,8 @@ func addGreeting(namePtr *string) {
 	// On peut intéragir avec le fichier!
 }</code></pre></div></div></div></section><section id="gestion_derreur_22"><h2>Gestion d&#8217;Erreur (2/2)</h2><div class="slide-content"><div class="ulist"><ul><li><p>Certaines instructions peuvent mettre le programme dans un état ou il ne peut plus s&#8217;exécuter.</p><div class="ulist"><ul><li><p>Par exemple, accéder à un pointeur <code>nil</code></p></li></ul></div></li><li><p>Dans ce cas la, l&#8217;exécution de la fonction s&#8217;arrête et on parle de <code>panic</code></p></li></ul></div></div></section><section id="collections"><h2>Collections</h2></section><section id="collections_arrays"><h2>Collections: Arrays</h2><div class="slide-content"><div class="ulist"><ul><li><p>Un tableau de taille fixe de N elements.</p></li><li><p>⚠️  La taille du tableau fait partie de son type</p><div class="ulist"><ul><li><p><strong>Limite</strong>: ne peut pas être changée une fois le tableau instancié.</p></li></ul></div></li></ul></div>
 <div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-go hljs" data-noescape="true" data-lang="go">func main() {
-	// Declare et initialise un tableau de 2 strings.
-	var intArray [2]string
+	// Declare et initialise un tableau de 2 entiers.
+	var intArray [2]int
 	// On peut assigner un élément du tableau en utilisant son index.
 	intArray[0] = 1
 	intArray[1] = 3
