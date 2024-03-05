@@ -34,11 +34,17 @@ include::./chapitres/setup-dev-env.adoc[leveloffset=1]
 // Chapitre Guide de Survie en ligne de command
 include::./chapitres/cli.adoc[leveloffset=1]
 
+// Chapitre Comment le Web Fonctionne
+include::./chapitres/intro-web.adoc[leveloffset=1]
+
+// Chapitre Go Basics
+include::./chapitres/go-basics.adoc[leveloffset=1]
+
 // Chapitre Introduction to Git
 include::./chapitres/introduction-to-git.adoc[leveloffset=1]
 
-// Chapitre Introduction to MenuServer
-include::./chapitres/introduction-to-menuserver.adoc[leveloffset=1]
+// Chapitre Introduction to Project
+include::./chapitres/introduction-to-project.adoc[leveloffset=1]
 
 // Chapitre Project Lifecycle
 include::./chapitres/project-lifecycle.adoc[leveloffset=1]
