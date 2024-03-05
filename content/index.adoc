@@ -4,7 +4,7 @@
 include::./attributes.adoc[]
 
 [.title]
-ENSG - Décembre 2023
+ENSG - Mars 2024
 
 [.small]
 * Présentation disponible à l’adresse: {presentationUrl}[{presentationUrl}]
