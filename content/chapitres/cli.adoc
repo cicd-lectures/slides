@@ -52,6 +52,7 @@ Dans un terminal Unix/Linux/WSL :
 * `CTRL + A` : Positionner le curseur au début de la ligne
 * `CTRL + E` : Positionner le curseur à la fin de la ligne
 * `CTRL + R` : Rechercher dans l'historique de commandes
+* `Tab`: Compléter la commande
 
 [.small]
 🎓 Essayez-les !
@@ -75,6 +76,7 @@ Dans un terminal Unix/Linux/WSL :
 * `rm` : Supprimer un fichier ou dossier
 * `touch` : Créer un fichier
 * `grep` : Chercher un motif de texte
+* `code` : Ouvre le fichier dans l'éditeur de texte
 
 == Arborescence de fichiers 1/2
 
@@ -98,6 +100,7 @@ link:https://linuxhandbook.com/linux-directory-structure/[Source,windows="_blank
 
 
 * `~` (tilde) c'est un raccourci vers le dossier de l'utilisateur courant : 🎓 `ls -l ~`
+* `-` (minus) racourci pour revenir au dernier repertoire visité
 * Sensible à la casse (majuscules/minuscules) et aux espaces :
 🎓
 +

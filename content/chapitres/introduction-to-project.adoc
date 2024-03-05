@@ -1,0 +1,85 @@
+[{invert}]
+= Présentation de votre projet
+
+TODO REFAIRE TOUTE CETTE PARTIE.
+
+== Contexte
+
+Expliquer l'app
+Expliquer la fonctionnalite qu'on implemente
+Trouver une excuse pour justifier le fait qu'on donne une tarball.
+
+== Prise en Main du Projet (1/2)
+
+* Une équipe technique de **Bananes** avait commencé l'implémentation du serveur, et à fourni une archive link:media/menu-server.tar.gz[téléchargeable ICI], contenant le code source du projet
+* **Bananes** vous assure qu'ils ont suivi toutes les "best practices" du développement logiciel sur minitel
+** Il y à un `LISEZMOI.txt` à la racine du projet :tada:
+** ... et pas grand chose d'autre?
+
+== Prise en Main du Projet (2/2)
+
+[source,bash]
+--
+# Création du répertoire menu-server
+mkdir -p /workspace/menu-server && cd /workspace/menu-server
+
+# Téléchargez le projet sur votre environnement de développement
+curl -sSLO https://cicd-lectures.github.io/slides/2023/media/menu-server.tar.gz
+
+# Décompresser et extraire l'archive téléchargée
+tar xvzf ./menu-server.tar.gz
+--
+
+A partir de la vous pouvez ouvrir le fichier `LISEZMOI.txt` et commencer à suivre ses instructions.
+
+[{invert}]
+== Qu'est-ce qui va / ne va pas dans ce projet d'après vous?
+
+== Triste Rencontre avec la Réalité
+
+- Pas de gestion de version...
+- Le projet ne fonctionne pas, tous les menus retournés s'appellent "TODO" :sob:
+- Le correctif ne semble pas compliqué à faire...
+- ... sauf que vous ne pouvez pas compiler le projet!
+
+Il va falloir remédier à ça d'une façon ou d'une autre, sinon vous n'allez pas aller bien loin!
+
+== 🎓 Exercice : Initialisez un dépôt git
+
+* Nettoyez le contenu superflu du projet et initialisez un dépôt git dans le répertoire, puis créez un premier commit
+
+* Par contenu superflu, nous entendons:
+** Tout ce qui est potentiellement généré
+** Les scripts de lancement obsolètes et inutiles
+** Un petit renommage du LISEZMOI.txt en README.md et un coup de nettoyage de son contenu
+
+* 💡 Pour chaque "popup" de l'éditeur (en bas à droite), choisissez "Oui" ou "Reload"
+
+== ✅ Solution Exercice
+
+[source,bash]
+--
+# On évacue le contenu inutile
+rm -rf dist/ menu-server.tar.gz
+rm executer.sh
+# On renomme LISEZMOI.txt en README.md
+mv LISEZMOI.txt README.md
+# On nettoie son contenu
+code README.md
+
+# On initialise un nouveau dépôt git
+git init
+
+# On ajoute tous les fichiers contenus a la zone de staging.
+git add .
+
+# On crée un nouveau commit
+git commit -m "Add initial menu-server project files"
+--
+
+== Checkpoint 🎯
+
+* Vous avez récupéré un projet Java qui semble fonctionner...
+** ..mais pas vraiment à l'état de l'art.
+
+* Application du chapitre précédent : vous avez initialisé un projet `git` local

@@ -1,0 +1,676 @@
+[{invert}]
+= Le Langage Go
+
+image::go.jpeg[caption="Golang",width=1024]
+
+== Pourquoi Go dans ce Cours?
+
+* Peu importe les outils, les problèmes sous jacents lié au CI/CD sont les mêmes
+* Faire face à un nouveau langage est quelque chose de fréquent
+
+== Qu'est ce que Go?
+
+* 🧱 Langage fortement typé
+* 💻 Compilé
+* © Syntaxe proche du C
+* ☁️ Gestion de la mémoire automatisée
+* 🔄 Conçu pour le traitement concurrent
+
+== Go Propulse Le Cloud!
+
+* Issu de chez Google
+* Première version publique en 2009
+* v1.0 en 2012 ... et rétrocompatible depuis!
+* Utilisé dans de nombreux projets!
+** Docker, Kubernetes, Terraform, Prometheus, Grafana...
+
+== 🎓 Exercice: Un Premier Programme en Go
+
+* Dans le répertoire `workspace` créez un repertoire `helloworld`
+* Dans ce répertoire, créez un fichier `main.go` et copiez le code ci-dessous.
+
+[source,go]
+----
+include::../code-samples/go/helloworld.go[]
+----
+
+* Compilez votre programme a l'aide de la commande `go build ./main.go`
+* Executez le programme généré `./main`
+
+== ✅ Solution: Un Premier Programme en Go
+
+[source,bash]
+----
+# Crée un répertoire helloworld
+mkdir -p /workspace/helloworld
+# Saute dans le répertoire
+cd /workspace/helloworld
+# Crée un fichier main.go
+touch main.go
+# Ouvre le fichier main.go dans l'éditeur
+code main.go
+# Compile le programme
+go build ./main.go
+# Exécute le programme.
+./main
+----
+
+== !
+
+💡 `go run ./main.go` compile et execute le programme directement!
+
+⚠️  Ne génère pas de binaire utilisable.
+
+[source,bash]
+----
+$ go run ./main.go
+Hello ENSG!
+----
+
+== Formatage de Code
+
+* Formatage du code automatique, si vous appuyez sur `Ctrl+S`
+* Pas de débat tabs vs spaces 🤡, c'est des tabs.
+
+== Anatomie d'un Fichier go (1/2)
+
+[source,go]
+----
+include::../code-samples/go/helloworld.go[]
+----
+
+== Anatomie d'un Fichier go (2/2)
+
+* `func`: Declare une fonction `main`:
+** Cette fonction appelle la fonction `Println` du package `fmt`
+** En passant la chaine de caractères "Hello ENSG!"
+* `package`: declare que ce fichier fait partie du package `main`.
+* `import`: importe le package `fmt` dans le fichier
+
+== Packages & Imports (1/2)
+
+* Un package est un groupe logique de symboles (variables, constantes, types et fonction)
+* Un package est identifié par une URL indiquant ou le télécharger
+** 👉 Tous les packages sont uniques!
+** Ex: `github.com/jlevesy/prometheus-elector/config`
+* Sauf pour la librarie standard, ou il n'y a pas de domaines
+** Ex: `net/http`, `os`
+* Un package est importé par un autre package
+** Ici notre programme importe le package `fmt`
+
+== Packages & Imports (2/2)
+
+* Un package est représenté par un répertoire dans un dépot de code
+* Tous les fichiers go presents dans un même repertoire doivent declarer le meme package
+* *Convention*: Le nom du package déclaré est le même que celui du répertoire content le fichier
+** Ex: Les fichiers présents dans `github.com/jlevesy/prometheus-elector/config` commencent tous par  `package config`
+
+== !
+
+Mais ce n'est pas le cas de notre programme?
+
+== ℹ️ Le Package Spécial `main`
+
+* Ce package est le `point d'entrée` du programme.
+* La fonction `main` du package `main` est la première fonction appellée lors de l'exécution d'un programme go.
+
+== Packages et Visibilité
+
+* La visibilité en dehors du package d'un symbole déclaré dans un package est controllée par l'utilisation d'une majuscule ou minuscule en premier caractère.
+** Une *majuscule* rendra le symbole publique et utilisable en dehors du package.
+** Une *minuscule* rendra le symbole privé seulement accessible dans le package courant.
+
+[source,go]
+----
+include::../code-samples/go/examples.go[tags="package_visibility"]
+----
+
+== !
+
+Controller la visibilité des symboles exporté permet de s'assurer que le package sera bien utilisé!
+
+C'est l'idée *d'encapsulation*, on expose uniquement ce dont l'utilisateur à besoin.
+
+== Origine des Packages
+
+Votre fichier peut dépendre d'un package issu de:
+
+* Votre de projet courant
+* La (link:https://pkg.go.dev/std[très fournie]) librarie standard de Go
+* D'une librairie externe
+
+[source,go]
+----
+include::../code-samples/go/imports.go[tags="import"]
+----
+
+== Variables (1/3)
+
+Une variable est une zone mémoire allouée contenant une valeur
+
+[source,go]
+----
+include::../code-samples/go/examples.go[tags="main_start,variables,main_end"]
+----
+
+== Variables (2/3)
+
+Une variable est définie dans un "scope", par défaut une fonction. C'est sa durée de vie.
+
+[source,go]
+----
+include::../code-samples/go/examples.go[tags="var_scopes"]
+----
+
+== Variables (3/3)
+
+⚠️ Go est un langage fortement typé ⚠️
+
+[source,go]
+----
+include::../code-samples/go/examples.go[tags="main_start,variables_bad,main_end"]
+----
+
+== !
+
+image::static_types.png[caption="Gymmastics",width=512]
+
+== Constantes
+
+[source,go]
+----
+include::../code-samples/go/examples.go[tags="consts"]
+----
+
+== Types Scalaires
+
+* Numeriques: `int`, `intX`, `uint`, `uintX`, `float32`, `float64`
+* Booléen: `bool`
+* Chaine de caractères UTF-8: `string`
+* Autres: `byte` (octet), `rune` (caractère UTF-8)
+
+== Conversions
+
+[source,go]
+----
+include::../code-samples/go/examples.go[tags="conversions"]
+----
+
+== Controle de Flot
+
+== Controle de Flot: if (1/2)
+
+[source,go]
+----
+include::../code-samples/go/examples.go[tags="flow_control_if_1"]
+----
+
+== Controle de Flot: if (2/2)
+
+[source,go]
+----
+include::../code-samples/go/examples.go[tags="flow_control_if_2"]
+----
+
+== Controle de Flot: switch
+
+[source,go]
+----
+include::../code-samples/go/examples.go[tags="flow_control_switch"]
+----
+
+== Controle de Flot: boucle for
+
+[source,go]
+----
+include::../code-samples/go/examples.go[tags="flow_control_for"]
+----
+
+== Fonctions(1/4)
+
+* Une fonction est un groupement logique d'instructions
+* Accepte entre 0 et N arguments
+* 🎉 Retourne entre 0 et N résultats 🎉
+
+[source,go]
+----
+include::../code-samples/go/examples.go[tags="func_examples_1"]
+----
+
+== Fonctions(2/4)
+
+* Les fonctions peuvent être manipulées comme des valeurs!
+
+[source,go]
+----
+include::../code-samples/go/examples.go[tags="func_examples_2"]
+----
+
+== Fonctions(3/4)
+
+* Go permets de "reporter" l'exécution d'une fonction quand une fonction parente se termine
+* Pratique pour garantir qu'une resource soit libérée quoi qu'il se passe lors de l'exécution de la fonction.
+** Similaire aux "destructeurs" en C++
+
+[source,go]
+----
+include::../code-samples/go/examples.go[tags="func_defer"]
+----
+
+== Fonctions(4/4)
+
+* Les arguments de fonctions sont passés par valeur.
+* Cela signifie que les valeurs des arguments sont copiés lors de l'appel
+
+[source,go]
+----
+include::../code-samples/go/examples.go[tags="func_pass_by_value"]
+----
+
+== Pointeurs (1/3)
+
+* Déclarer une variable reviens à indiquer au programme d'allouer une certaine quantité de mémoire (en fonction du type de la variable) à une adresse en mémoire
+* 🎓 Go permets de *référencer* cet emplacement memoire en copiant son adresse dans une autre variable avec l'opérateur `&`. Autrement dit, on *crée un pointeur*.
+
+[source,go]
+----
+include::../code-samples/go/examples.go[tags="main_start,pointers_ref,main_end"]
+----
+
+== Pointeurs (2/3)
+
+* À l'inverse, on peut aussi accéder au contenu d'une variable référencée par un pointeur.
+* 🎓 Cela est appelé *déréférencer* un pointeur, avec l'opérateur `*`.
+
+[source,go]
+----
+include::../code-samples/go/examples.go[tags="main_start,pointers_deref,main_end"]
+----
+
+== Pointeurs (3/3)
+
+* 🎓 Les types *pointeur sur X* sont des types dit de *référence*.
+* 🎓 La valeur par défaut d'un type référence est `nil`.
+* Il existe d'autres types références en go.
+
+[source,go]
+----
+include::../code-samples/go/examples.go[tags="main_start,pointers_panic,main_end"]
+----
+
+== 🎓 Exercice: Corriger la Fonction
+
+* Corriger la fonction `addGreeting` pour qu'elle affiche correctement `Hello John`
+* Sans retourner de valeur.
+
+[source,go]
+----
+include::../code-samples/go/examples.go[tags="func_pass_by_value"]
+----
+
+== ✅ Solution: Corriger la Fonction
+
+[source,go]
+----
+include::../code-samples/go/examples.go[tags="func_pass_by_reference"]
+----
+
+== Gestion d'Erreur (1/2)
+
+* Go traite les erreurs avec des valeurs retour au lieu d'exeptions
+* Il est commun qu'une fonction qui puisse échouer retourne une valeur et un résultat.
+** Il convient alors de vérifier l'erreur retournée soit égale a nil.
+** ...Sinon il faudra la gérer!
+
+[source,go]
+----
+include::../code-samples/go/examples.go[tags="error_example"]
+----
+
+== Gestion d'Erreur (2/2)
+
+* Certaines instructions peuvent mettre le programme dans un état ou il ne peut plus s'exécuter.
+** Par exemple, accéder à un pointeur `nil`
+* Dans ce cas la, l'exécution de la fonction s'arrête et on parle de `panic`
+
+== Collections
+
+== Collections: Arrays
+
+* Un tableau de taille fixe de N elements.
+* ⚠️  La taille du tableau fait partie de son type
+** *Limite*: ne peut pas être changée une fois le tableau instancié.
+
+[source,go]
+----
+include::../code-samples/go/examples.go[tags="arrays"]
+----
+
+👉 On évite en général de les utiliser directement, sauf bonne raison.
+
+== Collections: Slices (1/5)
+
+Une `slice` est une référence sur un sous ensemble d'entrées dans un tableau
+
+[source,go]
+----
+include::../code-samples/go/examples.go[tags="slices"]
+----
+
+== Collections: Slices (2/5)
+
+* On peut initialiser directement une slice sans passer par un tableau.
+* On peut aussi initialiser une slice avec l'operateur `make`
+
+[source,go]
+----
+include::../code-samples/go/examples.go[tags="slices_literals"]
+----
+
+== Collections: Slices (3/5)
+
+Une `slice` possède deux caractéristiques importantes:
+
+* Sa taille: le nombre d'éléments présents dans la slice
+** On y accède a l'aide de la fonction `len`
+* Sa capacité: la taille totale du tableau référencé
+** On y accède a l'aide de la fonction `cap`
+
+[source,go]
+----
+include::../code-samples/go/examples.go[tags="slices_len_cap"]
+----
+
+== Collections: Slices (4/5)
+
+* On peut concaténer des objets à une slice avec l'operateur `append`
+* ⚠️  Cela n'ajoute pas nécessairement un entrée a la slice passée en parametre.
+** Dans le cas ou le tableau sous jacent est plein (len == cap), `append` va réallouer un tableau et copier toutes les entées dans ce nouveau tableau.
+** 👉 En conséquence: il faut *TOUJOURS* assigner la valeur retournée par `append`
+
+[source,go]
+----
+include::../code-samples/go/examples.go[tags="slices_append"]
+----
+
+== Collections: Slices (5/5)
+
+* Le type *slice de X*, comme le type *pointeur sur X*, est un type référence.
+* Sa valeur par défaut est `nil`
+* Accéder à une slice nil provoque un arrêt de l'exécution
+* En revanche: `append` et `len` savent gérer une nil slice.
+
+[source,go]
+----
+include::../code-samples/go/examples.go[tags="slices_nil"]
+----
+
+== Parcourir une slice ou un tableau
+
+* Go fournit la fonction `range` qui permet de parcourir une collection.
+* `range` accepte une collection, et retourne deux valeurs:
+** L'index courant dans la collection
+** La valeur de la collection a l'index
+
+[source,go]
+----
+include::../code-samples/go/examples.go[tags="slices_range"]
+----
+
+== 🎓 Exercice: Convertir une collection d'entiers en une collection de strings
+
+* Ecrire une fonction `toStringSlice` qui convertit slice d'entiers en une slice de strings.
+** 🕵️: Il faut utiliser la fonction *strconv.Itoa* link:https://pkg.go.dev/strconv#Itoa[doc]
+
+== ✅ Solution: Convertir une collection d'entiers en une collection de strings
+
+[source,go]
+----
+include::../code-samples/go/examples.go[tags="slices_int_to_string"]
+----
+
+== Collections: maps (1/3)
+
+* Tableau associatif clé-valeur
+* Initialisée de façon littérale, ou avec `make`
+* On récupère sa taille avec `len`
+* On supprime une clé avec `delete`
+* Type référence, comme les pointeurs out les slices
+** Une map peut être nil, `len` retournera 0.
+
+== Collections: maps (2/3)
+
+Exemple d'écriture
+
+[source,go]
+----
+include::../code-samples/go/examples.go[tags="maps"]
+----
+
+== Collections: maps (3/3)
+
+Exemple de lecture
+
+[source,go]
+----
+include::../code-samples/go/examples.go[tags="maps_reads"]
+----
+
+== Parcourir une map
+
+* `range` supporte aussi les maps dans une boucle for
+* Assigne la clé et la valeur courante
+* ⚠️ L'ordre de parcours n'est pas déterministe! Il ne faut pas en dépendre!
+
+[source,go]
+----
+include::../code-samples/go/examples.go[tags="maps_range"]
+----
+
+== 🎓 Exercice: Comptez les occurences de mots dans une chaine de caractère
+
+* Ecrivez une fonction `WordCount` en go qui accepte une chaine de caractère et qui retourne le nombre d'occurences de chacun des mots contenu dans la chaine.
+** *Indice*: La signature de votre fonction devrait resembler a `func WordCount(str string) map[string]int`.
+*** La valeur de retour mappe le mot vers le nombre de fois qu'il est apparu.
+** *Indice*: `strings.Fields` link:https://pkg.go.dev/strings#Fields[(doc)] sépare les mots d'une chaine de caractère et retourne une string.
+
+== ✅ Solution: Comptez les occurences de mots dans une chaine de caractère
+
+[source,go]
+----
+include::../code-samples/go/examples.go[tags="word_count"]
+----
+
+== Structures (1/3)
+
+* Type déclaré représentant une collection fixe d'attributs (aussi appelés membres)
+* Les attributs commençant par une lettre majuscules sont accessibles en dehors du package. Ceux qui commencent par une lettre minuscule ne le sont pas.
+
+[source,go]
+----
+include::../code-samples/go/examples.go[tags="structs"]
+----
+
+== Structures (2/3)
+
+* La valeur par défaut d'une structure est égale a l'ensemble des valeurs par défaut de ses membres.
+
+[source,go]
+----
+include::../code-samples/go/examples.go[tags="struct_defaults"]
+----
+
+== Structures (3/3)
+
+* Toute structure doit instanciée doit être dans un état utilisable.
+* Si les valeurs par défaut ne suffisent pas, on peut fournir une fonction d'initialisation.
+** Similaire aux "constructeurs" dans d'autres langages.
+
+
+[source,go]
+----
+include::../code-samples/go/examples.go[tags="struct_initialization"]
+----
+
+== Annotations de Structures
+
+* Go permets d'annoter les membres d'une structure
+* Utilisation diverses
+** Ex: indiquer le champ d'un object JSON a lié à l'attribut.
+
+[source,go]
+----
+include::../code-samples/go/examples.go[tags="struct_annot"]
+----
+
+== Definir des Types
+
+* Nous avons utilisé le mot clef `type` pour définir un nouveau type de structure.
+* Mais `type` peut être appliqué á des tas d'autre choses.
+
+[source,go]
+----
+include::../code-samples/go/examples.go[tags="types"]
+----
+
+== Types et Méthodes (1/2)
+
+* Il est possible d'attacher des méthodes aux types que l'on définit
+
+[source,go]
+----
+include::../code-samples/go/examples.go[tags="methods_1"]
+----
+
+== Types et Méthodes (2/2)
+
+* Une structure avec des méthodes est l'équivalent d'une classe dans d'autres langages.
+* Le "Receveur" est équivalent a *this* en C++ ou Java.
+
+[source,go]
+----
+include::../code-samples/go/examples.go[tags="methods_2"]
+----
+
+== Receveurs: Pointeurs ou Valeurs?
+
+* On peut attacher une méthode sur une valeur du type, ou sur un pointeur.
+* L'opérateur `.` (accés) référence et déréférence les pointeurs implicitement.
+* Quelques règles:
+** Sur les types scalaires (int, string etc...) on préfèrera les valeurs, la copie ne coute rien.
+** Sur les collections et fonctions, on garde les valeurs, ce sont des types références.
+** Sur les structs, on préfère attacher au pointeurs car cela évite une copie parfois lourde.
+
+== Types Abstraits: Interfaces (1/3)
+
+* Une interface décrit un jeu de méthodes.
+* Une variable du type de l'interface peut recevoir n'importe quel type qui implémente les méthodes de l'interface.
+* Le comportement d'un appel de méthode est celui du type concret caché derrière l'interface. C'est ce qu'on appelle le *Polymorphisme*.
+
+== Types Abstraits: Interfaces (2/3)
+
+[source,go]
+----
+include::../code-samples/go/examples.go[tags="polymorphism"]
+----
+
+== Types Abstraits: Interfaces (3/4)
+
+* Une interface est un type référence vers un autre type, sa valeur par défaut est `nil`.
+* Les interfaces sont implicites:
+** Du moment que le type de la valeur satisfait toutes les methodes de l'interface, alors il est considéré comme implémentant l'interface.
+** Pas de mot clé `implements` comme en Java
+
+== Types Abstraits: Interfaces (4/4)
+
+* Pourquoi s'embêter à faire des interfaces?
+** Fournir du code générique
+** Découpler, cacher la complexité
+*** Exemple: Cacher une dépendance à une base de données derrière une interface
+
+[source,go]
+----
+include::../code-samples/go/examples.go[tags="io_example"]
+----
+
+== Interfaces Importantes en Go
+
+* package `io`:
+** link:https://pkg.go.dev/io#Reader[io.Reader], link:https://pkg.go.dev/io#Writer[io.Writer], link:https://pkg.go.dev/io#Closer[io.Closer]
+* package `http`:
+** link:https://pkg.go.dev/net/http#Handler[http.Handler] permet de gérer et répondre à une requête HTTP.
+* Le type `error`
+
+[source,go]
+----
+include::../code-samples/go/examples.go[tags="error_type"]
+----
+
+== Nommage de variables
+
+* *Convention*: La longueur du nom d'une variable est proportionnelle à sa durée de vie.
+* Certaines exceptions:
+** `err` pour une valeur d'erreur
+** `ctx` toute instance d'un a `context.Context`
+** Receveurs de méthodes (ie `*Store` =>  `st`)
+** Et d'autres...
+
+== Quelques Exemples
+
+* Decoder du JSON
+
+[source,go]
+----
+include::../code-samples/go/examples.go[tags="decode_json"]
+----
+
+== Quelques Exemples
+
+* Lire l'intégralité d'un Buffer
+
+[source,go]
+----
+include::../code-samples/go/examples.go[tags="read_buffer"]
+----
+
+== Quelques Exemples
+
+* Faire une requête HTTP
+
+[source,go]
+----
+include::../code-samples/go/examples.go[tags="http_request"]
+----
+
+== 🎓 Exercice: Donnez le Climat de Tatooine
+
+On vous demande le programme go suivant:
+
+* Fait une requête a swapi.dev pour récupérer les informations de la planete Tatooine
+** L'URL a appeler est link:https://swapi.dev/api/planets/1/[https://swapi.dev/api/planets/1/]
+* Si la requête est réussie alors on lit l'intégralité du corps de la réponse
+* Et on déserialise la réponse dans un object pour accéder au `climat`
+
+* **Bonus**: Une fois fini, essayez de nous donner le diametre de l'étoile noire aussi.
+
+== ✅ Solution: Le Climat de Tatooine
+
+[source,go]
+----
+include::../code-samples/go/examples.go[tags="tatooine_climate"]
+----
+
+== Réferences
+
+* Vidéos
+** https://www.youtube.com/watch?v=xi8732QO33Y
+** https://www.youtube.com/c/JustForFunc
+
+* Guides complets
+** https://go.dev/tour/
+** https://gobyexample.com/
+
+* Pour aller plus loin
+** https://go.dev/doc/effective_go
+** https://go.dev/doc/
+** https://go-proverbs.github.io/
