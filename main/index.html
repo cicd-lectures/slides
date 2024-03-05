@@ -392,7 +392,7 @@ td.hdlist1 {
 link.rel = 'stylesheet';
 link.type = 'text/css';
 link.href = window.location.search.match( /print-pdf/gi ) ? "./reveal.js/css/print/pdf.css" : "./reveal.js/css/print/paper.css";
-document.getElementsByTagName( 'head' )[0].appendChild( link );</script></head><body><div class="reveal"><div class="slides"><section class="title" data-state="title"><h1>Introduction au CI/CD</h1><div class="preamble"><div class="paragraph title"><p>ENSG - Décembre 2023</p></div>
+document.getElementsByTagName( 'head' )[0].appendChild( link );</script></head><body><div class="reveal"><div class="slides"><section class="title" data-state="title"><h1>Introduction au CI/CD</h1><div class="preamble"><div class="paragraph title"><p>ENSG - Mars 2024</p></div>
 <div class="ulist small"><ul><li><p>Présentation disponible à l’adresse: <a href="https://cicd-lectures.github.io/slides/2023">https://cicd-lectures.github.io/slides/2023</a></p></li><li><p>Version PDF de la présentation : <a href="slides.pdf"><span class="far fa-file-pdf"></span> Cliquez ici</a></p></li><li><p>This work is licensed under a Creative Commons Attribution 4.0 International License</p></li><li><p>Code source de la présentation: <a href="https://github.com/cicd-lectures/slides"><span class="fab fa-github"></span> https://github.com/cicd-lectures/slides</a></p></li></ul></div>
 <div class="imageblock"><img src="media/qrcode.png" alt="QRCode to this presentation" height="150"></div></div></section>
 <section id="comment_utiliser_cette_présentation"><h2>Comment utiliser cette présentation ?</h2><div class="slide-content"><div class="ulist"><ul><li><p>Pour naviguer, utilisez les flèches en bas à droite (ou celles de votre clavier)</p><div class="ulist"><ul><li><p>Gauche/Droite: changer de chapitre</p></li><li><p>Haut/Bas: naviguer dans un chapitre</p></li></ul></div></li><li><p>Pour avoir une vue globale : utilisez la touche "o" (pour "<strong>Overview</strong>")</p></li><li><p>Pour voir les notes de l&#8217;auteur : utilisez la touche "s" (pour "<strong>Speaker</strong> notes")</p></li></ul></div></div></section>
@@ -421,10 +421,10 @@ Saisissez un numéro de téléphone valide pour recevoir par SMS un code de déb
 <div class="ulist"><ul><li><p>Navigation avec les flèches haut et bas</p><div class="ulist"><ul><li><p>Tapez <code>/</code> puis une chaîne de texte pour chercher</p></li><li><p>Touche <code>n</code> pour sauter d’occurrence en occurrence</p></li></ul></div></li><li><p>Touche <code>q</code> pour quitter</p></li></ul></div></li></ul></div>
 <div class="paragraph"><p>🎓 Essayez avec <code>ls</code>, chercher le mot <code>color</code></p></div>
 <div class="ulist small"><ul><li><p>💡 La majorité des commandes fournit également une option (<code>--help</code>), un flag (<code>-h</code>)  ou un argument (<code>help</code>)</p></li><li><p>Google c&#8217;est pratique aussi hein !</p></li></ul></div></div></section><section id="raccourcis"><h2>Raccourcis</h2><div class="slide-content"><div class="paragraph"><p>Dans un terminal Unix/Linux/WSL :</p></div>
-<div class="ulist"><ul><li><p><code>CTRL + C</code> : Annuler le process ou prompt en cours</p></li><li><p><code>CTRL + L</code> : Nettoyer le terminal</p></li><li><p><code>CTRL + A</code> : Positionner le curseur au début de la ligne</p></li><li><p><code>CTRL + E</code> : Positionner le curseur à la fin de la ligne</p></li><li><p><code>CTRL + R</code> : Rechercher dans l&#8217;historique de commandes</p></li></ul></div>
-<div class="paragraph small"><small>🎓 Essayez-les !</small></div></div></section><section id="commandes_de_base_12"><h2>Commandes de base 1/2</h2><div class="slide-content"><div class="ulist"><ul><li><p><code>pwd</code> : Afficher le répertoire courant</p><div class="ulist"><ul><li><p>🎓 Option <code>-P</code> ?</p></li></ul></div></li><li><p><code>ls</code> : Lister le contenu du répertoire courant</p><div class="ulist"><ul><li><p>🎓 Options <code>-a</code> et <code>-l</code> ?</p></li></ul></div></li><li><p><code>cd</code> : Changer de répertoire</p><div class="ulist"><ul><li><p>🎓 Sans argument : que se passe t&#8217;il ?</p></li></ul></div></li><li><p><code>cat</code> : Afficher le contenu d&#8217;un fichier</p><div class="ulist"><ul><li><p>🎓 Essayez avec plusieurs arguments</p></li></ul></div></li><li><p><code>mkdir</code> : créer un répertoire</p><div class="ulist"><ul><li><p>🎓 Option <code>-p</code> ?</p></li></ul></div></li></ul></div></div></section><section id="commandes_de_base_22"><h2>Commandes de base 2/2</h2><div class="slide-content"><div class="ulist"><ul><li><p><code>echo</code> : Afficher un (des) message(s)</p></li><li><p><code>rm</code> : Supprimer un fichier ou dossier</p></li><li><p><code>touch</code> : Créer un fichier</p></li><li><p><code>grep</code> : Chercher un motif de texte</p></li></ul></div></div></section><section id="arborescence_de_fichiers_12"><h2>Arborescence de fichiers 1/2</h2><div class="slide-content"><div class="ulist"><ul><li><p>Le système de fichier a une structure d&#8217;arbre</p><div class="ulist"><ul><li><p>La racine du disque dur c&#8217;est <code>/</code> : 🎓 <code>ls -l /</code></p></li><li><p>Le séparateur c&#8217;est également <code>/</code> : 🎓 <code>ls -l /usr/bin</code></p></li></ul></div></li><li><p>Deux types de chemins :</p><div class="ulist"><ul><li><p>Absolu (depuis la racine): Commence par <code>/</code> (Ex. <code>/usr/bin</code>)</p></li><li><p>Sinon c&#8217;est relatif (e.g. depuis le dossier courant) (Ex <code>./bin</code> ou <code>local/bin/</code>)</p></li></ul></div></li></ul></div>
+<div class="ulist"><ul><li><p><code>CTRL + C</code> : Annuler le process ou prompt en cours</p></li><li><p><code>CTRL + L</code> : Nettoyer le terminal</p></li><li><p><code>CTRL + A</code> : Positionner le curseur au début de la ligne</p></li><li><p><code>CTRL + E</code> : Positionner le curseur à la fin de la ligne</p></li><li><p><code>CTRL + R</code> : Rechercher dans l&#8217;historique de commandes</p></li><li><p><code>Tab</code>: Compléter la commande</p></li></ul></div>
+<div class="paragraph small"><small>🎓 Essayez-les !</small></div></div></section><section id="commandes_de_base_12"><h2>Commandes de base 1/2</h2><div class="slide-content"><div class="ulist"><ul><li><p><code>pwd</code> : Afficher le répertoire courant</p><div class="ulist"><ul><li><p>🎓 Option <code>-P</code> ?</p></li></ul></div></li><li><p><code>ls</code> : Lister le contenu du répertoire courant</p><div class="ulist"><ul><li><p>🎓 Options <code>-a</code> et <code>-l</code> ?</p></li></ul></div></li><li><p><code>cd</code> : Changer de répertoire</p><div class="ulist"><ul><li><p>🎓 Sans argument : que se passe t&#8217;il ?</p></li></ul></div></li><li><p><code>cat</code> : Afficher le contenu d&#8217;un fichier</p><div class="ulist"><ul><li><p>🎓 Essayez avec plusieurs arguments</p></li></ul></div></li><li><p><code>mkdir</code> : créer un répertoire</p><div class="ulist"><ul><li><p>🎓 Option <code>-p</code> ?</p></li></ul></div></li></ul></div></div></section><section id="commandes_de_base_22"><h2>Commandes de base 2/2</h2><div class="slide-content"><div class="ulist"><ul><li><p><code>echo</code> : Afficher un (des) message(s)</p></li><li><p><code>rm</code> : Supprimer un fichier ou dossier</p></li><li><p><code>touch</code> : Créer un fichier</p></li><li><p><code>grep</code> : Chercher un motif de texte</p></li><li><p><code>code</code> : Ouvre le fichier dans l&#8217;éditeur de texte</p></li></ul></div></div></section><section id="arborescence_de_fichiers_12"><h2>Arborescence de fichiers 1/2</h2><div class="slide-content"><div class="ulist"><ul><li><p>Le système de fichier a une structure d&#8217;arbre</p><div class="ulist"><ul><li><p>La racine du disque dur c&#8217;est <code>/</code> : 🎓 <code>ls -l /</code></p></li><li><p>Le séparateur c&#8217;est également <code>/</code> : 🎓 <code>ls -l /usr/bin</code></p></li></ul></div></li><li><p>Deux types de chemins :</p><div class="ulist"><ul><li><p>Absolu (depuis la racine): Commence par <code>/</code> (Ex. <code>/usr/bin</code>)</p></li><li><p>Sinon c&#8217;est relatif (e.g. depuis le dossier courant) (Ex <code>./bin</code> ou <code>local/bin/</code>)</p></li></ul></div></li></ul></div>
 <div class="imageblock"><img src="media/linux-directory-structure.png" alt="linux directory structure" width="400"></div>
-<div class="paragraph small"><small><a href="https://linuxhandbook.com/linux-directory-structure/">Source</a></small></div></div></section><section id="arborescence_de_fichiers_22"><h2>Arborescence de fichiers 2/2</h2><div class="slide-content"><div class="ulist"><ul><li><p>Le dossier "courant" c&#8217;est <code>.</code> : 🎓 <code>ls -l ./bin # Dans le dossier /usr</code></p></li><li><p>Le dossier "parent" c&#8217;est <code>..</code> : 🎓 <code>ls -l ../ # Dans le dossier /usr</code></p></li><li><p><code>~</code> (tilde) c&#8217;est un raccourci vers le dossier de l&#8217;utilisateur courant : 🎓 <code>ls -l ~</code></p></li><li><p>Sensible à la casse (majuscules/minuscules) et aux espaces :
+<div class="paragraph small"><small><a href="https://linuxhandbook.com/linux-directory-structure/">Source</a></small></div></div></section><section id="arborescence_de_fichiers_22"><h2>Arborescence de fichiers 2/2</h2><div class="slide-content"><div class="ulist"><ul><li><p>Le dossier "courant" c&#8217;est <code>.</code> : 🎓 <code>ls -l ./bin # Dans le dossier /usr</code></p></li><li><p>Le dossier "parent" c&#8217;est <code>..</code> : 🎓 <code>ls -l ../ # Dans le dossier /usr</code></p></li><li><p><code>~</code> (tilde) c&#8217;est un raccourci vers le dossier de l&#8217;utilisateur courant : 🎓 <code>ls -l ~</code></p></li><li><p><code>-</code> (minus) racourci pour revenir au dernier repertoire visité</p></li><li><p>Sensible à la casse (majuscules/minuscules) et aux espaces :
 🎓</p><div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-bash hljs" data-noescape="true" data-lang="bash">ls -l /bin
 ls -l /Bin
 mkdir ~/"Accent tué"
@@ -471,6 +471,782 @@ $ head -n1 ./monscript.sh
 
 $ ./monscript.sh
 # Exécution</code></pre></div></div></li></ul></div></li></ul></div></div></section></section>
+<section><section id="comment_fonctionnent_les_internets" data-background-color="rgb(248, 228, 130)" data-state="invert"><h2>Comment fonctionnent les Internets?</h2><div class="slide-content"><div class="imageblock"><img src="https://media1.tenor.com/m/X6lbLfskG4MAAAAC/internet-web.gif" alt="internet web" width="512"></div></div></section><section><div class="slide-content"><div class="paragraph"><p>🧐 Que se passe t&#8217;il quand je tape google.com dans mon navigateur et que j&#8217;appuie sur entree?</p></div></div></section><section><div class="slide-content"><div class="olist arabic"><ol class="arabic"><li><p>📖 Resolution DNS</p></li><li><p>🛜 Connection TCP</p></li><li><p>🔒 Handshake TLS</p></li><li><p>➡️  Envoi d&#8217;une requête HTTP au Serveur</p></li><li><p>⬅️ Réception d&#8217;une reponse et décodage du contenu</p></li><li><p>🎨 Rendu de la page</p></li></ol></div></div></section><section id="zoom_sur_http"><h2>Zoom sur HTTP</h2><div class="slide-content"><div class="ulist"><ul><li><p>Hypertext Transfer Protocol</p></li><li><p>Définit un format de requête/réponse dans le modèle client / serveur</p><div class="ulist"><ul><li><p>Le client soumet une requête HTTP a un serveur, le serveur lui réponds une réponse avec un contenu.</p></li></ul></div></li><li><p>Plusieurs versions en activité HTTP/1.1, HTTP/2, HTTP/3, mais la sémantique reste la même</p></li></ul></div></div></section><section id="anatomie_dune_requête_http"><h2>Anatomie d&#8217;une requête HTTP</h2><div class="slide-content"><div class="paragraph"><p>Une requête est composée des champs suivant:</p></div>
+<div class="ulist"><ul><li><p>Méthode: Indique une action désirée (<code>GET</code>, <code>POST</code>, <code>PUT</code>, <code>DELETE</code>, <code>HEAD</code>, <code>OPTIONS</code>&#8230;&#8203;)</p></li><li><p>Hote: indique un domain dans lequel récupérer les resources (<code>github.com</code>)</p></li><li><p>Chemin (path): indiqe une resource à obtenir au server (<code>/assets/file.js</code>)</p></li><li><p>Entêtes (headers): Couple clé &#8594; multiples valeurs indiquant des méta information sur la requête (<code>Accepted-Content</code>, <code>User-Agent</code>,<code>Accept</code>, <code>Referrer</code>, <code>Authorization</code>, <code>Cookies</code>)</p></li><li><p>Corps (body): Optionel, contenu encodé à envoyer au serveur, par exemple une soumission de formulaires.</p></li></ul></div></div></section><section id="anatomie_dune_réponse_http"><h2>Anatomie d&#8217;une réponse HTTP</h2><div class="slide-content"><div class="paragraph"><p>Une réponse est composée des champs suivant:</p></div>
+<div class="ulist"><ul><li><p><a href="https://http.cat">D&#8217;un status code</a> 🐱</p><div class="ulist"><ul><li><p>200 OK, 404 Not Found, 301 Moved Permanently etc..</p></li></ul></div></li><li><p>Entêtes (headers): Couple clé &#8594; multiples valeurs indiquant des méta information sur la réponse (<code>Content-Length</code>, <code>Content-Encoding</code>,<code>Content-Type</code> &#8230;&#8203;)</p></li><li><p>Un corps de requête à lire et à décoder</p></li></ul></div></div></section><section id="comment_parler_http_depuis_le_terminal"><h2>Comment parler HTTP depuis le terminal?</h2><div class="slide-content"><div class="ulist"><ul><li><p>On propose d&#8217;utiliser <a href="https://curl.se/">cURL</a></p></li><li><p>Outil pour transférer des données dans différents protocoles</p><div class="ulist"><ul><li><p>Le couteau suisse des internets!</p></li></ul></div></li></ul></div></div></section><section id="exercice_première_requête_en_utilisant_curl"><h2>🎓 Exercice: Première Requête en utilisant cURL</h2><div class="slide-content"><div class="ulist"><ul><li><p>Que signifie cette ligne de commande?</p><div class="ulist"><ul><li><p>Indice: <code>man curl</code></p></li></ul></div></li><li><p>Que pouvez vous dire du résultat affiché?</p></li></ul></div>
+<div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-bash hljs" data-noescape="true" data-lang="bash">curl --verbose --location --output /dev/null voi.com</code></pre></div></div></div></section><section id="solution_première_requête_en_utilisant_curl_14"><h2>✅ Solution: Première Requête en utilisant cURL (1/4)</h2><div class="slide-content"><div class="ulist"><ul><li><p>C&#8217;est verbeux 🙃, mais on l&#8217;a demandé avec <code>--verbose</code>. cURL va logger tous les échanges effectués avec le serveur</p></li><li><p><code>--location</code> indique à cURL de suivre les redirections</p></li><li><p><code>--output</code> indique à cURL d&#8217;écrire le contenu dans répondu <code>/dev/null</code> au lieu de l&#8217;afficher sur la sortie standard</p></li></ul></div></div></section><section id="solution_première_requête_en_utilisant_curl_24"><h2>✅ Solution: Première Requête en utilisant cURL (2/4)</h2><div class="slide-content"><div class="paragraph"><p>Regardons d&#8217;un peut plus près les logs:</p></div>
+<div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-bash hljs" data-noescape="true" data-lang="bash"># On se connecte a une IPv6... probablement celle de voi.com?
+* Trying [2606:4700:20::681a:3d6]:80...
+* Connected to voi.com (2606:4700:20::681a:3d6) port 80
+
+# cURL formule la requête demandée sur HTTP.
+&gt; GET / HTTP/1.1
+&gt; Host: voi.com
+&gt; User-Agent: curl/8.4.0
+&gt; Accept: */*
+&gt;
+# Le serveur nous réponds une 301 !? voi.com à bougé?
+&lt; HTTP/1.1 301 Moved Permanently
+# [...]
+# Aha! Le serveur nous redirige vers le même site, mais en HTTPS sur le port 443.
+&lt; Location: https://voi.com:443/</code></pre></div></div></div></section><section id="solution_première_requête_en_utilisant_curl_34"><h2>✅ Solution: Première Requête en utilisant cURL (3/4)</h2><div class="slide-content"><div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-bash hljs" data-noescape="true" data-lang="bash"># Comme indiqué: on se reconnecte a voi.com sur le port 443!
+* Clear auth, redirects to port from 80 to 443
+* Issue another request to this URL: 'https://voi.com:443/'
+*   Trying [2606:4700:20::681a:3d6]:443...
+* Connected to voi.com (2606:4700:20::681a:3d6) port 443
+
+# On se connecte en HTTPS, du coup il va falloir établir une session TLS
+# Ensuite cURL et le serveur se mettent d'accord et établissent la connection sécurisée.
+* (304) (OUT), TLS handshake, Client hello (1):
+# [...]
+# On est connectés de façon sécurisée au serveur!
+* SSL connection using TLSv1.3 / AEAD-CHACHA20-POLY1305-SHA256
+* Server certificate:
+# [...] Le certificat du serveur est valide!
+*  SSL certificate verify ok.
+# [...] On refait notre requête une fois connectés!
+&gt; GET / HTTP/2
+&gt; Host: voi.com
+&gt; User-Agent: curl/8.4.0
+&gt; Accept: */*
+&gt;
+# Victoire le serveur nous réponds!
+&lt; HTTP/2 200
+# Du HTML!
+&lt; content-type: text/html; charset=utf-8
+# et 22kb de données!
+{ [21877 bytes data]</code></pre></div></div></div></section><section id="solution_première_requête_en_utilisant_curl_44"><h2>✅ Solution: Première Requête en utilisant cURL (4/4)</h2><div class="slide-content"><div class="ulist"><ul><li><p>Ce qu&#8217;il viens de se passer est ce que l&#8217;on appelle une <code>HTTPS</code> upgrade</p></li><li><p>Le serveur force le client a se connecter de façon sécurisée!</p></li><li><p>Pourquoi?</p><div class="ulist"><ul><li><p>TLS prouve que le client parle bien au bon serveur!</p></li><li><p>TLS chiffre les communications sur le réseau, on peut faire transiter des données sans(trop) se soucier d&#8217;être espionés 🕵️</p></li></ul></div></li></ul></div></div></section><section><div class="slide-content"><div class="ulist"><ul><li><p>Maintenant essayez d&#8217;enlever l&#8217;option <code>--location</code>, que se passe t&#8217;il?</p></li><li><p>Maintenant essayez d&#8217;enlever l&#8217;option <code>--output /dev/null</code>, que se passe t&#8217;il?</p></li></ul></div></div></section><section id="autres_options_utiles_de_curl"><h2>Autres Options Utiles de cURL</h2><div class="slide-content"><div class="ulist"><ul><li><p>Contrôle de la méthode de la requête: <code>--request POST</code>, <code>--request DELETE</code></p></li><li><p>Ajouter un header a la requête: <code>--header "Content-Type: application/json"</code></p></li><li><p>Envoyer un body dans la requête:</p><div class="ulist"><ul><li><p>Directement depuis la ligne de commande <code>--data '{"some":"json"}</code></p></li><li><p>En lisant un ficher <code>--data '@some/local/file'</code></p></li></ul></div></li></ul></div>
+<div class="paragraph"><p>Essayez donc sur voi.com!</p></div></div></section><section id="exercice_afficher_du_json_de_façon_lisible"><h2>🎓 Exercice: Afficher du JSON de Façon Lisible</h2><div class="slide-content"><div class="ulist"><ul><li><p>Qu&#8217;affiche le résultat de la commande suivante?</p></li><li><p>Comment le rendre plus lisible?</p><div class="ulist"><ul><li><p>Indice: il faut utilser un <code>|</code> (pipe) et la commande <code>jq</code></p></li></ul></div></li></ul></div>
+<div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-bash hljs" data-noescape="true" data-lang="bash">curl https://swapi.dev/api/planets/1</code></pre></div></div></div></section><section id="solution_afficher_du_json_de_façon_lisible"><h2>✅ Solution: Afficher du JSON de Façon Lisible</h2><div class="slide-content"><div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-bash hljs" data-noescape="true" data-lang="bash">curl https://swapi.dev/api/planets/1 | jq .</code></pre></div></div>
+<div class="ulist"><ul><li><p>Bonus: jq permets de sélectionner un attribut JSON.</p></li></ul></div>
+<div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-bash hljs" data-noescape="true" data-lang="bash">curl https://swapi.dev/api/planets/1 | jq .residents</code></pre></div></div></div></section><section id="checkpoint_2"><h2>Checkpoint 🎯</h2><div class="slide-content"><div class="ulist"><ul><li><p>Internet repose sur une collection de protocole (DNS, HTTP, TLS)</p></li><li><p>HTTP permets de formuler une requête à un serveur et une réponse</p></li><li><p><code>cURL</code> est un outil très complet pour parler HTTP depuis un terinal!</p></li></ul></div></div></section></section>
+<section><section id="le_langage_go" data-background-color="rgb(248, 228, 130)" data-state="invert"><h2>Le Langage Go</h2><div class="slide-content"><div class="imageblock"><img src="media/go.jpeg" alt="go" width="1024"></div></div></section><section id="pourquoi_go_dans_ce_cours"><h2>Pourquoi Go dans ce Cours?</h2><div class="slide-content"><div class="ulist"><ul><li><p>Peu importe les outils, les problèmes sous jacents lié au CI/CD sont les mêmes</p></li><li><p>Faire face à un nouveau langage est quelque chose de fréquent</p></li></ul></div></div></section><section id="quest_ce_que_go"><h2>Qu&#8217;est ce que Go?</h2><div class="slide-content"><div class="ulist"><ul><li><p>🧱 Langage fortement typé</p></li><li><p>💻 Compilé</p></li><li><p>© Syntaxe proche du C</p></li><li><p>☁️ Gestion de la mémoire automatisée</p></li><li><p>🔄 Conçu pour le traitement concurrent</p></li></ul></div></div></section><section id="go_propulse_le_cloud"><h2>Go Propulse Le Cloud!</h2><div class="slide-content"><div class="ulist"><ul><li><p>Issu de chez Google</p></li><li><p>Première version publique en 2009</p></li><li><p>v1.0 en 2012 &#8230;&#8203; et rétrocompatible depuis!</p></li><li><p>Utilisé dans de nombreux projets!</p><div class="ulist"><ul><li><p>Docker, Kubernetes, Terraform, Prometheus, Grafana&#8230;&#8203;</p></li></ul></div></li></ul></div></div></section><section id="exercice_un_premier_programme_en_go"><h2>🎓 Exercice: Un Premier Programme en Go</h2><div class="slide-content"><div class="ulist"><ul><li><p>Dans le répertoire <code>workspace</code> créez un repertoire <code>helloworld</code></p></li><li><p>Dans ce répertoire, créez un fichier <code>main.go</code> et copiez le code ci-dessous.</p></li></ul></div>
+<div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-go hljs" data-noescape="true" data-lang="go">package main
+
+import (
+	"fmt"
+)
+
+func main() {
+	fmt.Println("Hello ENSG!")
+}</code></pre></div></div>
+<div class="ulist"><ul><li><p>Compilez votre programme a l&#8217;aide de la commande <code>go build ./main.go</code></p></li><li><p>Executez le programme généré <code>./main</code></p></li></ul></div></div></section><section id="solution_un_premier_programme_en_go"><h2>✅ Solution: Un Premier Programme en Go</h2><div class="slide-content"><div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-bash hljs" data-noescape="true" data-lang="bash"># Crée un répertoire helloworld
+mkdir -p /workspace/helloworld
+# Saute dans le répertoire
+cd /workspace/helloworld
+# Crée un fichier main.go
+touch main.go
+# Ouvre le fichier main.go dans l'éditeur
+code main.go
+# Compile le programme
+go build ./main.go
+# Exécute le programme.
+./main</code></pre></div></div></div></section><section><div class="slide-content"><div class="paragraph"><p>💡 <code>go run ./main.go</code> compile et execute le programme directement!</p></div>
+<div class="paragraph"><p>⚠️  Ne génère pas de binaire utilisable.</p></div>
+<div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-bash hljs" data-noescape="true" data-lang="bash">$ go run ./main.go
+Hello ENSG!</code></pre></div></div></div></section><section id="formatage_de_code"><h2>Formatage de Code</h2><div class="slide-content"><div class="ulist"><ul><li><p>Formatage du code automatique, si vous appuyez sur <code>Ctrl+S</code></p></li><li><p>Pas de débat tabs vs spaces 🤡, c&#8217;est des tabs.</p></li></ul></div></div></section><section id="anatomie_dun_fichier_go_12"><h2>Anatomie d&#8217;un Fichier go (1/2)</h2><div class="slide-content"><div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-go hljs" data-noescape="true" data-lang="go">package main
+
+import (
+	"fmt"
+)
+
+func main() {
+	fmt.Println("Hello ENSG!")
+}</code></pre></div></div></div></section><section id="anatomie_dun_fichier_go_22"><h2>Anatomie d&#8217;un Fichier go (2/2)</h2><div class="slide-content"><div class="ulist"><ul><li><p><code>func</code>: Declare une fonction <code>main</code>:</p><div class="ulist"><ul><li><p>Cette fonction appelle la fonction <code>Println</code> du package <code>fmt</code></p></li><li><p>En passant la chaine de caractères "Hello ENSG!"</p></li></ul></div></li><li><p><code>package</code>: declare que ce fichier fait partie du package <code>main</code>.</p></li><li><p><code>import</code>: importe le package <code>fmt</code> dans le fichier</p></li></ul></div></div></section><section id="packages_imports_12"><h2>Packages &amp; Imports (1/2)</h2><div class="slide-content"><div class="ulist"><ul><li><p>Un package est un groupe logique de symboles (variables, constantes, types et fonction)</p></li><li><p>Un package est identifié par une URL indiquant ou le télécharger</p><div class="ulist"><ul><li><p>👉 Tous les packages sont uniques!</p></li><li><p>Ex: <code>github.com/jlevesy/prometheus-elector/config</code></p></li></ul></div></li><li><p>Sauf pour la librarie standard, ou il n&#8217;y a pas de domaines</p><div class="ulist"><ul><li><p>Ex: <code>net/http</code>, <code>os</code></p></li></ul></div></li><li><p>Un package est importé par un autre package</p><div class="ulist"><ul><li><p>Ici notre programme importe le package <code>fmt</code></p></li></ul></div></li></ul></div></div></section><section id="packages_imports_22"><h2>Packages &amp; Imports (2/2)</h2><div class="slide-content"><div class="ulist"><ul><li><p>Un package est représenté par un répertoire dans un dépot de code</p></li><li><p>Tous les fichiers go presents dans un même repertoire doivent declarer le meme package</p></li><li><p><strong>Convention</strong>: Le nom du package déclaré est le même que celui du répertoire content le fichier</p><div class="ulist"><ul><li><p>Ex: Les fichiers présents dans <code>github.com/jlevesy/prometheus-elector/config</code> commencent tous par  <code>package config</code></p></li></ul></div></li></ul></div></div></section><section><div class="slide-content"><div class="paragraph"><p>Mais ce n&#8217;est pas le cas de notre programme?</p></div></div></section><section id="ℹ_le_package_spécial_main"><h2>ℹ️ Le Package Spécial <code>main</code></h2><div class="slide-content"><div class="ulist"><ul><li><p>Ce package est le <code>point d&#8217;entrée</code> du programme.</p></li><li><p>La fonction <code>main</code> du package <code>main</code> est la première fonction appellée lors de l&#8217;exécution d&#8217;un programme go.</p></li></ul></div></div></section><section id="packages_et_visibilité"><h2>Packages et Visibilité</h2><div class="slide-content"><div class="ulist"><ul><li><p>La visibilité en dehors du package d&#8217;un symbole déclaré dans un package est controllée par l&#8217;utilisation d&#8217;une majuscule ou minuscule en premier caractère.</p><div class="ulist"><ul><li><p>Une <strong>majuscule</strong> rendra le symbole publique et utilisable en dehors du package.</p></li><li><p>Une <strong>minuscule</strong> rendra le symbole privé seulement accessible dans le package courant.</p></li></ul></div></li></ul></div>
+<div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-go hljs" data-noescape="true" data-lang="go">// fonction privée du package courant. Ne peut pas être utilisée a l'extérieur.
+func privateFunc() {
+	// appelle la fonction `readContent` du package os.
+	// ❌ Ne compile pas: `readContent` n'est pas exportée.
+	content := os.readContent("/some/file")
+}
+
+// fonction publique du package courant.
+// Peut être appellée depuis un autre package.
+func PublicFunc() {
+	// appelle la fonction `OpenFile` du package os.
+	// ✅ compile, `OpenFile` est exportée!
+	file, _ := os.OpenFile("/some/file")
+}
+
+// Variable de package publique.
+var PublicVar int = 12</code></pre></div></div></div></section><section><div class="slide-content"><div class="paragraph"><p>Controller la visibilité des symboles exporté permet de s&#8217;assurer que le package sera bien utilisé!</p></div>
+<div class="paragraph"><p>C&#8217;est l&#8217;idée <strong>d&#8217;encapsulation</strong>, on expose uniquement ce dont l&#8217;utilisateur à besoin.</p></div></div></section><section id="origine_des_packages"><h2>Origine des Packages</h2><div class="slide-content"><div class="paragraph"><p>Votre fichier peut dépendre d&#8217;un package issu de:</p></div>
+<div class="ulist"><ul><li><p>Votre de projet courant</p></li><li><p>La (<a href="https://pkg.go.dev/std">très fournie</a>) librarie standard de Go</p></li><li><p>D&#8217;une librairie externe</p></li></ul></div>
+<div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-go hljs" data-noescape="true" data-lang="go">package main
+
+import (
+	// Imports de la librairie standard.
+	"crypto/tls"
+	"fmt"
+	"io"
+	"net/http"
+
+	// Import du projet courant.
+	"mondomaine.com/monprojet/pkg/helpers"
+
+	// Imports de librairie externes (dépendances).
+	"github.com/prometheus/client_golang/prometheus"
+)</code></pre></div></div></div></section><section id="variables_13"><h2>Variables (1/3)</h2><div class="slide-content"><div class="paragraph"><p>Une variable est une zone mémoire allouée contenant une valeur</p></div>
+<div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-go hljs" data-noescape="true" data-lang="go">func main() {
+	// Declare une variable de type string et assigne à la valeur par defaut du type.
+	// "" pour string.
+	var message string
+	// Assigne (copie) la valeur "Hello ENSG!" a la variable message.
+	message = "Hello ENSG!"
+
+	// Est équivalent a:
+	var message string = "Hello ENSG!"
+
+	// Est encore équivalent a... avec une syntaxe compacte.
+	// Ici le compilateur devine le type de la variable en fonction de la valeur assignée.
+	message := "Hello ENSG!"
+
+	// Affiche la valeur de la variable message dans la sortie standard.
+	fmt.Println(message)
+}</code></pre></div></div></div></section><section id="variables_23"><h2>Variables (2/3)</h2><div class="slide-content"><div class="paragraph"><p>Une variable est définie dans un "scope", par défaut une fonction. C&#8217;est sa durée de vie.</p></div>
+<div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-go hljs" data-noescape="true" data-lang="go">func doSomething() {
+	var age int64
+
+	age = readAge()
+
+	// ❌ Ne compile pas: newAge n'est pas définie dans ce scope.
+	newAge = 45
+
+	fmt.Println(age)
+}
+
+func readAge() int64 {
+	// ❌ Ne compile pas. age n'est pas définie dans ce scope.
+	age = 42
+
+	newAge := readAgeFile()
+
+	return newAge
+}</code></pre></div></div></div></section><section id="variables_33"><h2>Variables (3/3)</h2><div class="slide-content"><div class="paragraph"><p>⚠️ Go est un langage fortement typé ⚠️</p></div>
+<div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-go hljs" data-noescape="true" data-lang="go">func main() {
+	// Déclare et initialise une variable message de type string.
+	message := "Hello ENSG!"
+	// Déclare et initialise une variable age de type int.
+	age := 43
+
+	// Assigne la valeur age dans la variable message.
+	// ❌ Ne compile pas!
+	// message: cannot use age (variable of type int) as string value in assignment.
+	message = age
+}</code></pre></div></div></div></section><section><div class="slide-content"><div class="imageblock"><img src="media/static_types.png" alt="static types" width="512"></div></div></section><section id="constantes"><h2>Constantes</h2><div class="slide-content"><div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-go hljs" data-noescape="true" data-lang="go">const apiURL = "https://swapi.dev/vehicles/4"
+
+func main() {
+	const anotherConst = 4
+
+	fmt.Println(apiURL, anotherConst)
+}</code></pre></div></div></div></section><section id="types_scalaires"><h2>Types Scalaires</h2><div class="slide-content"><div class="ulist"><ul><li><p>Numeriques: <code>int</code>, <code>intX</code>, <code>uint</code>, <code>uintX</code>, <code>float32</code>, <code>float64</code></p></li><li><p>Booléen: <code>bool</code></p></li><li><p>Chaine de caractères UTF-8: <code>string</code></p></li><li><p>Autres: <code>byte</code> (octet), <code>rune</code> (caractère UTF-8)</p></li></ul></div></div></section><section id="conversions"><h2>Conversions</h2><div class="slide-content"><div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-go hljs" data-noescape="true" data-lang="go">func main() {
+	var i int = 42
+	var f float64 = float64(i)
+	var u uint = uint(f)
+}</code></pre></div></div></div></section><section id="controle_de_flot"><h2>Controle de Flot</h2></section><section id="controle_de_flot_if_12"><h2>Controle de Flot: if (1/2)</h2><div class="slide-content"><div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-go hljs" data-noescape="true" data-lang="go">func main() {
+	// if / else classique.
+	ok := doSomething()
+	if ok {
+		fmt.Println("C'est OK!")
+	} else {
+		fmt.Println("C'est pas OK!")
+	}
+}
+
+func doSomething() bool {
+	return true
+}</code></pre></div></div></div></section><section id="controle_de_flot_if_22"><h2>Controle de Flot: if (2/2)</h2><div class="slide-content"><div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-go hljs" data-noescape="true" data-lang="go">func main() {
+	// if / else avec short statement.
+	// avantage: ok n'exsite que dans le scope du if.
+	if ok := doSomething(); ok {
+		fmt.Println("C'est OK!")
+	} else {
+		fmt.Println("C'est pas OK!")
+	}
+
+	// Ne compile pas: ok n'est pas défini.
+	ok = true
+}
+
+func doSomething() bool {
+	return true
+}</code></pre></div></div></div></section><section id="controle_de_flot_switch"><h2>Controle de Flot: switch</h2><div class="slide-content"><div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-go hljs" data-noescape="true" data-lang="go">func main() {
+	// switch
+	age := readAge()
+	switch age {
+	case 10:
+		fmt.Println("Hello 10")
+	case 42:
+		fmt.Println("Hello 42")
+	default:
+		fmt.Prinln("Hello darkness my old friend")
+	}
+}
+
+func readAge() int {
+	return 42
+}</code></pre></div></div></div></section><section id="controle_de_flot_boucle_for"><h2>Controle de Flot: boucle for</h2><div class="slide-content"><div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-go hljs" data-noescape="true" data-lang="go">func sum0to9() {
+	var total int
+
+	for i := 0; i &lt; 10; i++ {
+		total += i
+	}
+
+	fmt.Println("Total", total)
+}</code></pre></div></div></div></section><section id="fonctions14"><h2>Fonctions(1/4)</h2><div class="slide-content"><div class="ulist"><ul><li><p>Une fonction est un groupement logique d&#8217;instructions</p></li><li><p>Accepte entre 0 et N arguments</p></li><li><p>🎉 Retourne entre 0 et N résultats 🎉</p></li></ul></div>
+<div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-go hljs" data-noescape="true" data-lang="go">// Un fonction qui accepte une string et ne retourne rien.
+func sayHello(message string) {
+	fmt.Println("Hello:", message)
+}
+
+// Une fonction qui accepte deux entiers et qui retourne un float64 et une erreur.
+func divide(numerator, denominator int) (float64, error) {
+	if denominator == 0 {
+		return 0, errors.New("can't divide by 0")
+	}
+
+	return numerator / denominator, nil
+}</code></pre></div></div></div></section><section id="fonctions24"><h2>Fonctions(2/4)</h2><div class="slide-content"><div class="ulist"><ul><li><p>Les fonctions peuvent être manipulées comme des valeurs!</p></li></ul></div>
+<div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-go hljs" data-noescape="true" data-lang="go">// Une fonction qui accepte une chaine de caractères
+// ... et qui retourne une fonction qui n'accepte aucun argument
+// mais qui retourne une chaine de caractères.
+func messWithFuncs(name string) func() string {
+	// Les fonctions peuvent etre manipulées comme des valeurs!
+	fn := func() string {
+		return "Hello " + name
+	}
+
+	return fn
+}</code></pre></div></div></div></section><section id="fonctions34"><h2>Fonctions(3/4)</h2><div class="slide-content"><div class="ulist"><ul><li><p>Go permets de "reporter" l&#8217;exécution d&#8217;une fonction quand une fonction parente se termine</p></li><li><p>Pratique pour garantir qu&#8217;une resource soit libérée quoi qu&#8217;il se passe lors de l&#8217;exécution de la fonction.</p><div class="ulist"><ul><li><p>Similaire aux "destructeurs" en C++</p></li></ul></div></li></ul></div>
+<div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-go hljs" data-noescape="true" data-lang="go">func faireDeLaPolitique() {
+	rendreLargent := func() {
+		fmt.Println("Argent rendu")
+	}
+
+	// Quoi qu'il advienne, l'argent sera rendu.
+	// Peu importe le résultat des élections.
+	defer rendreLargent()
+
+	if elu := elections(); elu {
+		fmt.Println("Je suis élu")
+		return
+	}
+
+	fmt.Printn("Je ne suis pas élu :(")
+}</code></pre></div></div></div></section><section id="fonctions44"><h2>Fonctions(4/4)</h2><div class="slide-content"><div class="ulist"><ul><li><p>Les arguments de fonctions sont passés par valeur.</p></li><li><p>Cela signifie que les valeurs des arguments sont copiés lors de l&#8217;appel</p></li></ul></div>
+<div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-go hljs" data-noescape="true" data-lang="go">func main() {
+	name := "John"
+
+	addGreeting(name)
+
+	// Affiche "John" et non "Hello John".
+	fmt.Println(name)
+}
+
+func addGreeting(name string) {
+	name = "Hello " + name
+}</code></pre></div></div></div></section><section id="pointeurs_13"><h2>Pointeurs (1/3)</h2><div class="slide-content"><div class="ulist"><ul><li><p>Déclarer une variable reviens à indiquer au programme d&#8217;allouer une certaine quantité de mémoire (en fonction du type de la variable) à une adresse en mémoire</p></li><li><p>🎓 Go permets de <strong>référencer</strong> cet emplacement memoire en copiant son adresse dans une autre variable avec l&#8217;opérateur <code>&amp;</code>. Autrement dit, on <strong>crée un pointeur</strong>.</p></li></ul></div>
+<div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-go hljs" data-noescape="true" data-lang="go">func main() {
+	// On déclare et initialise une variable. Cela aloue de la mémoire sur la pile.
+	var message string = "Hello ENSG!"
+	// On copie l'adresse memoire de cette variable dans une nouvelle variable.
+	// Pour cela on utilise l'opérateur &amp; (réference).
+	var pointerToMessage *string = &amp;message
+
+	// Affiche: message address in memory is: 0xc000014070
+	fmt.Println("message address in memory is:", pointerToMessage)
+}</code></pre></div></div></div></section><section id="pointeurs_23"><h2>Pointeurs (2/3)</h2><div class="slide-content"><div class="ulist"><ul><li><p>À l&#8217;inverse, on peut aussi accéder au contenu d&#8217;une variable référencée par un pointeur.</p></li><li><p>🎓 Cela est appelé <strong>déréférencer</strong> un pointeur, avec l&#8217;opérateur <code>*</code>.</p></li></ul></div>
+<div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-go hljs" data-noescape="true" data-lang="go">func main() {
+	var message string = "Hello ENSG!"
+	var pointerToMessage *string = &amp;message
+
+	// Affiche: message is: Hello ENSG!"
+	fmt.Println("message is:", *pointerToMessage)
+}</code></pre></div></div></div></section><section id="pointeurs_33"><h2>Pointeurs (3/3)</h2><div class="slide-content"><div class="ulist"><ul><li><p>🎓 Les types <strong>pointeur sur X</strong> sont des types dit de <strong>référence</strong>.</p></li><li><p>🎓 La valeur par défaut d&#8217;un type référence est <code>nil</code>.</p></li><li><p>Il existe d&#8217;autres types références en go.</p></li></ul></div>
+<div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-go hljs" data-noescape="true" data-lang="go">func main() {
+	// Le `= nil` est optionel ici: la valeur par défaut d'un pointeur est nil.
+	var nilPointer *string = nil
+
+	fmt.Println("address is:", nilPointer)
+	// A votre avis: que fait cette ligne?
+	fmt.Println("message is:", *nilPointer)
+}</code></pre></div></div></div></section><section id="exercice_corriger_la_fonction"><h2>🎓 Exercice: Corriger la Fonction</h2><div class="slide-content"><div class="ulist"><ul><li><p>Corriger la fonction <code>addGreeting</code> pour qu&#8217;elle affiche correctement <code>Hello John</code></p></li><li><p>Sans retourner de valeur.</p></li></ul></div>
+<div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-go hljs" data-noescape="true" data-lang="go">func main() {
+	name := "John"
+
+	addGreeting(name)
+
+	// Affiche "John" et non "Hello John".
+	fmt.Println(name)
+}
+
+func addGreeting(name string) {
+	name = "Hello " + name
+}</code></pre></div></div></div></section><section id="solution_corriger_la_fonction"><h2>✅ Solution: Corriger la Fonction</h2><div class="slide-content"><div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-go hljs" data-noescape="true" data-lang="go">func main() {
+	name := "John"
+
+	// On passe en argument de addGreeting l'adresse de la variable `name`.
+	addGreeting(&amp;name)
+
+	fmt.Println(name)
+}
+
+func addGreeting(namePtr *string) {
+	// La valeur de la variable référencée par namePtr égale à
+	// la chaine de caractères "Hello " concaténée avec
+	// la valeur de la variable référencée par namePtr.
+	*namePtr = "Hello " + *namePtr
+}</code></pre></div></div></div></section><section id="gestion_derreur_12"><h2>Gestion d&#8217;Erreur (1/2)</h2><div class="slide-content"><div class="ulist"><ul><li><p>Go traite les erreurs avec des valeurs retour au lieu d&#8217;exeptions</p></li><li><p>Il est commun qu&#8217;une fonction qui puisse échouer retourne une valeur et un résultat.</p><div class="ulist"><ul><li><p>Il convient alors de vérifier l&#8217;erreur retournée soit égale a nil.</p></li><li><p>&#8230;&#8203;Sinon il faudra la gérer!</p></li></ul></div></li></ul></div>
+<div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-go hljs" data-noescape="true" data-lang="go">func main() {
+	file, err := os.Open("/super/file")
+	if err != nil {
+		// Si err est non nil, alors l'opération à échouée,
+		fmt.Println("Impossible d'ouvrir le fichier", err)
+		return
+	}
+	// On s'assure de toujours fermer le fichier ouvert.
+	defer file.Close()
+
+	// On peut intéragir avec le fichier!
+}</code></pre></div></div></div></section><section id="gestion_derreur_22"><h2>Gestion d&#8217;Erreur (2/2)</h2><div class="slide-content"><div class="ulist"><ul><li><p>Certaines instructions peuvent mettre le programme dans un état ou il ne peut plus s&#8217;exécuter.</p><div class="ulist"><ul><li><p>Par exemple, accéder à un pointeur <code>nil</code></p></li></ul></div></li><li><p>Dans ce cas la, l&#8217;exécution de la fonction s&#8217;arrête et on parle de <code>panic</code></p></li></ul></div></div></section><section id="collections"><h2>Collections</h2></section><section id="collections_arrays"><h2>Collections: Arrays</h2><div class="slide-content"><div class="ulist"><ul><li><p>Un tableau de taille fixe de N elements.</p></li><li><p>⚠️  La taille du tableau fait partie de son type</p><div class="ulist"><ul><li><p><strong>Limite</strong>: ne peut pas être changée une fois le tableau instancié.</p></li></ul></div></li></ul></div>
+<div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-go hljs" data-noescape="true" data-lang="go">func main() {
+	// Declare et initialise un tableau de 2 entiers.
+	var intArray [2]int
+	// On peut assigner un élément du tableau en utilisant son index.
+	intArray[0] = 1
+	intArray[1] = 3
+	// On accède a un élément du tableau en utilisant son index.
+	fmt.Println(intArray[0], intArray[1])
+
+	anotherArray := [4]int{2, 4, 6, 8}
+	// ❌ Ne compile pas: la taille fait partie du type!
+	// On assigne un tableau de 4 entrées a un tableau de deux entrées
+	intArray = anotherArray
+}</code></pre></div></div>
+<div class="paragraph"><p>👉 On évite en général de les utiliser directement, sauf bonne raison.</p></div></div></section><section id="collections_slices_15"><h2>Collections: Slices (1/5)</h2><div class="slide-content"><div class="paragraph"><p>Une <code>slice</code> est une référence sur un sous ensemble d&#8217;entrées dans un tableau</p></div>
+<div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-go hljs" data-noescape="true" data-lang="go">func main() {
+	anArray := [4]int{2, 4, 6, 8}
+
+	// Declare et initialise une slice référençant les entrées
+	// entre l'index 1 et 3 du tableau anArray.
+	// Se lit interval [1:4[, du coup 1,2 et 3.
+	var aSlice []int = anArray[1:4]
+
+	// ⚠️ Une ecriture écrit une valeur dans le tableau référencé!
+	aSlice[0] = 9
+	fmt.Println(aSlice)  // [9, 6, 8]
+	fmt.Println(anArray) // [2, 9, 6, 8]
+}</code></pre></div></div></div></section><section id="collections_slices_25"><h2>Collections: Slices (2/5)</h2><div class="slide-content"><div class="ulist"><ul><li><p>On peut initialiser directement une slice sans passer par un tableau.</p></li><li><p>On peut aussi initialiser une slice avec l&#8217;operateur <code>make</code></p></li></ul></div>
+<div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-go hljs" data-noescape="true" data-lang="go">func main() {
+	aSlice := []int{2, 4, 6, 8}
+	// Sélectionne les entrées entre l'index 2 et 3 de la slice aSlice.
+	anotherSlice := aSlice[2:4]
+	fmt.Println(aSlice)       // [2, 4, 6, 8]
+	fmt.Println(anotherSlice) // [6, 8]
+
+	// Initialise une slice de strings de 3 entrées.
+	yetAnotherSlice := make([]string, 3)
+	fmt.Println(yetAnotherSlice) // ["", "", ""]
+}</code></pre></div></div></div></section><section id="collections_slices_35"><h2>Collections: Slices (3/5)</h2><div class="slide-content"><div class="paragraph"><p>Une <code>slice</code> possède deux caractéristiques importantes:</p></div>
+<div class="ulist"><ul><li><p>Sa taille: le nombre d&#8217;éléments présents dans la slice</p><div class="ulist"><ul><li><p>On y accède a l&#8217;aide de la fonction <code>len</code></p></li></ul></div></li><li><p>Sa capacité: la taille totale du tableau référencé</p><div class="ulist"><ul><li><p>On y accède a l&#8217;aide de la fonction <code>cap</code></p></li></ul></div></li></ul></div>
+<div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-go hljs" data-noescape="true" data-lang="go">func main() {
+	sliceOne := []int{0, 1, 2, 3}
+	sliceTwo := sliceOne[0:2]
+	// Affiche "Length: 2 Capacity: 4"
+	fmt.Println("Length: ", len(sliceTwo), "Capacity: ", cap(sliceTwo))
+}</code></pre></div></div></div></section><section id="collections_slices_45"><h2>Collections: Slices (4/5)</h2><div class="slide-content"><div class="ulist"><ul><li><p>On peut concaténer des objets à une slice avec l&#8217;operateur <code>append</code></p></li><li><p>⚠️  Cela n&#8217;ajoute pas nécessairement un entrée a la slice passée en parametre.</p><div class="ulist"><ul><li><p>Dans le cas ou le tableau sous jacent est plein (len == cap), <code>append</code> va réallouer un tableau et copier toutes les entées dans ce nouveau tableau.</p></li><li><p>👉 En conséquence: il faut <strong>TOUJOURS</strong> assigner la valeur retournée par <code>append</code></p></li></ul></div></li></ul></div>
+<div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-go hljs" data-noescape="true" data-lang="go">func main() {
+	// On ajoute l'entrée 10 a la slice  aSlice
+	aSlice := []int{2, 4, 6, 8}
+	aSlice = append(aSlice, 10)
+	fmt.Println(aSlice) // [2, 4, 6, 8, 10]
+
+	// On ajoute tous les items de la `anotherSlice` a la slice `aSlice`
+	// Et on assigne le résultat à la variable yetAnotherSlice
+	// Notez les  "..."
+	anotherSlice := []int{10, 12, 14, 16}
+	yetAnotherSlice := append(aSlice, anotherSlice...)
+	fmt.Println(yetAnotherSlice) // [2, 4, 6, 8, 10, 12, 14, 16]
+}</code></pre></div></div></div></section><section id="collections_slices_55"><h2>Collections: Slices (5/5)</h2><div class="slide-content"><div class="ulist"><ul><li><p>Le type <strong>slice de X</strong>, comme le type <strong>pointeur sur X</strong>, est un type référence.</p></li><li><p>Sa valeur par défaut est <code>nil</code></p></li><li><p>Accéder à une slice nil provoque un arrêt de l&#8217;exécution</p></li><li><p>En revanche: <code>append</code> et <code>len</code> savent gérer une nil slice.</p></li></ul></div>
+<div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-go hljs" data-noescape="true" data-lang="go">func main() {
+	var nilSlice []string
+
+	// panic!: on accède a un tableau qui n'existe pas.
+	v := nilSlice[0] // 💥
+
+	fmt.Println(len(nilSlice), cap(nilSlice)) // 0, 0
+
+	nilSlice = append(nilSlice, "foo", "bar", "biz")
+	fmt.Println(nilSlice) // ["foo", "bar", "biz"]
+}</code></pre></div></div></div></section><section id="parcourir_une_slice_ou_un_tableau"><h2>Parcourir une slice ou un tableau</h2><div class="slide-content"><div class="ulist"><ul><li><p>Go fournit la fonction <code>range</code> qui permet de parcourir une collection.</p></li><li><p><code>range</code> accepte une collection, et retourne deux valeurs:</p><div class="ulist"><ul><li><p>L&#8217;index courant dans la collection</p></li><li><p>La valeur de la collection a l&#8217;index</p></li></ul></div></li></ul></div>
+<div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-go hljs" data-noescape="true" data-lang="go">func main() {
+	slice := []int{2, 4, 6, 8}
+
+	// Affiche:
+	// Index: 0 Value: 2
+	// Index: 1 Value: 4
+	// Index: 2 Value: 6
+	// Index: 3 Value: 8
+	for index, value := range slice {
+		fmt.Println("Index: ", index, "Value: ", value)
+	}
+}</code></pre></div></div></div></section><section id="exercice_convertir_une_collection_dentiers_en_une_collection_de_strings"><h2>🎓 Exercice: Convertir une collection d&#8217;entiers en une collection de strings</h2><div class="slide-content"><div class="ulist"><ul><li><p>Ecrire une fonction <code>toStringSlice</code> qui convertit slice d&#8217;entiers en une slice de strings.</p><div class="ulist"><ul><li><p>🕵️: Il faut utiliser la fonction <strong>strconv.Itoa</strong> <a href="https://pkg.go.dev/strconv#Itoa">doc</a></p></li></ul></div></li></ul></div></div></section><section id="solution_convertir_une_collection_dentiers_en_une_collection_de_strings"><h2>✅ Solution: Convertir une collection d&#8217;entiers en une collection de strings</h2><div class="slide-content"><div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-go hljs" data-noescape="true" data-lang="go">func main() {
+	input := []int{1, 2, 3, 4}
+	output := toStringSlice(input)
+	fmt.Println(output)
+}
+
+func toStringSlice(input []int) []string {
+	// On alloue une slice de string de la taille de la slice d'entiers donnée en paramètre.
+	result := make([]string, len(input))
+
+	// Pour chaque entrée de la slice input...
+	for i, v := range input {
+		// On ecrit le resultat de la conversion
+		// dans la slice de resultat a l'index courant.
+		result[i] = strconv.Itoa(v)
+	}
+
+	return result
+}</code></pre></div></div></div></section><section id="collections_maps_13"><h2>Collections: maps (1/3)</h2><div class="slide-content"><div class="ulist"><ul><li><p>Tableau associatif clé-valeur</p></li><li><p>Initialisée de façon littérale, ou avec <code>make</code></p></li><li><p>On récupère sa taille avec <code>len</code></p></li><li><p>On supprime une clé avec <code>delete</code></p></li><li><p>Type référence, comme les pointeurs out les slices</p><div class="ulist"><ul><li><p>Une map peut être nil, <code>len</code> retournera 0.</p></li></ul></div></li></ul></div></div></section><section id="collections_maps_23"><h2>Collections: maps (2/3)</h2><div class="slide-content"><div class="paragraph"><p>Exemple d&#8217;écriture</p></div>
+<div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-go hljs" data-noescape="true" data-lang="go">func main() {
+	// Déclaration et initialisation d'une map de façon littérale.
+	mapAges := map[string]int{
+		"Julien": 35,
+		"Damien": 36,
+	}
+
+	// Déclaration et initialisation d'une map de taille 2.
+	mapVilles := make(map[string]string, 2)
+	// Ecritures des valeurs dans la map.
+	mapVilles["Julien"] = "Lyon"
+	mapVilles["Damien"] = "St-Etienne"
+
+	var nilMap map[int]int
+	nilMap[21] = 42 // panic! écriture dans une map qui n'est pas instanciée
+
+	// On peut suprimer une entrée d'une map
+	delete(mapVilles, "Julien")
+
+	// Affiche 2, 1, 0.
+	fmt.Println(len(mapAges), len(mapVilles), len(nilMap))
+}</code></pre></div></div></div></section><section id="collections_maps_33"><h2>Collections: maps (3/3)</h2><div class="slide-content"><div class="paragraph"><p>Exemple de lecture</p></div>
+<div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-go hljs" data-noescape="true" data-lang="go">func main() {
+	// Déclaration et initialisation d'une map de façon littérale.
+	mapAges := map[string]int{
+		"Julien": 35,
+		"Damien": 36,
+	}
+
+	// Lecture sans vérification.
+	// Si la clé existe, retourne la valeur associée.
+	// Si la clé n'existe pas, retoure la valeur par défaut du type de la valeur.
+	ageJulien := mapAges["Julien"]
+
+	fmt.Println("Age de Julien", ageJulien)
+
+	// Lecture avec vérification.
+	// Si la clé existe, la valeur sera retournée, et ok sera a true
+	// Si la clé n'existe pas, ok sera false.
+	ageMichel, ok := mapAges["Michel"]
+	if !ok {
+		fmt.Println("Pas d'age pour Michel")
+	} else {
+		fmt.Println("Age de Michel", ageMichel)
+	}
+}</code></pre></div></div></div></section><section id="parcourir_une_map"><h2>Parcourir une map</h2><div class="slide-content"><div class="ulist"><ul><li><p><code>range</code> supporte aussi les maps dans une boucle for</p></li><li><p>Assigne la clé et la valeur courante</p></li><li><p>⚠️ L&#8217;ordre de parcours n&#8217;est pas déterministe! Il ne faut pas en dépendre!</p></li></ul></div>
+<div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-go hljs" data-noescape="true" data-lang="go">func main() {
+	mapAges := map[string]int{
+		"Julien": 35,
+		"Damien": 36,
+	}
+
+	// Affiche soit:
+	// Julien a 35 ans
+	// Damien a 35 ans
+	// OU
+	// Damien a 35 ans
+	// Julien a 35 ans
+	for name, age := range mapAges {
+		fmt.Printf("%s a %d ans\n", name, age)
+	}
+}</code></pre></div></div></div></section><section id="exercice_comptez_les_occurences_de_mots_dans_une_chaine_de_caractère"><h2>🎓 Exercice: Comptez les occurences de mots dans une chaine de caractère</h2><div class="slide-content"><div class="ulist"><ul><li><p>Ecrivez une fonction <code>WordCount</code> en go qui accepte une chaine de caractère et qui retourne le nombre d&#8217;occurences de chacun des mots contenu dans la chaine.</p><div class="ulist"><ul><li><p><strong>Indice</strong>: La signature de votre fonction devrait resembler a <code>func WordCount(str string) map[string]int</code>.</p><div class="ulist"><ul><li><p>La valeur de retour mappe le mot vers le nombre de fois qu&#8217;il est apparu.</p></li></ul></div></li><li><p><strong>Indice</strong>: <code>strings.Fields</code> <a href="https://pkg.go.dev/strings#Fields">(doc)</a> sépare les mots d&#8217;une chaine de caractère et retourne une string.</p></li></ul></div></li></ul></div></div></section><section id="solution_comptez_les_occurences_de_mots_dans_une_chaine_de_caractère"><h2>✅ Solution: Comptez les occurences de mots dans une chaine de caractère</h2><div class="slide-content"><div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-go hljs" data-noescape="true" data-lang="go">func main() {
+	input := "The quick quick brown fox jumps over the lazy lazy dog"
+
+	result := WordCount(input)
+
+	fmt.Println(result)
+}
+
+func WordCount(input string) map[string]int {
+	result := make(map[string]int)
+
+	for _, word := range strings.Fields(input) {
+		result[word]++
+	}
+
+	return result
+}</code></pre></div></div></div></section><section id="structures_13"><h2>Structures (1/3)</h2><div class="slide-content"><div class="ulist"><ul><li><p>Type déclaré représentant une collection fixe d&#8217;attributs (aussi appelés membres)</p></li><li><p>Les attributs commençant par une lettre majuscules sont accessibles en dehors du package. Ceux qui commencent par une lettre minuscule ne le sont pas.</p></li></ul></div>
+<div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-go hljs" data-noescape="true" data-lang="go">// Déclaration du type lecture, composé de 3 attributs.
+type Lecture struct {
+	Topic    string
+	Duration time.Duration
+	Credits  int
+}
+
+func main() {
+	// On declare et initialise une nouvelle variable de type Lecture.
+	coursCICD := Lecture{
+		Topic:    "CICD",
+		Duration: 3 * 6 * time.Hour,
+		Credits:  2,
+	}
+	// On prends la référence de la variableCICD
+	var ptrVersCoursCICD *Lecture = &amp;coursCICD
+
+	// On accède aux valeurs des membres de la variable coursCICD avec `.`.
+	fmt.Println("Sujet du cours", coursCICD.Topic)
+	// `.` Fonctionne aussi sur un pointeur!
+	fmt.Println("Durée du cours", ptrVersCoursCICD.Duration)
+}</code></pre></div></div></div></section><section id="structures_23"><h2>Structures (2/3)</h2><div class="slide-content"><div class="ulist"><ul><li><p>La valeur par défaut d&#8217;une structure est égale a l&#8217;ensemble des valeurs par défaut de ses membres.</p></li></ul></div>
+<div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-go hljs" data-noescape="true" data-lang="go">// Déclaration du type lecture, composé de 4 attributs.
+type Lecture struct {
+	Topic    string
+	Duration time.Duration
+	Credits  int
+	// attribut secret, seulement accessible dans le package courant.
+	secret string
+}
+
+func main() {
+	coursVide := Lecture{
+		Topic:    "",
+		Duration: time.Duration(0),
+		Credits:  0,
+	}
+	coursDéfaut := Lecture{}
+
+	if coursVide == coursDéfaut {
+		// Affiche OK.
+		fmt.Println("OK")
+	}
+}</code></pre></div></div></div></section><section id="structures_33"><h2>Structures (3/3)</h2><div class="slide-content"><div class="ulist"><ul><li><p>Toute structure doit instanciée doit être dans un état utilisable.</p></li><li><p>Si les valeurs par défaut ne suffisent pas, on peut fournir une fonction d&#8217;initialisation.</p><div class="ulist"><ul><li><p>Similaire aux "constructeurs" dans d&#8217;autres langages.</p></li></ul></div></li></ul></div>
+<div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-go hljs" data-noescape="true" data-lang="go">// Déclaration du type lecture, composé de 4 attributs.
+type FileReader struct {
+	File *os.File
+}
+
+func NewFileReader(path string) (*FileReader, error) {
+	file, err := os.Open(path)
+	if err != nil {
+		return nil, err
+	}
+
+	return &amp;FileReader{
+		File: file,
+	}
+}
+
+func main() {
+	// ❌ instanciation sans utiliser la fonction d'initialisation.
+	var reader FileReader
+
+	// ✅
+	reader, err := NewFileReader("/some/file")
+}</code></pre></div></div></div></section><section id="annotations_de_structures"><h2>Annotations de Structures</h2><div class="slide-content"><div class="ulist"><ul><li><p>Go permets d&#8217;annoter les membres d&#8217;une structure</p></li><li><p>Utilisation diverses</p><div class="ulist"><ul><li><p>Ex: indiquer le champ d&#8217;un object JSON a lié à l&#8217;attribut.</p></li></ul></div></li></ul></div>
+<div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-go hljs" data-noescape="true" data-lang="go">type City struct {
+	ID   string `json:"id"`
+	Name string `json:"name"`
+}
+
+// {"id": "1", "name": "Lyon"}</code></pre></div></div></div></section><section id="definir_des_types"><h2>Definir des Types</h2><div class="slide-content"><div class="ulist"><ul><li><p>Nous avons utilisé le mot clef <code>type</code> pour définir un nouveau type de structure.</p></li><li><p>Mais <code>type</code> peut être appliqué á des tas d&#8217;autre choses.</p></li></ul></div>
+<div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-go hljs" data-noescape="true" data-lang="go">// Déclare un type Color représenté par un entier.
+type Color int
+
+const (
+	ColorBlue  = 0
+	ColorGreen = 1
+)
+
+// Déclare un type Car représenté par une structure composé de trois attributs.
+type Car struct {
+	Color   Color
+	Engine  Engine
+	Battery Battery
+}
+
+// Déclare un type Garage, qui est une map entre le nom du propriétaire et la voiture.
+type Garage map[string]Car
+
+// Déclare un type CarOption, qui est une fonction qui accepte un pointeur sur Car et retourne une erreur.
+type CarOption func(*Car) error</code></pre></div></div></div></section><section id="types_et_méthodes_12"><h2>Types et Méthodes (1/2)</h2><div class="slide-content"><div class="ulist"><ul><li><p>Il est possible d&#8217;attacher des méthodes aux types que l&#8217;on définit</p></li></ul></div>
+<div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-go hljs" data-noescape="true" data-lang="go">// Définit un type Color représenté en mémoire par un entier.
+type Color int
+
+// Attache une méthode String a toute instance de la valeur Color
+// qui retourne le nom de la couleur sous forme de chaine de Caractères.
+func (c Color) String() string {
+	switch c {
+	case ColorBlue:
+		return "blue"
+	case ColorGreen:
+		return "green"
+	default:
+		return "unknown"
+	}
+}
+
+// Bloc de constantes déclarant les couleurs possibles
+const (
+	ColorBlue  Color = 1
+	ColorGreen Color = 2
+)
+
+func main() {
+	color := ColorBlue
+	fmt.Prntln("La couleur est:", color.String())
+}</code></pre></div></div></div></section><section id="types_et_méthodes_22"><h2>Types et Méthodes (2/2)</h2><div class="slide-content"><div class="ulist"><ul><li><p>Une structure avec des méthodes est l&#8217;équivalent d&#8217;une classe dans d&#8217;autres langages.</p></li><li><p>Le "Receveur" est équivalent a <strong>this</strong> en C++ ou Java.</p></li></ul></div>
+<div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-go hljs" data-noescape="true" data-lang="go">type Car struct {
+	Brand string
+	Color Color
+}
+
+// Attache une méthode a toute instance de type "pointeur sur Car".
+// Le premier argument avant le nom de la méthode est appelé "receveur".
+func (c *Car) Describe() {
+	fmt.Printf("Car brand is: %s, car color is %s\n", c.Brand, c.Color.String())
+}
+
+func main() {
+	car := Car{
+		Brand: "Renault",
+		Color: ColorBlue,
+	}
+
+	car.Describe()
+}</code></pre></div></div></div></section><section id="receveurs_pointeurs_ou_valeurs"><h2>Receveurs: Pointeurs ou Valeurs?</h2><div class="slide-content"><div class="ulist"><ul><li><p>On peut attacher une méthode sur une valeur du type, ou sur un pointeur.</p></li><li><p>L&#8217;opérateur <code>.</code> (accés) référence et déréférence les pointeurs implicitement.</p></li><li><p>Quelques règles:</p><div class="ulist"><ul><li><p>Sur les types scalaires (int, string etc&#8230;&#8203;) on préfèrera les valeurs, la copie ne coute rien.</p></li><li><p>Sur les collections et fonctions, on garde les valeurs, ce sont des types références.</p></li><li><p>Sur les structs, on préfère attacher au pointeurs car cela évite une copie parfois lourde.</p></li></ul></div></li></ul></div></div></section><section id="types_abstraits_interfaces_13"><h2>Types Abstraits: Interfaces (1/3)</h2><div class="slide-content"><div class="ulist"><ul><li><p>Une interface décrit un jeu de méthodes.</p></li><li><p>Une variable du type de l&#8217;interface peut recevoir n&#8217;importe quel type qui implémente les méthodes de l&#8217;interface.</p></li><li><p>Le comportement d&#8217;un appel de méthode est celui du type concret caché derrière l&#8217;interface. C&#8217;est ce qu&#8217;on appelle le <strong>Polymorphisme</strong>.</p></li></ul></div></div></section><section id="types_abstraits_interfaces_23"><h2>Types Abstraits: Interfaces (2/3)</h2><div class="slide-content"><div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-go hljs" data-noescape="true" data-lang="go">type Vehicle interface {
+	Ride()
+}
+
+type Scooter struct{}
+
+func (s *Scooter) Ride() {
+	fmt.Println("Riding a Scooter")
+}
+
+type Bicycle struct{}
+
+func (b *Bicycle) Ride() {
+	fmt.Println("Ride a Bicycle")
+}
+
+func main() {
+	// La variable vehicle peut recevoir soit un Scooter, soit un Bicycle.
+	// Ces deux types satisfont l'interface `Vehicle`.
+	var vehicle Vehicle
+
+	vehicle = &amp;Scooter{}
+	// Affiche "Riding a Scooter".
+	vehicle.Ride()
+
+	vehicle = &amp;Bicycle{}
+	// Affiche "Rinding a Bicycle".
+	vehicle.Ride()
+}</code></pre></div></div></div></section><section id="types_abstraits_interfaces_34"><h2>Types Abstraits: Interfaces (3/4)</h2><div class="slide-content"><div class="ulist"><ul><li><p>Une interface est un type référence vers un autre type, sa valeur par défaut est <code>nil</code>.</p></li><li><p>Les interfaces sont implicites:</p><div class="ulist"><ul><li><p>Du moment que le type de la valeur satisfait toutes les methodes de l&#8217;interface, alors il est considéré comme implémentant l&#8217;interface.</p></li><li><p>Pas de mot clé <code>implements</code> comme en Java</p></li></ul></div></li></ul></div></div></section><section id="types_abstraits_interfaces_44"><h2>Types Abstraits: Interfaces (4/4)</h2><div class="slide-content"><div class="ulist"><ul><li><p>Pourquoi s&#8217;embêter à faire des interfaces?</p><div class="ulist"><ul><li><p>Fournir du code générique</p></li><li><p>Découpler, cacher la complexité</p><div class="ulist"><ul><li><p>Exemple: Cacher une dépendance à une base de données derrière une interface</p></li></ul></div></li></ul></div></li></ul></div>
+<div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-go hljs" data-noescape="true" data-lang="go">// writeHello écrit hello dans n'importe quelle destination du moment qu'elle satisfait `io.Writer`
+func writeHello(dest io.Writer) {
+	dest.Write([]byte("hello"))
+}
+
+func main() {
+	var buf bytes.Buffer
+
+	// Ici on écrit dans un buffer en mémoire.
+	writeHello(&amp;buf)
+
+	file, _ := os.Open("./file")
+	defer file.Close()
+
+	// Ici on l'écrit dans un ficher.
+	writeHello(file)
+}</code></pre></div></div></div></section><section id="interfaces_importantes_en_go"><h2>Interfaces Importantes en Go</h2><div class="slide-content"><div class="ulist"><ul><li><p>package <code>io</code>:</p><div class="ulist"><ul><li><p><a href="https://pkg.go.dev/io#Reader">io.Reader</a>, <a href="https://pkg.go.dev/io#Writer">io.Writer</a>, <a href="https://pkg.go.dev/io#Closer">io.Closer</a></p></li></ul></div></li><li><p>package <code>http</code>:</p><div class="ulist"><ul><li><p><a href="https://pkg.go.dev/net/http#Handler">http.Handler</a> permet de gérer et répondre à une requête HTTP.</p></li></ul></div></li><li><p>Le type <code>error</code></p></li></ul></div>
+<div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-go hljs" data-noescape="true" data-lang="go">type error interface {
+	Error() string
+}</code></pre></div></div></div></section><section id="nommage_de_variables"><h2>Nommage de variables</h2><div class="slide-content"><div class="ulist"><ul><li><p><strong>Convention</strong>: La longueur du nom d&#8217;une variable est proportionnelle à sa durée de vie.</p></li><li><p>Certaines exceptions:</p><div class="ulist"><ul><li><p><code>err</code> pour une valeur d&#8217;erreur</p></li><li><p><code>ctx</code> toute instance d&#8217;un a <code>context.Context</code></p></li><li><p>Receveurs de méthodes (ie <code>*Store</code> &#8658;  <code>st</code>)</p></li><li><p>Et d&#8217;autres&#8230;&#8203;</p></li></ul></div></li></ul></div></div></section><section id="quelques_exemples"><h2>Quelques Exemples</h2><div class="slide-content"><div class="ulist"><ul><li><p>Decoder du JSON</p></li></ul></div>
+<div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-go hljs" data-noescape="true" data-lang="go">type City struct {
+	ID   string `json:"id"`
+	Name string `json:"name"`
+}
+
+// {"id": "1", "name": "Lyon"}
+
+
+const payload = `[{"id":"1","name":"Lyon"},{"id":"2","name":"Paris"}]`
+
+func main() {
+	var cities []City
+
+	if err := json.Unmarshal([]byte(payload), &amp;cities); err != nil {
+		fmt.Println("cannot unmarshal", err)
+		return
+	}
+
+	fmt.Println(cities)
+}</code></pre></div></div></div></section><section id="quelques_exemples_2"><h2>Quelques Exemples</h2><div class="slide-content"><div class="ulist"><ul><li><p>Lire l&#8217;intégralité d&#8217;un Buffer</p></li></ul></div>
+<div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-go hljs" data-noescape="true" data-lang="go">func main() {
+	var buf bytes.Buffer
+
+	readBytes, err := io.ReadAll(&amp;buf)
+	if err != nil {
+		// KO.
+	}
+	// OK!
+}</code></pre></div></div></div></section><section id="quelques_exemples_3"><h2>Quelques Exemples</h2><div class="slide-content"><div class="ulist"><ul><li><p>Faire une requête HTTP</p></li></ul></div>
+<div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-go hljs" data-noescape="true" data-lang="go">func main() {
+	resp, err := http.Get("https://google.com")
+	if err != nil {
+		// Handle err...
+	}
+	if resp.StatusCode != http.StatusOK {
+		// Code non OK. Ouch.
+	}
+
+	// On va accéder au Body.
+	// Il faut s'assurer de toujours le fermer.
+	defer resp.Body.Close()
+}</code></pre></div></div></div></section><section id="exercice_donnez_le_climat_de_tatooine"><h2>🎓 Exercice: Donnez le Climat de Tatooine</h2><div class="slide-content"><div class="paragraph"><p>On vous demande le programme go suivant:</p></div>
+<div class="ulist"><ul><li><p>Fait une requête a swapi.dev pour récupérer les informations de la planete Tatooine</p><div class="ulist"><ul><li><p>L&#8217;URL a appeler est <a href="https://swapi.dev/api/planets/1/">https://swapi.dev/api/planets/1/</a></p></li></ul></div></li><li><p>Si la requête est réussie alors on lit l&#8217;intégralité du corps de la réponse</p></li><li><p>Et on déserialise la réponse dans un object pour accéder au <code>climat</code></p></li><li><p><strong>Bonus</strong>: Une fois fini, essayez de nous donner le diametre de l&#8217;étoile noire aussi.</p></li></ul></div></div></section><section id="solution_le_climat_de_tatooine"><h2>✅ Solution: Le Climat de Tatooine</h2><div class="slide-content"><div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-go hljs" data-noescape="true" data-lang="go">type Planet struct {
+	Climate string `json:"climate"`
+}
+
+func main() {
+	resp, err := http.Get("https://swapi.dev/api/planets/1")
+	if err != nil {
+		fmt.Println("Cannot query swapi", err)
+		return
+	}
+
+	if resp.StatusCode != http.StatusOK {
+		fmt.Println("Bad status", resp.Status)
+		return
+	}
+
+	defer resp.Body.Close()
+
+	readBody, err := io.ReadAll(resp.Body)
+	if err != nil {
+		fmt.Println("Can't read body", err)
+		return
+	}
+
+	var tatooine Planet
+	if err := json.Unmarshal(readBody, &amp;tatooine); err != nil {
+		fmt.Println("Can't unmarshal payload", err)
+		return
+	}
+
+	fmt.Println("Tatooine's climate is", tatooine.Climate)
+}</code></pre></div></div></div></section><section id="réferences"><h2>Réferences</h2><div class="slide-content"><div class="ulist"><ul><li><p>Vidéos</p><div class="ulist"><ul><li><p><a href="https://www.youtube.com/watch?v=xi8732QO33Y" class="bare">https://www.youtube.com/watch?v=xi8732QO33Y</a></p></li><li><p><a href="https://www.youtube.com/c/JustForFunc" class="bare">https://www.youtube.com/c/JustForFunc</a></p></li></ul></div></li><li><p>Guides complets</p><div class="ulist"><ul><li><p><a href="https://go.dev/tour/" class="bare">https://go.dev/tour/</a></p></li><li><p><a href="https://gobyexample.com/" class="bare">https://gobyexample.com/</a></p></li></ul></div></li><li><p>Pour aller plus loin</p><div class="ulist"><ul><li><p><a href="https://go.dev/doc/effective_go" class="bare">https://go.dev/doc/effective_go</a></p></li><li><p><a href="https://go.dev/doc/" class="bare">https://go.dev/doc/</a></p></li><li><p><a href="https://go-proverbs.github.io/" class="bare">https://go-proverbs.github.io/</a></p></li></ul></div></li></ul></div></div></section></section>
 <section><section id="les_fondamentaux_de_git" data-background-color="rgb(248, 228, 130)" data-state="invert"><h2>Les fondamentaux de git</h2></section><section id="tracer_le_changement_dans_le_code"><h2>Tracer le changement dans le code</h2><div class="slide-content"><div class="paragraph"><p>avec un <strong>VCS</strong> : 🇬🇧 Version Control System</p></div>
 <div class="paragraph small"><small>également connu sous le nom de SCM (🇬🇧 Source Code Management)</small></div></div></section><section id="pourquoi_un_vcs"><h2>Pourquoi un VCS ?</h2><div class="slide-content"><div class="ulist"><ul><li><p>Pour conserver une trace de <strong>tous</strong> les changements dans un historique</p></li><li><p>Pour <strong>collaborer</strong> efficacement sur un même référentiel de code source</p></li></ul></div>
 <aside class="notes"><div class="ulist"><ul><li><p>Historique : On parle de source unique de vérité (<em>Single Source of Truth</em>)</p><div class="ulist"><ul><li><p>Historique complet des modifications</p></li><li><p>Possibilité de retour arrière à tout moment</p></li></ul></div></li><li><p>Collaboration:</p><div class="ulist"><ul><li><p>Aide à la résolution de conflits</p></li><li><p>Partage de contenu facile</p></li></ul></div></li></ul></div></aside></div></section><section id="concepts_des_vcs"><h2>Concepts des VCS</h2><div class="slide-content"><div class="imageblock"><img src="media/scm-local.png" alt="scm local" width="300"></div>
@@ -524,9 +1300,11 @@ git lg # cat ~/.gitconfig =&gt; regardez la section section [alias], cette comma
 git merge --no-ff feature/html # Enregistrer puis fermer le fichier 'MERGE_MSG' qui a été ouvert
 git log --graph
 
-# git lg</code></pre></div></div></div></section><section id="exemple_dusages_de_vcs"><h2>Exemple d&#8217;usages de VCS</h2><div class="slide-content"><div class="ulist"><ul><li><p>"Infrastructure as Code" :</p><div class="ulist"><ul><li><p>Besoins de traçabilité, de définition explicite et de gestion de conflits</p></li><li><p>Collaboration requise pour chaque changement (revue, responsabilités)</p></li></ul></div></li><li><p>Code Civil:</p><div class="ulist"><ul><li><p><a href="https://github.com/steeve/france.code-civil" class="bare">https://github.com/steeve/france.code-civil</a></p></li><li><p><a href="https://github.com/steeve/france.code-civil/pull/40" class="bare">https://github.com/steeve/france.code-civil/pull/40</a></p></li><li><p><a href="https://github.com/steeve/france.code-civil/commit/b805ecf05a86162d149d3d182e04074ecf72c066" class="bare">https://github.com/steeve/france.code-civil/commit/b805ecf05a86162d149d3d182e04074ecf72c066</a></p></li></ul></div></li></ul></div></div></section><section id="checkpoint_2"><h2>🎯 Checkpoint</h2><div class="slide-content"><div class="paragraph"><p>On a vu :</p></div>
+# git lg</code></pre></div></div></div></section><section id="exemple_dusages_de_vcs"><h2>Exemple d&#8217;usages de VCS</h2><div class="slide-content"><div class="ulist"><ul><li><p>"Infrastructure as Code" :</p><div class="ulist"><ul><li><p>Besoins de traçabilité, de définition explicite et de gestion de conflits</p></li><li><p>Collaboration requise pour chaque changement (revue, responsabilités)</p></li></ul></div></li><li><p>Code Civil:</p><div class="ulist"><ul><li><p><a href="https://github.com/steeve/france.code-civil" class="bare">https://github.com/steeve/france.code-civil</a></p></li><li><p><a href="https://github.com/steeve/france.code-civil/pull/40" class="bare">https://github.com/steeve/france.code-civil/pull/40</a></p></li><li><p><a href="https://github.com/steeve/france.code-civil/commit/b805ecf05a86162d149d3d182e04074ecf72c066" class="bare">https://github.com/steeve/france.code-civil/commit/b805ecf05a86162d149d3d182e04074ecf72c066</a></p></li></ul></div></li></ul></div></div></section><section id="checkpoint_3"><h2>🎯 Checkpoint</h2><div class="slide-content"><div class="paragraph"><p>On a vu :</p></div>
 <div class="ulist"><ul><li><p>A quoi sert <code>git</code> et sa nomenclature de base (diff, changest, commit, branch)</p></li><li><p>A quoi reconnaître un dépôt initialisé local et l&#8217;espace de travail associé</p></li><li><p>Comment utiliser git localement (ajouter au staging, commiter)</p></li><li><p>l&#8217;historique et un merge avec git (localement)</p></li></ul></div></div></section></section>
-<section><section id="présentation_de_votre_projet" data-background-color="rgb(248, 228, 130)" data-state="invert"><h2>Présentation de votre projet</h2></section><section id="contexte_12"><h2>Contexte (1/2)</h2><div class="slide-content"><div class="ulist"><ul><li><p>Dans un effort d&#8217;optimisation de ses processus métiers, la cantina de Mos-Estafette s&#8217;est lancée dans un grand projet de digitalisation de la gestion de sa carte</p></li><li><p>Le projet est divisé en deux lots:</p><div class="ulist"><ul><li><p>Une partie serveur qui stocke et expose la données de la carte via une API REST</p></li><li><p>Une partie client qui permet de consulter et de gérer les menus de la cantina via l&#8217;API du serveur</p></li></ul></div></li></ul></div></div></section><section id="contexte_22"><h2>Contexte (2/2)</h2><div class="slide-content"><div class="ulist"><ul><li><p>Après une longue et épique bataille de chefs de projets et autres décideurs fonctionnels, la société <strong>Bananes Services d&#8217;Entreprises</strong>, spécialiste national des technologies du minitel, à remporté le lot de la partie serveur&#8230;&#8203;</p></li><li><p>&#8230;&#8203;Cependant, suite à d&#8217;un <strong>grave accident de brainstorming</strong> entre les 18 chefs de projet travaillant sur le dit projet et 6 mois de retard sur la première livraison, l&#8217;entreprise <strong>Bananes</strong> s&#8217;est retrouvée dans l&#8217;incapacité de mener le projet à son terme</p></li><li><p>Désemparés face à cette terrible nouvelle, le conseil d&#8217;administration de la cantina à décidé de se tourner vers l&#8217;ENSG pour tenter de sauver leur transition numérique</p></li></ul></div></div></section><section id="prise_en_main_du_projet_12"><h2>Prise en Main du Projet (1/2)</h2><div class="slide-content"><div class="ulist"><ul><li><p>Une équipe technique de <strong>Bananes</strong> avait commencé l&#8217;implémentation du serveur, et à fourni une archive <a href="media/menu-server.tar.gz">téléchargeable ICI</a>, contenant le code source du projet</p></li><li><p><strong>Bananes</strong> vous assure qu&#8217;ils ont suivi toutes les "best practices" du développement logiciel sur minitel</p><div class="ulist"><ul><li><p>Il y à un <code>LISEZMOI.txt</code> à la racine du projet :tada:</p></li><li><p>&#8230;&#8203; et pas grand chose d&#8217;autre?</p></li></ul></div></li></ul></div></div></section><section id="prise_en_main_du_projet_22"><h2>Prise en Main du Projet (2/2)</h2><div class="slide-content"><div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-bash hljs" data-noescape="true" data-lang="bash"># Création du répertoire menu-server
+<section><section id="présentation_de_votre_projet" data-background-color="rgb(248, 228, 130)" data-state="invert"><h2>Présentation de votre projet</h2><div class="slide-content"><div class="paragraph"><p>TODO REFAIRE TOUTE CETTE PARTIE.</p></div></div></section><section id="contexte"><h2>Contexte</h2><div class="slide-content"><div class="paragraph"><p>Expliquer l&#8217;app
+Expliquer la fonctionnalite qu&#8217;on implemente
+Trouver une excuse pour justifier le fait qu&#8217;on donne une tarball.</p></div></div></section><section id="prise_en_main_du_projet_12"><h2>Prise en Main du Projet (1/2)</h2><div class="slide-content"><div class="ulist"><ul><li><p>Une équipe technique de <strong>Bananes</strong> avait commencé l&#8217;implémentation du serveur, et à fourni une archive <a href="media/menu-server.tar.gz">téléchargeable ICI</a>, contenant le code source du projet</p></li><li><p><strong>Bananes</strong> vous assure qu&#8217;ils ont suivi toutes les "best practices" du développement logiciel sur minitel</p><div class="ulist"><ul><li><p>Il y à un <code>LISEZMOI.txt</code> à la racine du projet :tada:</p></li><li><p>&#8230;&#8203; et pas grand chose d&#8217;autre?</p></li></ul></div></li></ul></div></div></section><section id="prise_en_main_du_projet_22"><h2>Prise en Main du Projet (2/2)</h2><div class="slide-content"><div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-bash hljs" data-noescape="true" data-lang="bash"># Création du répertoire menu-server
 mkdir -p /workspace/menu-server &amp;&amp; cd /workspace/menu-server
 
 # Téléchargez le projet sur votre environnement de développement
@@ -534,10 +1312,8 @@ curl -sSLO https://cicd-lectures.github.io/slides/2023/media/menu-server.tar.gz
 
 # Décompresser et extraire l'archive téléchargée
 tar xvzf ./menu-server.tar.gz</code></pre></div></div>
-<div class="paragraph"><p>A partir de la vous pouvez ouvrir le fichier <code>LISEZMOI.txt</code> et commencer à suivre ses instructions.</p></div></div></section><section id="comment_accéder_à_un_serveur_démarré_dans_un_gitpod"><h2>Comment accéder à un serveur démarré dans un Gitpod ?</h2><div class="slide-content"><div class="ulist"><ul><li><p>Vous avez probablement démarré un serveur web qui écoute sur  le port 8080</p></li><li><p>Si vous souhaitez accéder par <code>curl</code> depuis terminal de votre gitpod, rien à faire</p></li><li><p>Si vous souhaitez y accéder depuis l&#8217;extérieur de votre gitpod il vous faut une URL publique:</p><div class="ulist"><ul><li><p><code>gp url 8080</code> vous indique l&#8217;URL du port 8080 de votre instance gitpod!</p></li><li><p><code>gp preview "$(gp url 8080)"</code> ouvrir votre navigateur.</p></li></ul></div></li></ul></div></div></section><section id="quest_ce_qui_va_ne_va_pas_dans_ce_projet_daprès_vous" data-background-color="rgb(248, 228, 130)" data-state="invert"><h2>Qu&#8217;est-ce qui va / ne va pas dans ce projet d&#8217;après vous?</h2></section><section id="triste_rencontre_avec_la_réalité"><h2>Triste Rencontre avec la Réalité</h2><div class="slide-content"><div class="ulist"><ul><li><p>Pas de gestion de version&#8230;&#8203;</p></li><li><p>Le projet ne fonctionne pas, tous les menus retournés s&#8217;appellent "TODO" :sob:</p></li><li><p>Le correctif ne semble pas compliqué à faire&#8230;&#8203;</p></li><li><p>&#8230;&#8203; sauf que vous ne pouvez pas compiler le projet!</p></li></ul></div>
-<div class="paragraph"><p>Il va falloir remédier à ça d&#8217;une façon ou d&#8217;une autre, sinon vous n&#8217;allez pas aller bien loin!</p></div></div></section><section id="architecture_du_projet"><h2>Architecture du projet</h2><div class="slide-content"><div class="imageblock"><img src="media/architecture.png" alt="architecture"></div></div></section><section id="http_layer"><h2>HTTP Layer</h2><div class="slide-content"><div class="ulist"><ul><li><p>Fait la transition entre une requête HTTP et une action logique de l&#8217;application</p></li><li><p>Accepte en entrée une requête HTTP (headers, query parameters, verb, (JSON) body)</p></li><li><p>Réponds un code de statut, des headers et optionnellement un body</p></li><li><p>Appelle la couche service en passant des DTOs (data transfer objects)</p></li></ul></div></div></section><section id="business_layer"><h2>Business Layer</h2><div class="slide-content"><div class="ulist"><ul><li><p>Implémente la logique métier de l&#8217;application</p></li><li><p>Accepte en entrée des DTOs et en réponds en sortie</p></li><li><p>Appelle d&#8217;autre services ou les repositories de l&#8217;application en leur passant des objets model</p></li></ul></div></div></section><section id="storage_layer"><h2>Storage Layer</h2><div class="slide-content"><div class="ulist"><ul><li><p>Fait la transition entre le modèle objet java et le modèle de la base de données (ici relationnel // SQL)</p></li><li><p>Accepte en entrée des objets du modèle, et peut en répondre aussi</p></li><li><p>Chaque méthode implémentée par un repository est en réalité une requête à votre base de données</p></li><li><p>Implémentation ici déléguée à un outil d&#8217;ORM (object relational mapping), ici hibernate</p></li><li><p>On utilisera dans le cadre de ce cours une base de donnée in-memory appelée <a href="https://www.h2database.com/html/main.html">h2</a></p></li></ul></div></div></section><section id="architecture_résumé"><h2>Architecture: résumé</h2><div class="slide-content"><div class="imageblock"><img src="media/architecture.png" alt="architecture"></div></div></section><section id="modèle_de_données"><h2>Modèle de données</h2><div class="slide-content"><div class="ulist"><ul><li><p>Une entité <code>Menu</code>, portant un identifiant et un titre</p></li><li><p>Une entité <code>Dish</code>, portant un identifiant et un titre</p></li><li><p>Un <code>Menu</code> est composé de 0 à N <code>Dish</code></p></li></ul></div></div></section><section id="organisation_du_code_source"><h2>Organisation du Code Source</h2><div class="slide-content"><div class="paragraph"><p>Toutes les classes sont créées dans un sous répertoire de <code>src/main/java/com/cicdlectures/menuserver</code></p></div>
-<div class="paragraph"><p>Le découpage est le suivant:</p></div>
-<div class="ulist"><ul><li><p><code>controller</code>: Couche d&#8217;interconnection entre HTTP et le domaine métier</p></li><li><p><code>dto</code> (Data Transfer Objects): Représentation intermédiaire de la donnée</p></li><li><p><code>service</code>: Couche métier</p></li><li><p><code>repository</code>: Couche d&#8217;accès a la base de données</p></li><li><p><code>model</code>: Représentation de votre modèle de donnée, configuration de l&#8217;ORM.</p></li></ul></div></div></section><section id="exercice_initialisez_un_dépôt_git"><h2>🎓 Exercice : Initialisez un dépôt git</h2><div class="slide-content"><div class="ulist"><ul><li><p>Nettoyez le contenu superflu du projet et initialisez un dépôt git dans le répertoire, puis créez un premier commit</p></li><li><p>Par contenu superflu, nous entendons:</p><div class="ulist"><ul><li><p>Tout ce qui est potentiellement généré</p></li><li><p>Les scripts de lancement obsolètes et inutiles</p></li><li><p>Un petit renommage du LISEZMOI.txt en README.md et un coup de nettoyage de son contenu</p></li></ul></div></li><li><p>💡 Pour chaque "popup" de l&#8217;éditeur (en bas à droite), choisissez "Oui" ou "Reload"</p></li></ul></div></div></section><section id="solution_exercice"><h2>✅ Solution Exercice</h2><div class="slide-content"><div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-bash hljs" data-noescape="true" data-lang="bash"># On évacue le contenu inutile
+<div class="paragraph"><p>A partir de la vous pouvez ouvrir le fichier <code>LISEZMOI.txt</code> et commencer à suivre ses instructions.</p></div></div></section><section id="quest_ce_qui_va_ne_va_pas_dans_ce_projet_daprès_vous" data-background-color="rgb(248, 228, 130)" data-state="invert"><h2>Qu&#8217;est-ce qui va / ne va pas dans ce projet d&#8217;après vous?</h2></section><section id="triste_rencontre_avec_la_réalité"><h2>Triste Rencontre avec la Réalité</h2><div class="slide-content"><div class="ulist"><ul><li><p>Pas de gestion de version&#8230;&#8203;</p></li><li><p>Le projet ne fonctionne pas, tous les menus retournés s&#8217;appellent "TODO" :sob:</p></li><li><p>Le correctif ne semble pas compliqué à faire&#8230;&#8203;</p></li><li><p>&#8230;&#8203; sauf que vous ne pouvez pas compiler le projet!</p></li></ul></div>
+<div class="paragraph"><p>Il va falloir remédier à ça d&#8217;une façon ou d&#8217;une autre, sinon vous n&#8217;allez pas aller bien loin!</p></div></div></section><section id="exercice_initialisez_un_dépôt_git"><h2>🎓 Exercice : Initialisez un dépôt git</h2><div class="slide-content"><div class="ulist"><ul><li><p>Nettoyez le contenu superflu du projet et initialisez un dépôt git dans le répertoire, puis créez un premier commit</p></li><li><p>Par contenu superflu, nous entendons:</p><div class="ulist"><ul><li><p>Tout ce qui est potentiellement généré</p></li><li><p>Les scripts de lancement obsolètes et inutiles</p></li><li><p>Un petit renommage du LISEZMOI.txt en README.md et un coup de nettoyage de son contenu</p></li></ul></div></li><li><p>💡 Pour chaque "popup" de l&#8217;éditeur (en bas à droite), choisissez "Oui" ou "Reload"</p></li></ul></div></div></section><section id="solution_exercice"><h2>✅ Solution Exercice</h2><div class="slide-content"><div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-bash hljs" data-noescape="true" data-lang="bash"># On évacue le contenu inutile
 rm -rf dist/ menu-server.tar.gz
 rm executer.sh
 # On renomme LISEZMOI.txt en README.md
@@ -552,239 +1328,13 @@ git init
 git add .
 
 # On crée un nouveau commit
-git commit -m "Add initial menu-server project files"</code></pre></div></div></div></section><section id="checkpoint_3"><h2>Checkpoint 🎯</h2><div class="slide-content"><div class="ulist"><ul><li><p>Vous avez récupéré un projet Java qui semble fonctionner&#8230;&#8203;</p><div class="ulist"><ul><li><p>..mais pas vraiment à l&#8217;état de l&#8217;art.</p></li></ul></div></li><li><p>Application du chapitre précédent : vous avez initialisé un projet <code>git</code> local</p></li></ul></div></div></section></section>
+git commit -m "Add initial menu-server project files"</code></pre></div></div></div></section><section id="checkpoint_4"><h2>Checkpoint 🎯</h2><div class="slide-content"><div class="ulist"><ul><li><p>Vous avez récupéré un projet Java qui semble fonctionner&#8230;&#8203;</p><div class="ulist"><ul><li><p>..mais pas vraiment à l&#8217;état de l&#8217;art.</p></li></ul></div></li><li><p>Application du chapitre précédent : vous avez initialisé un projet <code>git</code> local</p></li></ul></div></div></section></section>
 <section><section id="cycle_de_vie_de_votre_projet" data-background-color="rgb(248, 228, 130)" data-state="invert"><h2>Cycle de vie de votre projet</h2></section><section id="quel_est_le_problème"><h2>🤔 Quel est le problème ?</h2><div class="slide-content"><div class="paragraph"><p>On a du code. C&#8217;est un bon début. MAIS:</p></div>
 <div class="ulist"><ul><li><p>Qu&#8217;est ce qu&#8217;on "fabrique" à partir du code ?</p></li><li><p>Comment faire pour "fabriquer" de la même manière pour tout•e•s (💻 | 🖥 ) ?</p></li></ul></div></div></section><section id="que_fabrique_ton_à_partir_du_code"><h2>Que "fabrique" t&#8217;on à partir du code ? 📦</h2><div class="slide-content"><div class="paragraph"><p>Un <strong>livrable</strong> :</p></div>
-<div class="ulist"><ul><li><p>C&#8217;est ce que vos utilisateurs vont utiliser: un binaire à télécharger ? L&#8217;application de production ?</p></li><li><p>C&#8217;est versionné</p></li><li><p>C&#8217;est <em>reproductible</em></p></li></ul></div></div></section><section id="reproduire_la_fabrication"><h2>Reproduire la fabrication 🏭</h2><div class="slide-content"><div class="paragraph"><p>Comment fabriquer et tester de manière reproductible ?</p></div>
-<div class="ulist"><ul><li><p>Dimension technique: type de language, différents OS, différentes machines</p></li><li><p>Dimension temporelle: version de dépendances qui changent dans le temps</p></li><li><p>Dimension humaine: habitudes, connaissances, documentation (ou pas)</p></li></ul></div></div></section><section id="mauvais_exemple"><h2>(Mauvais) Exemple</h2><div class="slide-content"><div class="paragraph"><p>Que pensez-vous de :</p></div>
-<div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-bash hljs" data-noescape="true" data-lang="bash"># Compilation
-javac -d ./target \
-    ./src/main/java/com/cicdlectures/menuserver/MenuServerApplication.java \
-    ./src/main/java/com/cicdlectures/menuserver/*.java \
-    ./src/main/java/com/cicdlectures/menuserver/controller/*.java \
-    ./src/main/java/com/cicdlectures/menuserver/dto/*.java \
-    ./src/main/java/com/cicdlectures/menuserver/model/*.java \
-    ./src/main/java/com/cicdlectures/menuserver/repository/*.java \
-    ./src/main/java/com/cicdlectures/menuserver/service/*.java</code></pre></div></div>
-<div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-bash hljs" data-noescape="true" data-lang="bash"># Exécution
-java -cp target/classes/com/cicdlectures/menuserver/ \
-  -cp target/classes/com/cicdlectures/menuserver/controller/ \
-  -cp target/classes/com/cicdlectures/menuserver/dto/ \
-  -cp target/classes/com/cicdlectures/menuserver/model/ \
-  -cp target/classes/com/cicdlectures/menuserver/repository/ \
-  -cp target/classes/com/cicdlectures/menuserver/service/ \
-MenuServerApplication</code></pre></div></div></div></section><section><div class="slide-content"><div class="paragraph"><p>Résultat(s) :</p></div>
-<div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-none hljs" data-noescape="true">./src/main/java/com/cicdlectures/menuserver/dto/DishDto.java:16: error: cannot find symbol
-@NoArgsConstructor(access = AccessLevel.PRIVATE)</code></pre></div></div>
-<div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-none hljs" data-noescape="true">Error: Could not find or load main class MenuServerApplication
-Caused by: java.lang.ClassNotFoundException: MenuServerApplication</code></pre></div></div>
-<div class="paragraph"><p><span class="image"><img src="media/angry-panda.gif" alt="Loosing Patience"></span></p></div></div></section><section id="maven"><h2>Maven</h2><div class="slide-content"><div class="paragraph"><p>Say Hello to "Maven":</p></div>
-<div class="ulist"><ul><li><p>Idée de Maven : <strong>Cycles de vie</strong> standardisés</p></li><li><p>"Convention over configuration" : fichier <code>pom.xml</code> décrivant le projet</p></li><li><p>Ligne de commande <code>mvn</code> qui lit le <code>pom.xml</code> et exécute les <strong>phases</strong></p></li></ul></div></div></section><section id="maven_cycles_de_vie"><h2>Maven : Cycles de vie</h2><div class="slide-content"><div class="ulist"><ul><li><p>3 cycles de vie :</p><div class="ulist"><ul><li><p>🏗 <code>default</code> : pour construire les applications dans <code>target/</code></p></li><li><p>📝 <code>site</code> : pour construire un site web de documentation dans <code>target/</code></p></li><li><p>🧹 <code>clean</code> : nettoyer <code>target/</code></p></li></ul></div></li><li><p>Chaque cycle de vie est composé d&#8217;une série d&#8217;étapes appelées "phases"</p></li></ul></div></div></section><section id="maven_phases"><h2>Maven : Phases</h2><div class="slide-content"><div class="paragraph"><p>Phases du cycle de vie 🏗 <code>default</code> :</p></div>
-<div class="ulist"><ul><li><p><code>validate</code> - Validation du projet (syntaxe du <code>pom.xml</code> et du Java, etc.)</p></li><li><p><code>compile</code> - Fabrication des fichiers <code>.class</code> depuis le code java</p></li><li><p><code>test</code> - Exécuter les tests unitaires</p></li><li><p><code>package</code> - Préparer le livrable finale (<code>.jar</code> par exemple)</p></li><li><p><code>verify</code> - Exécuter les tests d&#8217;intégration</p></li><li><p><code>install</code> - Mettre à disposition le livrable localement pour d&#8217;autres projets Maven</p></li><li><p><code>deploy</code> - Copier le livrable dans un système de stockage de dépendance distant</p></li></ul></div></div></section><section id="maven_pom_xml"><h2>Maven : <code>pom.xml</code></h2><div class="slide-content"><div class="ulist"><ul><li><p>"POM" signifie "Project Object Model"</p></li><li><p>Contenu en XML : language de type "markup", avec un <strong>schéma</strong>, donc strict</p></li><li><p>"Convention au lieu de configuration" pour limiter la complexité</p><div class="ulist"><ul><li><p>code source attendu dans <code>src/main/java/</code></p></li><li><p>résultats dans <code>target/</code> (transient), etc.</p></li><li><p><code>pom.xml</code> à la racine de votre projet</p></li></ul></div></li></ul></div></div></section><section id="maven_ligne_de_commande_mvn"><h2>Maven : Ligne de commande <code>mvn</code></h2><div class="slide-content"><div class="paragraph"><p>Ligne de commande <code>mvn</code> :</p></div>
-<div class="ulist"><ul><li><p>Lit le fichier <code>pom.xml</code> pour comprendre le projet</p></li><li><p>Attend une (ou plusieurs) phases en argument</p></li><li><p>Accepte des options (formes courtes <code>-X</code> ou longues <code>--debug</code>)</p><div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-bash hljs" data-noescape="true" data-lang="bash"># Exemples :
-mvn clean # Appelle la phase "clean"
-mvn compile # Appelle les phases "validate" puis "compile"
-mvn clean compile -X # On peut appeler plusieurs phases et passer des options</code></pre></div></div></li></ul></div></div></section><section id="exercice_maven_cest_à_vous"><h2>🎓 Exercice Maven : C&#8217;est à vous !</h2><div class="slide-content"><div class="paragraph"><p><strong>But :</strong> fabriquer l&#8217;application menuserver avec Maven</p></div>
-<div class="imageblock"><a class="image" href="https://gitpod.io/workspaces" target="_blank"><img src="https://gitpod.io/button/open-in-gitpod.svg" alt="open in gitpod"></a></div>
-<div class="paragraph"><p>Commençons par valider le projet en utilisant la phase
-<a href="https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html"><code>validate</code></a> de Maven:</p></div>
-<div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-bash hljs" data-noescape="true" data-lang="bash">mvn validate</code></pre></div></div>
-<div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-none hljs" data-noescape="true"># ...
-[ERROR] The goal you specified requires a project to execute but there is no POM in this directory (/workspace/menu-server). Please verify you invoked Maven from the correct directory. -&gt; [Help 1]
-# ...</code></pre></div></div>
-<div class="paragraph"><p>❌ Il manque un fichier <code>pom.xml</code> !</p></div></div></section><section id="exercice_maven_fichier_pom_xml"><h2>🎓 Exercice Maven : fichier <code>pom.xml</code></h2><div class="slide-content"><div class="ulist"><ul><li><p>Commençons par créer un fichier <code>pom.xml</code> avec le contenu ci-dessous :</p><div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-xml hljs" data-noescape="true" data-lang="xml">&lt;project xmlns="http://maven.apache.org/POM/4.0.0"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"&gt;
-  &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
-  &lt;!-- Insert content here  --&gt;
-&lt;/project&gt;</code></pre></div></div></li><li><p>Puis ré-essayons de valider le projet avec Maven :</p><div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-bash hljs" data-noescape="true" data-lang="bash">mvn validate</code></pre></div></div>
-<div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-none hljs" data-noescape="true"># ...
-[ERROR] [ERROR] Some problems were encountered while processing the POMs:
-[FATAL] 'groupId' is missing. @ line 2, column 102
-[FATAL] 'artifactId' is missing. @ line 2, column 102
-[FATAL] 'version' is missing. @ line 2, column 102
-# ...</code></pre></div></div></li></ul></div>
-<div class="paragraph"><p>❌ On doit ajouter du contenu dans le <code>pom.xml</code> !</p></div></div></section><section id="maven_identité_dun_projet"><h2>Maven : identité d&#8217;un projet</h2><div class="slide-content"><div class="paragraph"><p>Maven identifie un projet avec les 3 éléments <strong>obligatoires</strong> suivants :</p></div>
-<div class="ulist"><ul><li><p><strong>groupId</strong> : Identifiant unique de votre projet suivant les règles Java de nommage de paquets</p></li><li><p><strong>artifactId</strong> : Identifiant du projet (paquet de la classe principale)</p></li><li><p><strong>version</strong> : Version de l&#8217;artefact</p></li></ul></div>
-<div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-xml hljs" data-noescape="true" data-lang="xml">  &lt;!-- Exemple avec un paquet Java `com.cicdlectures.menuserver` dans `src/main/java/com/cicdlectures/menuserver` --&gt;
-  &lt;groupId&gt;com.cicdlectures&lt;/groupId&gt;
-  &lt;artifactId&gt;menuserver&lt;/artifactId&gt;
-  &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;</code></pre></div></div></div></section><section id="exercice_maven_identifiez_votre_projet"><h2>🎓 Exercice Maven : identifiez votre projet</h2><div class="slide-content"><div class="paragraph"><p>&#8658; C&#8217;est à vous</p></div>
-<div class="ulist"><ul><li><p>Identifiez votre projet en remplissant le fichier <code>pom.xml</code></p><div class="ulist"><ul><li><p><code>groupId</code> et <code>artifactId</code>: utilisez le nom de package de votre classe principale <code>MenuServerApplication.java</code></p></li><li><p><code>version</code> : <code>1.0-SNAPSHOT</code></p></li></ul></div></li><li><p><strong>Objectif :</strong> Maven doit valider le projet avec succès :</p><div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-bash hljs" data-noescape="true" data-lang="bash">mvn validate</code></pre></div></div>
-<div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-none hljs" data-noescape="true"># ...
-[INFO] BUILD SUCCESS
-# ...</code></pre></div></div></li></ul></div></div></section><section id="checkpoint_4"><h2>Checkpoint 🎯</h2><div class="slide-content"><div class="ulist"><ul><li><p>On a pu créer un fichier <code>pom.xml</code> valide ✅</p></li><li><p>Pensez à commiter ce changement 💡</p></li><li><p>Il est temps de compiler l&#8217;application avec Maven 🏗</p></li></ul></div></div></section><section id="exercice_maven_compiler"><h2>🎓 Exercice Maven : Compiler 🏗</h2><div class="slide-content"><div class="ulist"><ul><li><p>Essayez de compiler l&#8217;application à l&#8217;aide de la phase
-<a href="https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html"><code>compile</code></a> de Maven:</p><div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-bash hljs" data-noescape="true" data-lang="bash">mvn compile</code></pre></div></div></li><li><p>Résultat attendu : Message <code>[INFO] BUILD FAILURE</code> ❌</p></li></ul></div></div></section><section id="analyse_des_erreurs_de_compilation"><h2>Analyse des erreurs de compilation 🏗</h2><div class="slide-content"><div class="paragraph"><p>Que s&#8217;est il passé ?</p></div>
-<div class="olist arabic"><ol class="arabic"><li><p>&#8658; Maven a téléchargé plein de dépendances depuis <a href="https://repo.maven.apache.org" class="bare" target="_blank">https://repo.maven.apache.org</a></p></li><li><p>&#8658; La compilation a échoué avec plein d&#8217;erreurs et quelques "warning" :</p></li></ol></div>
-<div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-none hljs" data-noescape="true">[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.10.1:compile (default-compile)
-      on project my-app: Compilation failure: Compilation failure:
-[ERROR] &lt;...&gt;/src/main/java/com/cicdlectures/menuserver/repository/MenuRepository.java:[3,43]
-      package org.springframework.data.repository does not exist</code></pre></div></div></div></section><section id="maven_et_dépendances_externes"><h2>Maven et Dépendances Externes</h2><div class="slide-content"><div class="ulist"><ul><li><p>Maven propose 2 types de dépendances externes :</p><div class="ulist"><ul><li><p><strong>Plugin</strong> : c&#8217;est un artefact qui sera utilisé par Maven durant son cycle de vie</p><div class="ulist"><ul><li><p>"Build-time dependency"</p></li></ul></div></li><li><p><strong>Dépendance</strong> (🇬🇧 "dependency") : c&#8217;est un artefact qui sera utilisé par votre application,
-<em>en dehors de Maven</em></p><div class="ulist"><ul><li><p>"Run-time dependency"</p></li></ul></div></li></ul></div></li></ul></div></div></section><section id="maven_et_plugins"><h2>Maven et Plugins</h2><div class="slide-content"><div class="paragraph"><p>Quand on regarde sous le capot, Maven est un framework d&#8217;exécution de plugins.</p></div>
-<div class="paragraph"><p>&#8658; Tout est plugin :</p></div>
-<div class="ulist"><ul><li><p>Effacer le dossier <code>target</code> ? Un plugin ! (si si essayez <code>mvn clean</code> une première fois&#8230;&#8203;)</p></li><li><p>Compiler du Java ? Un plugin !</p></li><li><p>Pas de plugin qui fait ce que vous voulez ? Écrivez un autre plugin !</p></li></ul></div></div></section><section><div class="slide-content"><div class="paragraph"><p><strong>C&#8217;est bien gentil mais comment corriger notre erreur ?</strong></p></div>
-<div class="paragraph"><p>💡 Il manque des dépendances pour compiler :</p></div>
-<div class="ulist"><ul><li><p>❌ <code>package org.springframework.data.repository does not exist</code></p></li><li><p>❌ <code>package jakarta.persistence does not exist</code></p></li><li><p>❌ <code>package lombok does not exist</code></p></li></ul></div></div></section><section id="dépendances_externes"><h2>Dépendances Externes</h2><div class="slide-content"><div class="paragraph"><p><strong>Hypothèse</strong> : on a besoin de code et d&#8217;outils externes (e.g. écrits par quelqu&#8217;un d&#8217;autre)</p></div>
-<div class="ulist"><ul><li><p>Comment faire si le code externe est mis à jour ?</p></li><li><p>Que se passe t&#8217;il si le code externe est supprimé de l&#8217;internet ?</p><div class="ulist small"><ul><li><p><a href="https://github.blog/2020-11-16-standing-up-for-developers-youtube-dl-is-back/" class="bare" target="_blank">https://github.blog/2020-11-16-standing-up-for-developers-youtube-dl-is-back/</a></p></li></ul></div></li><li><p>Acceptez-vous d&#8217;exécuter le code de quelqu&#8217;un d&#8217;autre sur votre machine ?</p></li><li><p>Et si quelqu&#8217;un injecte du code malicieux dans le code externe ?</p><div class="ulist small"><ul><li><p><a href="https://www.zdnet.com/article/malicious-npm-packages-caught-installing-remote-access-trojans/" class="bare" target="_blank">https://www.zdnet.com/article/malicious-npm-packages-caught-installing-remote-access-trojans/</a></p></li></ul></div></li></ul></div></div></section><section id="tous_les_languages"><h2>TOUS les languages&#8230;&#8203;</h2><div class="slide-content"><div class="paragraph"><p>... sont concernés</p></div></div></section><section id="maven_dépôts_dartefacts"><h2>Maven : Dépôts d&#8217;Artefacts</h2><div class="slide-content"><div class="paragraph"><p>Maven récupère les dépendances (et plugins) dans des dépôts d&#8217;artefacts</p></div>
-<div class="paragraph"><p>(🇬🇧 Artifacts Repositories) qui sont de 3 types :</p></div>
-<div class="ulist"><ul><li><p><strong>Central</strong> : un dépôt géré par la communauté - <a href="https://repo.maven.apache.org" class="bare" target="_blank">https://repo.maven.apache.org</a></p><div class="ulist"><ul><li><p><a href="https://mvnrepository.com/repos/central" target=""_blank">Avec une interface web de recherche</a></p></li></ul></div></li><li><p><strong>Remote</strong> : des dépôts privés de votre organisation</p></li><li><p><strong>Local</strong> : un dossier sur la machine où la commande <code>mvn</code> est exécuté, généralement dans <code>${HOME}/.m2</code></p><div class="ulist small"><ul><li><p>💡 <code>mvn install</code> cible ce dépôt "local"</p></li></ul></div></li></ul></div></div></section><section id="dépendances_maven"><h2>Dépendances Maven</h2><div class="slide-content"><div class="paragraph"><p>💡 <a href="https://maven.apache.org/guides/introduction/introduction-to-dependency-mechanism.html">"Introduction au mécanisme de dépendances - documentation Maven</a></p></div>
-<div class="ulist"><ul><li><p>Pour spécifier les dépendances (dans votre <code>pom.xml</code>):</p><div class="ulist"><ul><li><p>Il faut utiliser la balise <code>&lt;dependencies&gt;</code>,</p></li><li><p>&#8230;&#8203; qui est une collection de dépendances (balise <code>&lt;dependency&gt;</code> - quelle surprise !),</p></li><li><p>.. chaque dépendance étant défini par un trio <code>&lt;groupId&gt;</code>, <code>&lt;artifactId&gt;</code> et <code>&lt;version&gt;</code> (que de surprises&#8230;&#8203;)</p></li></ul></div></li><li><p>Pour les plugins c&#8217;est la même idée (<code>&lt;plugins&gt;</code> &#8594; <code>&lt;plugin&gt;</code> &#8594; <code>&lt;groupId&gt;</code>, <code>&lt;artifactId&gt;</code>, <code>&lt;version&gt;</code>)</p></li></ul></div></div></section><section id="exemple_de_dépendance_spring"><h2>Exemple de Dépendance : Spring</h2><div class="slide-content"><div class="ulist"><ul><li><p><strong>Idée</strong> : Nous avons besoin d&#8217;ajouter le framework Spring en dépendance.</p></li></ul></div>
-<div class="paragraph"><p>Voilà ce que ça donne dans le fichier <code>pom.xml</code> :</p></div>
-<div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-xml hljs" data-noescape="true" data-lang="xml">&lt;dependencies&gt;
-  &lt;dependency&gt;
-    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-    &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;
-    &lt;version&gt;3.0.2&lt;/version&gt;
-  &lt;/dependency&gt;
-&lt;/dependencies&gt;</code></pre></div></div></div></section><section id="exercice_avec_les_dépendances_spring_12"><h2>🎓 Exercice avec les dépendances Spring 1/2</h2><div class="slide-content"><div class="paragraph"><p>&#8658; C&#8217;est à vous.</p></div>
-<div class="ulist"><ul><li><p>Ajoutez le bloc <code>&lt;dependencies&gt;</code> de la slide précédente dans votre <code>pom.xml</code></p><div class="ulist"><ul><li><p>💡 <a href="https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-web/3.0.2" target="_blank">org.springframework.boot.spring-boot-starter-web 3.0.2 sur Maven Central</a></p></li></ul></div></li><li><p>Exécutez la commande <code>mvn compile</code></p></li><li><p>Résultat attendu :</p><div class="ulist"><ul><li><p>✅ L&#8217;erreur <code>package org.springframework.data.repository does not exist</code> a disparu: la dépendance est présente</p></li><li><p>❌ Encore d&#8217;autre dépendances manquantes (<code>jakarta.persistence</code>, <code>lombok</code>, etc.)</p></li></ul></div></li></ul></div></div></section><section id="exercice_avec_les_dépendances_spring_22"><h2>🎓 Exercice avec les dépendances Spring 2/2</h2><div class="slide-content"><div class="ulist"><ul><li><p><strong>But:</strong> Compiler l&#8217;application complète</p></li><li><p>Continuez de modifier le fichier <code>pom.xml</code> afin d&#8217;ajouter les 2 dépendances suivantes :</p><div class="ulist"><ul><li><p>Lombok: <a href="https://mvnrepository.com/artifact/org.projectlombok/lombok/1.18.26" target="_blank">org.projectlombok.lombok 1.18.26 sur Maven Central</a></p></li><li><p>Jakarta persistence: <a href="https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-jpa/3.0.2" target="_blank">org.springframework.boot.spring-boot-starter-data-jpa 3.0.2 sur Maven Central</a></p></li></ul></div></li><li><p>Résultat attendu : ✅ <code>[INFO] BUILD SUCCESS</code></p></li></ul></div></div></section><section id="solution_avec_les_dépendances_spring"><h2>✅ Solution avec les dépendances Spring</h2><div class="slide-content"><div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-xml hljs" data-noescape="true" data-lang="xml">&lt;project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"&gt;
-  &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
-    &lt;groupId&gt;com.cicdlectures&lt;/groupId&gt;
-    &lt;artifactId&gt;menuserver&lt;/artifactId&gt;
-    &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;
-
-    &lt;dependencies&gt;
-      &lt;dependency&gt;
-        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-        &lt;artifactId&gt;spring-boot-starter-data-jpa&lt;/artifactId&gt;
-        &lt;version&gt;3.0.2&lt;/version&gt;
-      &lt;/dependency&gt;
-      &lt;dependency&gt;
-        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-        &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;
-        &lt;version&gt;3.0.2&lt;/version&gt;
-      &lt;/dependency&gt;
-      &lt;dependency&gt;
-        &lt;groupId&gt;org.projectlombok&lt;/groupId&gt;
-        &lt;artifactId&gt;lombok&lt;/artifactId&gt;
-        &lt;version&gt;1.18.26&lt;/version&gt;
-      &lt;/dependency&gt;
-    &lt;/dependencies&gt;
-&lt;/project&gt;</code></pre></div></div></div></section><section id="exécution_de_lapplication_spring_tentative_1"><h2>Exécution de l&#8217;application Spring : Tentative 1</h2><div class="slide-content"><div class="ulist"><ul><li><p>Quel est le contenu de <code>target/</code> ? Et de <code>target/classes</code> ?</p><div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-bash hljs" data-noescape="true" data-lang="bash"># 💡 Chercher tous les fichier dans le sous-dossier ./target/classes
-find ./target/classes -type f</code></pre></div></div></li><li><p>Vous avez un état stable : pensez à <code>git</code> :</p><div class="ulist"><ul><li><p>Dites à <code>git</code> d&#8217;ignorer le dossier <code>target/</code> (fichier <code>.gitignore</code>)</p></li><li><p>Ajoutez et commitez dans <code>git</code></p><div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-bash hljs" data-noescape="true" data-lang="bash">echo 'target/' &gt;&gt; .gitignore
-git add .gitignore pom.xml
-git commit -m "Ajout de la configuration pour compiler l'application"</code></pre></div></div></li></ul></div></li></ul></div></div></section><section id="checkpoint_5"><h2>Checkpoint 🎯</h2><div class="slide-content"><div class="ulist"><ul><li><p>C&#8217;est la galère pour trouver les bonnes dépendances 🤔</p></li><li><p><code>mvn compile</code> a produit des fichiers dans <code>target/classes/**</code> ✅</p></li><li><p>Il faut encore pouvoir exécuter l&#8217;application</p></li></ul></div>
-<div class="paragraph"><p>&#8658; reprenons en lisant le documentation</p></div></div></section><section id="spring_boot_read_the_manual"><h2>Spring Boot : Read The Manual</h2><div class="slide-content"><div class="ulist"><ul><li><p>Spring Boot est bien plus simple à utiliser que ce que l&#8217;on a vu 🧸 !</p><div class="ulist small"><ul><li><p>On l&#8217;a abordé ainsi pour mieux comprendre</p></li></ul></div></li><li><p>Une documentation très complète :</p><div class="ulist"><ul><li><p><a href="https://spring.io/guides/gs/spring-boot/">"Get Started" pour bien démarrer</a></p></li><li><p><a href="https://start.spring.io/">Spring Initialzr</a> pour générer son <code>pom.xml</code> en ligne</p></li><li><p>Une <a href="https://docs.spring.io/spring-boot/docs/2.0.x/reference/html/">documentation de référence</a></p></li></ul></div></li><li><p>Un <a href="https://docs.spring.io/spring-boot/docs/2.5.6/maven-plugin/reference/htmlsingle/">plugin Maven est fourni par le projet Spring Boot</a>
-pour se simplifier la vie:</p><div class="ulist"><ul><li><p>Pas besoin de répéter les versions</p></li><li><p>Plein de fonctionnalités de développement</p></li><li><p>Moins de configuration à faire soit même</p></li></ul></div></li></ul></div></div></section><section id="maven_plugins"><h2>Maven Plugins</h2><div class="slide-content"><div class="paragraph"><p>Un plugin Maven implémente les tâches à effectuer durant les différentes phases,
-et peut appartenir à l&#8217;un ou l&#8217;autre de ces 2 types :</p></div>
-<div class="ulist"><ul><li><p><strong>"Build"</strong> : Implémente une action durant les phase du cycle de vie <code>default</code>,
-et est configuré dans la balise <code>&lt;build&gt;</code></p></li><li><p><strong>"Reporting"</strong> Implémente une action durant les phases du cycle de vie <code>site</code>,
-et est configuré dans la balise <code>&lt;reporting&gt;</code> (à votre grande surprise)</p></li></ul></div>
-<div class="paragraph"><p>C&#8217;est un fichier <code>*.jar</code> identifié par&#8230;&#8203; groupId, artifactId et version.</p></div></div></section><section id="plugin_maven_spring_boot"><h2>Plugin Maven Spring Boot</h2><div class="slide-content"><div class="ulist"><ul><li><p>On vous fournit le contenu du <code>pom.xml</code> (slide suivante) généré (et adapté) depuis <a href="https://start.spring.io/">Spring Initialzr</a>,
-avec les changements suivants :</p><div class="ulist"><ul><li><p>Ajout d&#8217;un POM "parent" (dont on hérite) venant de Spring Boot (Éviter la répétition)</p></li><li><p>Configuration avec des properties (clef/valeurs)</p></li><li><p>Mise à jour des dépendances (ajouts et simplification des versions, déléguées au "POM parent")</p></li><li><p>Activation du plugin Spring Boot lors des phases de "build"</p></li></ul></div></li></ul></div></div></section><section id="exemple_maven_pom_xml_final"><h2>Exemple Maven : pom.xml final</h2><div class="slide-content"><div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-xml hljs" data-noescape="true" data-lang="xml">&lt;project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"&gt;
-  &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
-
-  &lt;groupId&gt;com.cicdlectures&lt;/groupId&gt;
-  &lt;artifactId&gt;menuserver&lt;/artifactId&gt;
-  &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;
-
-  &lt;parent&gt;
-    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-    &lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt;
-    &lt;version&gt;3.0.2&lt;/version&gt;
-  &lt;/parent&gt;
-
-  &lt;properties&gt;
-    &lt;java.version&gt;17&lt;/java.version&gt;
-    &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;
-  &lt;/properties&gt;
-
-  &lt;dependencies&gt;
-    &lt;dependency&gt;
-      &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-      &lt;artifactId&gt;spring-boot-starter-data-jpa&lt;/artifactId&gt;
-    &lt;/dependency&gt;
-    &lt;dependency&gt;
-      &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-      &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;
-    &lt;/dependency&gt;
-    &lt;dependency&gt;
-      &lt;groupId&gt;org.projectlombok&lt;/groupId&gt;
-      &lt;artifactId&gt;lombok&lt;/artifactId&gt;
-    &lt;/dependency&gt;
-    &lt;dependency&gt;
-      &lt;groupId&gt;com.h2database&lt;/groupId&gt;
-      &lt;artifactId&gt;h2&lt;/artifactId&gt;
-      &lt;scope&gt;runtime&lt;/scope&gt;
-    &lt;/dependency&gt;
-  &lt;/dependencies&gt;
-
-  &lt;build&gt;
-    &lt;plugins&gt;
-      &lt;plugin&gt;
-        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-        &lt;artifactId&gt;spring-boot-maven-plugin&lt;/artifactId&gt;
-      &lt;/plugin&gt;
-    &lt;/plugins&gt;
-  &lt;/build&gt;
-&lt;/project&gt;</code></pre></div></div></div></section><section id="exercice_démarrer_lapplication_12"><h2>🎓 Exercice : Démarrer l&#8217;application - 1/2</h2><div class="slide-content"><div class="ulist"><ul><li><p><strong>But</strong>: Exécuter l&#8217;application à l&#8217;aide du plugin Spring Boot</p></li><li><p>Sprint Boot fournit une phase Maven nommée <code>spring-boot:run</code> qui exécute
-l&#8217;application en mode "développement" sur le port <code>8080</code> local</p><div class="ulist"><ul><li><p>Essayez d&#8217;appeler cette phase avec Maven</p></li></ul></div></li><li><p>Résultat attendu (une jolie bannière ASCIIArt):</p><div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-none hljs" data-noescape="true">  .   ____          _            __ _ _
- /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
-( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
- \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
-  '  |____| .__|_| |_|_| |_\__, | / / / /
- =========|_|==============|___/=/_/_/_/
- :: Spring Boot ::                (v3.0.2)</code></pre></div></div></li></ul></div></div></section><section id="exercice_démarrer_lapplication_22"><h2>🎓 Exercice : Démarrer l&#8217;application - 2/2</h2><div class="slide-content"><div class="ulist"><ul><li><p>Dans un second terminal de Gitpod, affichez la page web de l&#8217;application avec les commandes suivantes :</p><div class="ulist"><ul><li><p><code>gp url 8080</code> pour afficher l&#8217;URL publique de l&#8217;application correspondant au port <code>8080</code> local</p></li><li><p><code>gp preview "$(gp url 8080)/"</code> pour prévisualiser le "endpoint" <code>/</code> dans un navigateur local</p></li></ul></div></li><li><p>La page d&#8217;accueil doit afficher HTTP/404</p></li><li><p>Trouvez la page des menus qui doit répondre <code>[]</code> (liste vide en JSON)</p><div class="ulist"><ul><li><p>💡 <code>src/*/controller/*.java</code></p></li></ul></div></li></ul></div></div></section><section id="checkpoint_6"><h2>Checkpoint 🎯</h2><div class="slide-content"><div class="ulist"><ul><li><p>Spring Boot (et toutes ses dépendances) est configuré ✅</p></li><li><p>Le plugin Maven Spring Boot permet de compiler et d&#8217;exécuter l&#8217;application avec la commande <code>mvn spring-boot:run</code> ✅</p></li><li><p>Il faut encore fabriquer un fichier JAR 🏺 pour la production 🤔</p></li></ul></div>
-<div class="paragraph"><p>&#8658; reprenons avec Maven</p></div></div></section><section id="exercice_maven_jar_plugin"><h2>🎓 Exercice : Maven JAR Plugin</h2><div class="slide-content"><div class="ulist"><ul><li><p><strong>But</strong>: Produire l&#8217;artefact JAR distribuable</p></li><li><p>La génération du JAR est déclenchée lors de l&#8217;appel à <code>mvn package</code> :</p><div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-bash hljs" data-noescape="true" data-lang="bash">ls -ltra ./target
-mvn clean # Nettoyez tout !
-ls -ltra ./target
-mvn package
-ls -ltra ./target # Est-ce que vous voyez un fichier JAR ?</code></pre></div></div></li><li><p>Exécution de l&#8217;application :</p><div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-bash hljs" data-noescape="true" data-lang="bash">java -jar &lt;chemin vers le fichier JAR&gt;</code></pre></div></div>
-<div class="ulist"><ul><li><p>Même fonctionnement que précédemment (bannière, port 8080, endpoint <code>/menus</code>&#8230;&#8203;)</p></li></ul></div></li></ul></div></div></section><section id="exercice_changer_le_nom_de_lartefact_final"><h2>🎓 Exercice : Changer le nom de l&#8217;artefact final</h2><div class="slide-content"><div class="ulist"><ul><li><p><strong>But</strong>: Produire un artefact JAR dont le nom est <code>menu-server.jar</code></p></li><li><p>Quel est le nom de l&#8217;artefact généré ? Est-il constant ?</p><div class="ulist"><ul><li><p>(SPOILER: 🙅🏽‍♀️)</p></li></ul></div></li><li><p>En utilisant la documentation de référence <a href="https://maven.apache.org/pom.html#the-basebuild-element-set" class="bare" target="_blank">https://maven.apache.org/pom.html#the-basebuild-element-set</a>,
-adaptez votre <code>pom.xml</code> afin que le fichier généré se nomme <strong>toujours</strong> <code>menu-server.jar</code>.</p></li></ul></div></div></section><section id="solution_changer_le_nom_de_lartefact_final"><h2>✅ Solution : Changer le nom de l&#8217;artefact final</h2><div class="slide-content"><div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-xml hljs" data-noescape="true" data-lang="xml">&lt;build&gt;
-  &lt;finalName&gt;menu-server&lt;/finalName&gt;
-  &lt;!-- ... &lt;plugins&gt; ... --&gt;
-&lt;/build&gt;</code></pre></div></div></div></section><section><div class="slide-content"><div class="paragraph"><p>💡 Pensez à ajouter / commiter quand c&#8217;est fonctionnel pour vous !</p></div></div></section><section id="solution_pom_xml_final"><h2>✅ Solution: pom.xml final</h2><div class="slide-content"><div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-xml hljs" data-noescape="true" data-lang="xml">&lt;project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"&gt;
-  &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
-
-  &lt;groupId&gt;com.cicdlectures&lt;/groupId&gt;
-  &lt;artifactId&gt;menuserver&lt;/artifactId&gt;
-  &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;
-
-  &lt;parent&gt;
-    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-    &lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt;
-    &lt;version&gt;3.0.2&lt;/version&gt;
-  &lt;/parent&gt;
-
-  &lt;properties&gt;
-    &lt;java.version&gt;17&lt;/java.version&gt;
-    &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;
-  &lt;/properties&gt;
-
-  &lt;dependencies&gt;
-    &lt;dependency&gt;
-      &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-      &lt;artifactId&gt;spring-boot-starter-data-jpa&lt;/artifactId&gt;
-    &lt;/dependency&gt;
-    &lt;dependency&gt;
-      &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-      &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;
-    &lt;/dependency&gt;
-    &lt;dependency&gt;
-      &lt;groupId&gt;org.projectlombok&lt;/groupId&gt;
-      &lt;artifactId&gt;lombok&lt;/artifactId&gt;
-    &lt;/dependency&gt;
-    &lt;dependency&gt;
-      &lt;groupId&gt;com.h2database&lt;/groupId&gt;
-      &lt;artifactId&gt;h2&lt;/artifactId&gt;
-      &lt;scope&gt;runtime&lt;/scope&gt;
-    &lt;/dependency&gt;
-  &lt;/dependencies&gt;
-
-  &lt;build&gt;
-    &lt;finalName&gt;menu-server&lt;/finalName&gt;
-    &lt;plugins&gt;
-      &lt;plugin&gt;
-        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-        &lt;artifactId&gt;spring-boot-maven-plugin&lt;/artifactId&gt;
-      &lt;/plugin&gt;
-    &lt;/plugins&gt;
-  &lt;/build&gt;
-&lt;/project&gt;</code></pre></div></div></div></section><section id="checkpoint_7"><h2>Checkpoint 🎯</h2><div class="slide-content"><div class="ulist"><ul><li><p>Le projet Menu Server est configuré avec Maven (<code>pom.xml</code>) ✅</p></li><li><p>On peut vérifier l&#8217;application localement avec la commande <code>mvn spring-boot:run</code> ✅</p></li><li><p>L&#8217;application est fabriquée avec la commande <code>mvn package</code> qui produit le délivrable <code>./target/menu-server.jar</code> ✅</p></li></ul></div></div></section></section>
+<div class="ulist"><ul><li><p>C&#8217;est ce que vos utilisateurs vont utiliser: un binaire à télécharger ? L&#8217;application de production ?</p></li><li><p>C&#8217;est versionné</p></li><li><p>C&#8217;est <em>reproductible</em></p></li></ul></div></div></section><section id="comment_fabriquer_du_code"><h2>Comment fabriquer du code?</h2><div class="slide-content"><div class="paragraph"><p>TODO (refaire)</p></div>
+<div class="ulist"><ul><li><p>Faire suivre un cycle de vie precis</p><div class="ulist"><ul><li><p>build, lint, test, integration test, release.</p></li></ul></div></li><li><p>go n&#8217;impose pas forcement de cycle de vie, c&#8217;est specifique a l&#8217;application</p></li><li><p>On utilise Make pour <code>normaliser</code> le cyle de vie</p></li></ul></div></div></section><section id="todo_deterer_les_slides_make"><h2>TODO DETERER LES slides make?</h2></section><section id="comment_garantir_que_le_processus_de_livraison_est_reproductble"><h2>Comment garantir que le processus de livraison est reproductble?</h2><div class="slide-content"><div class="ulist"><ul><li><p>Gestion des dependances</p></li><li><p>Gestion des outils</p></li></ul></div>
+<div class="paragraph"><p>Parler des go modules, de ce que fait la toolchain go
+<a href="https://go.dev/ref/mod" class="bare">https://go.dev/ref/mod</a>, faire un resume """"digeste""" de ca.</p></div></div></section></section>
 <section><section id="mettre_son_code_en_sécurité" data-background-color="rgb(248, 228, 130)" data-state="invert"><h2>Mettre son code en sécurité</h2></section><section id="une_autre_petite_histoire"><h2>Une autre petite histoire</h2><div class="slide-content"><div class="paragraph"><p>Votre dépôt est actuellement sur votre ordinateur.</p></div>
 <div class="ulist"><ul><li><p>Que se passe t&#8217;il si :</p><div class="ulist"><ul><li><p>Votre disque dur tombe en panne ?</p></li><li><p>On vous vole votre ordinateur ?</p></li><li><p>Vous échappez votre tasse de thé / café sur votre ordinateur ?</p></li><li><p>Une météorite tombe sur votre bureau et fracasse votre ordinateur ?</p></li></ul></div></li></ul></div></div></section><section><div class="slide-content"><div class="paragraph"><p><span class="image"><img src="media/crying.gif" alt="crying" width="500"></span></p></div>
 <div class="paragraph small"><small>Testé, pas approuvé.</small></div></div></section><section id="comment_éviter_ça_2"><h2>Comment éviter ça ?</h2><div class="slide-content"><div class="ulist"><ul><li><p>Répliquer votre dépôt sur une ou plusieurs machines !</p></li><li><p>Git est pensé pour gérer ce de problème</p></li></ul></div></div></section><section id="gestion_de_version_décentralisée"><h2>Gestion de version décentralisée</h2><div class="slide-content"><div class="ulist"><ul><li><p>Chaque utilisateur maintient une version du dépôt <em>local</em> qu&#8217;il peut changer à souhait</p></li><li><p>Indépendant du commit, ils peuvent "pousser" une version sur un dépôt <strong>distant</strong></p></li><li><p>Un dépôt <em>local</em> peut avoir plusieurs dépôts <strong>distants</strong>.</p></li></ul></div></div></section><section id="centralisé_vs_décentralisé"><h2>Centralisé vs Décentralisé</h2><div class="slide-content"><div class="paragraph"><p><span class="image"><img src="media/cvsdcvs.png" alt="cvsdcvs" width="800"></span></p></div>
@@ -950,7 +1500,7 @@ jobs:
       options: --user=root
     steps:
       - uses: actions/checkout@v4 # Récupère le contenu du dépôt correspondant au commit du workflow en cours
-      - run: cat README.md | cowsay</code></pre></div></div></div></section><section id="checkpoint_8"><h2>Checkpoint 🎯</h2><div class="slide-content"><div class="ulist"><ul><li><p>Quel est l&#8217;impact en terme de temps d&#8217;exécution du changement précédent ?</p></li><li><p><strong>Problème :</strong> Le temps entre une modification et le retour est crucial</p></li></ul></div>
+      - run: cat README.md | cowsay</code></pre></div></div></div></section><section id="checkpoint_5"><h2>Checkpoint 🎯</h2><div class="slide-content"><div class="ulist"><ul><li><p>Quel est l&#8217;impact en terme de temps d&#8217;exécution du changement précédent ?</p></li><li><p><strong>Problème :</strong> Le temps entre une modification et le retour est crucial</p></li></ul></div>
 <div class="imageblock"><img src="media/wait-here.jpg" alt="wait here"></div></div></section><section id="exercice_optimiser_avec_les_fonctionnalités_du_moteur_de_ci"><h2>🎓 Exercice : Optimiser avec les fonctionnalités du moteur de CI</h2><div class="slide-content"><div class="ulist"><ul><li><p><strong>But</strong> : s&#8217;assurer que GitHub actions install et utilise <code>cowsay</code> le plus efficacement possible</p></li><li><p>C&#8217;est à vous de mettre à jour le workflow pour:</p><div class="ulist"><ul><li><p>Lire le contenu du fichier <code>README.md</code> dans un "output" (une variable temporaire de GitHub Actions)</p></li><li><p>Passer le contenu (via l&#8217;output) à une version de cowsay gérée par GitHub Actions</p></li></ul></div></li><li><p>💡 Utilisez les GitHub Actions et documentations suivantes :</p><div class="ulist"><ul><li><p><a href="https://github.com/marketplace/actions/neo-cowsay" target="_blank">GitHub Action pour cowsay</a></p></li><li><p><a href="https://github.com/juliangruber/read-file-action" target="_blank">GitHub Action pour lire un fichier dans une variable <code>output</code></a></p></li><li><p><a href="https://docs.github.com/en/actions/learn-github-actions/contexts#steps-context" target="_blank">Documentation de <code>steps.outputs</code></a></p></li></ul></div></li></ul></div></div></section><section id="solution_optimiser_avec_les_fonctionnalités_du_moteur_de_ci"><h2>✅ Solution : Optimiser avec les fonctionnalités du moteur de CI</h2><div class="slide-content"><div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-yaml hljs" data-noescape="true" data-lang="yaml">name: Bonjour
 on:
   - push
@@ -991,7 +1541,7 @@ jobs:
       - name: Build application
         run: mvn compile
       - name: Package application
-        run: mvn package</code></pre></div></div></div></section><section id="checkpoint_9"><h2>🎯 Checkpoint</h2><div class="slide-content"><div class="ulist"><ul><li><p>Pour chaque commit poussé dans la branche <code>main</code> de Menu Server,</p></li><li><p>GitHub action vérifie que l&#8217;application est compilable et fabriquée,</p></li><li><p>Avec un feedback (notification GitHub).</p></li></ul></div>
+        run: mvn package</code></pre></div></div></div></section><section id="checkpoint_6"><h2>🎯 Checkpoint</h2><div class="slide-content"><div class="ulist"><ul><li><p>Pour chaque commit poussé dans la branche <code>main</code> de Menu Server,</p></li><li><p>GitHub action vérifie que l&#8217;application est compilable et fabriquée,</p></li><li><p>Avec un feedback (notification GitHub).</p></li></ul></div>
 <div class="paragraph"><p>&#8658; On peut modifier notre code avec plus de confiance !</p></div></div></section></section>
 <section><section id="git_à_plusieurs" data-background-color="rgb(248, 228, 130)" data-state="invert"><h2>Git à plusieurs</h2></section><section id="limites_de_travailler_seul"><h2>Limites de travailler seul</h2><div class="slide-content"><div class="ulist"><ul><li><p>Capacité finie de travail</p></li><li><p>Victime de propres biais</p></li><li><p>On ne sait pas tout</p></li></ul></div></div></section><section><div class="slide-content"><div class="paragraph"><p><span class="image"><img src="media/solo.gif" alt="solo" width="500"></span></p></div></div></section><section id="travailler_en_équipe_une_si_bonne_idée"><h2>Travailler en équipe ? Une si bonne idée ?</h2><div class="slide-content"><div class="ulist"><ul><li><p>&#8230;&#8203; Mais il faut communiquer ?</p></li><li><p>&#8230;&#8203; Mais tout le monde n&#8217;a pas les mêmes compétences ?</p></li><li><p>&#8230;&#8203; Mais tout le monde y code pas pareil ?</p></li></ul></div></div></section><section><div class="slide-content"><div class="paragraph"><p>Collaborer c&#8217;est pas évident, mais il existe des outils et des méthodes pour vous aider.</p></div>
 <div class="paragraph small"><small>Cela reste des outils, ça ne résous pas tout non plus.</small></div></div></section><section id="git_multijoueur"><h2>Git multijoueur</h2><div class="slide-content"><div class="ulist"><ul><li><p>Git permet de collaborer assez aisément</p></li><li><p>Chaque développeur crée et publie des commits&#8230;&#8203;</p></li><li><p>&#8230;&#8203; et rapatrie ceux de de ses camarades !</p></li><li><p>C&#8217;est un outil très flexible&#8230;&#8203; chacun peut faire ce qu&#8217;il lui semble bon !</p></li></ul></div></div></section><section id="et_souvent_ça_finit_comme_ça"><h2>&#8230;&#8203; et (souvent) ça finit comme ça !</h2><div class="slide-content"><div class="paragraph"><p><span class="image"><img src="media/bloing.jpeg" alt="bloing"></span></p></div></div></section><section id="un_example_de_git_flow"><h2>Un Example de Git Flow</h2><div class="slide-content"><div class="paragraph"><p>(Attachez vous aux idées générales&#8230;&#8203; les détails varient d&#8217;un projet à l&#8217;autre!)</p></div></div></section><section id="gestion_des_branches"><h2>Gestion des branches</h2><div class="slide-content"><div class="ulist"><ul><li><p>Les "versions" du logiciel sont maintenues sur des branches principales (main, staging)</p></li><li><p>Ces branches reflètent l&#8217;état du logiciel</p><div class="ulist"><ul><li><p><strong>main</strong>: version actuelle en production</p></li><li><p><strong>staging</strong>: prochaine version</p></li></ul></div></li></ul></div></div></section><section><div class="slide-content"><div class="paragraph"><p><span class="image"><img src="media/gitmulti1.svg" alt="gitmulti1"></span></p></div></div></section><section id="gestion_des_branches_2"><h2>Gestion des branches</h2><div class="slide-content"><div class="ulist"><ul><li><p>Chaque groupe de travail (développeur, binôme&#8230;&#8203;)</p><div class="ulist"><ul><li><p>Crée une branche de travail à partir de la branche staging</p></li><li><p>Une branche de travail correspond à <strong>une chose à la fois</strong></p></li><li><p>Pousse des commits dessus qui implémentent le changement</p></li></ul></div></li></ul></div></div></section><section><div class="slide-content"><div class="paragraph"><p><span class="image"><img src="media/gitmulti2.svg" alt="gitmulti2"></span></p></div></div></section><section><div class="slide-content"><div class="paragraph"><p><span class="image"><img src="media/gitmulti3.svg" alt="gitmulti3" width="500"></span></p></div>
@@ -1019,23 +1569,12 @@ curl localhost:8080/menus</code></pre></div></div></div></section><section id="e
 <div class="paragraph"><p><span class="image"><img src="media/pr.png" alt="pr" width="500"></span></p></div></div></section><section id="la_procédure_de_pull_request"><h2>La procédure de Pull Request</h2><div class="slide-content"><div class="paragraph"><p><strong>Objectif</strong> : Valider les changements d&#8217;un contributeur</p></div>
 <div class="ulist"><ul><li><p>Technique : est-ce que ça marche ? est-ce maintenable ?</p></li><li><p>Fonctionnel : est-ce que le code fait ce que l&#8217;on veux ?</p></li><li><p>Humain : Propager la connaissance par la revue de code.</p></li><li><p>Méthode : Tracer les changements.</p></li></ul></div></div></section><section id="revue_de_code"><h2>Revue de code ?</h2><div class="slide-content"><div class="ulist"><ul><li><p>Validation par un ou plusieurs pairs (technique et non technique) des changements</p></li><li><p>Relecture depuis github (ou depuis le poste du développeur)</p></li><li><p>Chaque relecteur émet des commentaires // suggestions de changement</p></li><li><p>Quand un relecteur est satisfait d&#8217;un changement, il l&#8217;approuve</p></li></ul></div></div></section><section><div class="slide-content"><div class="ulist"><ul><li><p>La revue de code est un <strong>exercice difficile</strong> et <strong>potentiellement frustrant</strong> pour les deux parties.</p><div class="ulist"><ul><li><p>Comme sur Twitter, on est bien à l&#8217;abri derrière son écran ;=)</p></li></ul></div></li><li><p>En tant que contributeur, <strong>soyez respectueux</strong> de vos relecteurs : votre changement peut être refusé et c&#8217;est quelque chose de normal.</p></li><li><p>En tant que relecteur, <strong>soyez respectueux</strong> du travail effectué, même si celui ci comporte des erreurs ou ne correspond pas à vos attentes.</p></li></ul></div>
 <div class="paragraph"><p>💡 Astuce: <a href="https://github.com/franckverrot/clamav-client/pull/12#discussion_r526222319" target="_blank">Proposez des solutions</a> plutôt que simplement pointer les problèmes.</p></div></div></section><section id="exercice_relisez_votre_pr_reçue"><h2>🎓 Exercice : Relisez votre PR reçue !</h2><div class="slide-content"><div class="ulist"><ul><li><p>Vous devriez avoir reçu une PR de votre binôme :-)</p></li><li><p>Relisez le changement de la PR</p></li><li><p>Effectuez quelques commentaires (bonus: utilisez la suggestion de changements), si c&#8217;est nécessaire</p></li><li><p>Si elle vous convient, approuvez la!</p></li><li><p>En revanche ne la "mergez" pas, car il manque quelque chose&#8230;&#8203;</p></li></ul></div></div></section><section id="validation_automatisée"><h2>Validation automatisée</h2><div class="slide-content"><div class="paragraph"><p><strong>Objectif</strong>: Valider que le changement n&#8217;introduit pas de régressions dans le projet</p></div>
-<div class="ulist"><ul><li><p>A chaque fois qu&#8217;un nouveau commit est créé dans une PR, une succession de validations ("checks") sont déclenchés par GitHub</p></li><li><p>Effectue des vérifications automatisées sur un commit de merge entre votre branche cible et la branche de PR</p></li></ul></div></div></section><section id="quelques_exemples"><h2>Quelques exemples</h2><div class="slide-content"><div class="ulist"><ul><li><p>Analyse syntaxique du code (lint), pour détecter les erreurs potentielles ou les violations du guide de style</p></li><li><p>Compilation du projet</p></li><li><p>Execution des tests automatisés du projet</p></li><li><p>Déploiement du projet dans un environnement de test&#8230;&#8203;</p></li></ul></div>
-<div class="paragraph"><p>Ces "checks" peuvent êtres exécutés par votre moteur de CI ou des outils externes.</p></div></div></section><section id="exercice_déclencher_un_workflow_de_ci_sur_une_pr"><h2>🎓 Exercice : Déclencher un Workflow de CI sur une PR</h2><div class="slide-content"><div class="ulist"><ul><li><p>Votre PR n&#8217;a pas déclenché le workflow de CI de votre binôme 🤔</p></li><li><p>Il faut changer la spec de votre workflow pour qu&#8217;il se déclenche aussi sur une PR</p></li><li><p>Vous pouvez changer la spec du workflow directement dans votre PR</p></li><li><p>La <a href="https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows" target="_blank">documentation</a> se trouve par ici</p></li></ul></div></div></section><section id="checkpoint_10"><h2>🎯 Checkpoint</h2><div class="slide-content"><div class="paragraph"><p><strong>Règle d&#8217;or</strong>: Si le CI est rouge, on ne merge pas la pull request !</p></div>
+<div class="ulist"><ul><li><p>A chaque fois qu&#8217;un nouveau commit est créé dans une PR, une succession de validations ("checks") sont déclenchés par GitHub</p></li><li><p>Effectue des vérifications automatisées sur un commit de merge entre votre branche cible et la branche de PR</p></li></ul></div></div></section><section id="quelques_exemples_4"><h2>Quelques exemples</h2><div class="slide-content"><div class="ulist"><ul><li><p>Analyse syntaxique du code (lint), pour détecter les erreurs potentielles ou les violations du guide de style</p></li><li><p>Compilation du projet</p></li><li><p>Execution des tests automatisés du projet</p></li><li><p>Déploiement du projet dans un environnement de test&#8230;&#8203;</p></li></ul></div>
+<div class="paragraph"><p>Ces "checks" peuvent êtres exécutés par votre moteur de CI ou des outils externes.</p></div></div></section><section id="exercice_déclencher_un_workflow_de_ci_sur_une_pr"><h2>🎓 Exercice : Déclencher un Workflow de CI sur une PR</h2><div class="slide-content"><div class="ulist"><ul><li><p>Votre PR n&#8217;a pas déclenché le workflow de CI de votre binôme 🤔</p></li><li><p>Il faut changer la spec de votre workflow pour qu&#8217;il se déclenche aussi sur une PR</p></li><li><p>Vous pouvez changer la spec du workflow directement dans votre PR</p></li><li><p>La <a href="https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows" target="_blank">documentation</a> se trouve par ici</p></li></ul></div></div></section><section id="checkpoint_7"><h2>🎯 Checkpoint</h2><div class="slide-content"><div class="paragraph"><p><strong>Règle d&#8217;or</strong>: Si le CI est rouge, on ne merge pas la pull request !</p></div>
 <div class="paragraph small"><small>Même si le linter "ilécon", même si on a la flemme et "sépanou" qui avons cassé le CI.</small></div></div></section></section>
 <section><section id="tests_automatisés" data-background-color="rgb(248, 228, 130)" data-state="invert"><h2>Tests Automatisés</h2></section><section id="quest_ce_quun_test"><h2>Qu&#8217;est ce qu&#8217;un test ?</h2><div class="slide-content"><div class="paragraph"><p>C&#8217;est du code qui vérifie que votre code fait ce qu&#8217;il est supposé faire.</p></div></div></section><section id="pourquoi_faire_des_tests"><h2>Pourquoi faire des tests ?</h2><div class="slide-content"><div class="ulist"><ul><li><p>Prouve que le logiciel se comporte comme attendu a tout moment.</p></li><li><p>Détecte les impacts non anticipés des changements introduits</p></li><li><p>Evite l&#8217;introduction de régressions</p></li><li><p>Écrire des tests est un acte préventif et non curatif.</p></li></ul></div></div></section><section id="quest_ce_que_lon_teste"><h2>Qu&#8217;est ce que l&#8217;on teste ?</h2><div class="slide-content"><div class="ulist"><ul><li><p>Une fonction</p></li><li><p>Une combinaison de classes</p></li><li><p>Un serveur applicatif et une base de données</p></li></ul></div>
 <div class="paragraph"><p>On parle de <strong>SUT</strong>, System Under Test.</p></div></div></section><section id="différents_systèmes_différentes_techniques_de_tests"><h2>Différents systèmes, Différentes Techniques de Tests</h2><div class="slide-content"><div class="ulist"><ul><li><p>Test unitaire</p></li><li><p>Test d&#8217;integration</p></li><li><p>Test de bout en bout</p></li><li><p>Smoke tests</p></li><li><p>Test de performance</p></li></ul></div>
-<div class="paragraph"><p>(La terminologie varie d&#8217;un développeur / langage / entreprise / écosystème à l&#8217;autre)</p></div></div></section><section id="test_unitaire"><h2>Test unitaire</h2><div class="slide-content"><div class="ulist"><ul><li><p>Test validant le bon comportement une unité de code.</p></li><li><p>Prouve que l&#8217;unité de code interagit correctement avec les autres unités.</p></li><li><p>Par exemple :</p><div class="ulist"><ul><li><p>Retourne les bonnes valeur en fonction des paramètres donnés</p></li><li><p>Appelle la bonne méthode du bon attribut avec les bons paramètres</p></li></ul></div></li></ul></div></div></section><section id="mise_en_place_de_lexercice"><h2>Mise en place de l&#8217;exercice</h2><div class="slide-content"><div class="ulist"><ul><li><p>Depuis votre environnement de développement, dans le repertoire du <strong>fork</strong> de votre binôme</p></li><li><p>Créez une feature branch <code>add-tests</code>.</p></li></ul></div></div></section><section id="ajout_des_outils_de_tests_unitaires_au_projet_13"><h2>Ajout des Outils de Tests Unitaires au Projet (1/3)</h2><div class="slide-content"><div class="paragraph"><p>L&#8217;execution de tests nécessite un outillage non ajouté au projet</p></div>
-<div class="ulist"><ul><li><p>Framework d&#8217;écriture et d&#8217;execution de tests: <code>JUnit</code></p></li><li><p>Librairie de création de mocks: <code>Mockito</code></p></li><li><p>Plugin maven de lancement de tests unitaires: <code>surefire</code></p></li></ul></div></div></section><section id="cycle_de_vie_maven_et_tests"><h2>Cycle de Vie Maven et Tests</h2><div class="slide-content"><div class="ulist"><ul><li><p>Rappel : Maven définit un cycle de vie de votre logiciel par phases:</p></li><li><p><code>surefire</code> exécute les tests contenus dans tous les fichiers ayant le suffixe <code>Tests.java</code> (<code>MaClasseTests.java</code>)</p></li><li><p>Le plugin <code>surefire</code> s’exécute (par défaut) lors de la phase <code>tests</code></p></li><li><p>Lancer <code>mvn test</code> va exécuter les phases <code>validate</code> &#8594; <code>compile</code> &#8594; <code>test</code></p></li></ul></div></div></section><section id="ajout_des_outils_de_tests_unitaires_au_projet_23"><h2>Ajout des Outils de Tests Unitaires au Projet (2/3)</h2><div class="slide-content"><div class="ulist"><ul><li><p>Ajoutez la dépendance suivante dans votre <code>pom.xml</code> (section <code>&lt;dependencies&gt;</code>):</p><div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-xml hljs" data-noescape="true" data-lang="xml">&lt;dependency&gt;
-  &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-  &lt;artifactId&gt;spring-boot-starter-test&lt;/artifactId&gt;
-  &lt;scope&gt;test&lt;/scope&gt;
-&lt;/dependency&gt;</code></pre></div></div></li><li><p>Puis configurez le plugin Maven Spring Boot pour les tests unitaires (section <code>&lt;build&gt;&lt;plugins&gt;</code>):</p><div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-xml hljs" data-noescape="true" data-lang="xml">&lt;plugin&gt;
-  &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
-  &lt;artifactId&gt;maven-surefire-plugin&lt;/artifactId&gt;
-  &lt;configuration&gt;
-    &lt;skipTests&gt;${skipUnitTests}&lt;/skipTests&gt;
-  &lt;/configuration&gt;
-&lt;/plugin&gt;</code></pre></div></div></li></ul></div></div></section><section id="ajout_des_outils_de_tests_automatisés_au_projet_33"><h2>Ajout des Outils de Tests Automatisés au Projet (3/3)</h2><div class="slide-content"><div class="ulist"><ul><li><p>Exécutez les tests unitaires avec la commande <code>mvn test</code></p><div class="ulist"><ul><li><p>Spoiler : <code>No tests to run&#8230;&#8203;</code></p></li><li><p>Pourquoi ca ?</p></li></ul></div></li></ul></div>
+<div class="paragraph"><p>(La terminologie varie d&#8217;un développeur / langage / entreprise / écosystème à l&#8217;autre)</p></div></div></section><section id="test_unitaire"><h2>Test unitaire</h2><div class="slide-content"><div class="ulist"><ul><li><p>Test validant le bon comportement une unité de code.</p></li><li><p>Prouve que l&#8217;unité de code interagit correctement avec les autres unités.</p></li><li><p>Par exemple :</p><div class="ulist"><ul><li><p>Retourne les bonnes valeur en fonction des paramètres donnés</p></li><li><p>Appelle la bonne méthode du bon attribut avec les bons paramètres</p></li></ul></div></li></ul></div></div></section><section id="mise_en_place_de_lexercice"><h2>Mise en place de l&#8217;exercice</h2><div class="slide-content"><div class="ulist"><ul><li><p>Depuis votre environnement de développement, dans le repertoire du <strong>fork</strong> de votre binôme</p></li><li><p>Créez une feature branch <code>add-tests</code>.</p></li></ul></div></div></section><section id="todo_refaire_tout_ca_avec_go"><h2>TODO REFAIRE TOUT CA avec go.</h2></section><section id="ajout_des_outils_de_tests_automatisés_au_projet_33"><h2>Ajout des Outils de Tests Automatisés au Projet (3/3)</h2><div class="slide-content"><div class="ulist"><ul><li><p>Exécutez les tests unitaires avec la commande <code>mvn test</code></p><div class="ulist"><ul><li><p>Spoiler : <code>No tests to run&#8230;&#8203;</code></p></li><li><p>Pourquoi ca ?</p></li></ul></div></li></ul></div>
 <div class="imageblock"><img src="https://media.giphy.com/media/5x89XRx3sBZFC/giphy.gif" alt="giphy"></div></div></section><section id="exercice_corriger_un_bug_111"><h2>🎓 Exercice : Corriger un Bug (1/11)</h2><div class="slide-content"><div class="ulist"><ul><li><p>La classe <code>ListMenuService</code> semble être "buggée"&#8230;&#8203;</p><div class="ulist"><ul><li><p>Tous les noms des menus sont <strong>TEST TODO</strong> 😱</p></li></ul></div></li><li><p>Quand on regarde l&#8217;implémentation, on se rends compte que le problème provient de la méthode statique <code>fromModel</code> de la classe <code>MenuDto</code></p></li><li><p>Même si la correction est aisée, on va d&#8217;abord écrire un test unitaire qui valide le comportement du service.</p></li><li><p>Notre SUT: <code>ListMenuService</code> + <code>DTO</code> + <code>Model</code></p></li></ul></div></div></section><section id="exercice_corriger_un_bug_211"><h2>🎓 Exercice : Corriger un Bug (2/11)</h2><div class="slide-content"><div class="paragraph"><p>Mise en place du test</p></div>
 <div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-java hljs" data-noescape="true" data-lang="java">// src/test/java/com/cicdlectures/menuserver/service/ListMenuServiceTests.java
 
@@ -1122,7 +1661,7 @@ expected:
 but was:
   &lt;[MenuDto(id=1, name=TEST TODO, dishes=[DishDto(id=2, name=Pecan Pie), DishDto(id=1, name=Turkey)])]&gt;</code></pre></div></div>
 <div class="imageblock"><img src="https://media.giphy.com/media/FG14fnY17opr2/giphy.gif" alt="giphy"></div></div></section><section id="exercice_corriger_un_bug_1111"><h2>🎓 Exercice : Corriger un Bug (11/11)</h2><div class="slide-content"><div class="ulist"><ul><li><p>Il ne reste plus qu&#8217;a faire la correction et le tour est joué!</p></li></ul></div>
-<div class="imageblock"><img src="https://media.giphy.com/media/111ebonMs90YLu/giphy.gif" alt="giphy" width="800"></div></div></section><section id="test_unitaire_quelques_règles"><h2>Test Unitaire : Quelques Règles</h2><div class="slide-content"><div class="ulist"><ul><li><p>Un test unitaire teste un et un seul comportement</p></li><li><p>Faites attention a ce que votre test teste vraiment quelque chose!</p><div class="ulist"><ul><li><p>Avec les mocks, c&#8217;est facile de se faire piéger.</p></li></ul></div></li><li><p>Essayez, dans la mesure du possible, d&#8217;écrire vos tests (qui échouent) avant d&#8217;écrire votre code.</p></li><li><p>Il n&#8217;y a pas de définition ferme du SUT</p><div class="ulist"><ul><li><p>Attention à garder une taille raisonnable (quelques classes).</p></li></ul></div></li><li><p>Privilégiez les tests de méthodes publiques.</p></li></ul></div></div></section><section id="checkpoint_11"><h2>Checkpoint 🎯</h2><div class="slide-content"><div class="paragraph"><p>On a vu :</p></div>
+<div class="imageblock"><img src="https://media.giphy.com/media/111ebonMs90YLu/giphy.gif" alt="giphy" width="800"></div></div></section><section id="test_unitaire_quelques_règles"><h2>Test Unitaire : Quelques Règles</h2><div class="slide-content"><div class="ulist"><ul><li><p>Un test unitaire teste un et un seul comportement</p></li><li><p>Faites attention a ce que votre test teste vraiment quelque chose!</p><div class="ulist"><ul><li><p>Avec les mocks, c&#8217;est facile de se faire piéger.</p></li></ul></div></li><li><p>Essayez, dans la mesure du possible, d&#8217;écrire vos tests (qui échouent) avant d&#8217;écrire votre code.</p></li><li><p>Il n&#8217;y a pas de définition ferme du SUT</p><div class="ulist"><ul><li><p>Attention à garder une taille raisonnable (quelques classes).</p></li></ul></div></li><li><p>Privilégiez les tests de méthodes publiques.</p></li></ul></div></div></section><section id="checkpoint_8"><h2>Checkpoint 🎯</h2><div class="slide-content"><div class="paragraph"><p>On a vu :</p></div>
 <div class="ulist"><ul><li><p>🔍 Qu&#8217;il faut tester son code</p></li><li><p>🌍 Qu&#8217;il existe différents type de tests en fonction de ce que l&#8217;on veut tester</p></li><li><p>🧩 Comment faire des tests unitaires</p></li></ul></div></div></section><section id="test_unitaire_pro_cons"><h2>Test Unitaire : Pro / Cons</h2><div class="slide-content"><div class="ulist"><ul><li><p>✅ Super rapides (&lt;1s) et légers a executer</p></li><li><p>✅ Pousse à avoir un bon design de code</p></li><li><p>✅ Efficaces pour tester des cas limites</p></li><li><p>❌ Peu réalistes</p></li></ul></div></div></section><section id="fail"><div class="slide-content"><div class="videoblock"><video src="media/ut-fail-1.mp4" width="600" height="100%" data-autoplay loop>Your browser does not support the video tag.</video></div></div></section><section id="fail2"><div class="slide-content"><div class="videoblock"><video src="media/ut-fail-2.mp4" width="600" height="100%" data-autoplay loop>Your browser does not support the video tag.</video></div></div></section><section data-background-color="rgb(248, 228, 130)" data-state="invert"><div class="slide-content"><div class="paragraph"><p>Tester des composants indépendamment ne prouve pas que le système fonctionne une fois intégré!</p></div></div></section><section id="solution_tests_dintégration"><h2>✅ Solution: Tests d&#8217;intégration</h2><div class="slide-content"><div class="ulist"><ul><li><p>Test validant qu’un assemblage d’unités se comportent comme prévu.</p></li><li><p>Teste votre application au travers de toutes ses couches</p></li><li><p>Par exemple avec menu server:</p><div class="ulist"><ul><li><p>Prouve que GET /menus retourne la liste des menus enregistrés en base</p></li><li><p>Prouve que POST /menus enregistre un nouveau menu en base avec ses plats.</p></li></ul></div></li></ul></div></div></section><section id="définition_du_sut_12"><h2>Définition du SUT (1/2)</h2><div class="slide-content"><div class="imageblock"><img src="media/architecture.png" alt="architecture"></div></div></section><section id="définition_du_sut_22"><h2>Définition du SUT (2/2)</h2><div class="slide-content"><div class="paragraph"><p>Une suite de tests d&#8217;intégration doit:</p></div>
 <div class="ulist"><ul><li><p>Démarrer et provisionner un environnement d’exécution (une DB, Elasticsearch, un autre service&#8230;&#8203;)</p></li><li><p>Démarrer votre application</p></li><li><p>Jouer un scénario de test</p></li><li><p>Éteindre et nettoyer son environnement d’exécution pour garantir l&#8217;isolation des tests</p></li></ul></div></div></section><section><div class="slide-content"><div class="paragraph"><p>Ce sont des tests plus lents et plus complexes que des tests unitaires. Comment gérer ça?</p></div></div></section><section id="exécuter_les_tests_dintégration_cycle_de_vie_maven"><h2>Exécuter Les Tests d’Intégration: Cycle de Vie Maven</h2><div class="slide-content"><div class="ulist"><ul><li><p>Les tests d’intégration sont une autre partie du cycle de vie de l’application: la phase <code>verify</code>.</p></li><li><p><code>verify</code> est une méta-phase composée de 3 sous-phases :</p><div class="ulist"><ul><li><p><code>pre-integration-test</code>: prépare l&#8217;environnement des tests d’intégration</p></li><li><p><code>integration-test</code>: execute la suite de tests d&#8217;intégration</p></li><li><p><code>post-integration-test</code>: nettoie l&#8217;environnement des tests d’intégration</p></li></ul></div></li></ul></div>
 <div class="paragraph"><p>⚠️ Il faut toujours appeler <code>verify</code> et non pas <code>integration-test</code>, sinon la sous-phase <code>post-integration-test</code> ne s’exécutera pas ⚠️</p></div></div></section><section id="exécuter_les_tests_dintégration_le_plugin_failsafe_13"><h2>Exécuter Les Tests d’Intégration: Le Plugin <code>failsafe</code> (1/3)</h2><div class="slide-content"><div class="ulist"><ul><li><p>Pour exécuter les tests d’intégration nous allons introduire un nouveau plugin: <code>failsafe</code></p></li><li><p>Ce plugin exécute les tests ayant le suffixe <code>IT.java</code> (par exemple: <code>MaClasseIT.java</code>)</p></li><li><p>Ce plugin s’exécute lors de la phase <code>integration-test</code></p></li></ul></div></div></section><section id="exécuter_les_tests_dintégration_le_plugin_failsafe_23"><h2>Exécuter Les Tests d’Intégration: Le Plugin <code>failsafe</code> (2/3)</h2><div class="slide-content"><div class="ulist"><ul><li><p>Configurez le plugin Maven Spring Boot pour les tests d&#8217;intégration (section <code>&lt;build&gt;&lt;plugins&gt;</code>):</p></li></ul></div>
@@ -1219,7 +1758,7 @@ public class MenuControllerIT {
   }
 }</code></pre></div></div></div></section><section id="exercice_activez_les_tests_dans_votre_ci"><h2>🎓 Exercice: Activez les tests dans votre CI</h2><div class="slide-content"><div class="paragraph"><p>Changez le workflow de ci de votre binôme (ou le votre) pour qu&#8217;à chaque build:</p></div>
 <div class="ulist"><ul><li><p>Les tests unitaires soient lancés</p></li><li><p>Les tests d&#8217;integrations soient lancés</p></li></ul></div>
-<div class="paragraph"><p>💡 Pensez à bien regarder le cycle de vie des phases Maven</p></div></div></section><section id="checkpoint_12"><h2>Checkpoint 🎯</h2><div class="slide-content"><div class="paragraph"><p>On a vu :</p></div>
+<div class="paragraph"><p>💡 Pensez à bien regarder le cycle de vie des phases Maven</p></div></div></section><section id="checkpoint_9"><h2>Checkpoint 🎯</h2><div class="slide-content"><div class="paragraph"><p>On a vu :</p></div>
 <div class="ulist"><ul><li><p>❌ Les limites des tests unitaires</p></li><li><p>🏭 Comment faire des tests d&#8217;intégration</p></li><li><p>🤔 Tester n&#8217;est pas facile mais très utile</p></li></ul></div></div></section></section>
 <section><section id="docker" data-background-color="rgb(248, 228, 130)" data-state="invert"><h2>Docker</h2><div class="slide-content"><div class="imageblock"><img src="media/docker-logo-monochromatic.png" alt="docker logo monochromatic" width="200"></div><div class="paragraph"><p>Remise à niveau / Rappels</p></div></div></section><section id="quel_est_le_problème_2"><h2>🤔 Quel est le problème ?</h2><div class="slide-content"><div class="imageblock"><img src="media/matrixfromhell.jpg" alt="matrixfromhell"></div>
 <div class="paragraph"><p>Problème de temps <strong>exponentiel</strong></p></div></div></section><section id="déjà_vu"><h2>Déjà vu ?</h2><div class="slide-content"><div class="paragraph"><p>L&#8217;IT n&#8217;est pas la seule industrie à résoudre des problèmes&#8230;&#8203;</p></div>
@@ -1327,7 +1866,7 @@ Successfully tagged docker-git:1.1.0
 
 docker container run --rm docker-git:1.0.0 git config --get init.defaultBranch
 docker container run --rm docker-git:1.1.0 git config --get init.defaultBranch
-# main</code></pre></div></div></div></section><section id="checkpoint_13"><h2>Checkpoint 🎯</h2><div class="slide-content"><div class="ulist"><ul><li><p>Une image Docker fournit un environnement de système de fichier auto-suffisant (application, dépendances, binaries, etc.) comme modèle de base d&#8217;un conteneur</p></li><li><p>On peut spécifier une recette de fabrication d&#8217;image à l&#8217;aide d&#8217;un <code>Dockerfile</code> et de la commande <code>docker image build</code></p></li><li><p>Les images Docker ont une convention de nommage permettant d&#8217;identifier les images très précisément</p></li></ul></div>
+# main</code></pre></div></div></div></section><section id="checkpoint_10"><h2>Checkpoint 🎯</h2><div class="slide-content"><div class="ulist"><ul><li><p>Une image Docker fournit un environnement de système de fichier auto-suffisant (application, dépendances, binaries, etc.) comme modèle de base d&#8217;un conteneur</p></li><li><p>On peut spécifier une recette de fabrication d&#8217;image à l&#8217;aide d&#8217;un <code>Dockerfile</code> et de la commande <code>docker image build</code></p></li><li><p>Les images Docker ont une convention de nommage permettant d&#8217;identifier les images très précisément</p></li></ul></div>
 <div class="paragraph"><p>⚠️ Friends don&#8217;t let friends use <code>latest</code> ⚠️</p></div></div></section></section>
 <section><section id="versions" data-background-color="rgb(248, 228, 130)" data-state="invert"><h2>Versions</h2></section><section id="pourquoi_faire_des_versions"><h2>Pourquoi faire des versions ?</h2><div class="slide-content"><div class="ulist"><ul><li><p>Un changement visible d&#8217;un logiciel peut nécessiter une adaptation de ses utilisateurs</p></li><li><p>Un humain ça s&#8217;adapte, mais un logiciel il faut l&#8217;adapter!</p></li><li><p>Cela permet de contrôler le problème de la compatibilité entre deux logiciels.</p></li></ul></div></div></section><section id="une_petite_histoire"><h2>Une petite histoire</h2><div class="slide-content"><div class="paragraph"><p>Le logiciel que vous développez utilise des données d&#8217;une API d&#8217;un site de vente.</p></div>
 <div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-json hljs" data-noescape="true" data-lang="json">// Corps de la réponse d'une requête GET https://supersite.com/api/item
