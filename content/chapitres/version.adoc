@@ -158,15 +158,74 @@ Retrait d'une fonctionnalité (retrait d'une route dans une API).
 * Utilisation de *tags* git pour définir des versions.
 * Un *tag* git est une référence sur un commit.
 
-== 🎓 Exercice : Créez et "taggez" la version v0.0.1 de votre menu-server
+== Qu'est ce que la "production" ?
+
+*Question Fondamentale :* qu'est ce qui apporte de la valeur à l'utilisateur final ET à votre organisation ?
+
+Autrement reformulé : "quelle est votre destination ?"
+
+* Un site web ? Une API ?
+* Un binaire à télécharger ?
+* Un peu de tout ça ?
+
+== 🏝️ Notre production sera...
+
+* Une image Docker de l'application...
+* ... visible sur le link:https://hub.docker.com/[Docker Hub]...
+* ... avec un (Docker) tag pour chaque version
+
+== 🎓 🐳 Docker Hub
+
+* Si vous n'avez pas déjà un compte sur le link:https://hub.docker.com/[Docker Hub], créez-en un maintenant (nécessite une validation)
+* Une fois authentifiés, naviguez dans votre compte (en haut à droite, "My Account")
+* Allez dans la section "Security" et créez un nouvel "Access Token"
+** Permissions: "Read & Write" (pas besoin de "Delete")
+** ⚠️ Conservez ce token dans un endroit sûr (ne PAS partagez à d'autres)
+
+[.small]
+💡 Activer le 2FA est une bonne idée également
+
+
+== 🎓 "Taguez" et déployez la version 1.0.0
+
+* Depuis GitPod, créez un tag git local `1.0.0`
+** 💡 `git tag 1.0.0 -a -m "Première release 1.0.0, mode manuel"`
+
+* Fabriquez l'image Docker avec le tag (Docker) 1.0.0
+** 💡 `docker image build --tag=XXXX/vehiculeserver:1.0.0 #...` avec `XXXX` étant votre username DockerHub
+
+* Déployez l'image sur le DockerHub
+** 💡 `docker login`, `docker image push`
+
+* Publier le tag sur votre "remote" `origin``.
+** 💡 `git push origin 1.0.0`
+
+== ✅ "Taguez" et déployez la version 1.0.0
 
 [source,bash]
 ----
+DOCKER_USERNAME=dduportal
+TAG=1.0.0
 
-# Créer un tag.
-git tag -a v0.0.1 -m "Release version v0.0.1"
+git tag "${TAG}" -a -m "Première release ${TAG}, mode manuel"
 
+docker image build --tag="${DOCKER_USERNAME}"/vehiculeserver:"${TAG}" ./
+docker login --username="${DOCKER_USERNAME}"
+# ...
 
-# Publier un tag sur le remote origin.
-git push origin v0.0.1
+docker image push "${DOCKER_USERNAME}"/vehiculeserver:"${TAG}"
+
+git push origin "${TAG}"
+
+# Vérifiez DockerHub et GitHub après ça
 ----
+
+== Checkpoint 🎯
+
+* La notion de "version" est un outil de communication aux consommateurs de nos produits logiciels
+
+* Le "semantic versioning" est une des façon les plus usitées pour gérer les politiques de version
+
+* Nous avons déployé manuellement notre première image Docker, avec synchronisation code source <-> image Docker
+
+=> 🤔 C'était fort manuel. Et si on regardait à automatiser tout ça ?

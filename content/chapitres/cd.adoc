@@ -33,21 +33,7 @@ ____
 
 La livraison continue est l'exercice de **mettre à disposition automatiquement** le produit logiciel pour qu'il soit prêt à être déployé à tout moment.
 
-== Livraison Continue avec GitHub
-
-Hello Github Releases!
-
-== Anatomie d'une Release GitHub
-
-Une release GiHub est associée à un tag git et porte :
-
-* Un titre
-* Un descriptif des changements
-* Une collection de d'assets dont:
-** Des tarballs du code source a cette version (automatique)
-** Et éventuellement des fichiers de votre choix (des binaires compilés par exemple)
-
-image::menu-server-releases.png[]
+== Livraison Continue avec GitHub Actions
 
 == Prérequis: exécution conditionnelle des jobs
 
@@ -63,23 +49,36 @@ jobs:
       # ...
 ----
 
-== 🎓 Exercice: Créer une Release depuis le CI
+== 🎓 Secret GitHub / DockerHub Token
 
-Changez votre workflow de CI de façon à ce que sur un push de tag, le CI effectue les tâches suivantes dans un nouveau job:
+* Reprenez (ou recréez) votre token DockerHub
+** 💡 https://docs.docker.com/docker-hub/access-tokens/[Documentation "Manage access tokens",window="_blank"]
 
-* Une fois que l'étape `build` est terminée
-* Télécharge et décompresse l'artefact généré par le job `build`
-* Créer une nouvelle release dans votre dépôt ayant pour titre le nom du tag
-* Upload `jar` de l'application dans cette release nouvellement créée
+* Insérez le token DockerHub comme secret dans votre dépôt GitHub
+** 💡 https://docs.github.com/en/actions/security-guides/encrypted-secrets#creating-encrypted-secrets-for-a-repository[Creating encrypted secrets for a repository,window="_blank"]
 
-On vous suggère d'utiliser la CLI `gh` fournie par GitHub:
+== 🎓 Livraison Continue sur le DockerHub
 
-* link:https://cli.github.com/manual/gh_release_create[Documentation de `gh release create`,window="_blank"]
-* Astuce: pensez a bien utiliser l'option `--generate-notes`
+* *But :* Automatiser le déploiement de l'image dans le DockerHub lorsqu'un tag est poussé
+
+* Changez votre workflow de CI de façon à ce que, sur un push de tag, les tâches suivantes soient effectuées :
+** Comme avant: Lint, Build, Test de l'image (en affichant le `README`)
+** SI c'est un tag, alors il faut pousser (et éventuellement reconstruire avec le bon nom) l'image sur le DockerHub
+
+* 💡 Utilisez les GitHub Action suivantes :
+** https://github.com/marketplace/actions/docker-login[docker-login, window="_blank]
+** https://github.com/marketplace/actions/build-and-push-docker-images[build-and-push-docker-images, window="_blank]
+
+== ✅ Livraison Continue sur le DockerHub
+
+[source,bash]
+----
+include::../code-samples/gh-actions/ci-docker-push-tag.yml[]
+----
 
 == Déploiement Continu
 
-Continuous Deployment
+🇬🇧 Continuous Deployment / "CD"
 
 == 🤔 Qu'est ce que le Déploiement Continu ?
 
@@ -101,118 +100,30 @@ Source : http://blog.crisp.se/2013/02/05/yassalsundman/continuous-delivery-vs-co
 * Limite les risques d'erreur lors de la mise en production
 * Fonctionne de 1 à 1000 serveurs et plus encore...
 
-== Qu'est ce que "La production" ?
+== 🎓 Déploiement Continu sur le DockerHub
 
-* Un (ou plusieurs) ordinateur ou votre / vos applications sont exécutées
-* Ce sont là où vos utilisateurs "utilisent" votre code
-** Que ce soit un serveur web pour une application web
-** Ou un téléphone pour une application mobile
-* Certaines plateformes sont plus ou moins outillées pour la mise en production automatique
+* *But :* Déployer votre image `vehiculeserver` continuellement sur le DockerHub
 
-== Introduction à Google Cloud Run
+* Changez votre workflow de CI de façon à ce que, sur un push sur la branch `main`, les tâches suivantes soient effectuées :
+** Comme avant: Lint, Build, Test de l'image (en affichant le `README`)
+** SI c'est la branche `main`, alors il faut pousser l'image avec le tag `main` sur le DockerHub
+** Conservez les autre cas avec les tags
 
-* Dans le cadre de ce cours nous allons utiliser link:https://cloud.google.com/run[Google Cloud  Run,window="_blank"]
-** Un Produit de Google Cloud Platform (GCP)
-* Cloud Run Permets d'exécuter des images de containers (🐳 wink wink) et de les exposer sur internet sans avoir a se soucier de l'infrastructure en dessous.
-* Ideal dans le cadre de notre projet!
-* Environment sponsorise par https://www.voi.com/[Voi,window="_blank"] pour le cours.
-
-== Construire une Image de Container pour Cloud Run
-
-* A la racine de votre dépôt menu-server créez un fichier `Dockerfile` avec le contenu suivant :
-
-[source,Dockerfile]
-----
-# Depuis l'image de base azul/zulu-openjdk:11 (qui embarque un JRE dans la version 11)
-FROM azul/zulu-openjdk:17
-
-# Copier l'archive JAR depuis l'hôte dans le fichier /opt/app/menu-server.jar de l'image
-COPY target/menu-server.jar /opt/app/menu-server.jar
-
-# Définis la commande par défaut du container à java -jar /opt/app/menu-server.jar  --server.port=${PORT}
-# La variable d'environnement PORT est définie par Google Cloud Run à la création du container.
-CMD ["java","-jar","/opt/app/menu-server.jar", "--server.port=${PORT}"]
-----
-
-== 🎓 Exercice: créez et exécutez l'image dans votre Workspace
-
-* Dans un terminal, lancez les commandes suivantes:
+== ✅ Déploiement Continu sur le DockerHub
 
 [source,bash]
 ----
-# On repackage l'app
-mvn package
-
-IMAGE_NAME="cicdlectures/menu-server:test"
-
-# Construit une image docker portant le tag `cicdlectures/menu-server:test`
-docker image build --tag="${IMAGE_NAME}" ./
-
-# Lance un container basé sur l'image `cicdlectures/menu-server:test` sans specifier la variable d'environnement PORT
-docker container run --tty --interactive --rm --publish 8080:9090 "${IMAGE_NAME}"
-# Badaboum attendu!
-
-# Lance un container basé sur l'image `cicdlectures/menu-server:test`
-docker container run --tty --interactive --rm --env PORT=9090 --publish 8080:9090 "${IMAGE_NAME}"
-
-# Vérifiez que vous pouvez faire des requêtes au menu-server....
-# Et Ctrl+C pour terminer l'exécution du container
+include::../code-samples/gh-actions/ci-docker-push-main.yml[]
 ----
 
-== Déployer dans Cloud Run
+== Checkpoint 🎯
 
-Les grandes étapes d'un déploiement dans Cloud Run
+* La livraison continue et le déploiement continu étendent les concepts du CI
 
-1. On construit une image de container de l'application et la publie dans une registry d'images Google Cloud.
-2. On demande ensuite a Cloud Run d'instancier un nouveau container utilisant la nouvelle image publiée.
+* Les 2 sont automatisées, mais un être humain est nécessaire comme déclencheur pour la 1ère
 
-== 🎓 Exercice: Connectez vous a Google Cloud depuis votre Workspace
+* Le choix dépends des risques et de la "production"
 
-Cela nécessite un compte Google, si vous n'en avez pas vous pouvez en créer un link:https://accounts.google.com/signup[ici,window="_blank"].
-
-[source,bash]
-----
-# Authentifie votre instance gitpod auprès de google cloud
-gcloud auth login
-
-# Paramétrise le projet
-GCP_PROJECT_NAME=voi-sdbx-ensg-2023
-GCP_REGISTRY=europe-west9-docker.pkg.dev
-
-# Indique a la CLI google cloud d'utiliser le projet partage pour le cours.
-gcloud config set project "${GCP_PROJECT_NAME}"
-
-# Authentifie le démon docker de votre instance auprès de la registry Google Cloud.
-gcloud auth configure-docker "${GCP_REGISTRY}"
-----
-
-== 🎓 Exercice: Déployez votre Menu Server dans Cloud Run
-
-[source,bash]
-----
-GCP_IMAGE_NAME="${GCP_REGISTRY}/${GCP_PROJECT_NAME}/cicd-registry/<votre-binôme>/menu-server:test-cloudrun"
-
-# On renomme l'image avec le nom de la registry
-docker image tag "${IMAGE_NAME}" "${GCP_IMAGE_NAME}"
-
-# On publie l'image dans la registry google cloud
-docker image push "${GCP_IMAGE_NAME}"
-
-# On déploie l'image publiée dans cloud run
-gcloud run deploy <votre-dépôt> --image="${GCP_IMAGE_NAME}" --region=europe-west9
-----
-
-[{invert}]
-== !
-
-Mais le faire manuellement c'est pas du déploiement continu! Il faut le faire depuis GitHub action!
-
-== 🎓 Exercice: Mise en Place du Déploiement Continu dans Cloud Run depuis votre Workflow
-
-Changez votre workflow de CI pour que, sur un évènement de push de tag de version:
-
-* Une fois le build terminé un nouveau job `release-cloud-run` soit lancé
-* Ce job effectue dans l'ordre:
-** Télécharge l'artefact de l'étape `build`
-** Checkout le depot (pour rapatrier le Dockerfile)
-** Appelle l'action link:https://github.com/cicd-lectures/cloudrun-release[Cloud Run Release,window="_blank"] pour deployer automatiquement une nouvelle version de votre application.
+* On a vu comment automatiser le déploiement dans GitHub Actions
+** Conditions dans le workflow
+** Gestion de secrets
