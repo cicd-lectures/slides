@@ -1,33 +1,44 @@
 [{invert}]
 = Présentation de votre projet
 
-TODO REFAIRE TOUTE CETTE PARTIE.
+== Contexte(1/4)
 
-== Contexte
+* Voi est une société qui fournit un service de "vehicules de transport doux" à la demande
+** 🔓 Vous dévérouillez un véhicule avec votre Smartphone
+** 🛴 Vous faites votre trajet avec le véhicule
+** 🔒 Vous vérouillez et laissez le véhicule sur votre lieu d'arrivée
+** 💸 Vous payez le temps passé sur le véhicule
 
-Expliquer l'app
-Expliquer la fonctionnalite qu'on implemente
-Trouver une excuse pour justifier le fait qu'on donne une tarball.
+== Contexte(2/4)
 
-== Prise en Main du Projet (1/2)
+Un cas d'utilisation principaux est de permettre aux utilisateurs de trouver un véhicle proche d'eux facilement.
 
-* Une équipe technique de **Bananes** avait commencé l'implémentation du serveur, et à fourni une archive link:media/menu-server.tar.gz[téléchargeable ICI], contenant le code source du projet
-* **Bananes** vous assure qu'ils ont suivi toutes les "best practices" du développement logiciel sur minitel
-** Il y à un `LISEZMOI.txt` à la racine du projet :tada:
-** ... et pas grand chose d'autre?
+image::voimap.jpeg[caption="Voimap",width=256]
+
+== Contexte(3/4)
+
+* Ce service est assuré par une API HTTP appellée `vehicle-server` qui doit supporter fonctionalités suivantes:
+** Enregistrer un véhicle
+** Trouver les N véhicules les plus proches de soi
+** Supprimer un véhicule.
+
+== Contexte (4/4)
+
+* Voi est entrain de reconstruire cette fonctionalité et à décidé de sous-traiter le développement de ce projet a l'ENSG...
+* Une équipe technique de **Voi** avait commencé l'implémentation du serveur, et vous à mis à disposition une archive link:media/vehicle-server.tar.gz[téléchargeable ICI], contenant le code source du projet.
 
 == Prise en Main du Projet (2/2)
 
 [source,bash]
 --
 # Création du répertoire menu-server
-mkdir -p /workspace/menu-server && cd /workspace/menu-server
+mkdir -p /workspace/vehicle-server && cd /workspace/vehicle-server
 
 # Téléchargez le projet sur votre environnement de développement
-curl -sSLO https://cicd-lectures.github.io/slides/2023/media/menu-server.tar.gz
+curl -sSLO https://cicd-lectures.github.io/slides/2024/media/vehicle-server.tar.gz
 
 # Décompresser et extraire l'archive téléchargée
-tar xvzf ./menu-server.tar.gz
+tar xvzf ./vehicle-server.tar.gz
 --
 
 A partir de la vous pouvez ouvrir le fichier `LISEZMOI.txt` et commencer à suivre ses instructions.
@@ -38,7 +49,7 @@ A partir de la vous pouvez ouvrir le fichier `LISEZMOI.txt` et commencer à suiv
 == Triste Rencontre avec la Réalité
 
 - Pas de gestion de version...
-- Le projet ne fonctionne pas, tous les menus retournés s'appellent "TODO" :sob:
+- Le projet ne fonctionne pas, tous les vehicles répondus s'appellent "TODO" :sob:
 - Le correctif ne semble pas compliqué à faire...
 - ... sauf que vous ne pouvez pas compiler le projet!
 
@@ -49,19 +60,15 @@ Il va falloir remédier à ça d'une façon ou d'une autre, sinon vous n'allez p
 * Nettoyez le contenu superflu du projet et initialisez un dépôt git dans le répertoire, puis créez un premier commit
 
 * Par contenu superflu, nous entendons:
-** Tout ce qui est potentiellement généré
-** Les scripts de lancement obsolètes et inutiles
+** Tout ce qui est potentiellement généré (le binaire)
 ** Un petit renommage du LISEZMOI.txt en README.md et un coup de nettoyage de son contenu
-
-* 💡 Pour chaque "popup" de l'éditeur (en bas à droite), choisissez "Oui" ou "Reload"
 
 == ✅ Solution Exercice
 
 [source,bash]
 --
 # On évacue le contenu inutile
-rm -rf dist/ menu-server.tar.gz
-rm executer.sh
+rm -rf dist/ vehicle-server.tar.gz
 # On renomme LISEZMOI.txt en README.md
 mv LISEZMOI.txt README.md
 # On nettoie son contenu
@@ -74,12 +81,12 @@ git init
 git add .
 
 # On crée un nouveau commit
-git commit -m "Add initial menu-server project files"
+git commit -m "Add initial vehicle-server project files"
 --
 
 == Checkpoint 🎯
 
-* Vous avez récupéré un projet Java qui semble fonctionner...
+* Vous avez récupéré un projet Go qui semble fonctionner...
 ** ..mais pas vraiment à l'état de l'art.
 
 * Application du chapitre précédent : vous avez initialisé un projet `git` local
