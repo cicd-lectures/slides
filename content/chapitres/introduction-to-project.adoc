@@ -11,20 +11,20 @@
 
 == Contexte(2/4)
 
-Un cas d'utilisation principaux est de permettre aux utilisateurs de trouver un véhicle proche d'eux facilement.
+Un cas d'utilisation majeur est de permettre aux utilisateurs de trouver un véhicule proche d'eux facilement.
 
 image::voimap.jpeg[caption="Voimap",width=256]
 
 == Contexte(3/4)
 
-* Ce service est assuré par une API HTTP appellée `vehicle-server` qui doit supporter fonctionalités suivantes:
+* Ce service est assuré par une API HTTP appellée `vehicle-server` qui doit supporter les fonctionalités suivantes:
 ** Enregistrer un véhicle
 ** Trouver les N véhicules les plus proches de soi
 ** Supprimer un véhicule.
 
 == Contexte (4/4)
 
-* Voi est entrain de reconstruire cette fonctionalité et à décidé de sous-traiter le développement de ce projet a l'ENSG...
+* Voi est entrain de reconstruire cette fonctionalitée et à décidé de sous-traiter le développement de ce projet a l'ENSG...
 * Une équipe technique de **Voi** avait commencé l'implémentation du serveur, et vous à mis à disposition une archive link:media/vehicle-server.tar.gz[téléchargeable ICI], contenant le code source du projet.
 
 == Prise en Main du Projet (2/2)
@@ -49,7 +49,7 @@ A partir de la vous pouvez ouvrir le fichier `LISEZMOI.txt` et commencer à suiv
 == Triste Rencontre avec la Réalité
 
 - Pas de gestion de version...
-- Le projet ne fonctionne pas, tous les vehicles répondus s'appellent "TODO" :sob:
+- Le projet ne fonctionne pas, tous les véhicules répondus s'appellent "TODO" :sob:
 - Le correctif ne semble pas compliqué à faire...
 - ... sauf que vous ne pouvez pas compiler le projet!
 
