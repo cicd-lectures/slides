@@ -30,6 +30,7 @@ Une requête est composée des champs suivant:
 * Méthode: Indique une action désirée (`GET`, `POST`, `PUT`, `DELETE`, `HEAD`, `OPTIONS`...)
 * Hote: indique un domain dans lequel récupérer les resources (`github.com`)
 * Chemin (path): indiqe une resource à obtenir au server (`/assets/file.js`)
+* Paramètres de requête (query parameters): paramètres additionels de requête apposés au path (`/pages/node?utm_source=facebook`)
 * Entêtes (headers): Couple clé -> multiples valeurs indiquant des méta information sur la requête (`Accepted-Content`, `User-Agent`,`Accept`, `Referrer`, `Authorization`, `Cookies`)
 * Corps (body): Optionel, contenu encodé à envoyer au serveur, par exemple une soumission de formulaires.
 
