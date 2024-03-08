@@ -1,0 +1,64 @@
+[{invert}]
+= La Gestion des Dépendances
+
+🇺🇸 Dependency Management
+
+== !
+
+Dans ce chapitre on ne parle que de dépendances du code
+
+== Pourquoi réutiliser du code?
+
+* 🧱 L'informatique moderne est un assemblage de briques logicielles
+* ⚙️ ... chacune des briques étant infiniment complexe
+** Ex: TLS, PostgresSQL, Linux, Firefox...
+* 🤔 Il est difficilement envisageable de démarrer un projet sans réutiliser des briques logicielles.
+* 🧘 Cela permet de concentrer son effort de dévelopement sur ce qui apporte vraiment de la valeur.
+** ➡️ Dans notre cas, notre métier est la gestion de véhicules, pas l'implémentation d'une pile réseau et d'un serveur HTTP.
+
+== Mais cela pose une quantité de problèmes!
+
+* Comment récupérer tout le code dont on à besoin?
+* Comment le maintenir à jour?
+* Comment s'assurer qu'il n'a pas été modifié?
+* Comment garantir la reproductibilité de nos builds?
+
+== !
+
+image::dependency-graph.png[caption="Dependency Graph",width=1024]
+
+Mais le pire, c'est que c'est un problème récursif! Nos dépendances ont aussi des dépendances!
+
+== !
+
+image::npm-dependency-graph.webp[caption="Dependency Graph",width=1024]
+
+== !
+
+image::https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExeHRxYmd1bGtjcTNyZmh1dXoxaWZsd3g5NWdiem40OW96YzFlbm12YyZlcD12MV9naWZzX3NlYXJjaCZjdD1n/HUkOv6BNWc1HO/giphy.gif[caption="Panic",width=1024]
+
+== Un peu de terminologie
+
+* Une *dépendance* est une librairie de code externe qui fournit une fonctionnalité.
+* On distingue deux types de dépendances:
+** Une *dépendances directe*: référencée directement par notre application
+** Une *dépendances transitive* (ou indirecte): référencée par une des librairies dont l'application dépends
+
+== Comment résoudre le problème?
+
+* On introduit un outil de gestion de dépendances
+** Permets au développeur de définir une liste de dépendences en fixant ou en plaçant une contrainte de version (ex <= 4.3.0)
+** Construit un arbre de dépendences de façon et le résoud a obtenir une liste de dépendances à télecharger de façon déterministe
+** Télecharge les dépendances sur la machine a distance et les mets à disposition de l'application.
+
+== Comment cela fonctionne avec go?
+
+image:gopher-tired.png[caption="Gopher Tired",width=256]
+
+link:https://www.deviantart.com/quasilyte/art/Tired-gopher-783302842[source]
+
+== Hello go modules
+
+* Rappel:
+** Tout symbole go est défini dans un package
+** Un package est identifié par une URL (ex: `github.com/prometheus/client_golang`)
