@@ -16,23 +16,224 @@ Un **livrable** :
 * C'est versionné
 * C'est __reproductible__
 
-== Comment fabriquer du code?
+== Que signifie "reproductible" ?
 
-TODO (refaire)
+* Il faut que notre processus de génération de livrable, (notre build) soit entierement **déterministe**.
+* Il faut qu'en fonction d'un jeu de paramètres, le résultat du processus de livraison soit même le "même".
 
-* Faire suivre un cycle de vie precis
-  ** build, lint, test, integration test, release. 
-* go n'impose pas forcement de cycle de vie, c'est specifique a l'application
-* On utilise Make pour `normaliser` le cyle de vie 
+== Quels sont les paramètres de notre livraison ?
 
-== TODO DETERER LES slides make?
+* *Le code*: Dans quelle version est-il? Est-il fonctionnel? Est-ce qu'il est sauvegardé?
+* *Les dépendances de notre code*: Toutes les libraires utilisés dans notre application.
+* *Les outils de génération de livrables*: Quel compilateur et dans quelle version?
+* *L'environment d'exécution cible*: Java 17 ou Java 20? Quelle version de PostgreSQL? Quel OS/Architecture CPU? Quel Navigateur?
+* *Le processus de livraison lui même*: Dans quelle mesure la procédure de génération est elle répetable et respectée?
 
-==  Comment garantir que le processus de livraison est reproductble?
+== Risques encourus?
 
-* Gestion des dependances
-* Gestion des outils
+* 😡 Dans le meilleur des cas, votre app ne marche pas du tout.
+* 🤡 Dans certains cas votre app va casser sans explication facile et seulement sur la production du client les jours impairs d'une année bisextile.
+** Allez reproduire et débugger!
+* 😱 Livrer votre application va devenir une angoisse permanente
+* 😱😭🔥☠️ Vous livrez une CVE ou un malware, avec un accès direct a votre base de données.
+** link:https://jfrog.com/blog/malware-civil-war-malicious-npm-packages-targeting-malware-authors[Vraiment]
+** link:https://www.theregister.com/2023/01/04/pypi_pytorch_dependency_attack[Vraiment, Vraiment]
+** link:https://nvd.nist.gov/vuln/detail/CVE-2021-44228[Vraiment, Vraiment, Vraiment...]
 
-Parler des go modules, de ce que fait la toolchain go
-https://go.dev/ref/mod, faire un resume """"digeste""" de ca.
+== !
 
+image::dumpster-fire.gif[caption="Dumpster Fire",width=1024]
 
+== On en est où la dedans? (1/2)
+
+* *Le code*
+** ✅ On vient de mettre en place git. On sait identifier une version par un hash de commit.
+** ❌ On ne sait pas vraiment dire si l'application "fonctionne" ou pas.
+* *Les dépendances de notre code*:
+** ❌ On ne sait ni les récupérer, ni les controller.
+* *Les outils de génération de livrables*
+** ❌ On sait que go1.22 est indiqué dans la documentation fournie mais c'est tout.
+
+== On en est où la dedans? (2/2)
+
+* *L'environment cible*:
+** ⚠️  La compilation Go génère un binaire qui embarque son environment d'exécution. C'est donc lié à la version du compilateur Go. Ce n'est pas le cas pour d'autres langages.
+** ❌ Par contre on sait que l'on à besoin de Postgres et Postgis, mais pas grand chose de plus!
+** ✅ Voi nous demande de cibler Linux >= 5.x sur une architecture CPU amd64
+* *Le processus de livraison lui même*:
+** ❌ Nous n'avons encore rien défini
+
+== Quelles solutions ? (1/2)
+
+* *Le code*
+** ➡️  *Solution* (pour savoir si il fonctionne): *les tests automatisés*
+** ➡️  *Solution* (pour garantir qu'il fonctionne à chaque changement): *l'intégration continue (CI)*
+* *Les dépendances du code*
+** ➡️  Solution: Mise en plase d'outils de **gestion et d'audit des dépendances**
+* *Les outils de génération du code*:
+** ➡️  Solution: Mise en place d'un environement controllé et automatisé de géneration de livrable, via de la **Livraison Continue**
+
+== Quelles solutions ? (2/2)
+
+* *L'environment cible*:
+** ➡️  Solution: Utilisation *d'outils de packaging* (Docker) pour notre application et son environment cible
+* *Le processus de livraison lui même*:
+** ➡️  Solution: définir un *cycle de vie* et en déduire un *processus de livraision*
+
+== Le cycle de vie de notre application
+
+* `build`: Compilation de l'application
+* `lint`: Analyse statique de code pour détecter des problèmes ou risques
+* `test`:
+** `unit_test`: Exécution de tests unitaires
+** `integration_test`: Exécution des test d'intégration
+* `package`: Création du livrable
+* `release`: Livraison du livrable
+
+== Comment normaliser ce cycle de vie?
+
+* Tout le monde peut jouer des commandes comme il le souhaite
+* Il est nécessaire que tous les acteurs (dévelopeurs et CI) jouent les même commandes
+* Utilisation d'un outil `normaliser` ces commandes
+** ➡️  On propose se propose d'utiliser `make`
+
+== `make`, kesako?
+
+* link:https://www.gnu.org/software/make/[GNU Make] est un outil en ligne de commande,
+* qui lit un fichier `Makefile` pour exécuter des tâches.
+* Chaque tâche (ou "règle") est décrite par une "cible":
+* Format d'une "cible" make :
++
+[source,makefile]
+----
+cible: dependance
+	commandes
+----
+* On appelle la commande `make` avec une ou plusieurs cibles en argument :
++
+[source,bash]
+----
+make clean build
+----
+
+== Exemple de Makefile
+
+[source,makefile]
+----
+# Fabrique le fichier "hello" (binaire) à partir des fichier "hello.o" et "main.o"
+hello: hello.o main.o
+	gcc -o hello hello.o main.o
+
+# Fabrique le fichier "hello.o" à partir du code source "hello.c"
+hello.o: hello.c
+	gcc -o hello.o -c hello.c
+
+# Fabrique le fichier "main.o" à partir du code source "main.c"
+main.o: main.c
+	gcc -o main.o -c main.c
+----
+
+[source,bash]
+----
+make hello # Appelle implicitement "make hello.o" et "make main.o"
+## équivalent à "make hello.o main.o hello"
+----
+
+== 🎓 Exercice: Mettre en place un Makefile dans le Projet
+
+* La compilation doit générer le binaire dans le répertoire `dist`.
+* On souhaite mettre en place un `Makefile` qui définit les cibles suivantes:
+** `dist`: crée le répertoire
+** `clean`: supprime le répertoire
+** `all`: qui execute `clean` puis `dist`
+
+== ✅ Solution: Mettre en place un Makefile dans le Projet
+
+[source,bash]
+----
+cd /workspace/vehicle-server
+touch Makefile
+----
+
+[source,makefile]
+----
+all: clean dist
+
+clean:
+  rm -rf ./dist
+
+dist:
+  mkdir dist
+----
+
+== Makefile Avancé (1/2)
+
+* Par défaut une cible/règle correspond à un fichier
+** Si le fichier existe, `make` ne ré-exécutera pas les commandes
+** 🤔 Que se passe t'il si vous créez un fichier `all` dans le même répertoire que le Makefile?
+
+== Makefile Avancé (2/2)
+
+* Pour désactiver ce comportement pour une cible donnée,
+ajoutez ladite cible comme dépendance à la cible spéciale `.PHONY`
+** On peut répéter `.PHONY` plusieurs fois
+** *convention*: on ajoute la cible à .PHONY avant sa définition
+
+[source,makefile]
+----
+.PHONY: target
+target: dependence
+  commande
+----
+
+* Si vous appellez `make` sans argument,
+alors la cible par défaut sera la première cible définie
+
+== 🎓 Exercice: Ajouter build dans le Makefile
+
+* Mettez à jour votre Makefile pour introduire une cible `build`
+* `build` doit générer le binaire dans le répertoire `./dist`
+* `build` doit être inclu dans la cible `all`
+* `build` doit s'exécuter même si un fichier `build` existe
+
+== ✅ Solution: Ajouter build dans le Makefile
+
+[source,makefile]
+----
+.PHONY: all
+all: clean dist build
+
+.PHONY: clean
+clean:
+  rm -rf ./dist
+
+.PHONY: build
+build:
+  go build -o ./dist/server ./cmd/server
+
+dist:
+  mkdir ./dist
+----
+
+== 😱 ça ne compile pas!
+
+[source,bash]
+----
+go: cannot find main module, but found .git/config in /workspace/vehicle-server
+        to create a module there, run:
+        go mod init
+----
+
+On ne peut pas compiler sans avoir auparavant réglé la question des dépendances!
+
+== !
+
+Mais avant toute chose, un commit :)
+
+== Checkpoint 🎯
+
+On a vu dans ce chapitre:
+
+* Ce qu'est la reproductiblé des livrables et son importance
+* On à défini un cycle de vie pour notre application
+* On à découvert l'outil `make` pour implémenter ce cycle de vie
