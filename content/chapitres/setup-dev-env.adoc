@@ -5,9 +5,8 @@
 
 * Un navigateur récent (et décent)
 * Un compte sur link:https://github.com[{github_icon} GitHub,window="_blank"]
-* Un compte sur link:https://google.com[Google,window="_blank"]
 * On va vous demander de travailler en binôme, commencez à réfléchir avec qui vous souhaitez travailler !
-* Enregistrez vous par link:https://docs.google.com/spreadsheets/d/1RyRn930gQpTKGoU_hpuZ70fAi2SpTm36oDxc44rGZwE/edit?usp=sharing[ici,window="_blank"]!
+* Enregistrez vous par link:https://docs.google.com/spreadsheets/d/1u6Dqqh2PlYJKirqMBHNCbVGKN0bcEbEmmxiKXR3vbb4/edit?usp=sharing[ici,window="_blank"]!
 
 == GitPod
 
@@ -68,7 +67,7 @@ image::gitpod-select-editor.png[width=600]
 
 image::gitpod-workspaces.png[width=600]
 
-== Permissions GitPod <-> GitHub 🔐
+== Permissions GitPod ↔️ GitHub 🔐
 
 * Pour les besoins de ce cours, vous devez autoriser GitPod à pouvoir effectuer certaines modification dans vos dépôts GitHub
 * Rendez-vous sur https://gitpod.io/user/integrations[la page des intégrations avec GitPod,window="_blank"]

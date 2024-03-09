@@ -1,0 +1,22 @@
+name: Vehicle Server CI
+on:
+  - push
+# tag::pr[]
+  - pull_request
+# end::pr[]
+jobs:
+  menu_server:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+      - name: Setup Go
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: './go.mod'
+      - name: Check Go Version
+        run: go version
+      - name: Build application
+        run: make build
+      - name: List dist output
+        run: ls dist/

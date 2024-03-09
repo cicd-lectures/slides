@@ -7,6 +7,7 @@ image::go.jpeg[caption="Golang",width=1024]
 
 * Peu importe les outils, les problèmes sous jacents lié au CI/CD sont les mêmes
 * Faire face à un nouveau langage est quelque chose de fréquent
+* Beaucoup d'opportunités professionelles autour de ce langage
 
 == Qu'est ce que Go?
 
@@ -333,79 +334,16 @@ include::../code-samples/go/examples.go[tags="error_example"]
 ** Par exemple, accéder à un pointeur `nil`
 * Dans ce cas la, l'exécution de la fonction s'arrête et on parle de `panic`
 
-== Collections
+== Slices
 
-== Collections: Arrays
-
-* Un tableau de taille fixe de N elements.
-* ⚠️  La taille du tableau fait partie de son type
-** *Limite*: ne peut pas être changée une fois le tableau instancié.
+* Une slice est un tableau dynamique de valeurs
 
 [source,go]
 ----
-include::../code-samples/go/examples.go[tags="arrays"]
+include::../code-samples/go/examples.go[tags="simplified_slices"]
 ----
 
-👉 On évite en général de les utiliser directement, sauf bonne raison.
-
-== Collections: Slices (1/5)
-
-Une `slice` est une référence sur un sous ensemble d'entrées dans un tableau
-
-[source,go]
-----
-include::../code-samples/go/examples.go[tags="slices"]
-----
-
-== Collections: Slices (2/5)
-
-* On peut initialiser directement une slice sans passer par un tableau.
-* On peut aussi initialiser une slice avec l'operateur `make`
-
-[source,go]
-----
-include::../code-samples/go/examples.go[tags="slices_literals"]
-----
-
-== Collections: Slices (3/5)
-
-Une `slice` possède deux caractéristiques importantes:
-
-* Sa taille: le nombre d'éléments présents dans la slice
-** On y accède a l'aide de la fonction `len`
-* Sa capacité: la taille totale du tableau référencé
-** On y accède a l'aide de la fonction `cap`
-
-[source,go]
-----
-include::../code-samples/go/examples.go[tags="slices_len_cap"]
-----
-
-== Collections: Slices (4/5)
-
-* On peut concaténer des objets à une slice avec l'operateur `append`
-* ⚠️  Cela n'ajoute pas nécessairement un entrée a la slice passée en parametre.
-** Dans le cas ou le tableau sous jacent est plein (len == cap), `append` va réallouer un tableau et copier toutes les entées dans ce nouveau tableau.
-** 👉 En conséquence: il faut *TOUJOURS* assigner la valeur retournée par `append`
-
-[source,go]
-----
-include::../code-samples/go/examples.go[tags="slices_append"]
-----
-
-== Collections: Slices (5/5)
-
-* Le type *slice de X*, comme le type *pointeur sur X*, est un type référence.
-* Sa valeur par défaut est `nil`
-* Accéder à une slice nil provoque un arrêt de l'exécution
-* En revanche: `append` et `len` savent gérer une nil slice.
-
-[source,go]
-----
-include::../code-samples/go/examples.go[tags="slices_nil"]
-----
-
-== Parcourir une slice ou un tableau
+== Parcourir une slice
 
 * Go fournit la fonction `range` qui permet de parcourir une collection.
 * `range` accepte une collection, et retourne deux valeurs:
@@ -421,64 +359,13 @@ include::../code-samples/go/examples.go[tags="slices_range"]
 
 * Ecrire une fonction `toStringSlice` qui convertit slice d'entiers en une slice de strings.
 ** 🕵️: Il faut utiliser la fonction *strconv.Itoa* link:https://pkg.go.dev/strconv#Itoa[doc]
+** Bonus: implémenter cette fonction sans utiliser `append`.
 
 == ✅ Solution: Convertir une collection d'entiers en une collection de strings
 
 [source,go]
 ----
 include::../code-samples/go/examples.go[tags="slices_int_to_string"]
-----
-
-== Collections: maps (1/3)
-
-* Tableau associatif clé-valeur
-* Initialisée de façon littérale, ou avec `make`
-* On récupère sa taille avec `len`
-* On supprime une clé avec `delete`
-* Type référence, comme les pointeurs out les slices
-** Une map peut être nil, `len` retournera 0.
-
-== Collections: maps (2/3)
-
-Exemple d'écriture
-
-[source,go]
-----
-include::../code-samples/go/examples.go[tags="maps"]
-----
-
-== Collections: maps (3/3)
-
-Exemple de lecture
-
-[source,go]
-----
-include::../code-samples/go/examples.go[tags="maps_reads"]
-----
-
-== Parcourir une map
-
-* `range` supporte aussi les maps dans une boucle for
-* Assigne la clé et la valeur courante
-* ⚠️ L'ordre de parcours n'est pas déterministe! Il ne faut pas en dépendre!
-
-[source,go]
-----
-include::../code-samples/go/examples.go[tags="maps_range"]
-----
-
-== 🎓 Exercice: Comptez les occurences de mots dans une chaine de caractère
-
-* Ecrivez une fonction `WordCount` en go qui accepte une chaine de caractère et qui retourne le nombre d'occurences de chacun des mots contenu dans la chaine.
-** *Indice*: La signature de votre fonction devrait resembler a `func WordCount(str string) map[string]int`.
-*** La valeur de retour mappe le mot vers le nombre de fois qu'il est apparu.
-** *Indice*: `strings.Fields` link:https://pkg.go.dev/strings#Fields[(doc)] sépare les mots d'une chaine de caractère et retourne une string.
-
-== ✅ Solution: Comptez les occurences de mots dans une chaine de caractère
-
-[source,go]
-----
-include::../code-samples/go/examples.go[tags="word_count"]
 ----
 
 == Structures (1/3)
@@ -674,3 +561,128 @@ include::../code-samples/go/examples.go[tags="tatooine_climate"]
 ** https://go.dev/doc/effective_go
 ** https://go.dev/doc/
 ** https://go-proverbs.github.io/
+
+== Bonus Track
+
+== Collections: Arrays
+
+* Un tableau de taille fixe de N elements.
+* ⚠️  La taille du tableau fait partie de son type
+** *Limite*: ne peut pas être changée une fois le tableau instancié.
+
+[source,go]
+----
+include::../code-samples/go/examples.go[tags="arrays"]
+----
+
+👉 On évite en général de les utiliser directement, sauf bonne raison.
+
+== Collections: Slices (1/5)
+
+Une `slice` est une référence sur un sous ensemble d'entrées dans un tableau
+
+[source,go]
+----
+include::../code-samples/go/examples.go[tags="slices"]
+----
+
+== Collections: Slices (2/5)
+
+* On peut initialiser directement une slice sans passer par un tableau.
+* On peut aussi initialiser une slice avec l'operateur `make`
+
+[source,go]
+----
+include::../code-samples/go/examples.go[tags="slices_literals"]
+----
+
+== Collections: Slices (3/5)
+
+Une `slice` possède deux caractéristiques importantes:
+
+* Sa taille: le nombre d'éléments présents dans la slice
+** On y accède a l'aide de la fonction `len`
+* Sa capacité: la taille totale du tableau référencé
+** On y accède a l'aide de la fonction `cap`
+
+[source,go]
+----
+include::../code-samples/go/examples.go[tags="slices_len_cap"]
+----
+
+== Collections: Slices (4/5)
+
+* On peut concaténer des objets à une slice avec l'operateur `append`
+* ⚠️  Cela n'ajoute pas nécessairement un entrée a la slice passée en parametre.
+** Dans le cas ou le tableau sous jacent est plein (len == cap), `append` va réallouer un tableau et copier toutes les entées dans ce nouveau tableau.
+** 👉 En conséquence: il faut *TOUJOURS* assigner la valeur retournée par `append`
+
+[source,go]
+----
+include::../code-samples/go/examples.go[tags="slices_append"]
+----
+
+== Collections: Slices (5/5)
+
+* Le type *slice de X*, comme le type *pointeur sur X*, est un type référence.
+* Sa valeur par défaut est `nil`
+* Accéder à une slice nil provoque un arrêt de l'exécution
+* En revanche: `append` et `len` savent gérer une nil slice.
+
+[source,go]
+----
+include::../code-samples/go/examples.go[tags="slices_nil"]
+----
+
+== Collections: maps (1/3)
+
+* Tableau associatif clé-valeur
+* Initialisée de façon littérale, ou avec `make`
+* On récupère sa taille avec `len`
+* On supprime une clé avec `delete`
+* Type référence, comme les pointeurs out les slices
+** Une map peut être nil, `len` retournera 0.
+
+== Collections: maps (2/3)
+
+Exemple d'écriture
+
+[source,go]
+----
+include::../code-samples/go/examples.go[tags="maps"]
+----
+
+== Collections: maps (3/3)
+
+Exemple de lecture
+
+[source,go]
+----
+include::../code-samples/go/examples.go[tags="maps_reads"]
+----
+
+== Parcourir une map
+
+* `range` supporte aussi les maps dans une boucle for
+* Assigne la clé et la valeur courante
+* ⚠️ L'ordre de parcours n'est pas déterministe! Il ne faut pas en dépendre!
+
+[source,go]
+----
+include::../code-samples/go/examples.go[tags="maps_range"]
+----
+
+== 🎓 Exercice: Comptez les occurences de mots dans une chaine de caractère
+
+* Ecrivez une fonction `WordCount` en go qui accepte une chaine de caractère et qui retourne le nombre d'occurences de chacun des mots contenu dans la chaine.
+** *Indice*: La signature de votre fonction devrait resembler a `func WordCount(str string) map[string]int`.
+*** La valeur de retour mappe le mot vers le nombre de fois qu'il est apparu.
+** *Indice*: `strings.Fields` link:https://pkg.go.dev/strings#Fields[(doc)] sépare les mots d'une chaine de caractère et retourne une string.
+
+== ✅ Solution: Comptez les occurences de mots dans une chaine de caractère
+
+[source,go]
+----
+include::../code-samples/go/examples.go[tags="word_count"]
+----
+

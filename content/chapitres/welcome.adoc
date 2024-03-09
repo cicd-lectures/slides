@@ -33,6 +33,4 @@ image::youreup.gif[width="800"]
 
 * Reproductible à la maison, pensé dans le contexte du "Covid à la maison"
 
-* Contenu entièrement libre et open-source
-[.small]
-** N'hésitez pas ouvrir des Pull Request si vous voyez des améliorations ou problèmes: link:https://github.com/cicd-lectures/slides/pulls[sur cette page] (😉 wink wink)
+* Contenu entièrement libre et open-source. Le code source est visible link:https://github.com/cicd-lectures/slides[sur cette page]

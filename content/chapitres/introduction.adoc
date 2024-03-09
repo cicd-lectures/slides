@@ -1,7 +1,5 @@
 [{invert}]
-= Une petite histoire du génie logiciel
-
-== Comment mener un projet logiciel?
+= Comment mener un projet logiciel?
 
 == Avant : le cycle en V
 

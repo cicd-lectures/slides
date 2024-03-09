@@ -375,6 +375,23 @@ func main() {
 
 // end::slices_nil[]
 
+// tag::simplified_slices[]
+func main() {
+	// Déclare une slice de string nil
+	var slice []string
+
+	// Déclare et initilaise une slice d'entiers
+	intSlice := []int{1, 2, 4, 5}
+
+	// Ajoute une ou plusieurs valeurs a la meme slice.
+	intSlice = append(intSlice, 6, 7, 8)
+
+	// Donne la taille d'une slice
+	len(intSlice)
+}
+
+// end::simplified_slices[]
+
 // tag::slices_range[]
 func main() {
 	slice := []int{2, 4, 6, 8}
@@ -399,14 +416,12 @@ func main() {
 }
 
 func toStringSlice(input []int) []string {
-	// On alloue une slice de string de la taille de la slice d'entiers donnée en paramètre.
-	result := make([]string, len(input))
+	var result []string
 
 	// Pour chaque entrée de la slice input...
-	for i, v := range input {
-		// On ecrit le resultat de la conversion
-		// dans la slice de resultat a l'index courant.
-		result[i] = strconv.Itoa(v)
+	for _, v := range input {
+		// On ajoute la slice de résultat
+		result = append(result, strconv.Itoa(v))
 	}
 
 	return result
