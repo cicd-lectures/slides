@@ -27,7 +27,7 @@ Testé, pas approuvé.
 == Gestion de version décentralisée
 
 * Chaque utilisateur maintient une version du dépôt _local_ qu'il peut changer à souhait
-* Indépendant du commit, ils peuvent "pousser" une version sur un dépôt **distant**
+* Ils peuvent "pousser" une version sur un dépôt **distant**
 * Un dépôt _local_ peut avoir plusieurs dépôts **distants**.
 
 == Centralisé vs Décentralisé
@@ -44,9 +44,9 @@ Cela rends la manipulation un peu plus complexe, allons-y pas à pas :-)
 
 * Rendez vous sur link:https://github.com[GitHub]
 ** Créez un nouveau dépôt distant en cliquant sur "New" en haut à gauche
-** Appelez le `menu-server`
+** Appelez le `vehicle-server`
 ** Une fois créé, mémorisez l'URL (++https://github.com/...++) de votre dépôt :-)
-** Inscrivez l'URL de votre depot link:https://docs.google.com/spreadsheets/d/1RyRn930gQpTKGoU_hpuZ70fAi2SpTm36oDxc44rGZwE/edit?usp=sharing[ici].
+** Inscrivez l'URL de votre depot link:https://docs.google.com/spreadsheets/d/1u6Dqqh2PlYJKirqMBHNCbVGKN0bcEbEmmxiKXR3vbb4/edit?usp=sharing[ici].
 
 == Consulter l'historique de commits
 

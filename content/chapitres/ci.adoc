@@ -54,11 +54,11 @@ GitHub Actions est un moteur de CI/CD intégré à GitHub
 
 image::gh-actions-concepts.svg[width=800]
 
-== Concepts de GitHub Actions - Step 1/2
+== Concepts de GitHub Actions - Step 1/3
 
 image::gh-actions-concepts.steps.svg[width=800]
 
-== Concepts de GitHub Actions - Step 2/2
+== Concepts de GitHub Actions - Step 2/3
 
 Une *Step* (étape) est une tâche individuelle à faire effectuer par le CI :
 
@@ -80,15 +80,33 @@ steps: # Liste de steps
       password: ${{ secrets.DOCKERHUB_TOKEN }}
 ----
 
+== Concepts de GitHub Actions - Step 3/3
+
+Une *Step* peut avoir des outputs
+
+[source,yaml]
+----
+steps:
+  - name: "Install Go"
+    uses: actions/setup-go@v5
+    id: setup_go
+    with:
+      go-version: '1.22'
+
+  - name: "Echo installed version"
+    run |
+      echo "${{steps.setup_go.outputs.go-version}}"
+----
+
 == Concepts de GitHub Actions - Job 1/2
 
 image::gh-actions-concepts.jobs.svg[width=800]
 
 == Concepts de GitHub Actions - Job 2/2
 
-Un *Job* est un groupe logique de tâches :
+Un *Job* est un groupe logique de steps :
 
-* Enchaînement _séquentiel_ de tâches
+* Enchaînement _séquentiel_ de steps
 * Regroupement logique : "qui a un sens"
 ** Exemple : "compiler puis tester le résultat de la compilation"
 
@@ -296,31 +314,29 @@ image::wait-here.jpg[]
 include::../code-samples/gh-actions/say-hello-full.yml[tags="common,checkout,gha-cowsay"]
 ----
 
-== 🎓 Exercice : Intégration Continue du projet "menu-server"
+== 🎓 Exercice : Intégration Continue du projet "vehicle-server"
 
-👷🏽‍♀️ C'est à vous de modifier le projet "menu-server" pour faire l'intégration continue,
+👷🏽‍♀️ C'est à vous de modifier le projet "vehicle-server" pour faire l'intégration continue,
 afin qu'à chaque commit poussé sur votre dépôt, un workflow GitHub Actions va :
 
 * Récupérer le code de l'application depuis GitHub
-* S'assurer d'utiliser les *même* versions de Java et Maven que dans Gitpod (💡 `mvn -v`)
-** 💡 https://github.com/marketplace/actions/setup-java-jdk[window="_blank"]
-** 💡 https://github.com/marketplace/actions/setup-maven[window="_blank"]
-* L'application est compilée
-* Le `jar` de l'application est fabriqué
+* Installer go dans la version spécifiée par le fichier `go.mod`
+** 💡 https://github.com/actions/setup-go[window="_blank"]
+* L'application est compilée et le binaire est généré dans dist
 
 [.small]
 * Pensez à supprimer/renommer le workflow `bonjour.yaml`
 
-== ✅ Solution : Intégration Continue du projet "menu-server"
+== ✅ Solution : Intégration Continue du projet "vehicle-server"
 
 [source,yaml]
 ----
-include::../code-samples/gh-actions/menu-server.yml[tags="!pr"]
+include::../code-samples/gh-actions/vehicle-server.yml[tags="!pr"]
 ----
 
 == 🎯 Checkpoint
 
-* Pour chaque commit poussé dans la branche `main` de Menu Server,
+* Pour chaque commit poussé dans la branche `main` du Vehicle Server,
 * GitHub action vérifie que l'application est compilable et fabriquée,
 * Avec un feedback (notification GitHub).
 
