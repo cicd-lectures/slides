@@ -15,7 +15,7 @@ on:
 env:
   ## Override default value for Docker cached image
   IMAGE_CACHE_NAME: "ghcr.io/${{ github.repository_owner }}/slides:cicd-lectures"
-  PRINCIPAL_BRANCH: "2023"
+  PRINCIPAL_BRANCH: "2024"
 
 jobs:
   build-slides:
