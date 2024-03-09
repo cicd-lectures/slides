@@ -42,13 +42,13 @@ image::https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExeHRxYmd1bGtjcTNyZmh1dXox
 * Une *dépendance* est une librairie de code externe qui fournit une fonctionnalité.
 * On distingue deux types de dépendances:
 ** Une *dépendances directe*: référencée directement par notre application
-** Une *dépendances transitive* (ou indirecte): référencée par une des librairies dont l'application dépends
+** Une *dépendances transitive*: référencée par une des librairies dont l'application dépends
 
 == Comment résoudre le problème?
 
 * On introduit un outil de gestion de dépendances
 ** Permets au développeur de définir une liste de dépendences en fixant ou en plaçant une contrainte de version (ex <= 4.3.0)
-** Construit un arbre de dépendences de façon et le résoud a obtenir une liste de dépendances à télecharger de façon déterministe
+** Construit un graph de dépendences de façon et le résoud a obtenir une liste de dépendances à télecharger de façon déterministe
 ** Télecharge les dépendances sur la machine a distance et les mets à disposition de l'application.
 
 == Comment cela fonctionne avec go?
@@ -57,8 +57,152 @@ image:gopher-tired.png[caption="Gopher Tired",width=256]
 
 link:https://www.deviantart.com/quasilyte/art/Tired-gopher-783302842[source]
 
-== Hello go modules
+== Quelques rappels sur go
 
-* Rappel:
-** Tout symbole go est défini dans un package
-** Un package est identifié par une URL (ex: `github.com/prometheus/client_golang`)
+* Tout symbole go est défini dans un package
+* Un package est identifié par une URL unique
+** (ex: `github.com/prometheus/client_golang`)
+* Un package peut dépendre de un ou plusieurs autres packages.
+
+== Provenances des packages
+
+* La librairie standard
+** ✅ La version est controllée par la version de go utilisée pour compiler
+* La base de code du projet
+** ✅ Controllée par notre VCS
+* D'une ou plusieurs librairies externes
+** ❌ Pas de solutions pour l'instant
+
+== Bonjour go modules
+
+* Go introduit la notion de *modules*: une collection de packages qui sont livrés, versionnés et distribués enssemble
+* Un module est identifié par un *module path* déclaré dans un fichier appelé `go.mod`
+* Le fichier `go.mod` est situé a la racine du module et englobe tous les packages définis en dessous de ce fichier
+
+== Le module github.com/prometheus/client_golang
+
+[source,bash]
+----
+include::../code-samples/go/module_tree[]
+----
+
+== Que déclare le fichier go.mod
+
+* Le module path: l'identifiant unique du module
+* La version minimum de go nécessaire pour utiliser ce module
+* Les modules dont dépends le module courant
+** ⚠️  La version *minimale* à utiliser est indiquée explicitement
+
+== Un exemple de go.mod
+
+[source,go]
+----
+include::../code-samples/go/example.go.mod[]
+----
+
+== 🎓 Exercice: Ajout de la gestion de dépendances (1/3)
+
+* On initialise un nouveau module
+
+[source,bash]
+----
+go mod init github.com/${VOTRE_UTILISATEUR_GITHUB}/vehicle-server
+----
+
+* On ajoute les dépendances au projet
+
+[source,bash]
+----
+go mod tidy
+----
+
+* ❌ Cela ne fonctionne pas, que se passe t'il?
+
+== 🎓 Exercice: Ajout de la gestion de dépendances (2/3)
+
+* Les fichiers go du projet importent encore des packages issus du module original!
+** `github.com/cicd-lectures/vehicle-server`
+* Il faut les renommer, pour cela utilisez la commande suivante!
+
+[source,bash]
+----
+find . -type f -name '*.go' -exec sed -i -e 's,github.com/cicd-lectures,github.com/${VOTRE_UTILISATEUR_GITHUB},g' {} \;
+----
+
+* Pour vérifier que cette (horrible) commande a fonctionné on peut utiliser `git diff`
+* Une fois cela fait on peut relancer
+
+[source,bash]
+----
+go mod tidy
+----
+
+== 🎓 Exercice: Ajout de la gestion de dépendances (3/3)
+
+* Affichez maintenant le graph de dépendances du projet
+
+[source,bash]
+----
+go mod graph
+
+# Regarder uniquement les dépendances de pgx
+go mod graph | grep pgx
+----
+
+* La partie droite indique le module parent, la partie gauche les modules dont dépend le module parent.
+* ⚠️ C'est verbeux, vous pouvez utiliser `| grep` pour filtrer le resultat
+
+* Et pour finir, on oublie pas de créer un commit :)
+
+== Résolution Reproductibilite: l'algorithme MVS (1/2)
+
+image:buildlist.svg[caption="BuildGraph",width=700]
+
+== Résolution Reproductibilible: l'algorithme MVS (2/2)
+
+* *MVS*: Minimum Version Selection
+* Go cherche à utiliser la *version minimale* d'une dépendance
+* L'algorithme *est déterministe*:
+** Il ne change pas si une nouvelle version d'un module est mise à disposition.
+** Pas besoin de `lockfile` (comme sur npm, bundler, pip etc...)
+
+== Controller le Contenu Téléchargé
+
+* `go` lit le fichier `go.mod` du module à compiler et détermine la liste des modules à télécharger
+* Il les télécharge soit depuis:
+** Un `module proxy`
+** Depuis un dépôt de code directement (via git, mercurial etc...)
+* `go` calcule ensuite une somme de contrôle (checksum) des fichiers téléchargés et la compare avec un référenciel établi lors du premier télechargement: le fichier `go.sum`.
+** ➡️  Cela garantit que les dépendances téléchargées n'ont pas été altérées entre deux télechargements.
+
+== Quelques Commandes Utiles:
+
+* `go get <modulepath>@version`: Ajoute un module à la liste de dépendances
+* `go mod tidy`: Nettoie le fichier `go.mod` en récupérant tout les modules importés par l'application et en s'assurant que le fichier `go.sum` est à jour.
+* `go get -u ./...` Update tous les modules dépendants
+* `go get -u <modulepath>` Mets à jour un module
+* `go mod why` indique le chemin de dépendance entre le package courant et un package (ou un module avec le flag `-m`)
+* `go list -m` affiche la liste des modules à compiler
+
+== 🎓 Exercice: Compiler le serveur
+
+A vous de jouer, il nous faut maintenant compiler et lancer notre serveur!
+
+== ✅ Solution: Compiler le serveur
+
+[source,bash]
+----
+# On démarre le serveur de base de données
+make dev_db
+# On compile le serveur
+make all
+# On lance notre serveur
+./dist/server
+----
+
+== Checkpoint 🎯
+
+* La gestion de dépendances est une question importante et complexe
+* Une bonne compréhension de son système de gestion de dépendances est nécessaire pour garantir la reproductibilité de nos builds
+* go fournit une suite d'outils intégrées qui simplifie la gestion des dépendances externes
+* 🎉 On est maintenant en mesure de compiler notre projet! 🎉
