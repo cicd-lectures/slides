@@ -35,13 +35,13 @@ image::voimap.jpeg[caption="Voimap",width=256]
 mkdir -p /workspace/vehicle-server && cd /workspace/vehicle-server
 
 # Téléchargez le projet sur votre environnement de développement
-curl -sSLO https://cicd-lectures.github.io/slides/2024/media/vehicle-server.tar.gz
+curl -sSLO https://cicd-lectures.github.io/slides/main/media/vehicle-server.tar.gz
 
 # Décompresser et extraire l'archive téléchargée
 tar xvzf ./vehicle-server.tar.gz
 --
 
-A partir de la vous pouvez ouvrir le fichier `LISEZMOI.txt` et commencer à suivre ses instructions.
+A partir de la vous pouvez ouvrir le fichier `README.md` et commencer à suivre ses instructions.
 
 [{invert}]
 == Qu'est-ce qui va / ne va pas dans ce projet d'après vous?
