@@ -228,4 +228,4 @@ git push origin "${TAG}"
 
 * Nous avons déployé manuellement notre première image Docker, avec synchronisation code source <-> image Docker
 
-=> 🤔 C'était fort manuel. Et si on regardait à automatiser tout ça ?
+=> 🤔 C'était très manuel. Et si on regardait à automatiser tout ça ?
