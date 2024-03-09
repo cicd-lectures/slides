@@ -48,31 +48,20 @@ A partir de la vous pouvez ouvrir le fichier `LISEZMOI.txt` et commencer à suiv
 
 == Triste Rencontre avec la Réalité
 
-- Pas de gestion de version...
-- Le projet ne fonctionne pas, tous les véhicules répondus s'appellent "TODO" :sob:
-- Le correctif ne semble pas compliqué à faire...
+- Pas de gestion de version
+- Le projet ne fonctionne pas complètement, delete réponds un erreur 😭
+- Il suffirait de l'implémenter
 - ... sauf que vous ne pouvez pas compiler le projet!
-
-Il va falloir remédier à ça d'une façon ou d'une autre, sinon vous n'allez pas aller bien loin!
 
 == 🎓 Exercice : Initialisez un dépôt git
 
-* Nettoyez le contenu superflu du projet et initialisez un dépôt git dans le répertoire, puis créez un premier commit
-
-* Par contenu superflu, nous entendons:
-** Tout ce qui est potentiellement généré (le binaire)
-** Un petit renommage du LISEZMOI.txt en README.md et un coup de nettoyage de son contenu
+* Supprimez le binaire et l'archive et initialisez un dépôt git dans le répertoire, puis créez un premier commit
 
 == ✅ Solution Exercice
 
 [source,bash]
 --
-# On évacue le contenu inutile
-rm -rf dist/ vehicle-server.tar.gz
-# On renomme LISEZMOI.txt en README.md
-mv LISEZMOI.txt README.md
-# On nettoie son contenu
-code README.md
+rm -f server vehicle-server.tar.gz
 
 # On initialise un nouveau dépôt git
 git init
