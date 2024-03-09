@@ -49,6 +49,9 @@ include::./chapitres/introduction-to-project.adoc[leveloffset=1]
 // Chapitre Project Lifecycle
 include::./chapitres/project-lifecycle.adoc[leveloffset=1]
 
+// Chapitre Dependency Management
+include::./chapitres/dependency-management.adoc[leveloffset=1]
+
 // Chapitre Sauvegarder son Projet
 include::./chapitres/saving-your-project.adoc[leveloffset=1]
 

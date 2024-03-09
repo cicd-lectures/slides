@@ -1,0 +1,16 @@
+├── go.mod # Racine du module github.com/prometheus/client_golang
+├── go.sum
+├── api # Package github.com/prometheus/client_golang/api
+│   ├── client.go
+│   ├── client_test.go
+│   └── prometheus
+│       └── v1 # Package github.com/prometheus/client_golang/api/prometheus/v1
+│           ├── api.go
+│           ├── api_bench_test.go
+│           ├── api_test.go
+│           └── example_test.go
+├── prometheus # Package github.com/prometheus/client_golang/prometheus
+│   ├── gauge.go
+│   ├── gauge_test.go
+├─ [...]
+[...]
