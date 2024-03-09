@@ -129,7 +129,7 @@ image:fork.png[]
 [{invert}]
 == !
 
-A vous de jouer: Ajoutez la fonctionnalité "suppression d'un menu" au projet de votre binôme
+A vous de jouer: Corrigez la fonctionnalité "suppression d'un vehicule" dans projet de votre binôme
 
 == 🎓 Exercice : Contribuez au projet de votre binôme (1/5)
 
@@ -143,44 +143,20 @@ cd /workspace/
 git clone <url_de_votre_fork>
 
 # Créez votre feature branch
-git switch --create implement-delete
+git switch --create fix-delete
 # Équivalent de git checkout -b <...>
 --
 
 == 🎓 Exercice : Contribuez au projet de votre binôme (2/5)
 
-Maintenant voici la liste des choses à faire:
+* Le code à corriger se trouve dans le fichier `vehicle/delete.go`, la methode `ServeHTTP` du `DeleteHandler` ne fait que retourner une erreur.
+* Ce qu'il faut faire:
+** Extraire l'identifiant depuis le path en utilisant la méthode link:https://pkg.go.dev/net/http#Request.PathValue[PathValue] de l'instance de `http.Request` passée en argument. Le nom de la valeur à extraire est `id`.
+** Parser la valeur obtenue en `int64` en utilisant link:https://pkg.go.dev/strconv#ParseInt[strconv.ParseInt]
+** Appeler la methode `Delete` du `VehicleStore` avec cet identifiant et le "contexte" récupéré en appelant `r.Context()`
+** Enfin si la suppression est réussie, répondre un status code 204 en appelant `rw.WriteHeader(http.StatusNoContent)`
 
-* Rajouter le `MenuRepository` comme dépendance du MenuController
-* Implémenter une nouvelle méthode `deleteMenu`
-** Gère les requêtes `DELETE /menus/{id}`
-** Appelle la méthode `deleteById` du `menuRepository`
-** Réponds 200 si la suppression est réussie
-* Bonus si vous arrivez à faire en sorte que le serveur réponde 404 si un menu à supprimer n'existe pas.
-
-Voici un link:https://spring.io/guides/tutorials/rest/#_http_is_the_platform[petit article bien utile,window="_blank"] pour vous aider!
-
-== 🎓 Exercice : Contribuez au projet de votre binôme (3/5)
-
-Pour tester votre changement
-
-[source, bash]
---
-# D'abord on crée un menu
-curl -H "Content-Type: application/json" --data-raw '{"name": "Menu spécial du chef", "dishes": [{"name": "Bananes aux fraises"},{"name": "Bananes flambées"}]}' localhost:8080/menus
---
-
-[source, bash]
---
-# Puis on le supprime
-curl -XDELETE localhost:8080/menus/4
---
-
-[source, bash]
---
-# Et on vérifie que le menu est bien supprimé
-curl localhost:8080/menus
---
+TODO FINIR
 
 == 🎓 Exercice : Contribuez au projet de votre binôme (4/5)
 
@@ -216,7 +192,7 @@ image:pr.png[width=500]
 == !
 
 * La revue de code est un **exercice difficile** et **potentiellement frustrant** pour les deux parties.
-** Comme sur Twitter, on est bien à l'abri derrière son écran ;=)
+** Comme sur Twitter, on est bien à l'abri derrière son écran
 * En tant que contributeur, **soyez respectueux** de vos relecteurs : votre changement peut être refusé et c'est quelque chose de normal.
 * En tant que relecteur, **soyez respectueux** du travail effectué, même si celui ci comporte des erreurs ou ne correspond pas à vos attentes.
 
@@ -224,7 +200,7 @@ image:pr.png[width=500]
 
 == 🎓 Exercice : Relisez votre PR reçue !
 
-* Vous devriez avoir reçu une PR de votre binôme :-)
+* Vous devriez avoir reçu une PR de votre binôme
 * Relisez le changement de la PR
 * Effectuez quelques commentaires (bonus: utilisez la suggestion de changements), si c'est nécessaire
 * Si elle vous convient, approuvez la!
