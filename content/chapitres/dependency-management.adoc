@@ -13,7 +13,7 @@ Dans ce chapitre on ne parle que de dépendances du code
 * ⚙️ ... chacune des briques étant infiniment complexe
 ** Ex: TLS, PostgresSQL, Linux, Firefox...
 * 🤔 Il est difficilement envisageable de démarrer un projet sans réutiliser des briques logicielles.
-* 🧘 Cela permet de concentrer son effort de dévelopement sur ce qui apporte vraiment de la valeur.
+* 🧘 Cela permet de *concentrer son effort de dévelopement sur ce qui apporte vraiment de la valeur*.
 ** ➡️ Dans notre cas, notre métier est la gestion de véhicules, pas l'implémentation d'une pile réseau et d'un serveur HTTP.
 
 == Mais cela pose une quantité de problèmes!
@@ -62,7 +62,7 @@ link:https://www.deviantart.com/quasilyte/art/Tired-gopher-783302842[source]
 * Tout symbole go est défini dans un package
 * Un package est identifié par une URL unique
 ** (ex: `github.com/prometheus/client_golang`)
-* Un package peut dépendre de un ou plusieurs autres packages.
+* Un package peut importer un ou plusieurs autres packages pour utiliser ses symboles.
 
 == Provenances des packages
 

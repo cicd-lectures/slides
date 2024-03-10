@@ -22,7 +22,7 @@ image:solo.gif[width="500"]
 Collaborer c'est pas évident, mais il existe des outils et des méthodes pour vous aider.
 
 [.small]
-Cela reste des outils, ça ne résous pas tout non plus.
+Cela reste des outils, ça ne résouds pas tout non plus.
 
 == Git multijoueur
 
@@ -131,7 +131,7 @@ image:fork.png[]
 
 A vous de jouer: Corrigez la fonctionnalité "suppression d'un vehicule" dans projet de votre binôme
 
-== 🎓 Exercice : Contribuez au projet de votre binôme (1/5)
+== 🎓 Exercice : Contribuez au projet de votre binôme (1/4)
 
 Première étape: on clone le fork dans son environnement de développement
 
@@ -147,22 +147,38 @@ git switch --create fix-delete
 # Équivalent de git checkout -b <...>
 --
 
-== 🎓 Exercice : Contribuez au projet de votre binôme (2/5)
+== Minute Go: L'interface http.Handler
 
-* Le code à corriger se trouve dans le fichier `vehicle/delete.go`, la methode `ServeHTTP` du `DeleteHandler` ne fait que retourner une erreur.
-* Ce qu'il faut faire:
-** Extraire l'identifiant depuis le path en utilisant la méthode link:https://pkg.go.dev/net/http#Request.PathValue[PathValue] de l'instance de `http.Request` passée en argument. Le nom de la valeur à extraire est `id`.
-** Parser la valeur obtenue en `int64` en utilisant link:https://pkg.go.dev/strconv#ParseInt[strconv.ParseInt]
-** Appeler la methode `Delete` du `VehicleStore` avec cet identifiant et le "contexte" récupéré en appelant `r.Context()`
-** Enfin si la suppression est réussie, répondre un status code 204 en appelant `rw.WriteHeader(http.StatusNoContent)`
+[source,go]
+----
+type Handler interface {
+	ServeHTTP(rw ResponseWriter, r *Request)
+}
+----
 
-TODO FINIR
+* Interface de la librairie standard qui normalise tous les types pouvant "gérer une requête HTTP"
+* Elle accepte deux arguments
+** `rw`: Le "response writer", qui permet d'écrire le code de status, les headers et le corps de la réponse
+** `r`: La requête à traiter
+* Nos implémentations de `http.Handler` se trouvent dans le package `vehicle`.
 
-== 🎓 Exercice : Contribuez au projet de votre binôme (4/5)
+*Pouvez vous identifier le code problématique?*
+
+== 🎓 Exercice : Contribuez au projet de votre binôme (2/4)
+
+* Extraire l'identifiant (la valeur `id`) du path en utilisant la méthode link:https://pkg.go.dev/net/http#Request.PathValue[PathValue].
+* Parser la valeur obtenue en `int64` en utilisant link:https://pkg.go.dev/strconv#ParseInt[strconv.ParseInt]
+* Appeler la methode `Delete` du `VehicleStore` en passant l'identifiant et le "contexte" récupéré en appelant `r.Context()`
+* Enfin il faut faire une réponse:
+** Si la suppression est réussie, répondre un status code 204 en appelant `rw.WriteHeader(http.StatusNoContent)`,
+** Si le véhicle indiqué n'existe pas, répondre 404.
+* Il convient de gérer les erreurs correctement, vous pouvez vous inspirer des hautres handlers défini dans le package!
+
+== 🎓 Exercice : Contribuez au projet de votre binôme (3/4)
 
 Une fois que vous êtes satisfaits de votre changement il vous faut maintenant créer un commit et pousser votre nouvelle branche sur votre fork.
 
-== 🎓 Exercice : Contribuez au projet de votre binôme (5/5)
+== 🎓 Exercice : Contribuez au projet de votre binôme (4/4)
 
 Dernière étape: ouvrir une pull request!
 
@@ -229,9 +245,13 @@ Ces "checks" peuvent êtres exécutés par votre moteur de CI ou des outils exte
 * Vous pouvez changer la spec du workflow directement dans votre PR
 * La link:https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows[documentation,window="_blank"] se trouve par ici
 
+== ✅ Exercice : Déclencher un Workflow de CI sur une PR
+
+[source,yaml]
+----
+include::../code-samples/gh-actions/vehicle-server.yml[tags=""]
+----
+
 == 🎯 Checkpoint
 
 *Règle d'or*: Si le CI est rouge, on ne merge pas la pull request !
-
-[.small]
-Même si le linter "ilécon", même si on a la flemme et "sépanou" qui avons cassé le CI.
