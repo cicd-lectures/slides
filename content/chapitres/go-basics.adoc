@@ -422,7 +422,8 @@ include::../code-samples/go/examples.go[tags="types"]
 
 == Types et Méthodes (1/2)
 
-* Il est possible d'attacher des méthodes aux types que l'on définit
+* Il est possible d'attacher des méthodes aux types que l'on définit en utilisant la syntaxe suivante
+* Le premier argument avant le nom est appelé *receveur*, c'est la référence vers l'objet sur lequel la méthode est appellée
 
 [source,go]
 ----
@@ -443,10 +444,8 @@ include::../code-samples/go/examples.go[tags="methods_2"]
 
 * On peut attacher une méthode sur une valeur du type, ou sur un pointeur.
 * L'opérateur `.` (accés) référence et déréférence les pointeurs implicitement.
-* Quelques règles:
-** Sur les types scalaires (int, string etc...) on préfèrera les valeurs, la copie ne coute rien.
-** Sur les collections et fonctions, on garde les valeurs, ce sont des types références.
-** Sur les structs, on préfère attacher au pointeurs car cela évite une copie parfois lourde.
+* On utilise une valeur quand on souhaite que la méthode ne puisse pas changer l'objet sur laquelle elle est appellée
+* ⚠️ Utiliser une valeur fait une copie à chaque appel.
 
 == Types Abstraits: Interfaces (1/3)
 
