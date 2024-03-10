@@ -559,7 +559,7 @@ echo "# Read Me\n\nObi Wan Kenobi" &gt; ./README.md
 git diff
 git status
 
-git checkout -- README.md
+git restore README.md
 git status</code></pre></div></div></div></section><section id="terminologie_de_git_branche"><h2>Terminologie de Git - Branche</h2><div class="slide-content"><div class="ulist"><ul><li><p>Abstraction d&#8217;une version "isolée" du code</p></li><li><p>Concrètement, une <strong>branche</strong> est un alias pointant vers un "commit"</p></li></ul></div>
 <div class="imageblock"><img src="media/scm-branches.png" alt="scm branches"></div></div></section><section id="exercice_avec_git_3"><h2>🎓 Exercice :avec Git - 3</h2><div class="slide-content"><div class="ulist"><ul><li><p>Créer une branche nommée <code>feature/html</code></p></li><li><p>Ajouter un nouveau commit contenant un nouveau fichier <code>index.html</code> sur cette branche</p></li><li><p>Afficher le graphe correspondant à cette branche avec <code>git log --graph</code></p></li></ul></div></div></section><section id="solution_avec_git_3"><h2>✅ Solution : avec Git - 3</h2><div class="slide-content"><div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-bash hljs" data-noescape="true" data-lang="bash">git branch feature/html &amp;&amp; git switch feature/html
 # Ou git switch --create feature/html
