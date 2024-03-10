@@ -245,13 +245,27 @@ Ces "checks" peuvent êtres exécutés par votre moteur de CI ou des outils exte
 * Vous pouvez changer la configuration du workflow directement dans votre PR
 * La link:https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows[documentation,window="_blank"] se trouve par ici
 
+⚠️  Ne mergez toujours pas votre PR ⚠️
+
 == ✅ Exercice : Déclencher un Workflow de CI sur une PR
 
 [source,yaml]
 ----
-include::../code-samples/gh-actions/vehicle-server.yml[tags=""]
+include::../code-samples/gh-actions/vehicle-server.yml[tags="!*;pr"]
 ----
+
+== !
+
+*Règle d'or*: Si le CI est rouge, on ne merge pas la pull request !
 
 == 🎯 Checkpoint
 
-*Règle d'or*: Si le CI est rouge, on ne merge pas la pull request !
+Nous avons vu:
+
+* Un exemple de modèle de gestion de branches git
+* Plusieurs modèles de gestions de remotes
+* Ce qu'est un "fork" sur GitHub
+* Le processus pour effectuer une contribution en utilisant un projet forké!
+
+➡️ Nous allons maintenant améliorer notre CI en ajoutant l'exécution des tests!
+

@@ -1,15 +1,14 @@
 [{invert}]
 = Tests Automatisés
+
 == Qu'est ce qu'un test ?
 
 C'est du code qui vérifie que votre code fait ce qu'il est supposé faire.
 
 == Pourquoi faire des tests ?
 
-* Prouve que le logiciel se comporte comme attendu a tout moment.
+* Prouve que le logiciel se comporte comme attendu à tout moment
 * Détecte les impacts non anticipés des changements introduits
-* Evite l'introduction de régressions
-* Écrire des tests est un acte préventif et non curatif.
 
 == Qu'est ce que l'on teste ?
 
@@ -22,7 +21,7 @@ On parle de **SUT**, System Under Test.
 == Différents systèmes, Différentes Techniques de Tests
 
 * Test unitaire
-* Test d'integration
+* Test d'intégration
 * Test de bout en bout
 * Smoke tests
 * Test de performance
@@ -31,221 +30,109 @@ On parle de **SUT**, System Under Test.
 
 == Test unitaire
 
-* Test validant le bon comportement une unité de code.
+* Test validant le bon comportement une unité de code
 * Prouve que l'unité de code interagit correctement avec les autres unités.
-* Par exemple :
-** Retourne les bonnes valeur en fonction des paramètres donnés
-** Appelle la bonne méthode du bon attribut avec les bons paramètres
+* Les autres composants dont l'unité de code dépends sont "bouchonnés", cela pour garantir leur simplicité et leur facilité.
+** Par Exemple: la couche d'accès a la base de données est réimplémentée en mémoire.
 
-== Mise en place de l'exercice
 
-* Depuis votre environnement de développement, dans le repertoire du **fork** de votre binôme
-* Créez une feature branch `add-tests`.
+== Tests & Go
 
-== TODO REFAIRE TOUT CA avec go.
-
-== Ajout des Outils de Tests Automatisés au Projet (3/3)
-
-* Exécutez les tests unitaires avec la commande `mvn test`
-** Spoiler : `No tests to run...`
-** Pourquoi ca ?
-
-image::https://media.giphy.com/media/5x89XRx3sBZFC/giphy.gif[]
-
-== 🎓 Exercice : Corriger un Bug (1/11)
-
-* La classe `ListMenuService` semble être "buggée"...
-** Tous les noms des menus sont *TEST TODO* 😱
-* Quand on regarde l'implémentation, on se rends compte que le problème provient de la méthode statique `fromModel` de la classe `MenuDto`
-* Même si la correction est aisée, on va d'abord écrire un test unitaire qui valide le comportement du service.
-* Notre SUT: `ListMenuService` + `DTO` + `Model`
-
-== 🎓 Exercice : Corriger un Bug (2/11)
-
-Mise en place du test
-
-[source,java]
---
-// src/test/java/com/cicdlectures/menuserver/service/ListMenuServiceTests.java
-
-public class ListMenuServiceTests {
-
-  private ListMenuService subject;
-
-  @BeforeEach
-  public void init() {
-    subject = new ListMenuService(null);
-  }
-
-  @Test
-  @DisplayName("lists all known menus")
-  public void listsKnownMenus() {
-     List<MenuDto> got = subject.listMenus();
-  }
-}
---
-
-== 🎓 Exercice : Corriger un Bug (3/11)
-
-* Super on à un test, il ne reste plus qu'à le lancer avec `mvn test` 🎉
-* Spoiler `java.lang.NullPointerException`
-
-image::https://media.giphy.com/media/ceHKRKMR6Ojao/giphy.gif[]
-
-== 🎓 Exercice : Corriger un Bug (4/11)
-
-* Le `ListMenuService` à besoin d'un `MenuRepository` pour fonctionner.
-* Cependant :
-** On ne veut pas valider le comportement du `MenuRepository`, il est en dehors de notre SUT.
-** Pire, on ne veut pas se connecter à une base de donnée pendant un test unitaire.
-
-== 🎓 Exercice : Corriger un Bug (5/11)
-
-Solution : On fournit une "fausse implémentation" au service, un mock.
-
-[source,java]
-----
-// src/test/java/com/cicdlectures/menuserver/service/ListMenuServiceTests.java
-
-private MenuRepository menuRepository;
-
-private ListMenuService subject;
-
-@BeforeEach
-public void init() {
-  this.menuRepository = mock(MenuRepository.class);
-  this.subject = new ListMenuService(this.menuRepository);
-}
-----
-
-== 🎓 Exercice : Corriger un Bug (6/11)
-
-Ce "mock" peut être piloté dans les tests!
-
-[source,java]
-----
-@Test
-@DisplayName("lists all known menus")
-public void listsKnownMenus() {
-  // Quand le repository reçoit l'appel findAll
-  // Alors il retourne la valeur null.
-  when(menuRepository.findAll()).thenReturn(null);
-}
-----
-
-== 🎓 Exercice : Corriger un Bug (7/11)
-
-* Super on a un test unitaire, il ne reste plus qu'à le lancer avec `mvn test` 🎉
-* Spoiler: ✅
-
-image::https://media.giphy.com/media/a0h7sAqON67nO/giphy.gif[]
+* Go embarque un framework de tests intégré a la CLI `go`, la commande `go test`
+* Les tests sont écrit dans un fichier `_test.go` apposé au fichier testé
+* `go test` découvre touts les fichiers de tests d'un module et joue tous les tests implémentés dans ces fichiers.
+** Un test est une fonction qui commence par `Test` et qui accepte en paramètre un pointeur sur `testing.T`
 
 == !
 
-Sauf qu'on avait pas un bug à corriger au fait?
-
-== 🎓 Exercice : Corriger un Bug (8/11)
-
-Objectif: Vérifier que les valeurs retournées par le `ListMenuService` sont cohérentes
-avec les données en base, pour cela il nous faut:
-
-* Préparer un jeu de données de test et configurer le mock du repository pour qu'il le retourne
-* Appeler notre service
-* Comparer le résultat obtenu du service avec des valeurs attendues.
-
-== 🎓 Exercice : Corriger un Bug (9/11)
-
-[source,java]
+[source,go]
 ----
-@Test
-@DisplayName("lists all known menus")
-public void listsKnownMenus() {
-  // Défini une liste de menus avec un menus.
-  Iterable<Menu> existingMenus = Arrays.asList(
-    new Menu(
-      Long.valueOf(1),
-      "Christmas menu",
-      new HashSet<>(
-        Arrays.asList(
-          new Dish(Long.valueOf(1), "Turkey", null),
-          new Dish(Long.valueOf(2), "Pecan Pie", null)
-        )
-      )
-    )
-  );
-
-  // On configure le menuRepository pour qu'il retourne notre liste de menus.
-  when(menuRepository.findAll()).thenReturn(existingMenus);
-
-  // On appelle notre sujet
-  List<MenuDto> gotMenus = subject.listMenus();
-
-  // On défini wantMenus, les résultats attendus
-  Iterable<MenuDto> wantMenus = Arrays.asList(
-      new MenuDto(
-        Long.valueOf(1),
-        "Christmas menu",
-        new HashSet<>(
-          Arrays.asList(
-            new DishDto(Long.valueOf(1), "Turkey"),
-            new DishDto(Long.valueOf(2), "Pecan Pie")
-          )
-        )
-      )
-    );
-
-    // On compare la valeur obtenue avec la valeur attendue.
-    assertEquals(wantMenus, gotMenus);
-}
+include::../code-samples/go/examples_test.go[tags="basic"]
 ----
 
-== 🎓 Exercice : Corriger un Bug (10/11)
+== Tests Paramétriques
 
-* Super on a un test unitaire (qui teste!), il ne reste plus qu'à le lancer avec `mvn test` 🎉
-* Spoiler:
+* On veut tester la même méthode avec plusieurs valeurs d'entrées
+* Cela crée pas mal de duplication
+* *Solution*: On utilise des tests paramétriques qui factorisent le code du test et variabilise les valeurs d'entrées et les valeurs attendues
+
+== !
+
+[source,go]
+----
+include::../code-samples/go/examples_test.go[tags="table_driven"]
+----
+
+== Exécutons les Tests du Package vehicle
+
+On exécute les tests d'un package particulier avec la commande suivante.
 
 [source,bash]
 ----
-[ERROR] Failures:
-[ERROR]   ListMenuServiceTests.listsKnownMenus:66
-expected:
-  <[MenuDto(id=1, name=Christmas menu, dishes=[DishDto(id=2, name=Pecan Pie), DishDto(id=1, name=Turkey)])]>
-but was:
-  <[MenuDto(id=1, name=TEST TODO, dishes=[DishDto(id=2, name=Pecan Pie), DishDto(id=1, name=Turkey)])]>
+go test -v ./vehicle
 ----
 
-image::https://media.giphy.com/media/FG14fnY17opr2/giphy.gif[]
+Quel est le résultat?
 
-== 🎓 Exercice : Corriger un Bug (11/11)
+== !
 
-* Il ne reste plus qu'a faire la correction et le tour est joué!
+🤔 Il semblerait que quelque chose ne se passe pas comme prévu...
 
-image::https://media.giphy.com/media/111ebonMs90YLu/giphy.gif[width="800"]
+== 🎓 Exercice: Corrigez Le Bug 🐛
 
-== Test Unitaire : Quelques Règles
+* À l'aide de la sortie du test, essayez de déterminer d'où peut venir le problème.
+* Quelques questions pour vous aider:
+** Quel méthode est testée? Dans quel fichier se trouve t'elle? Que doit faire cette méthode?
+** Quel comportement est testé par le cas de test?
+** Quel code HTTP est attendu? Retourné? Que signifient t'ils?
+* Une fois le problème clairement identifié, proposez un changement qui valide ce cas de test.
 
-* Un test unitaire teste un et un seul comportement
-* Faites attention a ce que votre test teste vraiment quelque chose!
-** Avec les mocks, c'est facile de se faire piéger.
-* Essayez, dans la mesure du possible, d'écrire vos tests (qui échouent) avant d'écrire votre code.
-* Il n'y a pas de définition ferme du SUT
-** Attention à garder une taille raisonnable (quelques classes).
-* Privilégiez les tests de méthodes publiques.
+⚠️ On ne change / supprime pas le code du test ⚠️
 
-== Checkpoint 🎯
+== ✅ Solution: Corrigez Le Bug 🐛
 
-On a vu :
+[source,go]
+----
+// vehicle/create.go:l26
 
-* 🔍 Qu'il faut tester son code
-* 🌍 Qu'il existe différents type de tests en fonction de ce que l'on veut tester
-* 🧩 Comment faire des tests unitaires
+if len(f.ShortCode) > 4 {
+  validationIssues = append(validationIssues, "short code too long")
+}
+----
+
+== 🎓 Exercice: Ajoutez La Target `unit_test` au Makefile
+
+* Pour faciliter l'exécution de toute la suite de tests, ajoutez la cible `unit_test` à votre Makefile pour que les tests de tous les packages soit joués.
+* Avec le mode verbeux d'activé par défaut
+** Indice: `go help test` et `go help packages`
+* *Bonus*: Activez le calcul de la couverture de tests
+
+== ✅ Solution: Ajoutez La Target `unit_test` au Makefile
+
+[source,Makefile]
+----
+.PHONY: unit_test
+unit_test:
+  go test -v -cover ./...
+----
 
 == Test Unitaire : Pro / Cons
 
-* ✅ Super rapides (<1s) et légers a executer
+* ✅ Super rapides (<1s) et légers a exécuter
 * ✅ Pousse à avoir un bon design de code
 * ✅ Efficaces pour tester des cas limites
-* ❌ Peu réalistes
+* ❌ Environnement "aseptisé" et "bouchonné", défini par le développeur
+* ❌ "Ossifie" le code
+
+== Le périmètre testé est-il satisfaisant?
+
+* La suite de tests qui vient de casser teste la logique de validation de la requête reçue.
+* Est-ce que cela est suffisant pour prouver que la fonctionnalité "créer un véhicule" fonctionne ?
+
+== !
+
+* Pas exactement, d'autres composants entrent en jeu dans l'environnement réel
+** La couche de communication avec la base de données, le routage HTTP...
 
 [%notitle]
 == fail
@@ -264,17 +151,13 @@ Tester des composants indépendamment ne prouve pas que le système fonctionne u
 
 == ✅ Solution: Tests d'intégration
 
-* Test validant qu’un assemblage d’unités se comportent comme prévu.
-* Teste votre application au travers de toutes ses couches
-* Par exemple avec menu server:
-**  Prouve que GET /menus retourne la liste des menus enregistrés en base
-**  Prouve que POST /menus enregistre un nouveau menu en base avec ses plats.
+* Test validant que l'assemblage de composants se comportent comme prévu.
+* Teste votre application au travers de tous ses composants
+* Par exemple avec vehicle-server:
+**  Prouve que GET /vehicles retourne la liste des vehicles les plus proche d'un point donné
+**  Prouve que POST /vehicles enregistre un nouveau véhicule en base.
 
-== Définition du SUT (1/2)
-
-image::architecture.png[]
-
-== Définition du SUT (2/2)
+== Définition du SUT
 
 Une suite de tests d'intégration doit:
 
@@ -283,201 +166,61 @@ Une suite de tests d'intégration doit:
 * Jouer un scénario de test
 * Éteindre et nettoyer son environnement d’exécution pour garantir l'isolation des tests
 
+➡️ On se place ici d'un point de vue extérieur à l'application
+
 == !
 
-Ce sont des tests plus lents et plus complexes que des tests unitaires. Comment gérer ça?
+* ❌ Ce sont des tests plus lents et plus complexes que des tests unitaires.
+* ⏳Tout tester avec des tests d'intégration n'est pas efficace
+* ➡️ Il faut équilibrer les deux stratégies
 
-== Exécuter Les Tests d’Intégration: Cycle de Vie Maven
+== Et concrètement avec le notre projet?
 
-* Les tests d’intégration sont une autre partie du cycle de vie de l’application: la phase `verify`.
-* `verify` est une méta-phase composée de 3 sous-phases :
-** `pre-integration-test`: prépare l'environnement des tests d’intégration
-** `integration-test`: execute la suite de tests d'intégration
-** `post-integration-test`: nettoie l'environnement des tests d’intégration
+* La suite de test d'intégration se situe dans le fichier `app_test.go`
+* Il y a un cas par fonctionnalité principale de l'application (create vehicle, delete vehicle, list vehicles)
 
-⚠️ Il faut toujours appeler `verify` et non pas `integration-test`, sinon la sous-phase `post-integration-test` ne s’exécutera pas ⚠️
-
-== Exécuter Les Tests d’Intégration: Le Plugin `failsafe` (1/3)
-
-* Pour exécuter les tests d’intégration nous allons introduire un nouveau plugin: `failsafe`
-* Ce plugin exécute les tests ayant le suffixe `IT.java` (par exemple: `MaClasseIT.java`)
-* Ce plugin s’exécute lors de la phase `integration-test`
-
-== Exécuter Les Tests d’Intégration: Le Plugin `failsafe` (2/3)
-
-* Configurez le plugin Maven Spring Boot pour les tests d'intégration (section `<build><plugins>`):
-
-[source,xml]
-----
-<plugin>
-  <groupId>org.apache.maven.plugins</groupId>
-  <artifactId>maven-failsafe-plugin</artifactId>
-  <configuration>
-    <skipTests>${skipIntegrationTests}</skipTests>
-  </configuration>
-</plugin>
-----
-
-== Exécuter Les Tests d’Intégration: Le Plugin `failsafe` (2/3)
-
-Cela crée les commandes suivantes:
-
-* `mvn test`: lance les tests unitaires
-* `mvn verify`: lance les tests unitaires et d’intégration
-* `mvn verify -DskipUnitTests=true`: lance uniquement les tests d’intégration
-
-== Tests d’Intégrations: Et concrètement avec le menu-server?
-
-* Dans les faits... nous n'allons pas utiliser les phases `pre-integration-test` et `post-integration-test`
-** -> Nous n'avons pas de serveur de base de données a démarrer.
-** -> SpringBoot intègre le démarrage et l’arrêt du serveur web dans l’exécution des tests via l'annotation `@SprintBootTest`.
-* C'est un projet pédagogique!
-** Dans un "vrai" projet, on voudrait peut-être démarrer / éteindre un serveur de base de données dans ces étapes.
-
-[{invert}]
 == !
 
-Nous allons écrire un test d'intégration pour l'appel `GET /menus`
+* La gestion de l'environnement est cachée:
+** Démarrer un container de base de données (Postgres avec Postgis)
+** Démarrer une instance de l'application
+** Tout éteindre une fois terminé
 
-== 🎓 Exercice : Ecrire un test d'integration (1/4)
+C'est fait dans le fichier `app/helper_test.go` si vous voulez 👀
 
-Mise en place d'un test vide
+== Lancez les tests d'intégration
 
-[source,java]
+* Vous pouvez lancer les tests d'intégration avec la commande suivante.
+
+[source,go]
 ----
-// src/test/java/com/cicdlectures/menuserver/controller/MenuControllerIT.java
-// Lance l'application sur un port aléatoire.
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-// Indique de relancer l'application à chaque test.
-@DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
-public class MenuControllerIT {
-
-  @LocalServerPort
-  private int port;
-
-  private URL getMenusURL() throws Exception {
-    return new URL("http://localhost:" + port + "/menus");
-  }
-
-  @Test
-  @DisplayName("lists all known menus")
-  public void listsAllMenus() throws Exception {
-  }
-}
+go test -v -count=1 --tags=integration ./app
 ----
 
-== 🎓 Exercice : Ecrire un test d'integration (2/4)
+== 🎓 Exercice: Corrigez votre Implémentation de Delete Vehicle
 
-Maintenant, on appelle le serveur et on verifie que l'appelle qu'il nous reponds une 200
-
-[source,java]
-----
-// src/test/java/com/cicdlectures/menuserver/controller/MenuControllerIT.java
-// Lance l'application sur un port aléatoire.
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-// Indique de relancer l'application à chaque test.
-@DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
-public class MenuControllerIT {
-  // ...
-  
-  private RestTemplate template = new RestTemplate();
-
-  @Test
-  @DisplayName("lists all known menus")
-  public void listsAllMenus() throws Exception {
-    ResponseEntity<MenuDto[]> response = this.template.getForEntity(getMenusURL().toString(), MenuDto[].class);
-
-    assertEquals(HttpStatus.OK, response.getStatusCode());
-  }
-}
-----
-
-
-[{invert}]
-== !
-
-Bon, c'est bien sympa mais notre test n'est pas satisfaisant en l'etat. Il faut maintenat valider notre comportement pricipal: lister tous les menus connus
-
-== 🎓 Exercice : Ecrire un test d'integration (3/4)
-
-D'abord il faut provisionner des données en base.
-
-[source, java]
-----
-public class MenuControllerIT {
-  // ...
-  // Injecte automatiquement l'instance du menu repository
-  @Autowired
-  private MenuRepository menuRepository;
-
-  private final List<Menu> existingMenus = Arrays.asList(
-      new Menu(null, "Christmas menu", new HashSet<>(Arrays.asList(new Dish(null, "Turkey", null), new Dish(null, "Pecan Pie", null)))),
-      new Menu(null, "New year's eve menu", new HashSet<>(Arrays.asList(new Dish(null, "Potatos", null), new Dish(null, "Tiramisu", null)))));
-
-
-  @BeforeEach
-  public void initDataset() {
-    for (Menu menu : existingMenus) {
-      menuRepository.save(menu);
-    }
-  }
-
-  // ...
-}
-----
-
-== 🎓 Exercice : Ecrire un test d'integration (4/4)
-
-Il ne nous reste qu'a changer le corps du test pour verifier que le contenu de la reponse est celui auquel on s'attends.
-
-[source, java]
-----
-
-public class MenuControllerIT {
-  // ...
-
-  @Test
-  @DisplayName("lists all known menus")
-  public void listsAllMenus() throws Exception {
-    // On declare la valeur attendue.
-    MenuDto[] wantMenus = {
-        new MenuDto(Long.valueOf(1), "Christmas menu",
-            new HashSet<DishDto>(
-                Arrays.asList(new DishDto(Long.valueOf(1), "Turkey"), new DishDto(Long.valueOf(2), "Pecan Pie")))),
-        new MenuDto(Long.valueOf(2), "New year's eve menu", new HashSet<DishDto>(
-            Arrays.asList(new DishDto(Long.valueOf(3), "Potatos"), new DishDto(Long.valueOf(4), "Tiramisu")))) };
-
-    // On fait la requête et on recupere la reponse.
-    ResponseEntity<MenuDto[]> response = this.template.getForEntity(getMenusURL().toString(), MenuDto[].class);
-
-    // On verifie le status de reponse.
-    assertEquals(HttpStatus.OK, response.getStatusCode());
-
-    // On list le corps de la reponse.
-    MenuDto[] gotMenus = response.getBody();
-
-    // On verifie que la reponse est la meme que celle attendue.
-    assertArrayEquals(wantMenus, gotMenus);
-  }
-}
-----
+Optionnel mais, si les tests d'intégration échouent à ce point, il serait bon de corriger votre implémentation de la suppression de vehicule.
 
 == 🎓 Exercice: Activez les tests dans votre CI
 
 Changez le workflow de ci de votre binôme (ou le votre) pour qu'à chaque build:
 
 * Les tests unitaires soient lancés
-* Les tests d'integrations soient lancés
+* Les tests d'intégration soient lancés
+** N'oubliez pas de définir une nouvelle cible integration_test dans le Makefile
 
-💡 Pensez à bien regarder le cycle de vie des phases Maven
+== ✅ Solution: Activez les tests dans votre CI
 
-// TODO: solution
+[source,yaml]
+----
+include::../code-samples/gh-actions/vehicle-server.yml[tags="!*;pr;ci"]
+----
 
-// Todo add a bullet
 == Checkpoint 🎯
 
 On a vu :
 
-* ❌ Les limites des tests unitaires
-* 🏭 Comment faire des tests d'intégration
-* 🤔 Tester n'est pas facile mais très utile
+* ❌ Les avantages et limites des différentes stratégies de tests...
+* ⚖️ ... et la nécessité d'avoir une stratégie équilibrée.
+
+🎉 Vous pouvez enfin merger votre PR!
