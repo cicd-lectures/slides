@@ -1708,12 +1708,11 @@ git switch --create fix-delete
 <div class="ulist"><ul><li><p>Technique : est-ce que ça marche ? est-ce maintenable ?</p></li><li><p>Fonctionnel : est-ce que le code fait ce que l&#8217;on veux ?</p></li><li><p>Humain : Propager la connaissance par la revue de code.</p></li><li><p>Méthode : Tracer les changements.</p></li></ul></div></div></section><section id="revue_de_code"><h2>Revue de code ?</h2><div class="slide-content"><div class="ulist"><ul><li><p>Validation par un ou plusieurs pairs (technique et non technique) des changements</p></li><li><p>Relecture depuis github (ou depuis le poste du développeur)</p></li><li><p>Chaque relecteur émet des commentaires // suggestions de changement</p></li><li><p>Quand un relecteur est satisfait d&#8217;un changement, il l&#8217;approuve</p></li></ul></div></div></section><section><div class="slide-content"><div class="ulist"><ul><li><p>La revue de code est un <strong>exercice difficile</strong> et <strong>potentiellement frustrant</strong> pour les deux parties.</p><div class="ulist"><ul><li><p>Comme sur Twitter, on est bien à l&#8217;abri derrière son écran</p></li></ul></div></li><li><p>En tant que contributeur, <strong>soyez respectueux</strong> de vos relecteurs : votre changement peut être refusé et c&#8217;est quelque chose de normal.</p></li><li><p>En tant que relecteur, <strong>soyez respectueux</strong> du travail effectué, même si celui ci comporte des erreurs ou ne correspond pas à vos attentes.</p></li></ul></div>
 <div class="paragraph"><p>💡 Astuce: <a href="https://github.com/franckverrot/clamav-client/pull/12#discussion_r526222319" target="_blank">Proposez des solutions</a> plutôt que simplement pointer les problèmes.</p></div></div></section><section id="exercice_relisez_votre_pr_reçue"><h2>🎓 Exercice : Relisez votre PR reçue !</h2><div class="slide-content"><div class="ulist"><ul><li><p>Vous devriez avoir reçu une PR de votre binôme</p></li><li><p>Relisez le changement de la PR</p></li><li><p>Effectuez quelques commentaires (bonus: utilisez la suggestion de changements), si c&#8217;est nécessaire</p></li><li><p>Si elle vous convient, approuvez la!</p></li><li><p>En revanche ne la "mergez" pas, car il manque quelque chose&#8230;&#8203;</p></li></ul></div></div></section><section id="validation_automatisée"><h2>Validation automatisée</h2><div class="slide-content"><div class="paragraph"><p><strong>Objectif</strong>: Valider que le changement n&#8217;introduit pas de régressions dans le projet</p></div>
 <div class="ulist"><ul><li><p>A chaque fois qu&#8217;un nouveau commit est créé dans une PR, une succession de validations ("checks") sont déclenchés par GitHub</p></li><li><p>Effectue des vérifications automatisées sur un commit de merge entre votre branche cible et la branche de PR</p></li></ul></div></div></section><section id="quelques_exemples_4"><h2>Quelques exemples</h2><div class="slide-content"><div class="ulist"><ul><li><p>Analyse syntaxique du code (lint), pour détecter les erreurs potentielles ou les violations du guide de style</p></li><li><p>Compilation du projet</p></li><li><p>Execution des tests automatisés du projet</p></li><li><p>Déploiement du projet dans un environnement de test&#8230;&#8203;</p></li></ul></div>
-<div class="paragraph"><p>Ces "checks" peuvent êtres exécutés par votre moteur de CI ou des outils externes.</p></div></div></section><section id="exercice_déclencher_un_workflow_de_ci_sur_une_pr"><h2>🎓 Exercice : Déclencher un Workflow de CI sur une PR</h2><div class="slide-content"><div class="ulist"><ul><li><p>Votre PR n&#8217;a pas déclenché le workflow de CI de votre binôme 🤔</p></li><li><p>Il faut changer la configuration de votre workflow pour qu&#8217;il se déclenche aussi sur une PR</p></li><li><p>Vous pouvez changer la configuration du workflow directement dans votre PR</p></li><li><p>La <a href="https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows" target="_blank">documentation</a> se trouve par ici</p></li></ul></div></div></section><section id="exercice_déclencher_un_workflow_de_ci_sur_une_pr_2"><h2>✅ Exercice : Déclencher un Workflow de CI sur une PR</h2><div class="slide-content"><div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-yaml hljs" data-noescape="true" data-lang="yaml">name: Vehicle Server CI
+<div class="paragraph"><p>Ces "checks" peuvent êtres exécutés par votre moteur de CI ou des outils externes.</p></div></div></section><section id="exercice_déclencher_un_workflow_de_ci_sur_une_pr"><h2>🎓 Exercice : Déclencher un Workflow de CI sur une PR</h2><div class="slide-content"><div class="ulist"><ul><li><p>Votre PR n&#8217;a pas déclenché le workflow de CI de votre binôme 🤔</p></li><li><p>Il faut changer la configuration de votre workflow pour qu&#8217;il se déclenche aussi sur une PR</p></li><li><p>Vous pouvez changer la configuration du workflow directement dans votre PR</p></li><li><p>La <a href="https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows" target="_blank">documentation</a> se trouve par ici</p></li></ul></div>
+<div class="paragraph"><p>⚠️  Ne mergez toujours pas votre PR ⚠️</p></div></div></section><section id="exercice_déclencher_un_workflow_de_ci_sur_une_pr_2"><h2>✅ Exercice : Déclencher un Workflow de CI sur une PR</h2><div class="slide-content"><div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-yaml hljs" data-noescape="true" data-lang="yaml">name: Vehicle Server CI
 on:
   - push
-# tag::pr[]
   - pull_request
-# end::pr[]
 jobs:
   ci:
     runs-on: ubuntu-22.04
@@ -1729,195 +1728,112 @@ jobs:
       - name: Build application
         run: make build
       - name: List dist output
-        run: ls dist/</code></pre></div></div></div></section><section id="checkpoint_9"><h2>🎯 Checkpoint</h2><div class="slide-content"><div class="paragraph"><p><strong>Règle d&#8217;or</strong>: Si le CI est rouge, on ne merge pas la pull request !</p></div></div></section></section>
-<section><section id="tests_automatisés" data-background-color="rgb(248, 228, 130)" data-state="invert"><h2>Tests Automatisés</h2></section><section id="quest_ce_quun_test"><h2>Qu&#8217;est ce qu&#8217;un test ?</h2><div class="slide-content"><div class="paragraph"><p>C&#8217;est du code qui vérifie que votre code fait ce qu&#8217;il est supposé faire.</p></div></div></section><section id="pourquoi_faire_des_tests"><h2>Pourquoi faire des tests ?</h2><div class="slide-content"><div class="ulist"><ul><li><p>Prouve que le logiciel se comporte comme attendu a tout moment.</p></li><li><p>Détecte les impacts non anticipés des changements introduits</p></li><li><p>Evite l&#8217;introduction de régressions</p></li><li><p>Écrire des tests est un acte préventif et non curatif.</p></li></ul></div></div></section><section id="quest_ce_que_lon_teste"><h2>Qu&#8217;est ce que l&#8217;on teste ?</h2><div class="slide-content"><div class="ulist"><ul><li><p>Une fonction</p></li><li><p>Une combinaison de classes</p></li><li><p>Un serveur applicatif et une base de données</p></li></ul></div>
-<div class="paragraph"><p>On parle de <strong>SUT</strong>, System Under Test.</p></div></div></section><section id="différents_systèmes_différentes_techniques_de_tests"><h2>Différents systèmes, Différentes Techniques de Tests</h2><div class="slide-content"><div class="ulist"><ul><li><p>Test unitaire</p></li><li><p>Test d&#8217;integration</p></li><li><p>Test de bout en bout</p></li><li><p>Smoke tests</p></li><li><p>Test de performance</p></li></ul></div>
-<div class="paragraph"><p>(La terminologie varie d&#8217;un développeur / langage / entreprise / écosystème à l&#8217;autre)</p></div></div></section><section id="test_unitaire"><h2>Test unitaire</h2><div class="slide-content"><div class="ulist"><ul><li><p>Test validant le bon comportement une unité de code.</p></li><li><p>Prouve que l&#8217;unité de code interagit correctement avec les autres unités.</p></li><li><p>Par exemple :</p><div class="ulist"><ul><li><p>Retourne les bonnes valeur en fonction des paramètres donnés</p></li><li><p>Appelle la bonne méthode du bon attribut avec les bons paramètres</p></li></ul></div></li></ul></div></div></section><section id="mise_en_place_de_lexercice"><h2>Mise en place de l&#8217;exercice</h2><div class="slide-content"><div class="ulist"><ul><li><p>Depuis votre environnement de développement, dans le repertoire du <strong>fork</strong> de votre binôme</p></li><li><p>Créez une feature branch <code>add-tests</code>.</p></li></ul></div></div></section><section id="todo_refaire_tout_ca_avec_go"><h2>TODO REFAIRE TOUT CA avec go.</h2></section><section id="ajout_des_outils_de_tests_automatisés_au_projet_33"><h2>Ajout des Outils de Tests Automatisés au Projet (3/3)</h2><div class="slide-content"><div class="ulist"><ul><li><p>Exécutez les tests unitaires avec la commande <code>mvn test</code></p><div class="ulist"><ul><li><p>Spoiler : <code>No tests to run&#8230;&#8203;</code></p></li><li><p>Pourquoi ca ?</p></li></ul></div></li></ul></div>
-<div class="imageblock"><img src="https://media.giphy.com/media/5x89XRx3sBZFC/giphy.gif" alt="giphy"></div></div></section><section id="exercice_corriger_un_bug_111"><h2>🎓 Exercice : Corriger un Bug (1/11)</h2><div class="slide-content"><div class="ulist"><ul><li><p>La classe <code>ListMenuService</code> semble être "buggée"&#8230;&#8203;</p><div class="ulist"><ul><li><p>Tous les noms des menus sont <strong>TEST TODO</strong> 😱</p></li></ul></div></li><li><p>Quand on regarde l&#8217;implémentation, on se rends compte que le problème provient de la méthode statique <code>fromModel</code> de la classe <code>MenuDto</code></p></li><li><p>Même si la correction est aisée, on va d&#8217;abord écrire un test unitaire qui valide le comportement du service.</p></li><li><p>Notre SUT: <code>ListMenuService</code> + <code>DTO</code> + <code>Model</code></p></li></ul></div></div></section><section id="exercice_corriger_un_bug_211"><h2>🎓 Exercice : Corriger un Bug (2/11)</h2><div class="slide-content"><div class="paragraph"><p>Mise en place du test</p></div>
-<div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-java hljs" data-noescape="true" data-lang="java">// src/test/java/com/cicdlectures/menuserver/service/ListMenuServiceTests.java
+        run: ls dist/</code></pre></div></div></div></section><section><div class="slide-content"><div class="paragraph"><p><strong>Règle d&#8217;or</strong>: Si le CI est rouge, on ne merge pas la pull request !</p></div></div></section><section id="checkpoint_9"><h2>🎯 Checkpoint</h2><div class="slide-content"><div class="paragraph"><p>Nous avons vu:</p></div>
+<div class="ulist"><ul><li><p>Un exemple de modèle de gestion de branches git</p></li><li><p>Plusieurs modèles de gestions de remotes</p></li><li><p>Ce qu&#8217;est un "fork" sur GitHub</p></li><li><p>Le processus pour effectuer une contribution en utilisant un projet forké!</p></li></ul></div>
+<div class="paragraph"><p>➡️ Nous allons maintenant améliorer notre CI en ajoutant l&#8217;exécution des tests!</p></div></div></section></section>
+<section><section id="tests_automatisés" data-background-color="rgb(248, 228, 130)" data-state="invert"><h2>Tests Automatisés</h2></section><section id="quest_ce_quun_test"><h2>Qu&#8217;est ce qu&#8217;un test ?</h2><div class="slide-content"><div class="paragraph"><p>C&#8217;est du code qui vérifie que votre code fait ce qu&#8217;il est supposé faire.</p></div></div></section><section id="pourquoi_faire_des_tests"><h2>Pourquoi faire des tests ?</h2><div class="slide-content"><div class="ulist"><ul><li><p>Prouve que le logiciel se comporte comme attendu à tout moment</p></li><li><p>Détecte les impacts non anticipés des changements introduits</p></li></ul></div></div></section><section id="quest_ce_que_lon_teste"><h2>Qu&#8217;est ce que l&#8217;on teste ?</h2><div class="slide-content"><div class="ulist"><ul><li><p>Une fonction</p></li><li><p>Une combinaison de classes</p></li><li><p>Un serveur applicatif et une base de données</p></li></ul></div>
+<div class="paragraph"><p>On parle de <strong>SUT</strong>, System Under Test.</p></div></div></section><section id="différents_systèmes_différentes_techniques_de_tests"><h2>Différents systèmes, Différentes Techniques de Tests</h2><div class="slide-content"><div class="ulist"><ul><li><p>Test unitaire</p></li><li><p>Test d&#8217;intégration</p></li><li><p>Test de bout en bout</p></li><li><p>Smoke tests</p></li><li><p>Test de performance</p></li></ul></div>
+<div class="paragraph"><p>(La terminologie varie d&#8217;un développeur / langage / entreprise / écosystème à l&#8217;autre)</p></div></div></section><section id="test_unitaire"><h2>Test unitaire</h2><div class="slide-content"><div class="ulist"><ul><li><p>Test validant le bon comportement une unité de code</p></li><li><p>Prouve que l&#8217;unité de code interagit correctement avec les autres unités.</p></li><li><p>Les autres composants dont l&#8217;unité de code dépends sont "bouchonnés", cela pour garantir leur simplicité et leur facilité.</p><div class="ulist"><ul><li><p>Par Exemple: la couche d&#8217;accès a la base de données est réimplémentée en mémoire.</p></li></ul></div></li></ul></div></div></section><section id="tests_go"><h2>Tests &amp; Go</h2><div class="slide-content"><div class="ulist"><ul><li><p>Go embarque un framework de tests intégré a la CLI <code>go</code>, la commande <code>go test</code></p></li><li><p>Les tests sont écrit dans un fichier <code>_test.go</code> apposé au fichier testé</p></li><li><p><code>go test</code> découvre touts les fichiers de tests d&#8217;un module et joue tous les tests implémentés dans ces fichiers.</p><div class="ulist"><ul><li><p>Un test est une fonction qui commence par <code>Test</code> et qui accepte en paramètre un pointeur sur <code>testing.T</code></p></li></ul></div></li></ul></div></div></section><section><div class="slide-content"><div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-go hljs" data-noescape="true" data-lang="go">func TestToStringSlice(t *testing.T) {
+	// Given.
+	input := []int{1, 2, 3, 4}
 
-public class ListMenuServiceTests {
+	// When.
+	got := ToStringSlice(input)
 
-  private ListMenuService subject;
+	// Then.
+	want := []string{"1", "2", "3", "4"}
 
-  @BeforeEach
-  public void init() {
-    subject = new ListMenuService(null);
-  }
+	// On vérifie que la longueur récupérée est conforme à celle attendue.
+	if len(want) != len(got) {
+		t.Fail("Mismatched length")
+		return
+	}
 
-  @Test
-  @DisplayName("lists all known menus")
-  public void listsKnownMenus() {
-     List&lt;MenuDto&gt; got = subject.listMenus();
-  }
-}</code></pre></div></div></div></section><section id="exercice_corriger_un_bug_311"><h2>🎓 Exercice : Corriger un Bug (3/11)</h2><div class="slide-content"><div class="ulist"><ul><li><p>Super on à un test, il ne reste plus qu&#8217;à le lancer avec <code>mvn test</code> 🎉</p></li><li><p>Spoiler <code>java.lang.NullPointerException</code></p></li></ul></div>
-<div class="imageblock"><img src="https://media.giphy.com/media/ceHKRKMR6Ojao/giphy.gif" alt="giphy"></div></div></section><section id="exercice_corriger_un_bug_411"><h2>🎓 Exercice : Corriger un Bug (4/11)</h2><div class="slide-content"><div class="ulist"><ul><li><p>Le <code>ListMenuService</code> à besoin d&#8217;un <code>MenuRepository</code> pour fonctionner.</p></li><li><p>Cependant :</p><div class="ulist"><ul><li><p>On ne veut pas valider le comportement du <code>MenuRepository</code>, il est en dehors de notre SUT.</p></li><li><p>Pire, on ne veut pas se connecter à une base de donnée pendant un test unitaire.</p></li></ul></div></li></ul></div></div></section><section id="exercice_corriger_un_bug_511"><h2>🎓 Exercice : Corriger un Bug (5/11)</h2><div class="slide-content"><div class="paragraph"><p>Solution : On fournit une "fausse implémentation" au service, un mock.</p></div>
-<div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-java hljs" data-noescape="true" data-lang="java">// src/test/java/com/cicdlectures/menuserver/service/ListMenuServiceTests.java
+	// Pour chacune des entrées récupérées
+	// On vérifie que l'entrée correspond à la valeur attendue.
+	for i, gotValue := range got {
+		if want[i] != gotValue {
+			t.Fail()
+		}
+	}
+}</code></pre></div></div></div></section><section id="tests_paramétriques"><h2>Tests Paramétriques</h2><div class="slide-content"><div class="ulist"><ul><li><p>On veut tester la même méthode avec plusieurs valeurs d&#8217;entrées</p></li><li><p>Cela crée pas mal de duplication</p></li><li><p><strong>Solution</strong>: On utilise des tests paramétriques qui factorisent le code du test et variabilise les valeurs d&#8217;entrées et les valeurs attendues</p></li></ul></div></div></section><section><div class="slide-content"><div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-go hljs" data-noescape="true" data-lang="go">func TestToStringSlice(t *testing.T) {
+	// On crée un tableau de cas de tests
+	testCases := []struct {
+		name  string
+		input []int
+		want  []string
+	}{
+		{
+			name:   "normal case",
+			input:  []int{1, 2, 3, 4},
+			output: []string{"1", "2", "3", "4"},
+		},
+		{
+			name:   "empty case",
+			input:  nil,
+			output: nil,
+		},
+	}
 
-private MenuRepository menuRepository;
+	// Pour chacun de ces cas de tests.
+	for _, testCase := range testCases {
+		// On execute un sous test qui utilises les attributs
+		// du cas de test.
+		t.Run(testCase.name, func(t *testing.T) {
+			got := ToStringSlice(testCase.input)
 
-private ListMenuService subject;
+			if len(testCase.want) != len(got) {
+				t.Fail("Mismatched length")
+				return
+			}
 
-@BeforeEach
-public void init() {
-  this.menuRepository = mock(MenuRepository.class);
-  this.subject = new ListMenuService(this.menuRepository);
-}</code></pre></div></div></div></section><section id="exercice_corriger_un_bug_611"><h2>🎓 Exercice : Corriger un Bug (6/11)</h2><div class="slide-content"><div class="paragraph"><p>Ce "mock" peut être piloté dans les tests!</p></div>
-<div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-java hljs" data-noescape="true" data-lang="java">@Test
-@DisplayName("lists all known menus")
-public void listsKnownMenus() {
-  // Quand le repository reçoit l'appel findAll
-  // Alors il retourne la valeur null.
-  when(menuRepository.findAll()).thenReturn(null);
-}</code></pre></div></div></div></section><section id="exercice_corriger_un_bug_711"><h2>🎓 Exercice : Corriger un Bug (7/11)</h2><div class="slide-content"><div class="ulist"><ul><li><p>Super on a un test unitaire, il ne reste plus qu&#8217;à le lancer avec <code>mvn test</code> 🎉</p></li><li><p>Spoiler: ✅</p></li></ul></div>
-<div class="imageblock"><img src="https://media.giphy.com/media/a0h7sAqON67nO/giphy.gif" alt="giphy"></div></div></section><section><div class="slide-content"><div class="paragraph"><p>Sauf qu&#8217;on avait pas un bug à corriger au fait?</p></div></div></section><section id="exercice_corriger_un_bug_811"><h2>🎓 Exercice : Corriger un Bug (8/11)</h2><div class="slide-content"><div class="paragraph"><p>Objectif: Vérifier que les valeurs retournées par le <code>ListMenuService</code> sont cohérentes
-avec les données en base, pour cela il nous faut:</p></div>
-<div class="ulist"><ul><li><p>Préparer un jeu de données de test et configurer le mock du repository pour qu&#8217;il le retourne</p></li><li><p>Appeler notre service</p></li><li><p>Comparer le résultat obtenu du service avec des valeurs attendues.</p></li></ul></div></div></section><section id="exercice_corriger_un_bug_911"><h2>🎓 Exercice : Corriger un Bug (9/11)</h2><div class="slide-content"><div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-java hljs" data-noescape="true" data-lang="java">@Test
-@DisplayName("lists all known menus")
-public void listsKnownMenus() {
-  // Défini une liste de menus avec un menus.
-  Iterable&lt;Menu&gt; existingMenus = Arrays.asList(
-    new Menu(
-      Long.valueOf(1),
-      "Christmas menu",
-      new HashSet&lt;&gt;(
-        Arrays.asList(
-          new Dish(Long.valueOf(1), "Turkey", null),
-          new Dish(Long.valueOf(2), "Pecan Pie", null)
-        )
-      )
-    )
-  );
+			for i, gotValue := range got {
+				if testCase.want[i] != gotValue {
+					t.Fail()
+				}
+			}
+		})
+	}
+}</code></pre></div></div></div></section><section id="exécutons_les_tests_du_package_vehicle"><h2>Exécutons les Tests du Package vehicle</h2><div class="slide-content"><div class="paragraph"><p>On exécute les tests d&#8217;un package particulier avec la commande suivante.</p></div>
+<div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-bash hljs" data-noescape="true" data-lang="bash">go test -v ./vehicle</code></pre></div></div>
+<div class="paragraph"><p>Quel est le résultat?</p></div></div></section><section><div class="slide-content"><div class="paragraph"><p>🤔 Il semblerait que quelque chose ne se passe pas comme prévu&#8230;&#8203;</p></div></div></section><section id="exercice_corrigez_le_bug"><h2>🎓 Exercice: Corrigez Le Bug 🐛</h2><div class="slide-content"><div class="ulist"><ul><li><p>À l&#8217;aide de la sortie du test, essayez de déterminer d&#8217;où peut venir le problème.</p></li><li><p>Quelques questions pour vous aider:</p><div class="ulist"><ul><li><p>Quel méthode est testée? Dans quel fichier se trouve t&#8217;elle? Que doit faire cette méthode?</p></li><li><p>Quel comportement est testé par le cas de test?</p></li><li><p>Quel code HTTP est attendu? Retourné? Que signifient t&#8217;ils?</p></li></ul></div></li><li><p>Une fois le problème clairement identifié, proposez un changement qui valide ce cas de test.</p></li></ul></div>
+<div class="paragraph"><p>⚠️ On ne change / supprime pas le code du test ⚠️</p></div></div></section><section id="solution_corrigez_le_bug"><h2>✅ Solution: Corrigez Le Bug 🐛</h2><div class="slide-content"><div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-go hljs" data-noescape="true" data-lang="go">// vehicle/create.go:l26
 
-  // On configure le menuRepository pour qu'il retourne notre liste de menus.
-  when(menuRepository.findAll()).thenReturn(existingMenus);
-
-  // On appelle notre sujet
-  List&lt;MenuDto&gt; gotMenus = subject.listMenus();
-
-  // On défini wantMenus, les résultats attendus
-  Iterable&lt;MenuDto&gt; wantMenus = Arrays.asList(
-      new MenuDto(
-        Long.valueOf(1),
-        "Christmas menu",
-        new HashSet&lt;&gt;(
-          Arrays.asList(
-            new DishDto(Long.valueOf(1), "Turkey"),
-            new DishDto(Long.valueOf(2), "Pecan Pie")
-          )
-        )
-      )
-    );
-
-    // On compare la valeur obtenue avec la valeur attendue.
-    assertEquals(wantMenus, gotMenus);
-}</code></pre></div></div></div></section><section id="exercice_corriger_un_bug_1011"><h2>🎓 Exercice : Corriger un Bug (10/11)</h2><div class="slide-content"><div class="ulist"><ul><li><p>Super on a un test unitaire (qui teste!), il ne reste plus qu&#8217;à le lancer avec <code>mvn test</code> 🎉</p></li><li><p>Spoiler:</p></li></ul></div>
-<div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-bash hljs" data-noescape="true" data-lang="bash">[ERROR] Failures:
-[ERROR]   ListMenuServiceTests.listsKnownMenus:66
-expected:
-  &lt;[MenuDto(id=1, name=Christmas menu, dishes=[DishDto(id=2, name=Pecan Pie), DishDto(id=1, name=Turkey)])]&gt;
-but was:
-  &lt;[MenuDto(id=1, name=TEST TODO, dishes=[DishDto(id=2, name=Pecan Pie), DishDto(id=1, name=Turkey)])]&gt;</code></pre></div></div>
-<div class="imageblock"><img src="https://media.giphy.com/media/FG14fnY17opr2/giphy.gif" alt="giphy"></div></div></section><section id="exercice_corriger_un_bug_1111"><h2>🎓 Exercice : Corriger un Bug (11/11)</h2><div class="slide-content"><div class="ulist"><ul><li><p>Il ne reste plus qu&#8217;a faire la correction et le tour est joué!</p></li></ul></div>
-<div class="imageblock"><img src="https://media.giphy.com/media/111ebonMs90YLu/giphy.gif" alt="giphy" width="800"></div></div></section><section id="test_unitaire_quelques_règles"><h2>Test Unitaire : Quelques Règles</h2><div class="slide-content"><div class="ulist"><ul><li><p>Un test unitaire teste un et un seul comportement</p></li><li><p>Faites attention a ce que votre test teste vraiment quelque chose!</p><div class="ulist"><ul><li><p>Avec les mocks, c&#8217;est facile de se faire piéger.</p></li></ul></div></li><li><p>Essayez, dans la mesure du possible, d&#8217;écrire vos tests (qui échouent) avant d&#8217;écrire votre code.</p></li><li><p>Il n&#8217;y a pas de définition ferme du SUT</p><div class="ulist"><ul><li><p>Attention à garder une taille raisonnable (quelques classes).</p></li></ul></div></li><li><p>Privilégiez les tests de méthodes publiques.</p></li></ul></div></div></section><section id="checkpoint_10"><h2>Checkpoint 🎯</h2><div class="slide-content"><div class="paragraph"><p>On a vu :</p></div>
-<div class="ulist"><ul><li><p>🔍 Qu&#8217;il faut tester son code</p></li><li><p>🌍 Qu&#8217;il existe différents type de tests en fonction de ce que l&#8217;on veut tester</p></li><li><p>🧩 Comment faire des tests unitaires</p></li></ul></div></div></section><section id="test_unitaire_pro_cons"><h2>Test Unitaire : Pro / Cons</h2><div class="slide-content"><div class="ulist"><ul><li><p>✅ Super rapides (&lt;1s) et légers a executer</p></li><li><p>✅ Pousse à avoir un bon design de code</p></li><li><p>✅ Efficaces pour tester des cas limites</p></li><li><p>❌ Peu réalistes</p></li></ul></div></div></section><section id="fail"><div class="slide-content"><div class="videoblock"><video src="media/ut-fail-1.mp4" width="600" height="100%" data-autoplay loop>Your browser does not support the video tag.</video></div></div></section><section id="fail2"><div class="slide-content"><div class="videoblock"><video src="media/ut-fail-2.mp4" width="600" height="100%" data-autoplay loop>Your browser does not support the video tag.</video></div></div></section><section data-background-color="rgb(248, 228, 130)" data-state="invert"><div class="slide-content"><div class="paragraph"><p>Tester des composants indépendamment ne prouve pas que le système fonctionne une fois intégré!</p></div></div></section><section id="solution_tests_dintégration"><h2>✅ Solution: Tests d&#8217;intégration</h2><div class="slide-content"><div class="ulist"><ul><li><p>Test validant qu’un assemblage d’unités se comportent comme prévu.</p></li><li><p>Teste votre application au travers de toutes ses couches</p></li><li><p>Par exemple avec menu server:</p><div class="ulist"><ul><li><p>Prouve que GET /menus retourne la liste des menus enregistrés en base</p></li><li><p>Prouve que POST /menus enregistre un nouveau menu en base avec ses plats.</p></li></ul></div></li></ul></div></div></section><section id="définition_du_sut_12"><h2>Définition du SUT (1/2)</h2><div class="slide-content"><div class="imageblock"><img src="media/architecture.png" alt="architecture"></div></div></section><section id="définition_du_sut_22"><h2>Définition du SUT (2/2)</h2><div class="slide-content"><div class="paragraph"><p>Une suite de tests d&#8217;intégration doit:</p></div>
-<div class="ulist"><ul><li><p>Démarrer et provisionner un environnement d’exécution (une DB, Elasticsearch, un autre service&#8230;&#8203;)</p></li><li><p>Démarrer votre application</p></li><li><p>Jouer un scénario de test</p></li><li><p>Éteindre et nettoyer son environnement d’exécution pour garantir l&#8217;isolation des tests</p></li></ul></div></div></section><section><div class="slide-content"><div class="paragraph"><p>Ce sont des tests plus lents et plus complexes que des tests unitaires. Comment gérer ça?</p></div></div></section><section id="exécuter_les_tests_dintégration_cycle_de_vie_maven"><h2>Exécuter Les Tests d’Intégration: Cycle de Vie Maven</h2><div class="slide-content"><div class="ulist"><ul><li><p>Les tests d’intégration sont une autre partie du cycle de vie de l’application: la phase <code>verify</code>.</p></li><li><p><code>verify</code> est une méta-phase composée de 3 sous-phases :</p><div class="ulist"><ul><li><p><code>pre-integration-test</code>: prépare l&#8217;environnement des tests d’intégration</p></li><li><p><code>integration-test</code>: execute la suite de tests d&#8217;intégration</p></li><li><p><code>post-integration-test</code>: nettoie l&#8217;environnement des tests d’intégration</p></li></ul></div></li></ul></div>
-<div class="paragraph"><p>⚠️ Il faut toujours appeler <code>verify</code> et non pas <code>integration-test</code>, sinon la sous-phase <code>post-integration-test</code> ne s’exécutera pas ⚠️</p></div></div></section><section id="exécuter_les_tests_dintégration_le_plugin_failsafe_13"><h2>Exécuter Les Tests d’Intégration: Le Plugin <code>failsafe</code> (1/3)</h2><div class="slide-content"><div class="ulist"><ul><li><p>Pour exécuter les tests d’intégration nous allons introduire un nouveau plugin: <code>failsafe</code></p></li><li><p>Ce plugin exécute les tests ayant le suffixe <code>IT.java</code> (par exemple: <code>MaClasseIT.java</code>)</p></li><li><p>Ce plugin s’exécute lors de la phase <code>integration-test</code></p></li></ul></div></div></section><section id="exécuter_les_tests_dintégration_le_plugin_failsafe_23"><h2>Exécuter Les Tests d’Intégration: Le Plugin <code>failsafe</code> (2/3)</h2><div class="slide-content"><div class="ulist"><ul><li><p>Configurez le plugin Maven Spring Boot pour les tests d&#8217;intégration (section <code>&lt;build&gt;&lt;plugins&gt;</code>):</p></li></ul></div>
-<div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-xml hljs" data-noescape="true" data-lang="xml">&lt;plugin&gt;
-  &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
-  &lt;artifactId&gt;maven-failsafe-plugin&lt;/artifactId&gt;
-  &lt;configuration&gt;
-    &lt;skipTests&gt;${skipIntegrationTests}&lt;/skipTests&gt;
-  &lt;/configuration&gt;
-&lt;/plugin&gt;</code></pre></div></div></div></section><section id="exécuter_les_tests_dintégration_le_plugin_failsafe_23_2"><h2>Exécuter Les Tests d’Intégration: Le Plugin <code>failsafe</code> (2/3)</h2><div class="slide-content"><div class="paragraph"><p>Cela crée les commandes suivantes:</p></div>
-<div class="ulist"><ul><li><p><code>mvn test</code>: lance les tests unitaires</p></li><li><p><code>mvn verify</code>: lance les tests unitaires et d’intégration</p></li><li><p><code>mvn verify -DskipUnitTests=true</code>: lance uniquement les tests d’intégration</p></li></ul></div></div></section><section id="tests_dintégrations_et_concrètement_avec_le_menu_server"><h2>Tests d’Intégrations: Et concrètement avec le menu-server?</h2><div class="slide-content"><div class="ulist"><ul><li><p>Dans les faits&#8230;&#8203; nous n&#8217;allons pas utiliser les phases <code>pre-integration-test</code> et <code>post-integration-test</code></p><div class="ulist"><ul><li><p>&#8594; Nous n&#8217;avons pas de serveur de base de données a démarrer.</p></li><li><p>&#8594; SpringBoot intègre le démarrage et l’arrêt du serveur web dans l’exécution des tests via l&#8217;annotation <code>@SprintBootTest</code>.</p></li></ul></div></li><li><p>C&#8217;est un projet pédagogique!</p><div class="ulist"><ul><li><p>Dans un "vrai" projet, on voudrait peut-être démarrer / éteindre un serveur de base de données dans ces étapes.</p></li></ul></div></li></ul></div></div></section><section data-background-color="rgb(248, 228, 130)" data-state="invert"><div class="slide-content"><div class="paragraph"><p>Nous allons écrire un test d&#8217;intégration pour l&#8217;appel <code>GET /menus</code></p></div></div></section><section id="exercice_ecrire_un_test_dintegration_14"><h2>🎓 Exercice : Ecrire un test d&#8217;integration (1/4)</h2><div class="slide-content"><div class="paragraph"><p>Mise en place d&#8217;un test vide</p></div>
-<div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-java hljs" data-noescape="true" data-lang="java">// src/test/java/com/cicdlectures/menuserver/controller/MenuControllerIT.java
-// Lance l'application sur un port aléatoire.
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-// Indique de relancer l'application à chaque test.
-@DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
-public class MenuControllerIT {
-
-  @LocalServerPort
-  private int port;
-
-  private URL getMenusURL() throws Exception {
-    return new URL("http://localhost:" + port + "/menus");
-  }
-
-  @Test
-  @DisplayName("lists all known menus")
-  public void listsAllMenus() throws Exception {
-  }
-}</code></pre></div></div></div></section><section id="exercice_ecrire_un_test_dintegration_24"><h2>🎓 Exercice : Ecrire un test d&#8217;integration (2/4)</h2><div class="slide-content"><div class="paragraph"><p>Maintenant, on appelle le serveur et on verifie que l&#8217;appelle qu&#8217;il nous reponds une 200</p></div>
-<div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-java hljs" data-noescape="true" data-lang="java">// src/test/java/com/cicdlectures/menuserver/controller/MenuControllerIT.java
-// Lance l'application sur un port aléatoire.
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-// Indique de relancer l'application à chaque test.
-@DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
-public class MenuControllerIT {
-  // ...
-
-  private RestTemplate template = new RestTemplate();
-
-  @Test
-  @DisplayName("lists all known menus")
-  public void listsAllMenus() throws Exception {
-    ResponseEntity&lt;MenuDto[]&gt; response = this.template.getForEntity(getMenusURL().toString(), MenuDto[].class);
-
-    assertEquals(HttpStatus.OK, response.getStatusCode());
-  }
-}</code></pre></div></div></div></section><section data-background-color="rgb(248, 228, 130)" data-state="invert"><div class="slide-content"><div class="paragraph"><p>Bon, c&#8217;est bien sympa mais notre test n&#8217;est pas satisfaisant en l&#8217;etat. Il faut maintenat valider notre comportement pricipal: lister tous les menus connus</p></div></div></section><section id="exercice_ecrire_un_test_dintegration_34"><h2>🎓 Exercice : Ecrire un test d&#8217;integration (3/4)</h2><div class="slide-content"><div class="paragraph"><p>D&#8217;abord il faut provisionner des données en base.</p></div>
-<div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-java hljs" data-noescape="true" data-lang="java">public class MenuControllerIT {
-  // ...
-  // Injecte automatiquement l'instance du menu repository
-  @Autowired
-  private MenuRepository menuRepository;
-
-  private final List&lt;Menu&gt; existingMenus = Arrays.asList(
-      new Menu(null, "Christmas menu", new HashSet&lt;&gt;(Arrays.asList(new Dish(null, "Turkey", null), new Dish(null, "Pecan Pie", null)))),
-      new Menu(null, "New year's eve menu", new HashSet&lt;&gt;(Arrays.asList(new Dish(null, "Potatos", null), new Dish(null, "Tiramisu", null)))));
-
-
-  @BeforeEach
-  public void initDataset() {
-    for (Menu menu : existingMenus) {
-      menuRepository.save(menu);
-    }
-  }
-
-  // ...
-}</code></pre></div></div></div></section><section id="exercice_ecrire_un_test_dintegration_44"><h2>🎓 Exercice : Ecrire un test d&#8217;integration (4/4)</h2><div class="slide-content"><div class="paragraph"><p>Il ne nous reste qu&#8217;a changer le corps du test pour verifier que le contenu de la reponse est celui auquel on s&#8217;attends.</p></div>
-<div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-java hljs" data-noescape="true" data-lang="java">public class MenuControllerIT {
-  // ...
-
-  @Test
-  @DisplayName("lists all known menus")
-  public void listsAllMenus() throws Exception {
-    // On declare la valeur attendue.
-    MenuDto[] wantMenus = {
-        new MenuDto(Long.valueOf(1), "Christmas menu",
-            new HashSet&lt;DishDto&gt;(
-                Arrays.asList(new DishDto(Long.valueOf(1), "Turkey"), new DishDto(Long.valueOf(2), "Pecan Pie")))),
-        new MenuDto(Long.valueOf(2), "New year's eve menu", new HashSet&lt;DishDto&gt;(
-            Arrays.asList(new DishDto(Long.valueOf(3), "Potatos"), new DishDto(Long.valueOf(4), "Tiramisu")))) };
-
-    // On fait la requête et on recupere la reponse.
-    ResponseEntity&lt;MenuDto[]&gt; response = this.template.getForEntity(getMenusURL().toString(), MenuDto[].class);
-
-    // On verifie le status de reponse.
-    assertEquals(HttpStatus.OK, response.getStatusCode());
-
-    // On list le corps de la reponse.
-    MenuDto[] gotMenus = response.getBody();
-
-    // On verifie que la reponse est la meme que celle attendue.
-    assertArrayEquals(wantMenus, gotMenus);
-  }
-}</code></pre></div></div></div></section><section id="exercice_activez_les_tests_dans_votre_ci"><h2>🎓 Exercice: Activez les tests dans votre CI</h2><div class="slide-content"><div class="paragraph"><p>Changez le workflow de ci de votre binôme (ou le votre) pour qu&#8217;à chaque build:</p></div>
-<div class="ulist"><ul><li><p>Les tests unitaires soient lancés</p></li><li><p>Les tests d&#8217;integrations soient lancés</p></li></ul></div>
-<div class="paragraph"><p>💡 Pensez à bien regarder le cycle de vie des phases Maven</p></div></div></section><section id="checkpoint_11"><h2>Checkpoint 🎯</h2><div class="slide-content"><div class="paragraph"><p>On a vu :</p></div>
-<div class="ulist"><ul><li><p>❌ Les limites des tests unitaires</p></li><li><p>🏭 Comment faire des tests d&#8217;intégration</p></li><li><p>🤔 Tester n&#8217;est pas facile mais très utile</p></li></ul></div></div></section></section>
+if len(f.ShortCode) &gt; 4 {
+  validationIssues = append(validationIssues, "short code too long")
+}</code></pre></div></div></div></section><section id="exercice_ajoutez_la_target_unit_test_au_makefile"><h2>🎓 Exercice: Ajoutez La Target <code>unit_test</code> au Makefile</h2><div class="slide-content"><div class="ulist"><ul><li><p>Pour faciliter l&#8217;exécution de toute la suite de tests, ajoutez la cible <code>unit_test</code> à votre Makefile pour que les tests de tous les packages soit joués.</p></li><li><p>Avec le mode verbeux d&#8217;activé par défaut</p><div class="ulist"><ul><li><p>Indice: <code>go help test</code> et <code>go help packages</code></p></li></ul></div></li><li><p><strong>Bonus</strong>: Activez le calcul de la couverture de tests</p></li></ul></div></div></section><section id="solution_ajoutez_la_target_unit_test_au_makefile"><h2>✅ Solution: Ajoutez La Target <code>unit_test</code> au Makefile</h2><div class="slide-content"><div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-Makefile hljs" data-noescape="true" data-lang="Makefile">.PHONY: unit_test
+unit_test:
+  go test -v -cover ./...</code></pre></div></div></div></section><section id="test_unitaire_pro_cons"><h2>Test Unitaire : Pro / Cons</h2><div class="slide-content"><div class="ulist"><ul><li><p>✅ Super rapides (&lt;1s) et légers a exécuter</p></li><li><p>✅ Pousse à avoir un bon design de code</p></li><li><p>✅ Efficaces pour tester des cas limites</p></li><li><p>❌ Environnement "aseptisé" et "bouchonné", défini par le développeur</p></li><li><p>❌ "Ossifie" le code</p></li></ul></div></div></section><section id="le_périmètre_testé_est_il_satisfaisant"><h2>Le périmètre testé est-il satisfaisant?</h2><div class="slide-content"><div class="ulist"><ul><li><p>La suite de tests qui vient de casser teste la logique de validation de la requête reçue.</p></li><li><p>Est-ce que cela est suffisant pour prouver que la fonctionnalité "créer un véhicule" fonctionne ?</p></li></ul></div></div></section><section><div class="slide-content"><div class="ulist"><ul><li><p>Pas exactement, d&#8217;autres composants entrent en jeu dans l&#8217;environnement réel</p><div class="ulist"><ul><li><p>La couche de communication avec la base de données, le routage HTTP&#8230;&#8203;</p></li></ul></div></li></ul></div></div></section><section id="fail"><div class="slide-content"><div class="videoblock"><video src="media/ut-fail-1.mp4" width="600" height="100%" data-autoplay loop>Your browser does not support the video tag.</video></div></div></section><section id="fail2"><div class="slide-content"><div class="videoblock"><video src="media/ut-fail-2.mp4" width="600" height="100%" data-autoplay loop>Your browser does not support the video tag.</video></div></div></section><section data-background-color="rgb(248, 228, 130)" data-state="invert"><div class="slide-content"><div class="paragraph"><p>Tester des composants indépendamment ne prouve pas que le système fonctionne une fois intégré!</p></div></div></section><section id="solution_tests_dintégration"><h2>✅ Solution: Tests d&#8217;intégration</h2><div class="slide-content"><div class="ulist"><ul><li><p>Test validant que l&#8217;assemblage de composants se comportent comme prévu.</p></li><li><p>Teste votre application au travers de tous ses composants</p></li><li><p>Par exemple avec vehicle-server:</p><div class="ulist"><ul><li><p>Prouve que GET /vehicles retourne la liste des vehicles les plus proche d&#8217;un point donné</p></li><li><p>Prouve que POST /vehicles enregistre un nouveau véhicule en base.</p></li></ul></div></li></ul></div></div></section><section id="définition_du_sut"><h2>Définition du SUT</h2><div class="slide-content"><div class="paragraph"><p>Une suite de tests d&#8217;intégration doit:</p></div>
+<div class="ulist"><ul><li><p>Démarrer et provisionner un environnement d’exécution (une DB, Elasticsearch, un autre service&#8230;&#8203;)</p></li><li><p>Démarrer votre application</p></li><li><p>Jouer un scénario de test</p></li><li><p>Éteindre et nettoyer son environnement d’exécution pour garantir l&#8217;isolation des tests</p></li></ul></div>
+<div class="paragraph"><p>➡️ On se place ici d&#8217;un point de vue extérieur à l&#8217;application</p></div></div></section><section><div class="slide-content"><div class="ulist"><ul><li><p>❌ Ce sont des tests plus lents et plus complexes que des tests unitaires.</p></li><li><p>⏳Tout tester avec des tests d&#8217;intégration n&#8217;est pas efficace</p></li><li><p>➡️ Il faut équilibrer les deux stratégies</p></li></ul></div></div></section><section id="et_concrètement_avec_le_notre_projet"><h2>Et concrètement avec le notre projet?</h2><div class="slide-content"><div class="ulist"><ul><li><p>La suite de test d&#8217;intégration se situe dans le fichier <code>app_test.go</code></p></li><li><p>Il y a un cas par fonctionnalité principale de l&#8217;application (create vehicle, delete vehicle, list vehicles)</p></li></ul></div></div></section><section><div class="slide-content"><div class="ulist"><ul><li><p>La gestion de l&#8217;environnement est cachée:</p><div class="ulist"><ul><li><p>Démarrer un container de base de données (Postgres avec Postgis)</p></li><li><p>Démarrer une instance de l&#8217;application</p></li><li><p>Tout éteindre une fois terminé</p></li></ul></div></li></ul></div>
+<div class="paragraph"><p>C&#8217;est fait dans le fichier <code>app/helper_test.go</code> si vous voulez 👀</p></div></div></section><section id="lancez_les_tests_dintégration"><h2>Lancez les tests d&#8217;intégration</h2><div class="slide-content"><div class="ulist"><ul><li><p>Vous pouvez lancer les tests d&#8217;intégration avec la commande suivante.</p></li></ul></div>
+<div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-go hljs" data-noescape="true" data-lang="go">go test -v -count=1 --tags=integration ./app</code></pre></div></div></div></section><section id="exercice_corrigez_votre_implémentation_de_delete_vehicle"><h2>🎓 Exercice: Corrigez votre Implémentation de Delete Vehicle</h2><div class="slide-content"><div class="paragraph"><p>Optionnel mais, si les tests d&#8217;intégration échouent à ce point, il serait bon de corriger votre implémentation de la suppression de vehicule.</p></div></div></section><section id="exercice_activez_les_tests_dans_votre_ci"><h2>🎓 Exercice: Activez les tests dans votre CI</h2><div class="slide-content"><div class="paragraph"><p>Changez le workflow de ci de votre binôme (ou le votre) pour qu&#8217;à chaque build:</p></div>
+<div class="ulist"><ul><li><p>Les tests unitaires soient lancés</p></li><li><p>Les tests d&#8217;intégration soient lancés</p><div class="ulist"><ul><li><p>N&#8217;oubliez pas de définir une nouvelle cible integration_test dans le Makefile</p></li></ul></div></li></ul></div></div></section><section id="solution_activez_les_tests_dans_votre_ci"><h2>✅ Solution: Activez les tests dans votre CI</h2><div class="slide-content"><div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-yaml hljs" data-noescape="true" data-lang="yaml">name: Vehicle Server CI
+on:
+  - push
+  - pull_request
+jobs:
+  ci:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+      - name: Setup Go
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: './go.mod'
+      - name: Check Go Version
+        run: go version
+      - name: Run Unit Tests
+        run: make unit_test
+      - name: Run Integration Tests
+        run: make integration_test
+      - name: Build application
+        run: make build
+      - name: List dist output
+        run: ls dist/</code></pre></div></div></div></section><section id="checkpoint_10"><h2>Checkpoint 🎯</h2><div class="slide-content"><div class="paragraph"><p>On a vu :</p></div>
+<div class="ulist"><ul><li><p>❌ Les avantages et limites des différentes stratégies de tests&#8230;&#8203;</p></li><li><p>⚖️ &#8230;&#8203; et la nécessité d&#8217;avoir une stratégie équilibrée.</p></li></ul></div>
+<div class="paragraph"><p>🎉 Vous pouvez enfin merger votre PR!</p></div></div></section></section>
 <section><section id="docker" data-background-color="rgb(248, 228, 130)" data-state="invert"><h2>Docker</h2><div class="slide-content"><div class="imageblock"><img src="media/docker-logo-monochromatic.png" alt="docker logo monochromatic" width="200"></div><div class="paragraph"><p>Remise à niveau / Rappels</p></div></div></section><section id="quel_est_le_problème_2"><h2>🤔 Quel est le problème ?</h2><div class="slide-content"><div class="imageblock"><img src="media/matrixfromhell.jpg" alt="matrixfromhell"></div>
 <div class="paragraph"><p>Problème de temps <strong>exponentiel</strong></p></div></div></section><section id="déjà_vu"><h2>Déjà vu ?</h2><div class="slide-content"><div class="paragraph"><p>L&#8217;IT n&#8217;est pas la seule industrie à résoudre des problèmes&#8230;&#8203;</p></div>
 <div class="imageblock"><img src="media/also-a-matrix-from-hell.png" alt="also a matrix from hell"></div></div></section><section id="solution_le_conteneur_intermodal"><h2>✅ Solution: Le conteneur intermodal</h2><div class="slide-content"><div class="paragraph"><p>"Separation of Concerns"</p></div>
@@ -2024,7 +1940,7 @@ Successfully tagged docker-git:1.1.0
 
 docker container run --rm docker-git:1.0.0 git config --get init.defaultBranch
 docker container run --rm docker-git:1.1.0 git config --get init.defaultBranch
-# main</code></pre></div></div></div></section><section id="checkpoint_12"><h2>Checkpoint 🎯</h2><div class="slide-content"><div class="ulist"><ul><li><p>Une image Docker fournit un environnement de système de fichier auto-suffisant (application, dépendances, binaries, etc.) comme modèle de base d&#8217;un conteneur</p></li><li><p>On peut spécifier une recette de fabrication d&#8217;image à l&#8217;aide d&#8217;un <code>Dockerfile</code> et de la commande <code>docker image build</code></p></li><li><p>Les images Docker ont une convention de nommage permettant d&#8217;identifier les images très précisément</p></li></ul></div>
+# main</code></pre></div></div></div></section><section id="checkpoint_11"><h2>Checkpoint 🎯</h2><div class="slide-content"><div class="ulist"><ul><li><p>Une image Docker fournit un environnement de système de fichier auto-suffisant (application, dépendances, binaries, etc.) comme modèle de base d&#8217;un conteneur</p></li><li><p>On peut spécifier une recette de fabrication d&#8217;image à l&#8217;aide d&#8217;un <code>Dockerfile</code> et de la commande <code>docker image build</code></p></li><li><p>Les images Docker ont une convention de nommage permettant d&#8217;identifier les images très précisément</p></li></ul></div>
 <div class="paragraph"><p>⚠️ Friends don&#8217;t let friends use <code>latest</code> ⚠️</p></div></div></section></section>
 <section><section id="versions" data-background-color="rgb(248, 228, 130)" data-state="invert"><h2>Versions</h2></section><section id="pourquoi_faire_des_versions"><h2>Pourquoi faire des versions ?</h2><div class="slide-content"><div class="ulist"><ul><li><p>Un changement visible d&#8217;un logiciel peut nécessiter une adaptation de ses utilisateurs</p></li><li><p>Un humain ça s&#8217;adapte, mais un logiciel il faut l&#8217;adapter!</p></li><li><p>Cela permet de contrôler le problème de la compatibilité entre deux logiciels.</p></li></ul></div></div></section><section id="une_petite_histoire"><h2>Une petite histoire</h2><div class="slide-content"><div class="paragraph"><p>Le logiciel que vous développez utilise des données d&#8217;une API d&#8217;un site de vente.</p></div>
 <div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-json hljs" data-noescape="true" data-lang="json">// Corps de la réponse d'une requête GET https://supersite.com/api/item
@@ -2074,7 +1990,7 @@ docker image push "${DOCKER_USERNAME}"/vehiculeserver:"${TAG}"
 
 git push origin "${TAG}"
 
-# Vérifiez DockerHub et GitHub après ça</code></pre></div></div></div></section><section id="checkpoint_13"><h2>Checkpoint 🎯</h2><div class="slide-content"><div class="ulist"><ul><li><p>La notion de "version" est un outil de communication aux consommateurs de nos produits logiciels</p></li><li><p>Le "semantic versioning" est une des façon les plus usitées pour gérer les politiques de version</p></li><li><p>Nous avons déployé manuellement notre première image Docker, avec synchronisation code source &lt;&#8594; image Docker</p></li></ul></div>
+# Vérifiez DockerHub et GitHub après ça</code></pre></div></div></div></section><section id="checkpoint_12"><h2>Checkpoint 🎯</h2><div class="slide-content"><div class="ulist"><ul><li><p>La notion de "version" est un outil de communication aux consommateurs de nos produits logiciels</p></li><li><p>Le "semantic versioning" est une des façon les plus usitées pour gérer les politiques de version</p></li><li><p>Nous avons déployé manuellement notre première image Docker, avec synchronisation code source &lt;&#8594; image Docker</p></li></ul></div>
 <div class="paragraph"><p>&#8658; 🤔 C&#8217;était très manuel. Et si on regardait à automatiser tout ça ?</p></div></div></section></section>
 <section><section id="continuous_everything" data-background-color="rgb(248, 228, 130)" data-state="invert"><h2>"Continuous Everything"</h2></section><section id="livraison_continue"><h2>Livraison Continue</h2><div class="slide-content"><div class="paragraph"><p>Continuous Delivery (CD)</p></div></div></section><section id="pourquoi_la_livraison_continue"><h2>🤔 Pourquoi la Livraison Continue ?</h2><div class="slide-content"><div class="ulist"><ul><li><p>Diminuer les risque liés au déploiement</p></li><li><p>Permettre de récolter des retours utilisateurs plus souvent</p></li><li><p>Rendre l&#8217;avancement visible par <strong>tous</strong></p></li></ul></div>
 <div class="quoteblock"><blockquote><div class="paragraph"><p>How long would it take to your organization to deploy a change that
@@ -2121,7 +2037,7 @@ involves just one single line of code?</p></div></blockquote><div class="attribu
           push: true
           context: ./
           tags: xxxxx/vehiculeserver:main
-      # ... Deploy if tagTag</code></pre></div></div></div></section><section id="checkpoint_14"><h2>Checkpoint 🎯</h2><div class="slide-content"><div class="ulist"><ul><li><p>La livraison continue et le déploiement continu étendent les concepts du CI</p></li><li><p>Les 2 sont automatisées, mais un être humain est nécessaire comme déclencheur pour la 1ère</p></li><li><p>Le choix dépends des risques et de la "production"</p></li><li><p>On a vu comment automatiser le déploiement dans GitHub Actions</p><div class="ulist"><ul><li><p>Conditions dans le workflow</p></li><li><p>Gestion de secrets</p></li></ul></div></li></ul></div></div></section></section>
+      # ... Deploy if tagTag</code></pre></div></div></div></section><section id="checkpoint_13"><h2>Checkpoint 🎯</h2><div class="slide-content"><div class="ulist"><ul><li><p>La livraison continue et le déploiement continu étendent les concepts du CI</p></li><li><p>Les 2 sont automatisées, mais un être humain est nécessaire comme déclencheur pour la 1ère</p></li><li><p>Le choix dépends des risques et de la "production"</p></li><li><p>On a vu comment automatiser le déploiement dans GitHub Actions</p><div class="ulist"><ul><li><p>Conditions dans le workflow</p></li><li><p>Gestion de secrets</p></li></ul></div></li></ul></div></div></section></section>
 <section><section id="bibliographie" data-background-color="rgb(248, 228, 130)" data-state="invert"><h2>Bibliographie</h2></section><section id="ligne_de_commande"><h2>Ligne de commande</h2><div class="slide-content"><div class="ulist"><ul><li><p><a href="https://blog.balthazar-rouberol.com/category/essential-tools-and-practices-for-the-aspiring-software-developer" class="bare">https://blog.balthazar-rouberol.com/category/essential-tools-and-practices-for-the-aspiring-software-developer</a></p></li><li><p><a href="https://tldp.org" class="bare">https://tldp.org</a></p></li><li><p><a href="https://en.wikipedia.org/wiki/POSIX" class="bare">https://en.wikipedia.org/wiki/POSIX</a></p></li><li><p><a href="https://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop" class="bare">https://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop</a></p></li><li><p><a href="https://linuxhandbook.com/linux-directory-structure/" class="bare">https://linuxhandbook.com/linux-directory-structure/</a></p></li></ul></div></div></section><section id="git_vcs"><h2>Git / VCS</h2><div class="slide-content"><div class="ulist"><ul><li><p><a href="https://docs.github.com" class="bare">https://docs.github.com</a></p></li><li><p><a href="https://git-scm.com/book/en/v2/Getting-Started-About-Version-Control" class="bare">https://git-scm.com/book/en/v2/Getting-Started-About-Version-Control</a></p></li><li><p><a href="http://martinfowler.com/bliki/VersionControlTools.html" class="bare">http://martinfowler.com/bliki/VersionControlTools.html</a></p></li><li><p><a href="http://martinfowler.com/bliki/FeatureBranch.html" class="bare">http://martinfowler.com/bliki/FeatureBranch.html</a></p></li><li><p><a href="https://about.gitlab.com/2014/09/29/gitlab-flow/" class="bare">https://about.gitlab.com/2014/09/29/gitlab-flow/</a></p></li><li><p><a href="https://www.atlassian.com/git/tutorials/comparing-workflows" class="bare">https://www.atlassian.com/git/tutorials/comparing-workflows</a></p></li><li><p><a href="http://nvie.com/posts/a-successful-git-branching-model/" class="bare">http://nvie.com/posts/a-successful-git-branching-model/</a></p></li></ul></div></div></section><section id="intégration_continue"><h2>Intégration Continue</h2><div class="slide-content"><div class="ulist"><ul><li><p><a href="http://martinfowler.com/articles/continuousIntegration.html" class="bare">http://martinfowler.com/articles/continuousIntegration.html</a></p></li><li><p><a href="http://martinfowler.com/bliki/ContinuousDelivery.html" class="bare">http://martinfowler.com/bliki/ContinuousDelivery.html</a></p></li><li><p><a href="https://jaxenter.com/implementing-continuous-delivery-117916.html" class="bare">https://jaxenter.com/implementing-continuous-delivery-117916.html</a></p></li><li><p><a href="https://technologyconversations.com/2014/04/29/continuous-delivery-introduction-to-concepts-and-tools/" class="bare">https://technologyconversations.com/2014/04/29/continuous-delivery-introduction-to-concepts-and-tools/</a></p></li><li><p><a href="http://blog.arungupta.me/continuous-integration-delivery-deployment-maturity-model" class="bare">http://blog.arungupta.me/continuous-integration-delivery-deployment-maturity-model</a></p></li><li><p><a href="http://blog.crisp.se/2013/02/05/yassalsundman/continuous-delivery-vs-continuous-deployment" class="bare">http://blog.crisp.se/2013/02/05/yassalsundman/continuous-delivery-vs-continuous-deployment</a></p></li></ul></div></div></section><section id="livraisondéploiement_continu"><h2>Livraison/Déploiement Continu</h2><div class="slide-content"><div class="ulist"><ul><li><p><a href="http://martinfowler.com/articles/continuousIntegration.html" class="bare">http://martinfowler.com/articles/continuousIntegration.html</a></p></li><li><p><a href="http://martinfowler.com/bliki/ContinuousDelivery.html" class="bare">http://martinfowler.com/bliki/ContinuousDelivery.html</a></p></li><li><p><a href="https://jaxenter.com/implementing-continuous-delivery-117916.html" class="bare">https://jaxenter.com/implementing-continuous-delivery-117916.html</a></p></li><li><p><a href="https://technologyconversations.com/2014/04/29/continuous-delivery-introduction-to-concepts-and-tools/" class="bare">https://technologyconversations.com/2014/04/29/continuous-delivery-introduction-to-concepts-and-tools/</a></p></li><li><p><a href="http://blog.arungupta.me/continuous-integration-delivery-deployment-maturity-model" class="bare">http://blog.arungupta.me/continuous-integration-delivery-deployment-maturity-model</a></p></li><li><p><a href="http://blog.crisp.se/2013/02/05/yassalsundman/continuous-delivery-vs-continuous-deployment" class="bare">http://blog.crisp.se/2013/02/05/yassalsundman/continuous-delivery-vs-continuous-deployment</a></p></li></ul></div></div></section><section id="tests"><h2>Tests</h2><div class="slide-content"><div class="ulist"><ul><li><p>(FR) <a href="http://douche.name/blog/nomenclature-des-tests-logiciels/" class="bare">http://douche.name/blog/nomenclature-des-tests-logiciels/</a></p></li><li><p><a href="http://martinfowler.com/bliki/UnitTest.html" class="bare">http://martinfowler.com/bliki/UnitTest.html</a></p></li><li><p><a href="https://en.wikipedia.org/wiki/Software_testing" class="bare">https://en.wikipedia.org/wiki/Software_testing</a></p></li><li><p><a href="http://martinfowler.com/tags/testing.html" class="bare">http://martinfowler.com/tags/testing.html</a></p></li><li><p><a href="http://martinfowler.com/bliki/TestCoverage.html" class="bare">http://martinfowler.com/bliki/TestCoverage.html</a></p></li><li><p><a href="http://martinfowler.com/bliki/TestDrivenDevelopment.html" class="bare">http://martinfowler.com/bliki/TestDrivenDevelopment.html</a></p></li></ul></div></div></section><section id="autre"><h2>Autre</h2><div class="slide-content"><div class="ulist"><ul><li><p><a href="https://dduportal.github.io/cours/" class="bare">https://dduportal.github.io/cours/</a></p></li><li><p><a href="https://www.jenkins.io/node/" class="bare">https://www.jenkins.io/node/</a></p></li></ul></div></div></section></section>
 <section id="merci" data-background-color="rgb(248, 228, 130)" data-state="invert"><h2>Merci !</h2><div class="slide-content"><div class="ulist"><ul><li><p><span class="fa fa-envelope"></span> damien.duportal &lt;chez&gt; gmail.com</p></li><li><p><a href="https://twitter.com/DamienDuportal" target="_blank"><span class="fab fa-twitter"></span> @DamienDuportal</a></p></li><li><p><span class="fa fa-envelope"></span> jlevesy &lt;chez&gt; gmail.com</p></li><li><p><a href="https://twitter.com/jlevesy" target="_blank"><span class="fab fa-twitter"></span> @jlevesy</a></p></li></ul></div>
 <div class="paragraph small"><small><a href="https://cicd-lectures.github.io/slides/2024">Slides: https://cicd-lectures.github.io/slides/2024</a></small></div>
