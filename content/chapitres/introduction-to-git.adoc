@@ -197,7 +197,7 @@ echo "# Read Me\n\nObi Wan Kenobi" > ./README.md
 git diff
 git status
 
-git checkout -- README.md
+git restore README.md
 git status
 --
 
