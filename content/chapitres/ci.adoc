@@ -191,7 +191,7 @@ include::../code-samples/gh-actions/npm-example.yml[]
 
 == Exemple simple avec GitHub Actions
 
-* Dans le projet "menu-server", sur la branch `main`,
+* Dans le projet "vehicle-server", sur la branch `main`,
 ** Créez le fichier `.github/workflows/bonjour.yml` avec le contenu suivant :
 
 [source,yaml]

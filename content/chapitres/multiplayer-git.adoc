@@ -22,7 +22,7 @@ image:solo.gif[width="500"]
 Collaborer c'est pas évident, mais il existe des outils et des méthodes pour vous aider.
 
 [.small]
-Cela reste des outils, ça ne résous pas tout non plus.
+Cela reste des outils, ça ne résouds pas tout non plus.
 
 == Git multijoueur
 
@@ -129,9 +129,9 @@ image:fork.png[]
 [{invert}]
 == !
 
-A vous de jouer: Ajoutez la fonctionnalité "suppression d'un menu" au projet de votre binôme
+A vous de jouer: Corrigez la fonctionnalité "suppression d'un vehicule" dans projet de votre binôme
 
-== 🎓 Exercice : Contribuez au projet de votre binôme (1/5)
+== 🎓 Exercice : Contribuez au projet de votre binôme (1/4)
 
 Première étape: on clone le fork dans son environnement de développement
 
@@ -143,50 +143,42 @@ cd /workspace/
 git clone <url_de_votre_fork>
 
 # Créez votre feature branch
-git switch --create implement-delete
+git switch --create fix-delete
 # Équivalent de git checkout -b <...>
 --
 
-== 🎓 Exercice : Contribuez au projet de votre binôme (2/5)
+== Minute Go: L'interface http.Handler
 
-Maintenant voici la liste des choses à faire:
+[source,go]
+----
+type Handler interface {
+	ServeHTTP(rw ResponseWriter, r *Request)
+}
+----
 
-* Rajouter le `MenuRepository` comme dépendance du MenuController
-* Implémenter une nouvelle méthode `deleteMenu`
-** Gère les requêtes `DELETE /menus/{id}`
-** Appelle la méthode `deleteById` du `menuRepository`
-** Réponds 200 si la suppression est réussie
-* Bonus si vous arrivez à faire en sorte que le serveur réponde 404 si un menu à supprimer n'existe pas.
+* Interface de la librairie standard qui normalise tous les types pouvant "gérer une requête HTTP"
+* Elle accepte deux arguments
+** `rw`: Le "response writer", qui permet d'écrire le code de status, les headers et le corps de la réponse
+** `r`: La requête à traiter
+* Nos implémentations de `http.Handler` se trouvent dans le package `vehicle`.
 
-Voici un link:https://spring.io/guides/tutorials/rest/#_http_is_the_platform[petit article bien utile,window="_blank"] pour vous aider!
+*Pouvez vous identifier le code problématique?*
 
-== 🎓 Exercice : Contribuez au projet de votre binôme (3/5)
+== 🎓 Exercice : Contribuez au projet de votre binôme (2/4)
 
-Pour tester votre changement
+* Extraire l'identifiant (la valeur `id`) du path en utilisant la méthode link:https://pkg.go.dev/net/http#Request.PathValue[PathValue].
+* Parser la valeur obtenue en `int64` en utilisant link:https://pkg.go.dev/strconv#ParseInt[strconv.ParseInt]
+* Appeler la methode `Delete` du `VehicleStore` en passant l'identifiant et le "contexte" récupéré en appelant `r.Context()`
+* Enfin il faut faire une réponse:
+** Si la suppression est réussie, répondre un status code 204 en appelant `rw.WriteHeader(http.StatusNoContent)`,
+** Si le véhicle indiqué n'existe pas, répondre 404.
+* Il convient de gérer les erreurs correctement, vous pouvez vous inspirer des hautres handlers défini dans le package!
 
-[source, bash]
---
-# D'abord on crée un menu
-curl -H "Content-Type: application/json" --data-raw '{"name": "Menu spécial du chef", "dishes": [{"name": "Bananes aux fraises"},{"name": "Bananes flambées"}]}' localhost:8080/menus
---
-
-[source, bash]
---
-# Puis on le supprime
-curl -XDELETE localhost:8080/menus/4
---
-
-[source, bash]
---
-# Et on vérifie que le menu est bien supprimé
-curl localhost:8080/menus
---
-
-== 🎓 Exercice : Contribuez au projet de votre binôme (4/5)
+== 🎓 Exercice : Contribuez au projet de votre binôme (3/4)
 
 Une fois que vous êtes satisfaits de votre changement il vous faut maintenant créer un commit et pousser votre nouvelle branche sur votre fork.
 
-== 🎓 Exercice : Contribuez au projet de votre binôme (5/5)
+== 🎓 Exercice : Contribuez au projet de votre binôme (4/4)
 
 Dernière étape: ouvrir une pull request!
 
@@ -216,7 +208,7 @@ image:pr.png[width=500]
 == !
 
 * La revue de code est un **exercice difficile** et **potentiellement frustrant** pour les deux parties.
-** Comme sur Twitter, on est bien à l'abri derrière son écran ;=)
+** Comme sur Twitter, on est bien à l'abri derrière son écran
 * En tant que contributeur, **soyez respectueux** de vos relecteurs : votre changement peut être refusé et c'est quelque chose de normal.
 * En tant que relecteur, **soyez respectueux** du travail effectué, même si celui ci comporte des erreurs ou ne correspond pas à vos attentes.
 
@@ -224,7 +216,7 @@ image:pr.png[width=500]
 
 == 🎓 Exercice : Relisez votre PR reçue !
 
-* Vous devriez avoir reçu une PR de votre binôme :-)
+* Vous devriez avoir reçu une PR de votre binôme
 * Relisez le changement de la PR
 * Effectuez quelques commentaires (bonus: utilisez la suggestion de changements), si c'est nécessaire
 * Si elle vous convient, approuvez la!
@@ -253,9 +245,13 @@ Ces "checks" peuvent êtres exécutés par votre moteur de CI ou des outils exte
 * Vous pouvez changer la spec du workflow directement dans votre PR
 * La link:https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows[documentation,window="_blank"] se trouve par ici
 
+== ✅ Exercice : Déclencher un Workflow de CI sur une PR
+
+[source,yaml]
+----
+include::../code-samples/gh-actions/vehicle-server.yml[tags=""]
+----
+
 == 🎯 Checkpoint
 
 *Règle d'or*: Si le CI est rouge, on ne merge pas la pull request !
-
-[.small]
-Même si le linter "ilécon", même si on a la flemme et "sépanou" qui avons cassé le CI.

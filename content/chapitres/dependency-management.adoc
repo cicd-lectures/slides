@@ -13,10 +13,19 @@ Dans ce chapitre on ne parle que de dépendances du code
 * ⚙️ ... chacune des briques étant infiniment complexe
 ** Ex: TLS, PostgresSQL, Linux, Firefox...
 * 🤔 Il est difficilement envisageable de démarrer un projet sans réutiliser des briques logicielles.
-* 🧘 Cela permet de concentrer son effort de dévelopement sur ce qui apporte vraiment de la valeur.
+* 🧘 Cela permet de *concentrer son effort de dévelopement sur ce qui apporte vraiment de la valeur*.
 ** ➡️ Dans notre cas, notre métier est la gestion de véhicules, pas l'implémentation d'une pile réseau et d'un serveur HTTP.
 
-== Mais cela pose une quantité de problèmes!
+== ⚠️ Ajouter une dépendance n'est pas un acte anodin ⚠️ 
+
+* Si votre dépendance ne fonctionne plus ou est compromise, votre app sera impactée
+* Attention à ne pas rajouter une dépendance trop grosse pour n'utiliser qu'une petite fonctionalité!
+* Attention aux dépendances de vos dépendances 😱
+* Quelques règles d'usage:
+** Vérifier que votre dépendance est activement maintenue? (date du dernier commit, existence d'une communauté autour)
+** 👀 le code. Est-ce que vous le comprenez? Est-ce que vous pourriez le débugger ou le faire vous même?
+
+== Dépendre de librairies externes pose une quantité de problèmes!
 
 * Comment récupérer tout le code dont on à besoin?
 * Comment le maintenir à jour?
@@ -62,7 +71,7 @@ link:https://www.deviantart.com/quasilyte/art/Tired-gopher-783302842[source]
 * Tout symbole go est défini dans un package
 * Un package est identifié par une URL unique
 ** (ex: `github.com/prometheus/client_golang`)
-* Un package peut dépendre de un ou plusieurs autres packages.
+* Un package peut importer un ou plusieurs autres packages pour utiliser ses symboles.
 
 == Provenances des packages
 
@@ -182,7 +191,7 @@ image:buildlist.svg[caption="BuildGraph",width=700]
 * `go get -u ./...` Update tous les modules dépendants
 * `go get -u <modulepath>` Mets à jour un module
 * `go mod why` indique le chemin de dépendance entre le package courant et un package (ou un module avec le flag `-m`)
-* `go list -m` affiche la liste des modules à compiler
+* `go list -m all` affiche la liste des modules à compiler
 
 == 🎓 Exercice: Compiler le serveur
 

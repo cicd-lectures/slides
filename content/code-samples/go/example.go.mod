@@ -19,8 +19,9 @@ require (
 )
 
 // Dépendances contraintes indirectement (...)
-// Certains dépots ne supportent pas go modules, ils sont gérés comme
-// dépenances directes...
+// Certaines librairies ne supportent pas go modules, ils sont gérés comme
+// dépendances directes...
+// D'autres cas peuvent mener à l'ajout d'une dépendance indirecte.
 require (
 	github.com/beorn7/perks v1.0.1 // indirect
 	github.com/cespare/xxhash/v2 v2.2.0 // indirect
