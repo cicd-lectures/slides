@@ -174,4 +174,4 @@ curl https://swapi.dev/api/planets/1 | jq .residents
 
 * Internet repose sur une collection de protocole (DNS, HTTP, TLS)
 * HTTP permets de formuler une requête à un serveur et une réponse
-* `cURL` est un outil très complet pour parler HTTP depuis un terinal!
+* `cURL` est un outil très complet pour parler HTTP depuis un terminal!
