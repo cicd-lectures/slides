@@ -237,5 +237,5 @@ Une multitudes de services facilitent et enrichissent encore git: (GitHub, Gitla
 
 * Plateforme de gestion et suivi d'issues
 * Plateforme de revue de code
-* Integration aux moteurs de CI/CD
+* Intégration aux moteurs de CI/CD
 * And so much more...

@@ -18,7 +18,7 @@ func main() {
 	// end::main_start[]
 
 	// tag::variables[]
-	// Declare une variable de type string et assigne à la valeur par defaut du type.
+	// Déclare une variable de type string et assigne à la valeur par défaut du type.
 	// "" pour string.
 	var message string
 	// Assigne (copie) la valeur "Hello ENSG!" a la variable message.
@@ -27,7 +27,7 @@ func main() {
 	// Est équivalent a:
 	var message string = "Hello ENSG!"
 
-	// Est encore équivalent a... avec une syntaxe compacte.
+	// Est encore équivalent a l'expression précédente avec une syntaxe compacte.
 	// Ici le compilateur devine le type de la variable en fonction de la valeur assignée.
 	message := "Hello ENSG!"
 
@@ -48,10 +48,10 @@ func main() {
 	// end::variables_bad[]
 
 	// tag::pointers_ref[]
-	// On déclare et initialise une variable. Cela aloue de la mémoire sur la pile.
+	// On déclare et initialise une variable. Cela alloue de la mémoire sur la pile.
 	var message string = "Hello ENSG!"
-	// On copie l'adresse memoire de cette variable dans une nouvelle variable.
-	// Pour cela on utilise l'opérateur & (réference).
+	// On copie l'adresse mémoire de cette variable dans une nouvelle variable.
+	// Pour cela on utilise l'opérateur & (référence).
 	var pointerToMessage *string = &message
 
 	// Affiche: message address in memory is: 0xc000014070
@@ -67,7 +67,7 @@ func main() {
 	// end::pointers_deref[]
 
 	// tag::pointers_panic[]
-	// Le `= nil` est optionel ici: la valeur par défaut d'un pointeur est nil.
+	// Le `= nil` est optionnel ici: la valeur par défaut d'un pointeur est nil.
 	var nilPointer *string = nil
 
 	fmt.Println("address is:", nilPointer)
@@ -89,7 +89,7 @@ func privateFunc() {
 }
 
 // fonction publique du package courant.
-// Peut être appellée depuis un autre package.
+// Peut être appelée depuis un autre package.
 func PublicFunc() {
 	// appelle la fonction `OpenFile` du package os.
 	// ✅ compile, `OpenFile` est exportée!
@@ -232,8 +232,8 @@ func doSomething() bool {
 // tag::flow_control_if_2[]
 
 func main() {
-	// if / else avec short statement.
-	// avantage: ok n'exsite que dans le scope du if.
+	// if / else avec déclaration.
+	// avantage: ok n'existe que dans le scope du if.
 	if ok := doSomething(); ok {
 		fmt.Println("C'est OK!")
 	} else {
@@ -305,12 +305,12 @@ func main() {
 func main() {
 	anArray := [4]int{2, 4, 6, 8}
 
-	// Declare et initialise une slice référençant les entrées
+	// Déclare et initialise une slice référençant les entrées
 	// entre l'index 1 et 3 du tableau anArray.
-	// Se lit interval [1:4[, du coup 1,2 et 3.
+	// Se lit intervalle [1:4[, du coup 1,2 et 3.
 	var aSlice []int = anArray[1:4]
 
-	// ⚠️ Une ecriture écrit une valeur dans le tableau référencé!
+	// ⚠️ Une écriture écrit une valeur dans le tableau référencé!
 	aSlice[0] = 9
 	fmt.Println(aSlice)  // [9, 6, 8]
 	fmt.Println(anArray) // [2, 9, 6, 8]
@@ -335,7 +335,7 @@ func main() {
 
 // tag::slices_append[]
 func main() {
-	// On ajoute l'entrée 10 a la slice  aSlice
+	// On ajoute l'entrée 10 a la slice aSlice
 	aSlice := []int{2, 4, 6, 8}
 	aSlice = append(aSlice, 10)
 	fmt.Println(aSlice) // [2, 4, 6, 8, 10]
@@ -380,10 +380,10 @@ func main() {
 	// Déclare une slice de string nil
 	var slice []string
 
-	// Déclare et initilaise une slice d'entiers
+	// Déclare et initialise une slice d'entiers
 	intSlice := []int{1, 2, 4, 5}
 
-	// Ajoute une ou plusieurs valeurs a la meme slice.
+	// Ajoute une ou plusieurs valeurs a la même slice.
 	intSlice = append(intSlice, 6, 7, 8)
 
 	// Donne la taille d'une slice
@@ -707,7 +707,7 @@ func main() {
 	vehicle.Ride()
 
 	vehicle = &Bicycle{}
-	// Affiche "Rinding a Bicycle".
+	// Affiche "Riding a Bicycle".
 	vehicle.Ride()
 }
 

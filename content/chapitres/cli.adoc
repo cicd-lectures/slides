@@ -37,7 +37,7 @@ man <commande> # Commande 'man' avec comme argument le nom de ladite commande
 *** Touche `n` pour sauter d’occurrence en occurrence
 ** Touche `q` pour quitter
 
-🎓 Essayez avec `ls`, chercher le mot `color`
+🎓 Essayez avec `ls`, cherchez le mot `color`
 
 [.small]
 - 💡 La majorité des commandes fournit également une option (`--help`), un flag (`-h`)  ou un argument (`help`)
@@ -47,7 +47,7 @@ man <commande> # Commande 'man' avec comme argument le nom de ladite commande
 
 Dans un terminal Unix/Linux/WSL :
 
-* `CTRL + C` : Annuler le process ou prompt en cours
+* `CTRL + C` : Annuler le processus ou prompt en cours
 * `CTRL + L` : Nettoyer le terminal
 * `CTRL + A` : Positionner le curseur au début de la ligne
 * `CTRL + E` : Positionner le curseur à la fin de la ligne
@@ -100,7 +100,7 @@ link:https://linuxhandbook.com/linux-directory-structure/[Source,windows="_blank
 
 
 * `~` (tilde) c'est un raccourci vers le dossier de l'utilisateur courant : 🎓 `ls -l ~`
-* `-` (minus) racourci pour revenir au dernier repertoire visité
+* `-` (minus) raccourci pour revenir au dernier répertoire visité
 * Sensible à la casse (majuscules/minuscules) et aux espaces :
 🎓
 +
@@ -209,7 +209,7 @@ ls -l "$(command -v cat)"
 == Exécution 2/2
 
 * Exécution de scripts :
-** Soit appel direct avec l'interprétateur : `sh ~/monscript.txt`
+** Soit appel direct avec l'interpréteur : `sh ~/monscript.txt`
 ** Soit droit d'exécution avec un "shebang" (e.g. `#!/bin/bash`)
 +
 [source,bash]

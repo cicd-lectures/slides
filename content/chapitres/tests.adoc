@@ -103,7 +103,7 @@ if len(f.ShortCode) > 4 {
 == 🎓 Exercice: Ajoutez La Target `unit_test` au Makefile
 
 * Pour faciliter l'exécution de toute la suite de tests, ajoutez la cible `unit_test` à votre Makefile pour que les tests de tous les packages soit joués.
-* Avec le mode verbeux d'activé par défaut
+* Avec le mode verbeux activé par défaut
 ** Indice: `go help test` et `go help packages`
 * *Bonus*: Activez le calcul de la couverture de tests
 
@@ -154,7 +154,7 @@ Tester des composants indépendamment ne prouve pas que le système fonctionne u
 * Test validant que l'assemblage de composants se comportent comme prévu.
 * Teste votre application au travers de tous ses composants
 * Par exemple avec vehicle-server:
-**  Prouve que GET /vehicles retourne la liste des vehicles les plus proche d'un point donné
+**  Prouve que GET /vehicles retourne la liste des véhicules les plus proche d'un point donné
 **  Prouve que POST /vehicles enregistre un nouveau véhicule en base.
 
 == Définition du SUT
@@ -181,7 +181,7 @@ Une suite de tests d'intégration doit:
 
 == !
 
-* La gestion de l'environnement est cachée:
+* La gestion de l'environnement est "cachée":
 ** Démarrer un container de base de données (Postgres avec Postgis)
 ** Démarrer une instance de l'application
 ** Tout éteindre une fois terminé
@@ -199,7 +199,7 @@ go test -v -count=1 --tags=integration ./app
 
 == 🎓 Exercice: Corrigez votre Implémentation de Delete Vehicle
 
-Optionnel mais, si les tests d'intégration échouent à ce point, il serait bon de corriger votre implémentation de la suppression de vehicule.
+Optionnel mais, si les tests d'intégration échouent à ce point, il serait bon de corriger votre implémentation de la suppression de véhicule.
 
 == 🎓 Exercice: Activez les tests dans votre CI
 

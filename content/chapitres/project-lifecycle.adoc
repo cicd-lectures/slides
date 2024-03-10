@@ -18,22 +18,22 @@ Un **livrable** :
 
 == Que signifie "reproductible" ?
 
-* Il faut que notre processus de génération de livrable, (notre build) soit entierement **déterministe**.
+* Il faut que notre processus de génération de livrable, (notre build) soit entièrement **déterministe**.
 * Il faut qu'en fonction d'un jeu de paramètres, le résultat du processus de livraison soit même le "même".
-* Il en va de même pour l'environement de production
+* Il en va de même pour l'environnement de production
 
 == Quels sont les paramètres de notre livraison ?
 
 * *Le code*: Dans quelle version est-il? Est-il fonctionnel? Est-ce qu'il est sauvegardé?
 * *Les dépendances de notre code*: Toutes les libraires utilisés dans notre application.
 * *Les outils de génération de livrables*: Quel compilateur et dans quelle version?
-* *L'environment d'exécution cible*: Java 17 ou Java 20? Quelle version de PostgreSQL? Quel OS/Architecture CPU? Quel Navigateur?
-* *Le processus de livraison lui même*: Dans quelle mesure la procédure de génération est elle répetable et respectée?
+* *L'environnement d'exécution cible*: Java 17 ou Java 20? Quelle version de PostgreSQL? Quel OS/Architecture CPU? Quel Navigateur?
+* *Le processus de livraison lui même*: Dans quelle mesure la procédure de génération est elle répétable et respectée?
 
 == Risques encourus?
 
-* 😡 Dans le meilleur des cas, votre app ne marche pas du tout.
-* 🤡 Dans certains cas votre app va casser sans explication facile et seulement sur la production du client les jours impairs d'une année bisextile.
+* 😡 Dans le meilleur des cas, votre livrable ne marche pas du tout.
+* 🤡 Dans certains cas votre livrable va casser sans explication facile et seulement sur la production du client les jours impairs d'une année bisextile.
 ** Allez reproduire et débugger!
 * 😱 Livrer votre application va devenir une angoisse permanente
 * 😱😭🔥☠️ Vous livrez une CVE ou un malware, avec un accès direct a votre base de données.
@@ -51,14 +51,14 @@ image::dumpster-fire.gif[caption="Dumpster Fire",width=1024]
 ** ✅ On vient de mettre en place git. On sait identifier une version par un hash de commit.
 ** ❌ On ne sait pas vraiment dire si l'application "fonctionne" ou pas.
 * *Les dépendances de notre code*:
-** ❌ On ne sait ni les récupérer, ni les controller.
+** ❌ On ne sait ni les récupérer, ni les contrôler.
 * *Les outils de génération de livrables*
 ** ❌ On sait que go1.22 est indiqué dans la documentation fournie mais c'est tout.
 
 == On en est où la dedans? (2/2)
 
-* *L'environment cible*:
-** ⚠️  La compilation Go génère un binaire qui embarque son environment d'exécution. C'est donc lié à la version du compilateur Go. Ce n'est pas le cas pour d'autres langages.
+* *L'environnement cible*:
+** ⚠️  La compilation Go génère un binaire qui embarque son environnement d'exécution. C'est donc lié à la version du compilateur Go. Ce n'est pas le cas pour d'autres langages.
 ** ❌ Par contre on sait que l'on à besoin de Postgres et Postgis, mais pas grand chose de plus!
 ** ✅ Voi nous demande de cibler Linux >= 5.x sur une architecture CPU amd64
 * *Le processus de livraison lui même*:
@@ -70,16 +70,16 @@ image::dumpster-fire.gif[caption="Dumpster Fire",width=1024]
 ** ➡️  *Solution* (pour savoir si il fonctionne): *les tests automatisés*
 ** ➡️  *Solution* (pour garantir qu'il fonctionne à chaque changement): *l'intégration continue (CI)*
 * *Les dépendances du code*
-** ➡️  Solution: Mise en plase d'outils de **gestion et d'audit des dépendances**
+** ➡️  Solution: Mise en place d'outils de **gestion et d'audit des dépendances**
 * *Les outils de génération du code*:
-** ➡️  Solution: Mise en place d'un environement controllé et automatisé de géneration de livrable, via de la **Livraison Continue**
+** ➡️  Solution: Mise en place d'un environnement contrôlé et automatisé de génération de livrable, via de la **Livraison Continue**
 
 == Quelles solutions ? (2/2)
 
-* *L'environment cible*:
+* *L'environnement cible*:
 ** ➡️  Solution: Utilisation *d'outils de packaging* (Docker) pour notre application et son environment cible
 * *Le processus de livraison lui même*:
-** ➡️  Solution: définir un *cycle de vie* et en déduire un *processus de livraision*
+** ➡️  Solution: définir un *cycle de vie* et en déduire un *processus de livraison*
 
 == Le cycle de vie de notre application
 
@@ -94,7 +94,7 @@ image::dumpster-fire.gif[caption="Dumpster Fire",width=1024]
 == Comment normaliser ce cycle de vie?
 
 * Tout le monde peut jouer des commandes comme il le souhaite
-* Il est nécessaire que tous les acteurs (dévelopeurs et CI) jouent les même commandes
+* Il est nécessaire que tous les acteurs (développeurs et CI) jouent les même commandes
 * Utilisation d'un outil `normaliser` ces commandes
 ** ➡️  On propose se propose d'utiliser `make`
 
@@ -146,7 +146,7 @@ make hello # Appelle implicitement "make hello.o" et "make main.o"
 * On souhaite mettre en place un `Makefile` qui définit les cibles suivantes:
 ** `dist`: crée le répertoire
 ** `clean`: supprime le répertoire
-** `all`: qui execute `clean` puis `dist`
+** `all`: qui exécute `clean` puis `dist`
 
 == ✅ Solution: Mettre en place un Makefile dans le Projet
 
@@ -187,7 +187,7 @@ target: dependence
   commande
 ----
 
-* Si vous appellez `make` sans argument,
+* Si vous appelez `make` sans argument,
 alors la cible par défaut sera la première cible définie
 
 == 🎓 Exercice: Ajouter build dans le Makefile
@@ -196,7 +196,7 @@ alors la cible par défaut sera la première cible définie
 * `build` doit générer le binaire dans le répertoire `./dist`
 ** *Indice*: Le package main de notre serveur se trouve dans `./cmd/server`
 ** *Indice*: `go help build`
-* `build` doit être inclu dans la cible `all`
+* `build` doit être inclus dans la cible `all`
 * `build` doit s'exécuter même si un fichier `build` existe
 
 == ✅ Solution: Ajouter build dans le Makefile
@@ -266,8 +266,8 @@ stop_dev_db:
 
 On a vu dans ce chapitre:
 
-* Ce qu'est la reproductiblé des livrables et son importance
+* Ce qu'est la reproductibilité des livrables et son importance
 * On à défini un cycle de vie pour notre application
 * On à découvert l'outil `make` pour implémenter ce cycle de vie
 
-✅ On vient de termininer un chapitre, faites donc un commit!
+✅ On vient de terminer un chapitre, faites donc un commit!

@@ -7,7 +7,7 @@ image::go.jpeg[caption="Golang",width=1024]
 
 * Peu importe les outils, les problèmes sous jacents lié au CI/CD sont les mêmes
 * Faire face à un nouveau langage est quelque chose de fréquent
-* Beaucoup d'opportunités professionelles autour de ce langage
+* Beaucoup d'opportunités professionnelles autour de ce langage
 
 == Qu'est ce que Go?
 
@@ -58,7 +58,7 @@ go build ./main.go
 
 == !
 
-💡 `go run ./main.go` compile et execute le programme directement!
+💡 `go run ./main.go` compile et exécute le programme directement!
 
 ⚠️  Ne génère pas de binaire utilisable.
 
@@ -82,10 +82,10 @@ include::../code-samples/go/helloworld.go[]
 
 == Anatomie d'un Fichier go (2/2)
 
-* `func`: Declare une fonction `main`:
+* `func`: Déclare une fonction `main`:
 ** Cette fonction appelle la fonction `Println` du package `fmt`
 ** En passant la chaine de caractères "Hello ENSG!"
-* `package`: declare que ce fichier fait partie du package `main`.
+* `package`: Déclare que ce fichier fait partie du package `main`.
 * `import`: importe le package `fmt` dans le fichier
 
 == Packages & Imports (1/2)
@@ -94,15 +94,15 @@ include::../code-samples/go/helloworld.go[]
 * Un package est identifié par une URL indiquant ou le télécharger
 ** 👉 Tous les packages sont uniques!
 ** Ex: `github.com/jlevesy/prometheus-elector/config`
-* Sauf pour la librarie standard, ou il n'y a pas de domaines
+* Sauf pour la librairie standard, ou il n'y a pas de domaines
 ** Ex: `net/http`, `os`
 * Un package est importé par un autre package
 ** Ici notre programme importe le package `fmt`
 
 == Packages & Imports (2/2)
 
-* Un package est représenté par un répertoire dans un dépot de code
-* Tous les fichiers go presents dans un même repertoire doivent declarer le meme package
+* Un package est représenté par un répertoire dans un dépôt de code
+* Tous les fichiers go présents dans un même répertoire doivent déclarer le même package
 * *Convention*: Le nom du package déclaré est le même que celui du répertoire content le fichier
 ** Ex: Les fichiers présents dans `github.com/jlevesy/prometheus-elector/config` commencent tous par  `package config`
 
@@ -113,11 +113,11 @@ Mais ce n'est pas le cas de notre programme?
 == ℹ️ Le Package Spécial `main`
 
 * Ce package est le `point d'entrée` du programme.
-* La fonction `main` du package `main` est la première fonction appellée lors de l'exécution d'un programme go.
+* La fonction `main` du package `main` est la première fonction appelée lors de l'exécution d'un programme go.
 
 == Packages et Visibilité
 
-* La visibilité en dehors du package d'un symbole déclaré dans un package est controllée par l'utilisation d'une majuscule ou minuscule en premier caractère.
+* La visibilité en dehors du package d'un symbole déclaré dans un package est contrôlée par l'utilisation d'une majuscule ou minuscule en premier caractère.
 ** Une *majuscule* rendra le symbole publique et utilisable en dehors du package.
 ** Une *minuscule* rendra le symbole privé seulement accessible dans le package courant.
 
@@ -128,7 +128,7 @@ include::../code-samples/go/examples.go[tags="package_visibility"]
 
 == !
 
-Controller la visibilité des symboles exporté permet de s'assurer que le package sera bien utilisé!
+Contrôler la visibilité des symboles exporté permet de s'assurer que le package sera bien utilisé!
 
 C'est l'idée *d'encapsulation*, on expose uniquement ce dont l'utilisateur à besoin.
 
@@ -137,7 +137,7 @@ C'est l'idée *d'encapsulation*, on expose uniquement ce dont l'utilisateur à b
 Votre fichier peut dépendre d'un package issu de:
 
 * Votre de projet courant
-* La (link:https://pkg.go.dev/std[très fournie]) librarie standard de Go
+* La (link:https://pkg.go.dev/std[très fournie]) librairie standard de Go
 * D'une librairie externe
 
 [source,go]
@@ -185,7 +185,7 @@ include::../code-samples/go/examples.go[tags="consts"]
 
 == Types Scalaires
 
-* Numeriques: `int`, `intX`, `uint`, `uintX`, `float32`, `float64`
+* Numériques: `int`, `intX`, `uint`, `uintX`, `float32`, `float64`
 * Booléen: `bool`
 * Chaine de caractères UTF-8: `string`
 * Autres: `byte` (octet), `rune` (caractère UTF-8)
@@ -250,7 +250,7 @@ include::../code-samples/go/examples.go[tags="func_examples_2"]
 == Fonctions(3/4)
 
 * Go permets de "reporter" l'exécution d'une fonction quand une fonction parente se termine
-* Pratique pour garantir qu'une resource soit libérée quoi qu'il se passe lors de l'exécution de la fonction.
+* Pratique pour garantir qu'une ressource soit libérée quoi qu'il se passe lors de l'exécution de la fonction.
 ** Similaire aux "destructeurs" en C++
 
 [source,go]
@@ -271,7 +271,7 @@ include::../code-samples/go/examples.go[tags="func_pass_by_value"]
 == Pointeurs (1/3)
 
 * Déclarer une variable reviens à indiquer au programme d'allouer une certaine quantité de mémoire (en fonction du type de la variable) à une adresse en mémoire
-* 🎓 Go permets de *référencer* cet emplacement memoire en copiant son adresse dans une autre variable avec l'opérateur `&`. Autrement dit, on *crée un pointeur*.
+* 🎓 Go permets de *référencer* cet emplacement mémoire en copiant son adresse dans une autre variable avec l'opérateur `&`. Autrement dit, on *crée un pointeur*.
 
 [source,go]
 ----
@@ -318,7 +318,7 @@ include::../code-samples/go/examples.go[tags="func_pass_by_reference"]
 
 == Gestion d'Erreur (1/2)
 
-* Go traite les erreurs avec des valeurs retour au lieu d'exeptions
+* Go traite les erreurs avec des valeurs retour au lieu d'exceptions
 * Il est commun qu'une fonction qui puisse échouer retourne une valeur et un résultat.
 ** Il convient alors de vérifier l'erreur retournée soit égale a nil.
 ** ...Sinon il faudra la gérer!
@@ -393,7 +393,6 @@ include::../code-samples/go/examples.go[tags="struct_defaults"]
 * Si les valeurs par défaut ne suffisent pas, on peut fournir une fonction d'initialisation.
 ** Similaire aux "constructeurs" dans d'autres langages.
 
-
 [source,go]
 ----
 include::../code-samples/go/examples.go[tags="struct_initialization"]
@@ -403,7 +402,7 @@ include::../code-samples/go/examples.go[tags="struct_initialization"]
 
 * Go permets d'annoter les membres d'une structure
 * Utilisation diverses
-** Ex: indiquer le champ d'un object JSON a lié à l'attribut.
+** Ex: indiquer le champ d'un objet JSON a lié à l'attribut.
 
 [source,go]
 ----
@@ -413,7 +412,7 @@ include::../code-samples/go/examples.go[tags="struct_annot"]
 == Definir des Types
 
 * Nous avons utilisé le mot clef `type` pour définir un nouveau type de structure.
-* Mais `type` peut être appliqué á des tas d'autre choses.
+* Mais `type` peut être appliqué à tous les types existants.
 
 [source,go]
 ----
@@ -423,7 +422,7 @@ include::../code-samples/go/examples.go[tags="types"]
 == Types et Méthodes (1/2)
 
 * Il est possible d'attacher des méthodes aux types que l'on définit en utilisant la syntaxe suivante
-* Le premier argument avant le nom est appelé *receveur*, c'est la référence vers l'objet sur lequel la méthode est appellée
+* Le premier argument avant le nom est appelé *receveur*, c'est la référence vers l'objet sur lequel la méthode est appelée
 
 [source,go]
 ----
@@ -444,7 +443,7 @@ include::../code-samples/go/examples.go[tags="methods_2"]
 
 * On peut attacher une méthode sur une valeur du type, ou sur un pointeur.
 * L'opérateur `.` (accés) référence et déréférence les pointeurs implicitement.
-* On utilise une valeur quand on souhaite que la méthode ne puisse pas changer l'objet sur laquelle elle est appellée
+* On utilise une valeur quand on souhaite que la méthode ne puisse pas changer l'objet sur laquelle elle est appelée
 * ⚠️ Utiliser une valeur fait une copie à chaque appel.
 
 == Types Abstraits: Interfaces (1/3)
@@ -464,7 +463,7 @@ include::../code-samples/go/examples.go[tags="polymorphism"]
 
 * Une interface est un type référence vers un autre type, sa valeur par défaut est `nil`.
 * Les interfaces sont implicites:
-** Du moment que le type de la valeur satisfait toutes les methodes de l'interface, alors il est considéré comme implémentant l'interface.
+** Du moment que le type de la valeur satisfait toutes les méthodes de l'interface, alors il est considéré comme implémentant l'interface.
 ** Pas de mot clé `implements` comme en Java
 
 == Types Abstraits: Interfaces (4/4)
@@ -498,12 +497,13 @@ include::../code-samples/go/examples.go[tags="error_type"]
 * Certaines exceptions:
 ** `err` pour une valeur d'erreur
 ** `ctx` toute instance d'un a `context.Context`
+** `r` et `rw` pour requête et response writer dans un handler HTTP.
 ** Receveurs de méthodes (ie `*Store` =>  `st`)
 ** Et d'autres...
 
 == Quelques Exemples
 
-* Decoder du JSON
+* Décoder du JSON vers une structure
 
 [source,go]
 ----
@@ -535,7 +535,7 @@ On vous demande le programme go suivant:
 * Fait une requête a swapi.dev pour récupérer les informations de la planete Tatooine
 ** L'URL a appeler est link:https://swapi.dev/api/planets/1/[https://swapi.dev/api/planets/1/]
 * Si la requête est réussie alors on lit l'intégralité du corps de la réponse
-* Et on déserialise la réponse dans un object pour accéder au `climat`
+* Et on déserialise la réponse dans un objet pour accéder au `climat`
 
 * **Bonus**: Une fois fini, essayez de nous donner le diametre de l'étoile noire aussi.
 
@@ -588,7 +588,7 @@ include::../code-samples/go/examples.go[tags="slices"]
 == Collections: Slices (2/5)
 
 * On peut initialiser directement une slice sans passer par un tableau.
-* On peut aussi initialiser une slice avec l'operateur `make`
+* On peut aussi initialiser une slice avec l'opérateur `make`
 
 [source,go]
 ----
@@ -611,9 +611,9 @@ include::../code-samples/go/examples.go[tags="slices_len_cap"]
 
 == Collections: Slices (4/5)
 
-* On peut concaténer des objets à une slice avec l'operateur `append`
+* On peut concaténer des objets à une slice avec l'opérateur `append`
 * ⚠️  Cela n'ajoute pas nécessairement un entrée a la slice passée en parametre.
-** Dans le cas ou le tableau sous jacent est plein (len == cap), `append` va réallouer un tableau et copier toutes les entées dans ce nouveau tableau.
+** Dans le cas ou le tableau sous-jacent est plein (len == cap), `append` va réallouer un tableau et copier toutes les entées dans ce nouveau tableau.
 ** 👉 En conséquence: il faut *TOUJOURS* assigner la valeur retournée par `append`
 
 [source,go]
@@ -625,7 +625,7 @@ include::../code-samples/go/examples.go[tags="slices_append"]
 
 * Le type *slice de X*, comme le type *pointeur sur X*, est un type référence.
 * Sa valeur par défaut est `nil`
-* Accéder à une slice nil provoque un arrêt de l'exécution
+* Accéder à une slice nil provoque une panic
 * En revanche: `append` et `len` savent gérer une nil slice.
 
 [source,go]
@@ -635,7 +635,7 @@ include::../code-samples/go/examples.go[tags="slices_nil"]
 
 == Collections: maps (1/3)
 
-* Tableau associatif clé-valeur
+* Tableau associatif (clé -> valeur)
 * Initialisée de façon littérale, ou avec `make`
 * On récupère sa taille avec `len`
 * On supprime une clé avec `delete`
@@ -671,14 +671,14 @@ include::../code-samples/go/examples.go[tags="maps_reads"]
 include::../code-samples/go/examples.go[tags="maps_range"]
 ----
 
-== 🎓 Exercice: Comptez les occurences de mots dans une chaine de caractère
+== 🎓 Exercice: Comptez les occurrences de mots dans une chaine de caractère
 
-* Ecrivez une fonction `WordCount` en go qui accepte une chaine de caractère et qui retourne le nombre d'occurences de chacun des mots contenu dans la chaine.
-** *Indice*: La signature de votre fonction devrait resembler a `func WordCount(str string) map[string]int`.
+* Écrivez une fonction `WordCount` en go qui accepte une chaine de caractère et qui retourne le nombre d'occurrences de chacun des mots contenu dans la chaine.
+** *Indice*: La signature de votre fonction devrait ressembler a `func WordCount(str string) map[string]int`.
 *** La valeur de retour mappe le mot vers le nombre de fois qu'il est apparu.
 ** *Indice*: `strings.Fields` link:https://pkg.go.dev/strings#Fields[(doc)] sépare les mots d'une chaine de caractère et retourne une string.
 
-== ✅ Solution: Comptez les occurences de mots dans une chaine de caractère
+== ✅ Solution: Comptez les occurrences de mots dans une chaine de caractère
 
 [source,go]
 ----

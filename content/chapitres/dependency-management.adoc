@@ -13,17 +13,17 @@ Dans ce chapitre on ne parle que de dépendances du code
 * ⚙️ ... chacune des briques étant infiniment complexe
 ** Ex: TLS, PostgresSQL, Linux, Firefox...
 * 🤔 Il est difficilement envisageable de démarrer un projet sans réutiliser des briques logicielles.
-* 🧘 Cela permet de *concentrer son effort de dévelopement sur ce qui apporte vraiment de la valeur*.
+* 🧘 Cela permet de *concentrer son effort de développement sur ce qui apporte vraiment de la valeur*.
 ** ➡️ Dans notre cas, notre métier est la gestion de véhicules, pas l'implémentation d'une pile réseau et d'un serveur HTTP.
 
 == ⚠️ Ajouter une dépendance n'est pas un acte anodin ⚠️ 
 
-* Si votre dépendance ne fonctionne plus ou est compromise, votre app sera impactée
-* Attention à ne pas rajouter une dépendance trop grosse pour n'utiliser qu'une petite fonctionalité!
+* Si votre dépendance ne fonctionne plus ou est compromise, votre livrable sera impactée
+* Attention à ne pas rajouter une dépendance trop grosse pour n'utiliser qu'une petite fonctionnalité!
 * Attention aux dépendances de vos dépendances 😱
 * Quelques règles d'usage:
 ** Vérifier que votre dépendance est activement maintenue? (date du dernier commit, existence d'une communauté autour)
-** 👀 le code. Est-ce que vous le comprenez? Est-ce que vous pourriez le débugger ou le faire vous même?
+** 👀 le code. Est-ce que vous le comprenez? Est-ce que vous pourriez le debugger ou le faire vous même?
 
 == Dépendre de librairies externes pose une quantité de problèmes!
 
@@ -56,9 +56,9 @@ image::https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExeHRxYmd1bGtjcTNyZmh1dXox
 == Comment résoudre le problème?
 
 * On introduit un outil de gestion de dépendances
-** Permets au développeur de définir une liste de dépendences en fixant ou en plaçant une contrainte de version (ex <= 4.3.0)
-** Construit un graph de dépendences de façon et le résoud a obtenir une liste de dépendances à télecharger de façon déterministe
-** Télecharge les dépendances sur la machine a distance et les mets à disposition de l'application.
+** Permets au développeur de définir une liste de dépendances en fixant ou en plaçant une contrainte de version (ex <= 4.3.0)
+** Construit un graph de dépendances et le résous de façon a obtenir une liste de dépendances à télécharger de façon déterministe
+** Télécharge les dépendances sur la machine a distance et les mets à disposition de l'application.
 
 == Comment cela fonctionne avec go?
 
@@ -76,15 +76,15 @@ link:https://www.deviantart.com/quasilyte/art/Tired-gopher-783302842[source]
 == Provenances des packages
 
 * La librairie standard
-** ✅ La version est controllée par la version de go utilisée pour compiler
+** ✅ La version est contrôlée par la version de go utilisée pour compiler
 * La base de code du projet
-** ✅ Controllée par notre VCS
+** ✅ Contrôlée par notre VCS
 * D'une ou plusieurs librairies externes
 ** ❌ Pas de solutions pour l'instant
 
 == Bonjour go modules
 
-* Go introduit la notion de *modules*: une collection de packages qui sont livrés, versionnés et distribués enssemble
+* Go introduit la notion de *modules*: une collection de packages qui sont livrés, versionnés et distribués ensemble
 * Un module est identifié par un *module path* déclaré dans un fichier appelé `go.mod`
 * Le fichier `go.mod` est situé a la racine du module et englobe tous les packages définis en dessous de ce fichier
 
@@ -159,11 +159,11 @@ go mod graph | grep pgx
 ----
 
 * La partie droite indique le module parent, la partie gauche les modules dont dépend le module parent.
-* ⚠️ C'est verbeux, vous pouvez utiliser `| grep` pour filtrer le resultat
+* ⚠️ C'est verbeux, vous pouvez utiliser `| grep` pour filtrer le résultat
 
 * Et pour finir, on oublie pas de créer un commit :)
 
-== Résolution Reproductibilible: l'algorithme MVS (1/2)
+== Résolution Reproductible: l'algorithme MVS (1/2)
 
 * *MVS*: Minimum Version Selection
 * Go cherche à utiliser la *version minimale* d'une dépendance
@@ -171,25 +171,24 @@ go mod graph | grep pgx
 ** Il ne change pas si une nouvelle version d'un module est mise à disposition.
 ** Pas besoin de `lockfile` (comme sur npm, bundler, pip etc...)
 
-== Résolution Reproductibilite: l'algorithme MVS (2/2)
+== Résolution Reproductible: l'algorithme MVS (2/2)
 
 image:buildlist.svg[caption="BuildGraph",width=700]
 
-
-== Controller le Contenu Téléchargé
+== Contrôler le Contenu Téléchargé
 
 * `go` lit le fichier `go.mod` du module à compiler et détermine la liste des modules à télécharger
 * Il les télécharge soit depuis:
 ** Un `module proxy`
 ** Depuis un dépôt de code directement (via git, mercurial etc...)
-* `go` calcule ensuite une somme de contrôle (checksum) des fichiers téléchargés et la compare avec un référenciel établi lors du premier télechargement: le fichier `go.sum`.
-** ➡️  Cela garantit que les dépendances téléchargées n'ont pas été altérées entre deux télechargements.
+* `go` calcule ensuite une somme de contrôle (checksum) des fichiers téléchargés et la compare avec un référentiel établi lors du premier téléchargement: le fichier `go.sum`.
+** ➡️  Cela garantit que les dépendances téléchargées n'ont pas été altérées entre deux téléchargements.
 
 == Quelques Commandes Utiles:
 
 * `go get <modulepath>@version`: Ajoute un module à la liste de dépendances
 * `go mod tidy`: Nettoie le fichier `go.mod` en récupérant tout les modules importés par l'application et en s'assurant que le fichier `go.sum` est à jour.
-* `go get -u ./...` Update tous les modules dépendants
+* `go get -u ./...` Mets à jour tous les modules dépendants
 * `go get -u <modulepath>` Mets à jour un module
 * `go mod why` indique le chemin de dépendance entre le package courant et un package (ou un module avec le flag `-m`)
 * `go list -m all` affiche la liste des modules à compiler
@@ -213,6 +212,6 @@ make all
 == Checkpoint 🎯
 
 * La gestion de dépendances est une question importante et complexe
-* Une bonne compréhension de son système de gestion de dépendances est nécessaire pour garantir la reproductibilité de nos builds
+* Une bonne compréhension de son système de gestion de dépendances est nécessaire pour garantir la reproductibilité de nos livrables
 * go fournit une suite d'outils intégrées qui simplifie la gestion des dépendances externes
 * 🎉 On est maintenant en mesure de compiler notre projet! 🎉

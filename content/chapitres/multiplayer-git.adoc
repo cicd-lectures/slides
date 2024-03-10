@@ -22,7 +22,7 @@ image:solo.gif[width="500"]
 Collaborer c'est pas évident, mais il existe des outils et des méthodes pour vous aider.
 
 [.small]
-Cela reste des outils, ça ne résouds pas tout non plus.
+Cela reste des outils, ça ne résous pas tout non plus.
 
 == Git multijoueur
 
@@ -129,7 +129,7 @@ image:fork.png[]
 [{invert}]
 == !
 
-A vous de jouer: Corrigez la fonctionnalité "suppression d'un vehicule" dans projet de votre binôme
+A vous de jouer: Corrigez la fonctionnalité "suppression d'un véhicule" dans projet de votre binôme
 
 == 🎓 Exercice : Contribuez au projet de votre binôme (1/4)
 
@@ -158,7 +158,7 @@ type Handler interface {
 
 * Interface de la librairie standard qui normalise tous les types pouvant "gérer une requête HTTP"
 * Elle accepte deux arguments
-** `rw`: Le "response writer", qui permet d'écrire le code de status, les headers et le corps de la réponse
+** `rw`: Le "response writer", qui permet d'écrire le code de statut, les headers et le corps de la réponse
 ** `r`: La requête à traiter
 * Nos implémentations de `http.Handler` se trouvent dans le package `vehicle`.
 
@@ -193,7 +193,7 @@ image:pr.png[width=500]
 
 *Objectif* : Valider les changements d'un contributeur
 
-* Technique : est-ce que ça marche ? est-ce maintenable ?
+* Technique : est-ce que ça marche ? Est-ce maintenable ?
 * Fonctionnel : est-ce que le code fait ce que l'on veux ?
 * Humain : Propager la connaissance par la revue de code.
 * Méthode : Tracer les changements.
@@ -233,7 +233,7 @@ image:pr.png[width=500]
 
 * Analyse syntaxique du code (lint), pour détecter les erreurs potentielles ou les violations du guide de style
 * Compilation du projet
-* Execution des tests automatisés du projet
+* Exécution des tests automatisés du projet
 * Déploiement du projet dans un environnement de test...
 
 Ces "checks" peuvent êtres exécutés par votre moteur de CI ou des outils externes.
@@ -268,4 +268,3 @@ Nous avons vu:
 * Le processus pour effectuer une contribution en utilisant un projet forké!
 
 ➡️ Nous allons maintenant améliorer notre CI en ajoutant l'exécution des tests!
-

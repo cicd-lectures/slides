@@ -3,10 +3,10 @@
 
 == Contexte(1/4)
 
-* Voi est une société qui fournit un service de "vehicules de transport doux" à la demande
-** 🔓 Vous dévérouillez un véhicule avec votre Smartphone
+* Voi est une société qui fournit un service de "véhicules de transport doux" à la demande
+** 🔓 Vous déverrouillez un véhicule avec votre Smartphone
 ** 🛴 Vous faites votre trajet avec le véhicule
-** 🔒 Vous vérouillez et laissez le véhicule sur votre lieu d'arrivée
+** 🔒 Vous verrouillez et laissez le véhicule sur votre lieu d'arrivée
 ** 💸 Vous payez le temps passé sur le véhicule
 
 == Contexte(2/4)
@@ -17,21 +17,21 @@ image::voimap.jpeg[caption="Voimap",width=256]
 
 == Contexte(3/4)
 
-* Ce service est assuré par une API HTTP appellée `vehicle-server` qui doit supporter les fonctionalités suivantes:
-** Enregistrer un véhicle
+* Ce service est assuré par une API HTTP appelée `vehicle-server` qui doit supporter les fonctionnalités suivantes:
+** Enregistrer un véhicule
 ** Trouver les N véhicules les plus proches de soi
-** Supprimer un véhicule.
+** Supprimer un véhicule
 
 == Contexte (4/4)
 
-* Voi est entrain de reconstruire cette fonctionalitée et à décidé de sous-traiter le développement de ce projet a l'ENSG...
+* Voi est entrain de reconstruire cette fonctionnalité et à décidé de sous-traiter le développement de ce projet a l'ENSG...
 * Une équipe technique de **Voi** avait commencé l'implémentation du serveur, et vous à mis à disposition une archive link:media/vehicle-server.tar.gz[téléchargeable ICI], contenant le code source du projet.
 
 == Prise en Main du Projet (2/2)
 
 [source,bash]
 --
-# Création du répertoire menu-server
+# Création du répertoire vehicle-server
 mkdir -p /workspace/vehicle-server && cd /workspace/vehicle-server
 
 # Téléchargez le projet sur votre environnement de développement

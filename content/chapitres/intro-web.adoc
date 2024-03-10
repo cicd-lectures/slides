@@ -5,7 +5,7 @@ image::https://media1.tenor.com/m/X6lbLfskG4MAAAAC/internet-web.gif[caption="Int
 
 == !
 
-🧐 Que se passe t'il quand je tape google.com dans mon navigateur et que j'appuie sur entree?
+🧐 Que se passe-t-il quand je tape google.com dans mon navigateur et que j'appuie sur entrée?
 
 == !
 
@@ -20,7 +20,7 @@ image::https://media1.tenor.com/m/X6lbLfskG4MAAAAC/internet-web.gif[caption="Int
 
 * Hypertext Transfer Protocol
 * Définit un format de requête/réponse dans le modèle client / serveur
-** Le client soumet une requête HTTP a un serveur, le serveur lui réponds une réponse avec un contenu.
+** Le client demande une ressource à un serveur via une requête HTTP, serveur lui réponds une réponse avec un contenu.
 * Plusieurs versions en activité HTTP/1.1, HTTP/2, HTTP/3, mais la sémantique reste la même
 
 == Anatomie d'une requête HTTP
@@ -29,10 +29,10 @@ Une requête est composée des champs suivant:
 
 * *Méthode*: Indique une action désirée (`GET`, `POST`, `PUT`, `DELETE`, `HEAD`, `OPTIONS`...)
 * *Hote*: indique un domaine dans lequel récupérer les resources (`github.com`)
-* *Chemin* (path): indiqe une resource à obtenir au server (`/assets/file.js`)
-* *Paramètres de requête* (query parameters): paramètres additionels de requête apposés au path (`/pages/node?utm_source=facebook`)
+* *Chemin* (path): indique une ressource à obtenir au serveur (`/assets/file.js`)
+* *Paramètres de requête* (query parameters): paramètres additionnels de requête apposés au path (`/pages/node?utm_source=facebook`)
 * *Entêtes* (headers): Couple clé -> multiples valeurs indiquant des méta information sur la requête (`Accepted-Content`, `User-Agent`,`Accept`, `Referrer`, `Authorization`, `Cookies`)
-* *Corps* (body): Optionel, contenu encodé à envoyer au serveur, par exemple une soumission de formulaires.
+* *Corps* (body): Optionnel, contenu encodé à envoyer au serveur, par exemple une soumission de formulaires.
 
 == Anatomie d'une réponse HTTP
 
@@ -100,7 +100,7 @@ Regardons d'un peut plus près les logs:
 * Connected to voi.com (2606:4700:20::681a:3d6) port 443
 
 # On se connecte en HTTPS, du coup il va falloir établir une session TLS
-# Ensuite cURL et le serveur se mettent d'accord et établissent la connection sécurisée.
+# Ensuite cURL et le serveur se mettent d'accord et établissent la connexion sécurisée.
 * (304) (OUT), TLS handshake, Client hello (1):
 # [...]
 # On est connectés de façon sécurisée au serveur!
@@ -128,12 +128,12 @@ Regardons d'un peut plus près les logs:
 * Le serveur force le client a se connecter de façon sécurisée!
 * Pourquoi?
 ** TLS prouve que le client parle bien au bon serveur!
-** TLS chiffre les communications sur le réseau, on peut faire transiter des données sans(trop) se soucier d'être espionés 🕵️
+** TLS chiffre les communications sur le réseau, on peut faire transiter des données sans(trop) se soucier d'être espionnés 🕵️
 
 == !
 
-* Maintenant essayez d'enlever l'option `--location`, que se passe t'il?
-* Maintenant essayez d'enlever l'option `--output /dev/null`, que se passe t'il?
+* Maintenant essayez d'enlever l'option `--location`, que se passe-t-il?
+* Maintenant essayez d'enlever l'option `--output /dev/null`, que se passe-t-il?
 
 == Autres Options Utiles de cURL
 
@@ -172,6 +172,6 @@ curl https://swapi.dev/api/planets/1 | jq .residents
 
 == Checkpoint 🎯
 
-* Internet repose sur une collection de protocole (DNS, HTTP, TLS)
+* Internet repose sur une collection de protocole (DNS, TCP, TLS, HTTP)
 * HTTP permets de formuler une requête à un serveur et une réponse
 * `cURL` est un outil très complet pour parler HTTP depuis un terminal!
