@@ -163,17 +163,18 @@ go mod graph | grep pgx
 
 * Et pour finir, on oublie pas de créer un commit :)
 
-== Résolution Reproductibilite: l'algorithme MVS (1/2)
-
-image:buildlist.svg[caption="BuildGraph",width=700]
-
-== Résolution Reproductibilible: l'algorithme MVS (2/2)
+== Résolution Reproductibilible: l'algorithme MVS (1/2)
 
 * *MVS*: Minimum Version Selection
 * Go cherche à utiliser la *version minimale* d'une dépendance
 * L'algorithme *est déterministe*:
 ** Il ne change pas si une nouvelle version d'un module est mise à disposition.
 ** Pas besoin de `lockfile` (comme sur npm, bundler, pip etc...)
+
+== Résolution Reproductibilite: l'algorithme MVS (2/2)
+
+image:buildlist.svg[caption="BuildGraph",width=700]
+
 
 == Controller le Contenu Téléchargé
 
