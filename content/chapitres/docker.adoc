@@ -341,9 +341,104 @@ docker container run --rm docker-git:1.1.0 git config --get init.defaultBranch
 # main
 ----
 
+== 🎓 Construire une Image du Vehicle Server I
+
+* A partir de l'image de base go link:https://hub.docker.com/_/golang[Go] constuisez une image du vehicule-server
+* Il vous faut copier les sources avec l'instruction link:https://docs.docker.com/reference/dockerfile/#copy[COPY]
+* Compiler le serveur
+* Faire en sorte que le point d'entrée de l'image soit le serveur (en utilisant link:https://docs.docker.com/reference/dockerfile/#entrypoint[ENTRYPOINT])
+* L'image doit être utilisable avec la commande suivante:
+
+[source,bash]
+----
+docker run --tty --interactive --rm --publish 8080:8080 image:tag -listen-address=:8080 -database-url=${POSTGRES_URL}
+----
+
+== ✅ Construire une Image du Vehicle Server I
+
+[source,Dockerfile]
+----
+FROM golang:1.22
+COPY ./ /app
+WORKDIR /app
+RUN go build ./cmd/server
+ENTRYPOINT ["/app/server"]
+----
+
+== Qu'avons nous construit?
+
+* On part d'une image de base avec le compilateur go
+* On copie l'intégralité de nos sources dedans
+* On compile le binaire dans l'image
+
+== Est-ce efficace?
+
+Regardons maintenant la taille de l'image
+
+== !
+
+* Quels outils avons nous à notre disposition pour optimiser ça?
+** Changer l'image de base pour embarquer uniquement ce qui est nécessaire dans l'image
+** Tirer partie de notre cycle de vie existant pour ne pas compiler dans la phase de création build de l'image.
+
+== Prérequis: Variables Makefile
+
+`make` permets de définir des variables
+
+[source,Makefile]
+----
+URL=?https://ensg.eu
+
+.PHONY: show_url
+show_url:
+  echo $(URL)
+----
+
+Les variables peuvent êtres surchargées au moment de l'appel
+
+[source,bash]
+----
+make show_url URL=https://google.com
+----
+
+== 🎓 Construire une Image du Vehicle Server II
+
+* Partir de l'image de base `gcr.io/distroless/static-debian12`
+* Copiez le binaire compilé dans `dst` dans l'image et en faire l'entrypoint
+** Attention à link:https://github.com/GoogleContainerTools/distroless?tab=readme-ov-file#entrypoints[l'utilisation d'ENTRYPOINT avec distroless]!
+* Changer le Makefile pour:
+** Ajouter une cible `package` qui crée l'image Docker
+** Intrégrer `package` à la cible all.
+
+== ✅ Construire une Image du Vehicle Server II
+
+Dockerfile
+
+[source,Dockerfile]
+----
+FROM gcr.io/distroless/static-debian12
+COPY dist/server /app/server
+ENTRYPOINT ["/app/server"]
+----
+
+Makefile
+
+[source,Makefile]
+----
+IMAGE?=username/vehcile-server
+TAG?=dev
+
+.PHONY: all
+all: clean unit_test integration_test build package
+
+.PHONY: package
+package:
+  docker build -t $(IMAGE):$(TAG) .
+----
+
 == Checkpoint 🎯
 
-* Une image Docker fournit un environnement de système de fichier auto-suffisant (application, dépendances, binaries, etc.) comme modèle de base d'un conteneur
+* Une image Docker fournit un environnement de système de fichier auto-suffisant (application, dépendances, binaires, etc.) comme modèle de base d'un conteneur
 
 * On peut spécifier une recette de fabrication d'image à l'aide d'un `Dockerfile` et de la commande `docker image build`
 
