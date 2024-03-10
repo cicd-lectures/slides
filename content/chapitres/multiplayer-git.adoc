@@ -241,8 +241,8 @@ Ces "checks" peuvent êtres exécutés par votre moteur de CI ou des outils exte
 == 🎓 Exercice : Déclencher un Workflow de CI sur une PR
 
 * Votre PR n'a pas déclenché le workflow de CI de votre binôme 🤔
-* Il faut changer la spec de votre workflow pour qu'il se déclenche aussi sur une PR
-* Vous pouvez changer la spec du workflow directement dans votre PR
+* Il faut changer la configuration de votre workflow pour qu'il se déclenche aussi sur une PR
+* Vous pouvez changer la configuration du workflow directement dans votre PR
 * La link:https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows[documentation,window="_blank"] se trouve par ici
 
 == ✅ Exercice : Déclencher un Workflow de CI sur une PR
