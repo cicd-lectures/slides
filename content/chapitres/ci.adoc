@@ -331,7 +331,7 @@ afin qu'à chaque commit poussé sur votre dépôt, un workflow GitHub Actions v
 
 [source,yaml]
 ----
-include::../code-samples/gh-actions/vehicle-server.yml[tags="!pr"]
+include::../code-samples/gh-actions/vehicle-server.yml[tags="!*"]
 ----
 
 == 🎯 Checkpoint
