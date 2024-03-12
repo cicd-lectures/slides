@@ -1,0 +1,37 @@
+[{invert}]
+= Évaluation du Projet
+
+== !
+
+* L'évaluation pour le cours de CI/CD sera sur votre projet final
+* Cela reste une note indépendante /20
+
+==  Barème (indicatif):
+
+* Utilisation de Git et GitHub (/5)
+** Est-ce que le Git Flow est clair?
+** Est-ce qu'il y a des PRs? Bien découpées? De la revue de code?
+** Est-ce qu'il y à des tags et des version sémantiques?
+
+== !
+
+* Cycle de vie (/3)
+** Est-ce que les différentes étapes de votre livraison sont claires?
+** Est-ce qu'un outil les normalise?
+* Gestion des Dépendances (/2)
+** Est-ce que vos dépendances sont récupérées de façon reproductible?
+
+== !
+
+* Intégration Continue (/5)
+** Est-ce qu'il y à un outil de CI?
+** Que prouve votre CI?
+
+== !
+
+* Livraison Continue (/3)
+** Est-ce que vous avez un processus de livraison clair?
+** Est-ce automatisé?
+** Est-ce que votre livrable est utilisable? Documenté?
+* Tests (/2)
+** Avez vous une suite de tests automatisée? Que prouve t'elle?

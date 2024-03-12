@@ -73,6 +73,12 @@ include::./chapitres/version.adoc[leveloffset=1]
 // Chapitre CD
 include::./chapitres/cd.adoc[leveloffset=1]
 
+// Evaluation
+include::./chapitres/evaluation.adoc[leveloffset=1]
+
+// BONUS TRACK
+include::./chapitres/bonus.adoc[leveloffset=1]
+
 // Bibliographie
 include::./chapitres/bibliographie.adoc[leveloffset=1]
 
