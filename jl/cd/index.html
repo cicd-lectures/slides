@@ -1940,12 +1940,12 @@ Successfully tagged docker-git:1.1.0
 
 docker container run --rm docker-git:1.0.0 git config --get init.defaultBranch
 docker container run --rm docker-git:1.1.0 git config --get init.defaultBranch
-# main</code></pre></div></div></div></section><section id="construire_une_image_du_vehicle_server_i"><h2>🎓 Construire une Image du Vehicle Server I</h2><div class="slide-content"><div class="ulist"><ul><li><p>A partir de l&#8217;image de base go <a href="https://hub.docker.com/_/golang">Go</a> constuisez une image du vehicule-server</p></li><li><p>Il vous faut copier les sources avec l&#8217;instruction <a href="https://docs.docker.com/reference/dockerfile/#copy">COPY</a></p></li><li><p>Compiler le serveur</p></li><li><p>Faire en sorte que le point d&#8217;entrée de l&#8217;image soit le serveur (en utilisant <a href="https://docs.docker.com/reference/dockerfile/#entrypoint">ENTRYPOINT</a>)</p></li><li><p>L&#8217;image doit être utilisable avec la commande suivante:</p></li></ul></div>
-<div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-bash hljs" data-noescape="true" data-lang="bash">docker run --tty --interactive --rm --publish 8080:8080 image:tag -listen-address=:8080 -database-url=${POSTGRES_URL}</code></pre></div></div></div></section><section id="construire_une_image_du_vehicle_server_i_2"><h2>✅ Construire une Image du Vehicle Server I</h2><div class="slide-content"><div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-Dockerfile hljs" data-noescape="true" data-lang="Dockerfile">FROM golang:1.22
+# main</code></pre></div></div></div></section><section id="construire_une_image_du_vehicle_server"><h2>🎓 Construire une Image du Vehicle Server</h2><div class="slide-content"><div class="ulist"><ul><li><p>A partir de l&#8217;image de base go <a href="https://hub.docker.com/_/golang">Go</a> construisez une image du vehicle-server</p></li><li><p>Il vous faut copier les sources avec l&#8217;instruction <a href="https://docs.docker.com/reference/dockerfile/#copy">COPY</a></p></li><li><p>Compiler le serveur</p></li><li><p>Faire en sorte que le point d&#8217;entrée de l&#8217;image soit le serveur (en utilisant <a href="https://docs.docker.com/reference/dockerfile/#entrypoint">ENTRYPOINT</a>)</p></li><li><p>L&#8217;image doit être utilisable avec la commande suivante:</p></li></ul></div>
+<div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-bash hljs" data-noescape="true" data-lang="bash">docker run --tty --interactive --rm --publish 8080:8080 image:tag -listen-address=:8080 -database-url=${POSTGRES_URL}</code></pre></div></div></div></section><section id="construire_une_image_du_vehicle_server_2"><h2>✅ Construire une Image du Vehicle Server</h2><div class="slide-content"><div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-Dockerfile hljs" data-noescape="true" data-lang="Dockerfile">FROM golang:1.22
 COPY ./ /app
 WORKDIR /app
 RUN go build ./cmd/server
-ENTRYPOINT ["/app/server"]</code></pre></div></div></div></section><section id="quavons_nous_construit"><h2>Qu&#8217;avons nous construit?</h2><div class="slide-content"><div class="ulist"><ul><li><p>On part d&#8217;une image de base avec le compilateur go</p></li><li><p>On copie l&#8217;intégralité de nos sources dedans</p></li><li><p>On compile le binaire dans l&#8217;image</p></li></ul></div></div></section><section id="est_ce_efficace"><h2>Est-ce efficace?</h2><div class="slide-content"><div class="paragraph"><p>Regardons maintenant la taille de l&#8217;image</p></div></div></section><section><div class="slide-content"><div class="ulist"><ul><li><p>Quels outils avons nous à notre disposition pour optimiser ça?</p><div class="ulist"><ul><li><p>Changer l&#8217;image de base pour embarquer uniquement ce qui est nécessaire dans l&#8217;image</p></li><li><p>Tirer partie de notre cycle de vie existant pour ne pas compiler dans la phase de création build de l&#8217;image.</p></li></ul></div></li></ul></div></div></section><section id="prérequis_variables_makefile"><h2>Prérequis: Variables Makefile</h2><div class="slide-content"><div class="paragraph"><p><code>make</code> permets de définir des variables</p></div>
+ENTRYPOINT ["/app/server"]</code></pre></div></div></div></section><section id="quavons_nous_construit"><h2>Qu&#8217;avons nous construit?</h2><div class="slide-content"><div class="ulist"><ul><li><p>On part d&#8217;une image de base avec le compilateur go</p></li><li><p>On copie l&#8217;intégralité de nos sources dedans</p></li><li><p>On compile le binaire dans l&#8217;image</p></li></ul></div></div></section><section id="est_ce_efficace"><h2>Est-ce efficace?</h2><div class="slide-content"><div class="paragraph"><p>Regardons maintenant la taille de l&#8217;image. Est-ce satisfaisant?</p></div></div></section><section><div class="slide-content"><div class="ulist"><ul><li><p>Quels outils avons nous à notre disposition pour optimiser ça?</p><div class="ulist"><ul><li><p>Changer l&#8217;image de base pour embarquer uniquement ce qui est nécessaire dans l&#8217;image</p></li><li><p>Tirer partie de notre cycle de vie existant pour ne pas compiler dans la phase de création build de l&#8217;image.</p></li></ul></div></li></ul></div></div></section><section id="prérequis_variables_makefile"><h2>Prérequis: Variables Makefile</h2><div class="slide-content"><div class="paragraph"><p><code>make</code> permets de définir des variables</p></div>
 <div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-Makefile hljs" data-noescape="true" data-lang="Makefile">URL=?https://ensg.eu
 
 .PHONY: show_url
@@ -1965,7 +1965,32 @@ all: clean unit_test integration_test build package
 
 .PHONY: package
 package:
-  docker build -t $(IMAGE):$(TAG) .</code></pre></div></div></div></section><section id="checkpoint_11"><h2>Checkpoint 🎯</h2><div class="slide-content"><div class="ulist"><ul><li><p>Une image Docker fournit un environnement de système de fichier auto-suffisant (application, dépendances, binaires, etc.) comme modèle de base d&#8217;un conteneur</p></li><li><p>On peut spécifier une recette de fabrication d&#8217;image à l&#8217;aide d&#8217;un <code>Dockerfile</code> et de la commande <code>docker image build</code></p></li><li><p>Les images Docker ont une convention de nommage permettant d&#8217;identifier les images très précisément</p></li></ul></div>
+  docker build -t $(IMAGE):$(TAG) .</code></pre></div></div></div></section><section id="ajouter_package_au_ci"><h2>🎓 Ajouter Package au CI</h2><div class="slide-content"><div class="ulist"><ul><li><p>Il faut tester aussi lors du CI que l&#8217;étape package fonctionne à chaque instant</p></li><li><p>Ajoutez package au CI</p></li></ul></div></div></section><section id="ajouter_létape_package_au_ci"><h2>✅ Ajouter l&#8217;étape Package  Au CI</h2><div class="slide-content"><div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-yaml hljs" data-noescape="true" data-lang="yaml">name: Vehicle Server CI
+on:
+  - push
+  - pull_request
+jobs:
+  ci:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+      - name: Setup Go
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: './go.mod'
+      - name: Check Go Version
+        run: go version
+      - name: Run Unit Tests
+        run: make unit_test
+      - name: Run Integration Tests
+        run: make integration_test
+      - name: Build application
+        run: make build
+      - name: Package Application
+        run: make package
+      - name: List dist output
+        run: ls dist/</code></pre></div></div></div></section><section id="checkpoint_11"><h2>Checkpoint 🎯</h2><div class="slide-content"><div class="ulist"><ul><li><p>Une image Docker fournit un environnement de système de fichier auto-suffisant (application, dépendances, binaires, etc.) comme modèle de base d&#8217;un conteneur</p></li><li><p>On peut spécifier une recette de fabrication d&#8217;image à l&#8217;aide d&#8217;un <code>Dockerfile</code> et de la commande <code>docker image build</code></p></li><li><p>Les images Docker ont une convention de nommage permettant d&#8217;identifier les images très précisément</p></li></ul></div>
 <div class="paragraph"><p>⚠️ Friends don&#8217;t let friends use <code>latest</code> ⚠️</p></div></div></section></section>
 <section><section id="versions" data-background-color="rgb(248, 228, 130)" data-state="invert"><h2>Versions</h2></section><section id="pourquoi_faire_des_versions"><h2>Pourquoi faire des versions ?</h2><div class="slide-content"><div class="ulist"><ul><li><p>Un changement visible d&#8217;un logiciel peut nécessiter une adaptation de ses utilisateurs</p></li><li><p>Un humain ça s&#8217;adapte, mais un logiciel il faut l&#8217;adapter!</p></li><li><p>Cela permet de contrôler le problème de la compatibilité entre deux logiciels.</p></li></ul></div></div></section><section id="une_petite_histoire"><h2>Une petite histoire</h2><div class="slide-content"><div class="paragraph"><p>Le logiciel que vous développez utilise des données d&#8217;une API d&#8217;un site de vente.</p></div>
 <div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-json hljs" data-noescape="true" data-lang="json">// Corps de la réponse d'une requête GET https://supersite.com/api/item
