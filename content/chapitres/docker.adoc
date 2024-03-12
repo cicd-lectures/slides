@@ -341,9 +341,9 @@ docker container run --rm docker-git:1.1.0 git config --get init.defaultBranch
 # main
 ----
 
-== 🎓 Construire une Image du Vehicle Server I
+== 🎓 Construire une Image du Vehicle Server
 
-* A partir de l'image de base go link:https://hub.docker.com/_/golang[Go] constuisez une image du vehicule-server
+* A partir de l'image de base go link:https://hub.docker.com/_/golang[Go] construisez une image du vehicle-server
 * Il vous faut copier les sources avec l'instruction link:https://docs.docker.com/reference/dockerfile/#copy[COPY]
 * Compiler le serveur
 * Faire en sorte que le point d'entrée de l'image soit le serveur (en utilisant link:https://docs.docker.com/reference/dockerfile/#entrypoint[ENTRYPOINT])
@@ -354,7 +354,7 @@ docker container run --rm docker-git:1.1.0 git config --get init.defaultBranch
 docker run --tty --interactive --rm --publish 8080:8080 image:tag -listen-address=:8080 -database-url=${POSTGRES_URL}
 ----
 
-== ✅ Construire une Image du Vehicle Server I
+== ✅ Construire une Image du Vehicle Server
 
 [source,Dockerfile]
 ----
@@ -373,7 +373,7 @@ ENTRYPOINT ["/app/server"]
 
 == Est-ce efficace?
 
-Regardons maintenant la taille de l'image
+Regardons maintenant la taille de l'image. Est-ce satisfaisant?
 
 == !
 
@@ -434,6 +434,18 @@ all: clean unit_test integration_test build package
 .PHONY: package
 package:
   docker build -t $(IMAGE):$(TAG) .
+----
+
+== 🎓 Ajouter Package au CI
+
+* Il faut tester aussi lors du CI que l'étape package fonctionne à chaque instant
+* Ajoutez package au CI
+
+== ✅ Ajouter l'étape Package  Au CI
+
+[source,yaml]
+----
+include::../code-samples/gh-actions/vehicle-server.yml[tags="!*;pr;ci;package"]
 ----
 
 == Checkpoint 🎯

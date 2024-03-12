@@ -24,5 +24,9 @@ jobs:
       # end::ci[]
       - name: Build application
         run: make build
+      # tag::package[]
+      - name: Package Application
+        run: make package
+      # end::package[]
       - name: List dist output
         run: ls dist/
