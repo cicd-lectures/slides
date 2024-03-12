@@ -37,16 +37,17 @@ La livraison continue est l'exercice de **mettre à disposition automatiquement*
 
 == Prérequis: exécution conditionnelle des jobs
 
-Il est possible d’exécuter conditionnellement un job ou un step à l'aide du mot clé `if` (link:https://docs.github.com/en/actions/learn-github-actions/workflow-syntax-for-github-actions#jobsjob_idif[documentation de `if`,window="_blank"]])
+Il est possible d’exécuter conditionnellement un job ou un step à l'aide du mot clé `if` (link:https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idstepsif[documentation de `if`,window="_blank"])
 
 [source,yaml]
 ----
 jobs:
   release:
-    # Lance le job release uniquement si la branche est main.
-    if: contains('refs/heads/main', github.ref)
     steps:
-      # ...
+      # Lance le step dire coucou uniquement si la branche est main.
+      - name: "Dire Coucou"
+        run: echo "coucou"
+        if: contains('refs/heads/main', github.ref)
 ----
 
 == 🎓 Secret GitHub / DockerHub Token
@@ -62,16 +63,16 @@ jobs:
 * *But :* Automatiser le déploiement de l'image dans le DockerHub lorsqu'un tag est poussé
 
 * Changez votre workflow de CI de façon à ce que, sur un push de tag, les tâches suivantes soient effectuées :
-** Comme avant: Lint, Build, Test de l'image (en affichant le `README`)
+** Comme avant:  Build, Tests, Build Package
 ** SI c'est un tag, alors il faut pousser (et éventuellement reconstruire avec le bon nom) l'image sur le DockerHub
 
+* 💡 Il va falloir adapter `make release` pour qu'il ne pousse plus de tag
 * 💡 Utilisez les GitHub Action suivantes :
 ** https://github.com/marketplace/actions/docker-login[docker-login, window="_blank]
-** https://github.com/marketplace/actions/build-and-push-docker-images[build-and-push-docker-images, window="_blank]
 
 == ✅ Livraison Continue sur le DockerHub
 
-[source,bash]
+[source,yml]
 ----
 include::../code-samples/gh-actions/ci-docker-push-tag.yml[]
 ----
@@ -102,10 +103,10 @@ Source : http://blog.crisp.se/2013/02/05/yassalsundman/continuous-delivery-vs-co
 
 == 🎓 Déploiement Continu sur le DockerHub
 
-* *But :* Déployer votre image `vehiculeserver` continuellement sur le DockerHub
+* *But :* Déployer votre image `vehicle-server` continuellement sur le DockerHub
 
 * Changez votre workflow de CI de façon à ce que, sur un push sur la branch `main`, les tâches suivantes soient effectuées :
-** Comme avant: Lint, Build, Test de l'image (en affichant le `README`)
+** Comme avant: on joue le cycle de vie via make.
 ** SI c'est la branche `main`, alors il faut pousser l'image avec le tag `main` sur le DockerHub
 ** Conservez les autre cas avec les tags
 

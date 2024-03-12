@@ -425,7 +425,7 @@ Makefile
 
 [source,Makefile]
 ----
-IMAGE?=username/vehcile-server
+IMAGE?=<VOTRE_USERNAME_DOCKERHUB>/vehicle-server
 TAG?=dev
 
 .PHONY: all
