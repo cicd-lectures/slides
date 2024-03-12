@@ -9,44 +9,21 @@
 
 == Une petite histoire
 
-Le logiciel que vous développez utilise des données d'une API d'un site de vente.
+Voi développe un client mobile qui utilise l'API exposée par le vehicle-server. Imaginez que vous changiez le contenu de la réponse de `list vehicles`
 
 [source,json]
 --
-// Corps de la réponse d'une requête GET https://supersite.com/api/item
-[
-  {
-    "identifier": 1343,
-    // ...
-  }
-]
---
-
-Voici comment est représenté un item vendu dans votre code.
-
-[source,java]
---
-public class Item {
-  // Identifiant de l'item représenté sous forme d'entier.
-  private int identifier;
-  // ...
+{
+  "vehicles": [
+      {
+        "id": 12,
+        "longitude": 34.33,
+        "latitude": 43.5343,
+-       "shortcode": "abef"
++       "short_code": "abef"
+      }
+  ],
 }
---
-
-[%notitle]
-== Une petite histoire
-
-Le site décide tout d'un coup de changer le format de l'identifiant de son objet en chaîne de caractères.
-
-[source,json]
---
-// Corps de la réponse d'une requête GET https://supersite.com/api/item
-[
-  {
-    "identifier": "lolilol3843",
-    // ...
-  }
-]
 --
 
 Que se passe t'il du côté de votre application ?
@@ -54,15 +31,14 @@ Que se passe t'il du côté de votre application ?
 [%notitle]
 == !
 
-`com.fasterxml.jackson.databind.JsonMappingException`
-
-
 image::explosion.gif[width="800"]
+
+💥 Plus personne ne peut dévérouiller de véhicle! 💥 
 
 == Qu'est s'est il passé ?
 
-* Votre application ne s'attendait pas à un identifiant sous forme de chaîne de caractères !
-* Le fournisseur de l'API à "changé le contrat" de son API d'une façon non rétrocompatible avec votre l'existant.
+* Le client mobile ne s'attendait pas à ce que le ShortCode du vehicule soit retourné sous l'attribut `short_code`!
+* Vous avez "changé le contrat" de votre API d'une façon non rétrocompatible avec votre l'existant.
 ** Cela s'appelle un 🇬🇧 *Breaking Change*
 
 == Comment éviter cela ?
@@ -147,7 +123,7 @@ Retrait d'une fonctionnalité (retrait d'une route dans une API).
 
 * Offrir a l'utilisateur un moyen d'indiquer la version de l'API a laquelle il souhaite parler
 ** Via un préfixe dans le chemin de la requête:
-*** `https://monsupersite.com/api/v2.3/item`
+*** `https://vehicles.voi.com/v2.3/vehicles`
 
 ** Via un en-tête HTTP:
 *** `Accept-version: v2.3`
@@ -158,15 +134,15 @@ Retrait d'une fonctionnalité (retrait d'une route dans une API).
 * Utilisation de *tags* git pour définir des versions.
 * Un *tag* git est une référence sur un commit.
 
-== Qu'est ce que la "production" ?
+[{invert}]
+== !
 
-*Question Fondamentale :* qu'est ce qui apporte de la valeur à l'utilisateur final ET à votre organisation ?
+Nous sommes prêts, il est grand temps de faire la release de notre v1.0.
 
-Autrement reformulé : "quelle est votre destination ?"
+[{invert}]
+== !
 
-* Un site web ? Une API ?
-* Un binaire à télécharger ?
-* Un peu de tout ça ?
+...mais c'est quoi notre production déjà?
 
 == 🏝️ Notre production sera...
 
@@ -192,7 +168,7 @@ Autrement reformulé : "quelle est votre destination ?"
 ** 💡 `git tag 1.0.0 -a -m "Première release 1.0.0, mode manuel"`
 
 * Fabriquez l'image Docker avec le tag (Docker) 1.0.0
-** 💡 `docker image build --tag=XXXX/vehiculeserver:1.0.0 #...` avec `XXXX` étant votre username DockerHub
+** 💡 `make package` ?
 
 * Déployez l'image sur le DockerHub
 ** 💡 `docker login`, `docker image push`
@@ -200,25 +176,30 @@ Autrement reformulé : "quelle est votre destination ?"
 * Publier le tag sur votre "remote" `origin``.
 ** 💡 `git push origin 1.0.0`
 
+* 💡 Peut être faire un `make release` qui englobe git tag et docker push ?
+
 == ✅ "Taguez" et déployez la version 1.0.0
+
+[source,Makefile]
+----
+.PHONY all
+all: clean dist unit_test integration_test build package release
+
+.PHONY: release
+release:
+  git tag $(TAG) -m "$(TAG_MESSAGE)"
+  git push $(TAG)
+  docker push $(IMAGE):$(TAG)
+----
 
 [source,bash]
 ----
-DOCKER_USERNAME=dduportal
-TAG=1.0.0
+docker login --username=<VOTRE USERNAME>
 
-git tag "${TAG}" -a -m "Première release ${TAG}, mode manuel"
-
-docker image build --tag="${DOCKER_USERNAME}"/vehiculeserver:"${TAG}" ./
-docker login --username="${DOCKER_USERNAME}"
-# ...
-
-docker image push "${DOCKER_USERNAME}"/vehiculeserver:"${TAG}"
-
-git push origin "${TAG}"
-
-# Vérifiez DockerHub et GitHub après ça
+make all TAG="1.0.0" "TAG_MESSAGE="Première Release, Version Manuelle"
 ----
+
+Vérifiez Git et DockerHub après ça!
 
 == Checkpoint 🎯
 
